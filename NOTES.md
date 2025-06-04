@@ -1,4 +1,4 @@
-Vim Notes
+# Vim Notes
 
 Following commands for when in command 'ex' mode:
 
@@ -23,11 +23,9 @@ Vim documentation: options
 https://vimtricks.com/p/display-hidden-characters/
 
 
-
 Leader commands (,+cmd) set in the .vimrc file. Here displayed in bold.
 
-
-Customising Vi/Vim
+## Customising Vi/Vim
 
 Vi/Vim can be customised in the ~/.vimrc file.
 
@@ -63,21 +61,20 @@ Information about the vim setting for the file based on its type:
 :filetype
 
 
-
 “This line will automatically reload you .vimrc whenever you update it.”
 	⁃	https://www.youtube.com/watch?v=XA2WjJbmmoM
 
 autocmd! bufwritepost .vimrc source %
 
 
-Command Mode
+##Command Mode
 
 : / <space> Enter command mode.
 <Ctrl+c> Clear text.
 
 
 
-Configuration
+##Configuration
 
 :map {letter} {commands} Map the key {letter} to a string of Vi/Vim {commands}
 
@@ -131,23 +128,27 @@ Append the following line:
 :set nonumber
 
 
-File types
+###File types
 
 Find out the file type of the open file:
 
 :set ft?
 
 
-Smartcase
+###Smartcase
 
 Make it so searches are 'smartcase'. This will automatically switch to a case-sensitive search if you use any capital letters:
 
 :set smartcase 
 :map! Show all mapping
 
+##Set syntax highlighting
+
+:syntax off
+:syntax on
 
 
-Test wrapping
+##Test wrapping
 
 https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
 

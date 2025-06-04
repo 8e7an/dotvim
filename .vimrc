@@ -1,4 +1,4 @@
-	" VI/VIM Global configuration file .vimrc
+" VI/VIM Global configuration file .vimrc
 "
 "        ___     ___    ___    ___        ___    _________     __________
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
