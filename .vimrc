@@ -319,6 +319,8 @@ nnoremap <leader>r :set wrap!<cr>
 nnoremap <leader>p diw"0P
 " Leader [ to change to previous buffer (last cycling around)
 nnoremap <leader>[ :bp<cr>
+" Toggle spelling
+nnoremap <leader>S :set spell!<cr>
 "Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
 " Leader ] to change to next buffer (first cycling around)
 nnoremap <leader>] :bn<cr>
