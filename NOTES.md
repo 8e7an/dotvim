@@ -10,18 +10,14 @@ You can traverse back though he history of your :, / and ? commands by typing :,
 
 In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) will move the cursor up and down lines.
 
+##Useful links
 
-Useful links
-
-https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/
-
-http://www.ungerhu.com/jxh/vi.html
-https://www.worldtimzone.com/res/vi.html
-50 Useful Vim Commands
-Coming Home to Vim / Steve Losh
-Vim documentation: options
-https://vimtricks.com/p/display-hidden-characters/
-
+* ['Vimrc Configuration Guide - How to Customize Your Vim Code Editor with Mappings, Vimscript, Status Line, and More](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
+* [vi Reference](http://www.ungerhu.com/jxh/vi.html)
+* [My vi/vim cheatsheet](https://www.worldtimzone.com/res/vi.html)
+* [50 Useful Vim Commands](https://vimtricks.com/p/50-useful-vim-commands/)
+* [Coming Home to Vim / Steve Losh](https://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader)
+* [Display hidden characters - VimTricks](https://vimtricks.com/p/display-hidden-characters/)
 
 Leader commands (,+cmd) set in the .vimrc file. Here displayed in bold.
 
@@ -33,100 +29,84 @@ To put comments in this file start the line with single double-quotes (").
 
 Here colours can be set for modes. eg.:
 
-autocmd InsertEnter * highlight Normal ctermfg=lightblue
-autocmd InsertLeave * highlight Normal ctermfg=green
+`autocmd InsertEnter * highlight Normal ctermfg=lightblue`
+`autocmd InsertLeave * highlight Normal ctermfg=green`
 
 And keyboard mapping overriding the default. eg. to set jj to fire the escape key in input mode:
 
-inoremap jj <esc>
+`inoremap jj<esc>`
 
 Or ; to replace the $ for moving the cursor to the end of the line in command mode:
 
-inoremap ; $
+`inoremap ; $`
 
 To source (apply) changes to your .vimrc file after you’ve edited it:
 
-:source %
+`:source %`
 
 Or:
 
-:source ~/.vimrc
+`:source ~/.vimrc`
 
 Information about the file (including full file name, line cursor is at how far down the document as a %):
 
-:file
+`:file`
 
 Information about the vim setting for the file based on its type:
 
-:filetype
-
+`:filetype`
 
 “This line will automatically reload you .vimrc whenever you update it.”
-	⁃	https://www.youtube.com/watch?v=XA2WjJbmmoM
+https://www.youtube.com/watch?v=XA2WjJbmmoM
 
-autocmd! bufwritepost .vimrc source %
-
+`autocmd! bufwritepost .vimrc source %`
 
 ##Command Mode
 
-: / <space> Enter command mode.
-<Ctrl+c> Clear text.
-
-
+`: / <space>` Enter command mode.
+`<Ctrl+c>` Clear text.
 
 ##Configuration
 
 :map {letter} {commands} Map the key {letter} to a string of Vi/Vim {commands}
 
-
 Info on configuration options: 
 https://www.cyberciti.biz/faq/vi-show-line-numbers/
 
-Note that :set can also be written as :se
+Note that :set can also be written as `:se`
 
-:set
-
-- Show the set options.
-
+Show the set options.
+`:set` 
 
 List all current vim settings
 
-:set all
- To see a list of everything that you have set so far in your vim config file or at runtime, type the following command at the : prompt:
-
-:set
+To see a list of everything that you have set so far in your vim config file or at runtime, type the following command at the : prompt:
+`:set all` 
 
 Prepend "no" to switch an option off. Eg.:
+`:set noic`
 
-:set noic
-
-Line numbers
+###Line numbers
 
 Show line numbers:
-
-:set nu
+`:set nu`
 
 Hide line numbers:
-
-:set nu!
+`:set nu!`
 
 Show relative line numbers:
-
-:set rnu
+`:set rnu`
 
 Hide relative line numbers:
-
-:set rnu!
+`:set rnu!`
 
 Can have both regular line numbers and relative line numbers enabled at the same time.
 
 Append the following line:
+`:set number`
 
-:set number
- To disable and not set line number by default in vim, add the following in ~/.vimrc file:
-
-:set nonumber
-
+To disable and not set line number by default in vim, add the following in `~/.vimrc` file:
+`:set nonumber`
 
 ###File types
 
@@ -242,23 +222,19 @@ f1 / :help
 :help {command} View a help entry (eg. :help user-manual)
 
 CTRL-W CTRL-W To jump from one window to another. Also works with splits.
-:q Close help.
-
-
+`:q` Close help.
 
 When entering in : commands <CTRL+D> will give a list of matching options; <TAB> to auto complete.
 
+##File Browser - NetRW
 
-
-File Browser - NetRW
-
-:Explore / :Ex
-:Lex NetRW explorer on the left (stays open on file open)
-:Lex! NetRW explorer on the right
-:Sex NetRW explorer on top (stays open on file open)
-:Sex! NetRW explorer on the left (stays open on file open)
-% Create new file
-D Delete file
+`:Explore` / `:Ex`
+`:Lex` NetRW explorer on the left (stays open on file open)
+`:Lex!` NetRW explorer on the right
+`:Sex` NetRW explorer on top (stays open on file open)
+`:Sex!` NetRW explorer on the left (stays open on file open)
+`%` Create new file
+`D` Delete file
 s Sort listing
 r Reverse sorting order
 x Special - opens the file in the web browser
@@ -271,8 +247,7 @@ v Open file in a vertical split
 o Open file in a horizontal split
 <enter> Toggle tree directories open/close in tree view
 
-
-Commands to save
+###Commands to save
 
 :wa Save changes made to all the files opened
 
