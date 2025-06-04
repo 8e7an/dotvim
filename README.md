@@ -1,0 +1,13 @@
+DotVim Repository Notes
+
+Repository to store my .vim configuation and plugins (submodules) for my Vim installation.
+
+* Includes .vimrc
+* colors folder for vim color themes
+* ftplugin folder for filetype *.vim configuation files
+* pack folder for the Plugins (submodules)
+
+This repository is intended to be cloned into the /User/{username} / ~ (Home) directory.
+The .vimrc file is stored in this repository but will need a symbolic .vimrc link in the ~ (Home) directory to point to it. This can be done with:
+
+ln -s .vim/.vimrc ~/.vimrc
