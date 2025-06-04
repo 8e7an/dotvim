@@ -61,7 +61,7 @@ https://www.youtube.com/watch?v=XA2WjJbmmoM
 
 `autocmd! bufwritepost .vimrc source %`
 
-##Command Mode
+## Command Mode
 
 `: / <space>` Enter command mode.
 `<Ctrl+c>` Clear text.
@@ -108,65 +108,58 @@ Append the following line:
 To disable and not set line number by default in vim, add the following in `~/.vimrc` file:
 `:set nonumber`
 
-###File types
+### File types
 
 Find out the file type of the open file:
 
-:set ft?
+`:set ft?`
 
-
-###Smartcase
+### Smartcase
 
 Make it so searches are 'smartcase'. This will automatically switch to a case-sensitive search if you use any capital letters:
 
-:set smartcase 
-:map! Show all mapping
+`:set smartcase`
+`:map!` Show all mapping
 
 ##Set syntax highlighting
 
-:syntax off
-:syntax on
+`:syntax off`
+`:syntax on`
 
-
-##Test wrapping
+## Test wrapping
 
 https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
 
 To wrap lines visually, i.e. the line is still one line of text, but Vim displays it on multiple lines:
 
-:set wrap
+`:set wrap`
 
 To display long lines as just one line (i.e. you have to scroll horizontally to see the entire line):
 
-:set nowrap
+`:set nowrap`
 
 By default this will wrap at the first character that won't fit in the window. This means it will wrap in the middle of a word if that's where the window boundary lies. To change it to wrap on word boundaries, you can also:
 
-:set linebreak
+`:set linebreak`
 
 This will cause wrap to only wrap at the characters in the breakat setting, which defaults to space, tab, and small set of punctuation characters.
 
-:set breatat= ^I!@*-+;:,./?
+`:set breatat= ^I!@*-+;:,./?`
 
-
-Spelling
+### Spelling
 
 Enable:
-
-:set spell
+`:set spell`
 
 Disable:
-
-:set nospell
+`:set nospell`
 
 Toggle:
+`:set spell!`
 
-:set spell!
-
-z= Give spelling suggestions for word under cursor
-]s Move cursor to next mispelt word
-[s Move cursor to previous misspelt word
-
+`z=` Give spelling suggestions for word under cursor
+`]s` Move cursor to next mispelt word
+`[s` Move cursor to previous misspelt word
 
 Opening files and effecting files with vim at the command line
 
