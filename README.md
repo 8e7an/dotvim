@@ -1,4 +1,4 @@
-DotVim Repository Notes
+# DotVim Repository Notes
 
 Repository to store my .vim configuation and plugins (submodules) for my Vim installation.
 
@@ -7,7 +7,16 @@ Repository to store my .vim configuation and plugins (submodules) for my Vim ins
 * ftplugin folder for filetype *.vim configuation files
 * pack folder for the Plugins (submodules)
 
-This repository is intended to be cloned into the /User/{username} / ~ (Home) directory.
-The .vimrc file is stored in this repository but will need a symbolic .vimrc link in the ~ (Home) directory to point to it. This can be done with:
+This repository is intended to be cloned into the `/User/{username}` / `~` (Home) directory. 
 
-ln -s .vim/.vimrc ~/.vimrc
+Use the clone command:
+
+`git clone git@github.com:8e7an/dotvim.git .vim`
+
+You will have to make sure this directory doesn't already exist.
+
+The .vimrc file is stored in this repository but will need a symbolic .vimrc link in the `~` (Home) directory to point to it. 
+
+This can be done with:
+
+`ln -s .vim/.vimrc ~/.vimrc`
