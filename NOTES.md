@@ -253,78 +253,130 @@ When entering in : commands <CTRL+D> will give a list of matching options; <TAB>
 
 Move with the cursor keys or:
 
-`h` Move cursor cursor 
+`h` Move cursor cursor
+
 `{number}h` Move cursor left {number} characters
+
 `j` Move cursor down
+
 `{number}j` Move cursor down {number} characters
+
 `k` Move cursor up
+
 `{number}k` Move cursor up {number} characters
+
 `l` Move cursor right
+
 `{number}l` Move cursor right {number} characters
+
 `:+{number}` Move cursor up {number} of lines
+
 `:-{number}` Move cursor up {number} of lines
 
 `b` Move to the start of the previous word (punctuation considered words).
+
 `B` Move to the start of the previous word following whitespace (no punctuation).
+
 `w` Move to the start of the (punctuation considered words).
+
 `W` Move to the start of the (no punctuation / spaces separate words).
+
 `e` Move to the end of the next word (punctuation considered words).
+
 `E` Move to the end of the next word following whitespace (including punctuation).
 
 `0` Move cursor to the start of the line.
+
 `$` / ' Move cursor to the end of line.
+
 `^` / - / ; First non-blank character of line.
+
 `+` Move cursor to the first non-whitespace character of the next line.
+
 `*` Move cursor to the next occurance of the word the cursor is over.
+
 `#` Move cursor to the previous occurance of the word the cursor is over.
+
 `H` Move cursor to the top of the screen.
+
 `M` Move cursor to the middle of the screen.
+
 `L` Move cursor to the bottom of the screen.
+
 `{` Move cursor to the start of previous paragraph
+
 `}` Move cursor to the start of previous paragraph
+
 `(` Move cursor to the start of the previous sentence
+
 `)` Move cursor to the start of the next sentence
+
 `f{character}` Move cursor to the next <character> on the current line.
+
 `F{character}` Move cursor to the previous <character> on the current line.
 
 `<Ctrl+f>` Forward one screen.
+
 `<Ctrl+b>` Back one screen.
+
 `<Ctrl+d>` Forward 1/2 screen.
+
 `<Ctrl+u>` Forward 1/2 screen.
+
 `<Ctrl+e>` Scroll screen up one line.
+
 `<Ctrl+y>` Scroll screen down one line.
+
 `<Ctrl+g>` Show file info and file status.
 
 `gg` / [[ Move to the top of the file.
+
 `G` / ]] Move to the bottom of the file.
+
 `<number>G` / <number>gg / :<number> Move to that line number (or the last line if the number is greater than the number of line in the file).
+
 `gj` Move cursor down line for wrapped text.
+
 `gJ` Join the following line with the current line with no space separation.
+
 `gh` Move cursor up line for wrapped text.
+
 `ga` / :as Show details about the character under the cursor - eg. <“> 8220, Hex 201c, Oct 20034, Digr "6.
+
 `gi` Go to last place text was in  insert mode.
+
 `gv` Go to last place text was in visual select mode.
+
 `gu` Make a line of text, all lowercase.
+
 `gV` Make current line of text all uppercase.
+
 `g~` Make current line of text case-inverted.
+
 `gD` Goto Global Declaration of the variable under the cursor. Like gd but starts at line 1.
 
-g% Repeat last substitution, but globally.
+`g%` Repeat last substitution, but globally.
 
-ea Go to the end of the word.
+`ea` Go to the end of the word.
 
-<space> Enter : for command - Default move cursor to the next character.
-<tab> Jump between matching brackets under cursor
+`<space> <enter>` : for command - Default move cursor to the next character.
+
+`<tab>` Jump between matching brackets under cursor.
 
 S / dd Delete current line and go into insert mode
-V Start line visual selection at cursor
-Ctrl + v Start character visual selection at cursor
-^v Multi line visual selection 
 
-% / <tab> - Move cursor to the closest (and then toggle) to the associated brackets - ( ), { }, [ ] - on the current line.
+V Start line visual selection at cursor
+
+`<Ctrl+v>` Start character visual selection at cursor
+
+`^v` Multi line visual selection 
+
+`%` / `<tab>` - Move cursor to the closest (and then toggle) to the associated brackets - ( ), { }, [ ] - on the current line.
 
 `gd`
+
 > Goto local Declaration.  When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "*", but lines that look like a comment are ignored (see 'comments' option).
+
 > Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).
 
 ## Command window
@@ -336,72 +388,128 @@ https://vimtricks.com/p/vim-command-line-window/
 ## Edit
 
 `i` Insert at the cursor (before the current character).
+
 `I` Insert at the start of the current line.
+
 `a` Insert (append) at the cursor (after the current character).
+
 `A` (Shift + a) Insert (append) at the end of the current line.
+
 `o` (letter o) Insert new line under/after cursor.
+
 `O` (capital letter O) Insert new line before cursor.
+
 `.` Repeat last command.
+
 `{number}.` Repeat last command {number} of times.
 
+
 `u` Undo
+
 `<Ctrl+r>` Redo
 
 `yy` / :y Yank (copy) line.
+
 `{number}y` Yank (copy) multiple {number} lines.
+
 `yw` / yiw Yank (copy) the word under the cursor. 
+
 `y$` / y' / Y Yank (copy) the from under the cursor to the end of the line.
+
 `"{character}yy` Yank the current line to register {character}.
+
 `yt{character}` Yank from the cursor to the next {character} on the current line.
+
 `y{number}w` Copy the {number} of words.
+
 `yip` Yank inside paragraph.
+
 `yap` Yank around paragraph.
 
 `x` Delete (remove as copy) character the under the cursor.
+
 `{number}x` Delete (remove as copy) {number} of characters the under and right of the cursor.
+
 `X` Delete (remove as copy) charactet left of the cursor.
+
 `{number}X` Delete (actually copy) {number} of characters left of the cursor.
 
 `c$` / c' Cut (remove and go to insert mode) from the cursor to the end of the current line.
+
 `cw` Cut (remove and go to insert mode) to the end of word.
+
 `ciw` Cut (remove and go to insert mode) word cursor is inside of?
+
 `cc` / S Delete line at cursor and substitute text.
+
 `s` Delete character at cursor and subsitute text and enter insert mode.
+
 `S` Indent cursor to document indentation.
 
 `c/{pattern}` From the cursor to the first matched pattern change (cut) the text and go into insert mode.
+
 `d/{pattern}` From the cursor to the first matched pattern delete the text.
+
 `c?{pattern}` From the cursor to the first matched pattern change (cut) the text and go into insert mode.
+
 `d?{pattern}` From the cursor to the first matched pattern delete the text.
 
 `dd` Delete line (stay in normal mode).
+
 `{number}dd` Delete a number of lines under cursor (where {number} is the number of lines starting).
+
 `dw` / diw Delete word (including following whitespace) - if the cursor is in the middle of the word deletes to the end of the word.
+
 `d{number}b` Delete multiple {number} of previous words.
+
 `d{number}w` Delete multiple {number} of following words.
+
 `d{number}j` Delete multiple lines {number} after the current line
+
 `d{number}k` Delete multiple lines {number} above the current line
+
 `d{number}h` Delete multiple {number} of previous characters on the current line
+
 `d{number}l` Delete multiple {number} of following characters on the current line
+
 `dt{character}` Delete from cursor to before next found character
+
 `dT{character}` Delete from cursor to after previous character
+
 `df{character}` Delete from cursor to including next found character
+
 `dF{character}` Delete from cursor to including previous found character
+
 `d$` / D / d' Delete from cursor to the end of the line
+
 `diw` Delete inside word
+
 `ciw` Cut inner word and go into insert mode
+
 `cap` Cut around paragraph
+
 `cit` Cut content between matching tags
+
 `cat` Cut content around matching tags
+
 `di"` Delete inside " marks
+
 `da"` Delete around " marks
+
 `dit` Delete inside matching tags
+
 `dat` Delete arount matching tags
+
 `dip` Delete inside paragraph
+
 `dap` Delete around paragraph
+
 `di(` / dib Delete inside ()
+
 `da(` / dab Delete around ()
+
 `di[` Delete inside []
+
 `da[` Delete around []
 `di{` / di} Delete inside {}
 `da{` / da} Delete around {}
@@ -411,54 +519,89 @@ https://vimtricks.com/p/vim-command-line-window/
 `dG` Delete from cursor to end of file
 
 `va(` / vib Visual select around ()
+
 `vi(` / vib Visual select inside ()
+
 `va{` Visual select around {}
+
 `vi{` Visual select inside {}
+
 `va[` Visual select around []
+
 `vi[` Visual select inside []
+
 `va"` Visual select around ""
+
 `vi"` Visual select inside ""
+
 `va"` Visual select around ''
+
 `vi"` Visual select inside ''
 
 `p` Paste under (after) the cursor 
+
 `P` Paste over (before) the cursor
+
 `"{character}p` Paste from the register {character} after the cursor
+
 `"{character}P` Paste from the register {character} before the cursor
 
 `r{character}` Replace {character}
+
 `R{characters}` Replace the text where the cursor is at with {characters} - Each character you enter will replace the character the cursor is over moving onto the next one - Press <esc> to cancel out of this
 
 `J` Join current and next line seperated with a space
+
 `~` Change the case of the letter under the cursor (inclusive of the current line)
 
 `>>` Indent current line by one increment
+
 `<<` Decrent current line by one increment
+
 `{number}>>` Increment current and following {number} (inclusive) lines
+
 `{number}<<` Decrement current and following {number} (inclusive) lines
+
 `>>{number}j` Increment current and following {number} (inclusive) lines
+
 `<<{number}j` Decrement current and following {number} (inclusive) lines
+
 `:.;+{linenumber}>` Indent range from current line to relative linenumber
+
 `:.;+{linenumber}<` Decrement range from current line to relative linenumber
+
 `==` Set indentation to logical surrounding indentation
+
 `{number}==` Set indentation to logical surrounding indentation for the current and following {number} (inclusive) lines
 
-<Ctrl+o> Move cursor to previous place.
+`<Ctrl+o>` Move cursor to previous place.
+
 <Ctrl+i> Move cursor to next place.
 
 gi Go to the last insertion location.
+
 gv Reselect previous visual selection.
+
 gf Open file path under cursor into a new buffer.
+
 g_ Go to the last non-whitespace character on the current line.
+
 gg=G To auto-indent entire document.
+
 guw Make the word after the cursor all uppercase.
+
 gUw Make the word after the cursor all lowercase.
+
 {number}guw Make {number} of words all uppercase.
+
 {number}gUw Make {number} of words all lowercase.
+
 gJ Join following line without a space (continuous join).
+
 gx Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 (which I have) it attempts to download the HTML as a file instead (which is not what I want.
 
 cit Jump into HTML tag.
+
 vit Visual select in html tag
 
 xp Cut then paste letter - effectively transpose the letter under the cursor with the following letter - repeating this can move the initial character further along in the text when repeated
