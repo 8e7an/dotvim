@@ -1,12 +1,14 @@
 # Vim Notes
 
-Following commands for when in command 'ex' mode:
+Following commands for when in command **ex** mode:
 
-When in view ('vi') mode Escape key goes to 'ex' mode. Various commands including i, a, o, O will automatically go to 'vi' (insert) mode after the command is executed (see *).
+When in view **vi** mode the Escape key goes to **ex** mode. Various commands including i, a, o, O will automatically go to **vi** (insert) mode after the command is executed.
 
-^ + means, in 'ex' mode, to hold down alt/option and press the following character (eg. ^+g means hold down alt/option and press g).
+`<Ctrl>` means to hold down the Control key in combination with pressing the following key.
 
-You can traverse back though he history of your :, / and ? commands by typing :, / or ? and pressing the up and down cursor keys. / and ? share the same history.
+`^` + means, in **ex** mode, to hold down alt/option and press the following character (eg. `^+g` means hold down alt/option and press `g`).
+
+You can traverse back though he history of your `:,` `/` and `?` commands by typing `:,` `/` or `?` and pressing the up and down cursor keys. / and `?` share the same history.
 
 In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) will move the cursor up and down lines.
 
@@ -20,9 +22,9 @@ In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) wil
 * [Display hidden characters - VimTricks](https://vimtricks.com/p/display-hidden-characters/)
 * [Command line](https://learnbyexample.gitbooks.io/vim-reference/content/Command_Line_mode.html)
 
-Leader commands (,+cmd) set in the .vimrc file. Here displayed in bold.
+Leader commands `(,+cmd)` set in the **.vimrc** file. Here displayed in **bold**.
 
-## Customising Vi/Vim
+## Customising Vim
 
 Vi/Vim can be customised in the ~/.vimrc file.
 
@@ -31,6 +33,7 @@ To put comments in this file start the line with single double-quotes (").
 Here colours can be set for modes. eg.:
 
 `autocmd InsertEnter * highlight Normal ctermfg=lightblue`
+
 `autocmd InsertLeave * highlight Normal ctermfg=green`
 
 And keyboard mapping overriding the default. eg. to set jj to fire the escape key in input mode:
@@ -1290,11 +1293,11 @@ https://vimtricks.com/p/vim-jump-list/
 
 When making certain movements, such as jumping to line 42 with 42G, Vim will save it as a “jump” in the jump list. 
 
-:jumps You can list jumps
+`:jumps` You can list jumps
 
-To move backwards through the jump list to an older jump use <ctrl-o>.
+To move backwards through the jump list to an older jump use `<ctrl-o>`.
 
-To move to a newer jump use <ctrl-i>. You can also press <tab>.
+To move to a newer jump use `<ctrl-i>`. You can also press <tab>.
 
 `{number}<ctrl+i>` Jump to {number} in control list
 
