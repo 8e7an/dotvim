@@ -329,7 +329,12 @@ nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc 
 nnoremap <leader>V :source $MYVIMRC<cr>
 
-nnoremap <leader>html :this is a test
+
+" nnoremap <leader>H :r!{curl -sL 'https://github.com/8e7an/' | awk '/<title>/ {print $0; exit}' | awk -F '<\/?title>' '{print $2; exit}'}<cr>
+nnoremap <leader>H yiW:r!curl -sL '<c-r>0'
+
+
+"nnoremap <leader>html :this is a test
 
 
 " STATUS LINE ------------------------------------------------------------ 
