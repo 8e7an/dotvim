@@ -743,6 +743,10 @@ Precede these with <Ctrl+n> to scope to just this file.
 
 `<Ctrl+x><Ctrl+f>` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
 
+Autocomplete from the dictionary:
+
+`<Ctrl+x><Ctrl+k>` then `<Ctrl+n>` and `<Ctrl+p>` to change autocompleted match.
+
 ### Screen Manipulation
 
 `:.=` Gives the line number the cursor is at.
