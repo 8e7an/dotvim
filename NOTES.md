@@ -14,12 +14,18 @@ In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) wil
 
 ## Useful Links
 
-* ['Vimrc Configuration Guide - How to Customize Your Vim Code Editor with Mappings, Vimscript, Status Line, and More](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
+* [Vimrc Configuration Guide - How to Customize Your Vim Code Editor with Mappings, Vimscript, Status Line, and More](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
+
 * [vi Reference](http://www.ungerhu.com/jxh/vi.html)
+
 * [My vi/vim cheatsheet](https://www.worldtimzone.com/res/vi.html)
+
 * [50 Useful Vim Commands](https://vimtricks.com/p/50-useful-vim-commands/)
+
 * [Coming Home to Vim / Steve Losh](https://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader)
+
 * [Display hidden characters - VimTricks](https://vimtricks.com/p/display-hidden-characters/)
+
 * [Command line](https://learnbyexample.gitbooks.io/vim-reference/content/Command_Line_mode.html)
 
 Leader commands `(,+cmd)` set in the **.vimrc** file. Here displayed in **bold**.
@@ -62,7 +68,7 @@ Information about the vim setting for the file based on its type:
 
 > “This line will automatically reload you .vimrc whenever you update it.”
 
-https://www.youtube.com/watch?v=XA2WjJbmmoM
+[How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
 
 `autocmd! bufwritepost .vimrc source %`
 
@@ -153,7 +159,7 @@ Make it so searches are 'smartcase'. This will automatically switch to a case-se
 
 ## Test wrapping
 
-https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim
+[How to stop line breaking in vim](https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim)
 
 To wrap lines visually, i.e. the line is still one line of text, but Vim displays it on multiple lines:
 
@@ -437,7 +443,7 @@ Move with the cursor keys or:
 
 `q:` open command line window
 
-https://vimtricks.com/p/vim-command-line-window/
+[Vim Command Line Window - VimTricks](https://vimtricks.com/p/vim-command-line-window/)
 
 ## Edit
 
@@ -831,12 +837,15 @@ Eg. List files in the current directory:
 
 Links about find + replace: 
 
-* http://www.linfo.org/vi/search.html
-* https://vim.fandom.com/wiki/Search_and_replace
-* https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html
-* https://vimtricks.com/p/inspect-character-under-cursor-in-vim/ (replace unicode / special characters) 
+* [Searching and Replacing in vi](http://www.linfo.org/vi/search.html)
 
-https://vim.fandom.com/wiki/Search_and_replace#:~:text=The%20%3Asubstitute%20command%20searches%20for,replace%20it%20with%20'bar'.
+* [Search and replace | Vim Tips Wiki | Fandom](https://vim.fandom.com/wiki/Search_and_replace)
+
+* [Regular Expressions &#xB7; Vim Reference](https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html)
+
+* [Inspect Character Under Cursor in Vim - VimTricks](https://vimtricks.com/p/inspect-character-under-cursor-in-vim/) (replace unicode / special characters) 
+
+[Search and replace | Vim Tips Wiki | Fandom](https://vim.fandom.com/wiki/Search_and_replace#:~:text=The%20%3Asubstitute%20command%20searches%20for,replace%20it%20with%20'bar'.)
 
 `f{character}` - next instance of {character} from cursor?
 
@@ -989,7 +998,7 @@ Special characters to escape
 
 ### Search Pattern Modifiers
 
-https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html#search-pattern-modifiers
+[Regular Expressions · Vim Reference](https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html#search-pattern-modifiers)
 
 `\v` helps to avoid \ for pattern qualifiers, grouping pattern, etc
 
@@ -1020,7 +1029,9 @@ https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.htm
 Notes
 
 * Regular expressions are case sensitive
+
 * Regular expressions are to be used where pattern is specified
+
 * To enter unicode characters into a command (eg. find and replace) enter <Ctrl+v>u, the unicode value, <enter>
 
 Can back-reference the whole match with backslash zero - eg. (to globally change ‘apple’ to ‘apples’) :
@@ -1213,7 +1224,7 @@ This will increment the list giving:
 
 ### Math Calculations in Vim
 
-https://vimtricks.com/p/vim-calculator/
+[Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
 
 Mathematical calculations can be done when in insert mode. For instance to get the result of a math equation:
 
@@ -1254,7 +1265,9 @@ Copy all text to the system clipboard:
 Explanation:
 
 * % to refer the next command to work on all the lines
+
 * y to yank those lines
+
 * + to copy to the system clipboard
 
 Set to:
@@ -1282,7 +1295,7 @@ The above will search from marked range starting point a going to marked point b
 
 ## Code folding
 
-https://vimtricks.com/p/vim-code-folding/
+[Vim Code Folding - VimTricks](https://vimtricks.com/p/vim-code-folding/)
 
 For Lua and python the following fold method is most suitable:
 
@@ -1310,7 +1323,7 @@ The most important Vim code folding commands:
 
 ## Jump list
 
-https://vimtricks.com/p/vim-jump-list/
+[Vim Jump List - VimTricks](https://vimtricks.com/p/vim-jump-list/)
 
 When making certain movements, such as jumping to line 42 with 42G, Vim will save it as a “jump” in the jump list. 
 
@@ -1327,7 +1340,7 @@ For more info, check out `:help jumplist` in Vim. Also be sure to read about the
 
 ## Change list
 
-https://vimtricks.com/p/vim-jump-to-last-change/
+[Vim Jump to Last Change - VimTricks](https://vimtricks.com/p/vim-jump-to-last-change/)
 
 Vim keeps track of the position of every undo-able change and makes the last 100 available to you when you call :changes. You can navigate backwards and forwards to these positions in your file without undoing the change by using g; and g,.
 
@@ -1359,9 +1372,12 @@ Open multiple files in vertical splits (- capital o):
 
 More on split windows in Vim:
 
-* https://vimtricks.com/p/splitting-to-a-specific-size/
-* https://vimtricks.com/p/resize-splits/
-* https://vimtricks.com/p/vim-move-split/
+* [Vim split to a specific size - VimTricks](https://vimtricks.com/p/splitting-to-a-specific-size/)
+
+* [Resize splits - VimTricks](https://vimtricks.com/p/resize-splits/)
+
+* [Vim Move Split - VimTricks](https://vimtricks.com/p/vim-move-split/)
+
 * https://www.baeldung.com/linux/vim-windows#:~:text=The%20Ctrl%2Bw%20%2Bs%20and,use%20Ctrl%2Bw%20%2Bn.
 
 `:edit` (of `:e`) {filepath} Open a file (to the buffer) to edit
@@ -1447,7 +1463,7 @@ When you see a variable that starts with a character and a colon it's describing
 
 `gT` / **`<leader>m`** Switch to left tabsets
 
-https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs :
+[Just a moment...](https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs) :
 
 This is the easiest way that I found, to switch between tabs faster and simple. 
 
@@ -1481,7 +1497,7 @@ Now you can use Ctrl ← to go left and Ctrl → to go right.
 
 More on marks in Vim:
 
-https://vimtricks.com/p/bookmark-frequent-locations/
+[Bookmark frequent locations - VimTricks](https://vimtricks.com/p/bookmark-frequent-locations/)
 
 ## Macros
 
@@ -1491,7 +1507,7 @@ When starting to record a macro with q you will see the text 'recording' at the 
 
 You can find out more about macros at: 
 
-http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/
+[Vi and Vim Macro Tutorial: How To Record and Play](http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/)
 
 `q{number|leater}` Start (and end) the macro recording
 
@@ -1541,12 +1557,12 @@ Open the .vimrc in a vertical split:
 
 Called ‘skeleton files’ in Vim, it provides a way to template files using Vim’s event scripting. See more at:
 
-https://vimtricks.com/p/vim-file-templates/
+[Vim File Templates - VimTricks](https://vimtricks.com/p/vim-file-templates/)
 
 ## Plugins
 
 * [Surround](https://github.com/tpope/vim-surround)
 
-* vimium
+* [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
 
 How to Write a Vim Plugin

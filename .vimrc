@@ -1,4 +1,3 @@
-" VI/VIM Global configuration file .vimrc
 "
 "        ___     ___    ___    ___        ___    _________     __________
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
@@ -328,11 +327,17 @@ nnoremap <leader>] :bn<cr>
 nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc 
 nnoremap <leader>V :source $MYVIMRC<cr>
-
-
-" nnoremap <leader>H :r!{curl -sL 'https://github.com/8e7an/' | awk '/<title>/ {print $0; exit}' | awk -F '<\/?title>' '{print $2; exit}'}<cr>
-nnoremap <leader>H yiW:r!curl -sL '<c-r>0'
-
+" Take the URL under the cursor and convert it to a Markdown link with the
+" name of the HTML page.
+" url -> [name of page](url)
+nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh <c-r>0<cr>kgJgJ
+" Works for simple URLs. It has issues with # and ? in URLs as the url is injected here and
+" can conflict with Vim.
+" Possible to use Visual select of the URL with something like (doesn't
+" currently work - copied from Stack Overflow):
+"vnoremap <Leader>name "0y :silent call system("~/.vim/getwebpagename.sh", @0)<cr>
+" Also if a page redirects its own way (not with redirect headers) this will
+" also break this.
 
 "nnoremap <leader>html :this is a test
 
