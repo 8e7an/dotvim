@@ -60,7 +60,8 @@ Information about the vim setting for the file based on its type:
 
 `:filetype`
 
-“This line will automatically reload you .vimrc whenever you update it.”
+> “This line will automatically reload you .vimrc whenever you update it.”
+
 https://www.youtube.com/watch?v=XA2WjJbmmoM
 
 `autocmd! bufwritepost .vimrc source %`
@@ -68,7 +69,9 @@ https://www.youtube.com/watch?v=XA2WjJbmmoM
 ## Command Mode
 
 `: / <space>` Enter command mode.
+
 `<Ctrl+c>` Clear text.
+
 `<Ctrl+r>{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
 
 ## Configuration
@@ -76,41 +79,57 @@ https://www.youtube.com/watch?v=XA2WjJbmmoM
 `:map {letter} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
 
 Info on configuration options: 
+
 https://www.cyberciti.biz/faq/vi-show-line-numbers/
 
 Note that :set can also be written as `:se`
 
 Show the set options.
+
 `:set` 
 
 List all current vim settings
 
 To see a list of everything that you have set so far in your vim config file or at runtime, type the following command at the : prompt:
+
 `:set all` 
 
 Prepend "no" to switch an option off. Eg.:
+
 `:set noic`
 
-###Line numbers
+Show what a custom command does (without executing it):
+
+`:nmap {command}`
+
+Eg. `:nmap <leader>s`
+
+### Line numbers
 
 Show line numbers:
+
 `:set nu`
 
 Hide line numbers:
+
 `:set nu!`
 
 Show relative line numbers:
+
 `:set rnu`
 
 Hide relative line numbers:
+
 `:set rnu!`
 
 Can have both regular line numbers and relative line numbers enabled at the same time.
 
 Append the following line:
+
 `:set number`
 
 To disable and not set line number by default in vim, add the following in `~/.vimrc` file:
+
 `:set nonumber`
 
 ### File types
@@ -645,6 +664,8 @@ https://vimtricks.com/p/vim-command-line-window/
 `vit` Visual select in html tag
 
 `xp` Cut then paste letter - effectively transpose the letter under the cursor with the following letter - repeating this can move the initial character further along in the text when repeated
+
+`{number}i{characters}<Esc>` Repeat the `{characters}` `{number}` of times on the one line.
 
 `:{number},{number}d` Delete lines by range of numbers (y instead of d to yank?).
 
