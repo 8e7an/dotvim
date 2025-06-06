@@ -2,7 +2,7 @@
 
 Following commands for when in command **ex** mode:
 
-When in view **vi** mode the Escape key goes to **ex** mode. Various commands including i, a, o, O will automatically go to **vi** (insert) mode after the command is executed.
+When in view **vi** mode the Escape key goes to **ex** mode. Various commands including `i`, `a`, `o`, `O` will automatically go to **vi** (insert) mode after the command is executed.
 
 `<Ctrl>` means to hold down the Control key in combination with pressing the following key.
 
@@ -84,9 +84,9 @@ Information about the vim setting for the file based on its type:
 
 `:map {letter} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
 
-Info on configuration options: 
+Information on configuration options: 
 
-https://www.cyberciti.biz/faq/vi-show-line-numbers/
+[How To Show or Hide Line Numbers In vi / vim Text Editor - nixCraft](https://www.cyberciti.biz/faq/vi-show-line-numbers/)
 
 Note that :set can also be written as `:se`
 
@@ -1565,4 +1565,6 @@ Called ‘skeleton files’ in Vim, it provides a way to template files using Vi
 
 * [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
 
-How to Write a Vim Plugin
+### How to Write a Vim Plugin
+
+--TODO--
