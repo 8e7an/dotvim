@@ -74,6 +74,12 @@ Information about the vim setting for the file based on its type:
 
 `autocmd! bufwritepost .vimrc source %`
 
+## Insert Mode
+
+<Ctrl+t> Increment line
+
+<Ctrl+d> Decrement line
+
 ## Command Mode
 
 `: / <space>` Enter command mode.
@@ -604,6 +610,8 @@ Move with the cursor keys or:
 `va"` Visual select around ''
 
 `vi"` Visual select inside ''
+
+`viw` Visual select word under the cursor
 
 `p` Paste under (after) the cursor 
 

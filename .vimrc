@@ -72,6 +72,10 @@ set smartcase
 " Show partial command you type in the last line of the screen.
 set showcmd
 
+" Set minimum number of columns to scroll horizontally (ss). Used in tandem with
+" 'wrap' option off and cursror is off the screen.
+"set sidescroll
+
 " Show the mode you are on the last line (default).
 "set showmode
 
@@ -92,8 +96,16 @@ set cursorcolumn
 
 " Tabstop length (override default of 8).
 set tabstop=4
+
 set softtabstop=4
+
 set shiftwidth=4
+
+" (sr) Set indent (>< commands) to multiples of shiftwidth.
+set shiftround
+
+" (mat) Tenths of a second to show the matching paren, when 'showmatch' is set. Note that this is not in milliseconds.
+"set matchtime=number
 
 " Expand tabstops to spaces.
 "set expandtab
@@ -114,10 +126,14 @@ set listchars+=extends:˺
 " Smart indentation
 set smartindent
 
-" Set line numbers to display by default.
+" Set line numbers (nu) to display by default. nonumber to turn off, number! to
+" number! to toggle
 set number
 
-" Set relative line numbers to display by default.
+" Set the width of the number (nuw) column.
+"set numberwidth=6
+
+" Set relative line numbers (rno) to display by default.
 set relativenumber
 
 " Set the cursor position (including % location in the file) in the status bar.
@@ -203,9 +219,24 @@ autocmd InsertEnter * highlight LineNr ctermfg=117
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
 
+" Ctrl+d to delete the current line in insert mode.
+imap <c-d> <esc>ddi
+
+" Ctrl+u to uppercase full word in insert mode.
+imap <c-u> <esc>viWU<esc>Ei
+
+" Ctrl+l to lowercase full word in insert mode.
+imap <c-l> <esc>viWu<esc>Ei
+
 " <esc> in insert mode remapped to jk
 inoremap jk <esc>
  
+" Ctrl+u to uppercase the full word in normal mode.
+nmap <c-u> viWU<esc>E
+
+" Ctrl+l to lowercase the full word in normal mode.
+nmap <c-l> viWu<esc>E
+
 " No <esc> to exit insert mode - use jk 
 " Commented as seems to break things"
 "inoremap <esc> <nop>
@@ -225,7 +256,9 @@ nnoremap <tab> %
 " Map Y to yank to the end of the current line
 nnoremap Y y$
 
-" Map page up and page down moves line under cursor up and down
+" Map page up and page down moves line under cursor up and down.
+" These break on the first and last lines of the document so
+" be carefule there (TODO: how to fix this behaviour)
 nnoremap <pageup> ddkP
 nnoremap <pagedown> ddp
 
@@ -374,6 +407,8 @@ set laststatus=2
 
 " ABBREVIATIONS ------------------------------------------------------------ 
 
+:ab teh the
+:ab fro for
 :ab bevs Bevan Sharp
 
 " NETRW  ------------------------------------------------------------ 

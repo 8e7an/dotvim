@@ -10,9 +10,9 @@ Vim.
 
 
 - [x] 1. Echoing Messages
-- [ ] 2. Setting Options
-- [ ] 3. Basic Mapping
-- [ ] 4. Modal Mapping
+- [x] 2. Setting Options
+- [x] 3. Basic Mapping
+- [x] 4. Modal Mapping
 - [ ] 5. Strict Mapping
 - [ ] 6. Leaders
 - [ ] 7. Editing Your Vimrc
