@@ -28,6 +28,8 @@ In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) wil
 
 * [Command line](https://learnbyexample.gitbooks.io/vim-reference/content/Command_Line_mode.html)
 
+* [Working With Buffers in Vim: A Guide | Built In](https://builtin.com/articles/working-with-buffers-in-vim#:~:text=Vim%20buffers%20is%20an%20editing,use%20it%20to%20manage%20workflows.)
+
 Leader commands `(,+cmd)` set in the **.vimrc** file. Here displayed in **bold**.
 
 ## Customising Vim
@@ -1396,7 +1398,35 @@ More on split windows in Vim:
 
 `:{number}b` / `:b{number}` / :bu{number} Go to the buffer by number
 
-`:bd` Delete a buffer (close a file)
+`:bd` / `:bdelete` **<leader>C** Delete a buffer (close a file)
+
+`:bufdo` Run an operation across all files open in the buffers
+
+Eg. to make a global change across all buffers (Update saves each buffer file after substitution):
+
+`:bufdo %s/pancake/waffle/g | update`
+
+`:args` List the args - the one in [] is the current args file
+
+`:args {filepath ...}` Overrite the args list with the provided files
+
+`:arga {filepath}` Add the file to the args list
+
+`:argd {file}` Delete the file in the args list
+
+`:next` Go to next in the args
+
+`:prev` Go to previous in the args
+
+`:first` Go to first in the args 
+
+`:last` Go to last in the args
+
+`:argdo` Run an operation across all files in the args
+
+Eg. to make a global change across all files in the args (Update saves each buffer file after substitution):
+
+`:argdo %s/method_a/method/b/g | update` 
 
 `:split` Open a horizontal split
 
@@ -1564,6 +1594,8 @@ Called ‘skeleton files’ in Vim, it provides a way to template files using Vi
 * [Surround](https://github.com/tpope/vim-surround)
 
 * [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
+
+* [GitHub - junegunn/fzf.vim: fzf vim](https://github.com/junegunn/fzf.vim)
 
 ### How to Write a Vim Plugin
 

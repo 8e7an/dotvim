@@ -268,6 +268,8 @@ nnoremap <leader>a <c-w>h
 nnoremap <leader>b :buffers<cr>
 " Close the buffer
 nnoremap <leader>c :close<cr>
+" Unload buffer [N] (default: current buffer) and delete it from the buffer list
+nnoremap <leader>C :bdelete<cr>
 " Set focus to right split
 nnoremap <leader>d <c-w>j
 " Set focus to top split
@@ -316,13 +318,17 @@ nnoremap <leader>h :set list!<cr>
 nnoremap <leader>r :set wrap!<cr>
 " Replace text under cursor or visually selected text with yanked (register) tex
 nnoremap <leader>p diw"0P
-" Leader [ to change to previous buffer (last cycling around)
-nnoremap <leader>[ :bp<cr>
 " Toggle spelling
 nnoremap <leader>S :set spell!<cr>
-"Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
+" Leader [ to change to previous buffer (last cycling around)
+nnoremap <leader>[ :bp<cr>
+" Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
 " Leader ] to change to next buffer (first cycling around)
 nnoremap <leader>] :bn<cr>
+" Go to the first buffer
+nnoremap <leader>{ :bfirst<cr>
+" Go to the last buffer
+nnoremap <leader>} :blast<cr>
 " Leader v to open the .vimrc file in a vertical split
 nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc 
