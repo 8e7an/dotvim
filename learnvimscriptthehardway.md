@@ -16,9 +16,9 @@ Vim.
 - [x] 5. Strict Mapping
 - [x] 6. Leaders
 - [x] 7. Editing Your Vimrc
-- [ ] 8. Abbreviations
-- [ ] 9. More Mappings
-- [ ] 10. Training Your Fingers
+- [x] 8. Abbreviations
+- [x] 9. More Mappings
+- [x] 10. Training Your Fingers
 - [ ] 11. Buffer-Local Options and Mappings
 - [ ] 12. Autocommands
 - [ ] 13. Buffer-Local Abbreviations

@@ -229,17 +229,21 @@ inoremap <c-u> <esc>viWU<esc>Ei
 inoremap <c-l> <esc>viWu<esc>Ei
 
 " <esc> in insert mode remapped to jk
-inoremap jk <esc>
- 
-" Ctrl+u to uppercase the full word in normal mode.
-nnoremap <c-u> viWU<esc>E
+" l to move the cursor back to where (in most cases) the cursor was in insert
+" mode
+inoremap jk <esc>l
+"
+" No <esc>, <Ctrl+c> or <Ctrl+[> to exit insert mode - use jk instead
+	" Commented as seems to break things"
+inoremap <esc> <nop>
+inoremap <c-c> <nop>
+inoremap <c-[> <nop>
 
-" Ctrl+l to lowercase the full word in normal mode.
-nnoremap <c-l> viWu<esc>E
-
-" No <esc> to exit insert mode - use jk 
-" Commented as seems to break things"
-"inoremap <esc> <nop>
+" No cursor keys in input mode 
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 " <space> to open the command input :
 nnoremap <space> :
@@ -255,6 +259,12 @@ nnoremap <tab> %
 
 " Map Y to yank to the end of the current line
 nnoremap Y y$
+ 
+" Ctrl+u to uppercase the full word in normal mode.
+nnoremap <c-u> viWU<esc>E
+
+" Ctrl+l to lowercase the full word in normal mode.
+nnoremap <c-l> viWu<esc>E
 
 " Map page up and page down moves line under cursor up and down.
 " These break on the first and last lines of the document so
@@ -369,6 +379,8 @@ nnoremap <leader>} :blast<cr>
 nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc 
 nnoremap <leader>V :source $MYVIMRC<cr>
+" Open NetRW in a left-sided split
+nnoremap <leader>E :Lex<cr>
 " Tidy the indentation the whole document.
 nnoremap <leader>= gg=G
 " Take the URL under the cursor and convert it to a Markdown link with the
@@ -385,6 +397,15 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 
 "nnoremap <leader>html :this is a test
 
+" VISUAL MODE REMAPPINGS --------------------------------------------------
+
+vnoremap ' <esc>`<i'<esc>`>a'<esc>
+vnoremap " <esc>`<i"<esc>`>a"<esc>
+vnoremap ` <esc>`<i`<esc>`>a`<esc>
+vnoremap ( <esc>`<i(<esc>`>a)<esc>
+vnoremap [ <esc>`<i[<esc>`>a]<esc>
+vnoremap { <esc>`<i{<esc>`>a}<esc>
+vnoremap < <esc>`<i<<esc>`>a><esc>
 
 " STATUS LINE ------------------------------------------------------------ 
 "
@@ -412,11 +433,19 @@ set laststatus=2
 
 " ABBREVIATIONS ------------------------------------------------------------ 
 
-:ab teh the
-:ab fro for
-:ab bevs Bevan Sharp
+" Insert mode abbreviations
+:iabbrev teh the
+:iabbrev hte the
+:iabbrev waht what
+:iabbrev tehn then
+:iabbrev adn and
+:iabbrev fro for
+:iabbrev bevs Bevan Sharp
+:iabbrev @@ bevan.sharp@gmail.com
+:iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
+:iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
 
-" NETRW  ------------------------------------------------------------ 
+" NETRW CUSOMISATIONS --------------------------------------------------
 
 let g:netrw_banner=0
 let g:netrw_liststyle=3

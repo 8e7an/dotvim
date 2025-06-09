@@ -3,9 +3,10 @@
 "
 "
 
-" syntax on
-syntax off
+" syntax highlighting on
+syntax on "off
 
+" spellcheck enabled
 set spell
 
 " Use Vim's spell checker

@@ -391,9 +391,13 @@ Move with the cursor keys or:
 
 `H` Move cursor to the top of the screen.
 
+`yH` Yank from the first visible line to the cursor line (inclusive).
+
 `M` Move cursor to the middle of the screen.
 
 `L` Move cursor to the bottom of the screen.
+
+`yL` Yank from the cursor line to the last visible line.
 
 `{` Move cursor to the start of previous paragraph
 
