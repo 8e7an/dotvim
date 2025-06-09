@@ -90,7 +90,9 @@ Information about the vim setting for the file based on its type:
 
 ## Configuration
 
-`:map {letter} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
+`:map {commands} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
+
+`:nunmap {commands}` Unmap the normal command mapping from `{letter}`
 
 Information on configuration options: 
 
@@ -229,6 +231,28 @@ adduser(:
 Take the concatenated files *.vim and pipe them to vim as the input:
 
 `cat *.vim | vim -`
+
+### Jump List
+
+
+
+
+
+### Change List
+
+Vim stores the last 100 changes in the change list.
+
+[Vim Jump to Last Change - VimTricks](https://vimtricks.com/p/vim-jump-to-last-change/)
+
+`:changes` Show position of last 100 changes.
+
+`g;` Jump to the last change made (in the change list).
+
+`g{number};` Jump to the `{number}` last change made (in the change list).
+
+`g,` Jump to the next change made (in the change list).
+
+`g{number},` Jump to the `{number}` next change made (in the change list).
 
 ### Tabs
 
@@ -1608,3 +1632,4 @@ Called ‘skeleton files’ in Vim, it provides a way to template files using Vi
 ### How to Write a Vim Plugin
 
 --TODO--
+

@@ -220,22 +220,22 @@ autocmd InsertEnter * highlight LineNr ctermfg=117
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
 
 " Ctrl+d to delete the current line in insert mode.
-imap <c-d> <esc>ddi
+inoremap <c-d> <esc>ddi
 
 " Ctrl+u to uppercase full word in insert mode.
-imap <c-u> <esc>viWU<esc>Ei
+inoremap <c-u> <esc>viWU<esc>Ei
 
 " Ctrl+l to lowercase full word in insert mode.
-imap <c-l> <esc>viWu<esc>Ei
+inoremap <c-l> <esc>viWu<esc>Ei
 
 " <esc> in insert mode remapped to jk
 inoremap jk <esc>
  
 " Ctrl+u to uppercase the full word in normal mode.
-nmap <c-u> viWU<esc>E
+nnoremap <c-u> viWU<esc>E
 
 " Ctrl+l to lowercase the full word in normal mode.
-nmap <c-l> viWu<esc>E
+nnoremap <c-l> viWu<esc>E
 
 " No <esc> to exit insert mode - use jk 
 " Commented as seems to break things"
