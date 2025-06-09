@@ -14,8 +14,8 @@ Vim.
 - [x] 3. Basic Mapping
 - [x] 4. Modal Mapping
 - [x] 5. Strict Mapping
-- [ ] 6. Leaders
-- [ ] 7. Editing Your Vimrc
+- [x] 6. Leaders
+- [x] 7. Editing Your Vimrc
 - [ ] 8. Abbreviations
 - [ ] 9. More Mappings
 - [ ] 10. Training Your Fingers

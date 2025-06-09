@@ -284,6 +284,9 @@ nnoremap <right> 10<c-e>
 
 " Leader mapped to , (replacing \).
 :let mapleader = ","
+
+" Local leader mapped to \\ (single \).
+:let maplocalleader = "\\"
   
 " CUSTOM LEADER COMMANDS ------------------------------------------------------------ 
 
@@ -366,6 +369,8 @@ nnoremap <leader>} :blast<cr>
 nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc 
 nnoremap <leader>V :source $MYVIMRC<cr>
+" Tidy the indentation the whole document.
+nnoremap <leader>= gg=G
 " Take the URL under the cursor and convert it to a Markdown link with the
 " name of the HTML page.
 " url -> [name of page](url)

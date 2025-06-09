@@ -19,6 +19,8 @@ set foldmethod=indent
 set foldlevel=2
 "
 " Code (JavaScript etc.) comment (//) current line
-nnoremap <leader>j I//<esc>
+nnoremap <localleader>j I//<esc>
 " Code (Javascript etc.) remove comment (remove //) current line
-nnoremap <leader>k :.s/\v^(\s*)(\/\/+)/\1/<cr>
+nnoremap <localleader>k :.s/\v^(\s*)(\/\/+)/\1/<cr>
+
+nnoremap <localleader>f ifunction () {<cr><cr>}<esc>ki<tab>
