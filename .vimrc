@@ -234,10 +234,11 @@ inoremap <c-l> <esc>viWu<esc>Ei
 inoremap jk <esc>l
 "
 " No <esc>, <Ctrl+c> or <Ctrl+[> to exit insert mode - use jk instead
-	" Commented as seems to break things"
-inoremap <esc> <nop>
-inoremap <c-c> <nop>
-inoremap <c-[> <nop>
+" Commented as setting <esc>, <Ctrl+c> or <Ctrl+[> to <nop> seems to break
+" things like cursor keys putting in junk characters."
+"inoremap <esc> <nop>
+"inoremap <c-c> <nop>
+"inoremap <c-[> <nop>
 
 " No cursor keys in input mode 
 inoremap <up> <nop>
