@@ -19,8 +19,8 @@ Vim.
 - [x] 8. Abbreviations
 - [x] 9. More Mappings
 - [x] 10. Training Your Fingers
-- [ ] 11. Buffer-Local Options and Mappings
-- [ ] 12. Autocommands
+- [x] 11. Buffer-Local Options and Mappings
+- [x] 12. Autocommands
 - [ ] 13. Buffer-Local Abbreviations
 - [ ] 14. Autocommand Groups
 - [ ] 15. Operator-Pending Mappings

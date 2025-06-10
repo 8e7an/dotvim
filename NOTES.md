@@ -114,6 +114,10 @@ Prepend "no" to switch an option off. Eg.:
 
 `:set noic`
 
+Set a local setting (for buffer/file) command:
+
+`:setlocal {command}`
+
 Show what a custom command does (without executing it):
 
 `:nmap {command}`

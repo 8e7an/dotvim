@@ -1,4 +1,3 @@
-"
 "        ___     ___    ___    ___        ___    _________     __________
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
 "      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
@@ -171,17 +170,10 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
-autocmd BufNewFile,BufRead *.p8 set ft=lua
-
-" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
-autocmd BufNewFile,BufRead *.scss set ft=css
-
-" COLORS ------------------------------------------------------------ 
+" CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- 
 
 " Set molokai as the color scheme (./vim/colors/molokai.vim).
 colorscheme molokai
-
 "
 " cterm has a set number of 256 color options. The colors are a number or color name.
 " cterm color names can be found here: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -216,6 +208,31 @@ colorscheme molokai
 " Set line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
 autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * highlight LineNr ctermfg=40 ctermbg=232 cterm=bold
 autocmd InsertEnter * highlight LineNr ctermfg=117
+
+" OTHER AUTO-COMMANDS ------------------------------------------------------------------ 
+
+" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
+autocmd BufNewFile,BufRead *.p8 set ft=lua
+
+" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
+autocmd BufNewFile,BufRead *.scss set ft=css
+
+" Auto indent HTML files on read (into the buffer) and write (from the buffer).
+autocmd BufWritePre,BufRead *.html :normal gg=G
+
+" Remove any trailing space on each line in HTML files on read (into the buffer) and write (from the buffer).
+" TODO Does not work but if/when I figure it out make the fix:
+" autocmd BufWritePre,BufRead *.html :normal :%s/\s+$//
+
+" Default to no text wrapping for HTML files.
+"autocmd BufNewFile,BufRead *.html setlocal nowrap
+
+" Local leader (\) for various file types (javascript and python)
+" Commented-out here as handled in respective (if there) file type *.vim
+" config files.
+"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+"autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
 
@@ -349,6 +366,8 @@ nnoremap <leader>i i<cr><esc>
 nnoremap <leader>w :w<cr>
 " Quit (no save)
 nnoremap <leader>q :q<cr>
+" Quit and discard any changes
+nnoremap <leader>Q :q!<cr>
 " Copy all text to the clipboard
 nnoremap <leader>e :%y+<cr>
 " Create new tab
@@ -358,7 +377,7 @@ nnoremap <leader>t :tabe<cr>
 " Undo
 "nnoremap <leader>z u
 " Redo
-nnoremap <leader>x :x<cr>
+"nnoremap <leader>x :x<cr>
 " Toggle hidden characters
 nnoremap <leader>h :set list!<cr>
 " Toggle text wrapping
