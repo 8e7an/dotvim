@@ -1269,16 +1269,17 @@ This will increment the list giving:
 [Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
 
 Mathematical calculations can be done when in insert mode. For instance to get the result of a math equation:
+Doesn't seem to provide decimal values on division.
 
 `<Ctrl+r>={math equation}<enter>`
 
 In normal mode use:
 
-`:put ={math equation}<enter>`
+`:put={math equation}<enter>`
 
 An example of a math function here is:
 
-`:put =range(1,10)`
+`:put=range(1,10)`
 
 This will give 1 to 10 on seperate lines.
 

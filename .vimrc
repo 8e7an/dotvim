@@ -186,39 +186,46 @@ colorscheme molokai
 " 232 is Grey3 (very dark grey)
 " 236 is Grey19 (dark grey)
 "
-" -- " color on file open (read and buffer).
-" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight Normal ctermfg=40 ctermbg=232
-" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
-" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorColumn cterm=none ctermbg=236
-" -- 
-" -- " Change Color when entering Insert Mode
-" -- " Make the colour of the text in Vim lightblue when in Insert mode 
-" -- autocmd InsertEnter * highlight Normal ctermfg=117 ctermbg=232
-" -- "autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=18
-" -- autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=236
-" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
+augroup filetype_colours
+	autocmd!
 
-" Revert normal colors when back to Command/Normal mode
-" Values sames as for BufReadPre,FileReadPre. 
-" autocmd InsertLeave * highlight Normal ctermfg=40 ctermbg=232
-" autocmd InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
+	" -- " color on file open (read and buffer).
+	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight Normal ctermfg=40 ctermbg=232
+	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
+	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorColumn cterm=none ctermbg=236
+	" -- 
+	" -- " Change Color when entering Insert Mode
+	" -- " Make the colour of the text in Vim lightblue when in Insert mode 
+	" -- autocmd InsertEnter * highlight Normal ctermfg=117 ctermbg=232
+	" -- "autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=18
+	" -- autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=236
+	" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
 
-":highlight LineNr ctermfg=grey
+	" Revert normal colors when back to Command/Normal mode
+	" Values sames as for BufReadPre,FileReadPre. 
+	" autocmd InsertLeave * highlight Normal ctermfg=40 ctermbg=232
+	" autocmd InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
 
-" Set line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
-autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * highlight LineNr ctermfg=40 ctermbg=232 cterm=bold
-autocmd InsertEnter * highlight LineNr ctermfg=117
+	":highlight LineNr ctermfg=grey
 
-" OTHER AUTO-COMMANDS ------------------------------------------------------------------ 
+	" Set line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
+	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * highlight LineNr ctermfg=40 ctermbg=232 cterm=bold
+	autocmd InsertEnter * highlight LineNr ctermfg=117
+augroup END
 
-" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
-autocmd BufNewFile,BufRead *.p8 set ft=lua
+" FILE-TYPE AUTO-COMMANDS ------------------------------------------------------------------ 
 
-" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
-autocmd BufNewFile,BufRead *.scss set ft=css
+augroup filetype_p8
+	autocmd!
+	" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
+	autocmd BufNewFile,BufRead *.p8 set ft=lua
+augroup END
 
-" Auto indent HTML files on read (into the buffer) and write (from the buffer).
-autocmd BufWritePre,BufRead *.html :normal gg=G
+augroup filetype_css
+	autocmd!
+	" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
+	autocmd BufNewFile,BufRead *.scss set ft=css
+augroup END
 
 " Remove any trailing space on each line in HTML files on read (into the buffer) and write (from the buffer).
 " TODO Does not work but if/when I figure it out make the fix:
@@ -227,12 +234,43 @@ autocmd BufWritePre,BufRead *.html :normal gg=G
 " Default to no text wrapping for HTML files.
 "autocmd BufNewFile,BufRead *.html setlocal nowrap
 
-" Local leader (\) for various file types (javascript and python)
-" Commented-out here as handled in respective (if there) file type *.vim
-" config files.
-"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-"autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
-autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
+" CUSTOM ABBREVIATIONS FOR VARIOUS FILE TYPES ------------------------------
+
+augroup filetype_python
+	autocmd!
+	" Local leader (\) for various file types (javascript and python)
+	" Commented-out here as handled in respective (if there) file type *.vim
+	" config files.
+	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+	"autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+	"autocmd FileType python :iabbrev <buffer> iff if:<left>
+augroup END
+
+augroup filetype_js
+	autocmd!
+	" Local leader (\) for various file types (javascript and python)
+	" Commented-out here as handled in respective (if there) file type *.vim
+	" config files.
+	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+augroup END
+
+augroup filetype_html
+	autocmd!
+	" Auto indent HTML files on read (into the buffer) and write (from the buffer).
+	autocmd BufWritePre,BufRead *.html :normal gg=G
+	" HTML comment
+	autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
+	" Fold section
+	"autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+	" Entity references shorthands
+	autocmd FileType html iabbrev <buffer> --- &ndash;
+	autocmd FileType html iabbrev <buffer> --= &mdash;
+	autocmd FileType html iabbrev <buffer> --a &amp;
+	autocmd FileType html iabbrev <buffer> --l &lt;
+	autocmd FileType html iabbrev <buffer> --g &gt;
+augroup END
+
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
 
@@ -454,16 +492,16 @@ set laststatus=2
 " ABBREVIATIONS ------------------------------------------------------------ 
 
 " Insert mode abbreviations
-:iabbrev teh the
-:iabbrev hte the
-:iabbrev waht what
-:iabbrev tehn then
-:iabbrev adn and
-:iabbrev fro for
-:iabbrev bevs Bevan Sharp
-:iabbrev @@ bevan.sharp@gmail.com
-:iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
-:iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
+iabbrev teh the
+iabbrev hte the
+iabbrev waht what
+iabbrev tehn then
+iabbrev adn and
+iabbrev fro for
+iabbrev bevs Bevan Sharp
+iabbrev @@ bevan.sharp@gmail.com
+iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
+iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
 
 " NETRW CUSOMISATIONS --------------------------------------------------
 

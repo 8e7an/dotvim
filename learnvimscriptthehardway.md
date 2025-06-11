@@ -21,8 +21,8 @@ Vim.
 - [x] 10. Training Your Fingers
 - [x] 11. Buffer-Local Options and Mappings
 - [x] 12. Autocommands
-- [ ] 13. Buffer-Local Abbreviations
-- [ ] 14. Autocommand Groups
+- [x] 13. Buffer-Local Abbreviations
+- [x] 14. Autocommand Groups
 - [ ] 15. Operator-Pending Mappings
 - [ ] 16. More Operator-Pending Mappings
 - [ ] 17. Status Lines
