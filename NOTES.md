@@ -76,9 +76,9 @@ Information about the vim setting for the file based on its type:
 
 ## Insert Mode
 
-<Ctrl+t> Increment line
+`<Ctrl+t>` Increment line
 
-<Ctrl+d> Decrement line
+`<Ctrl+d>` Decrement line
 
 ## Command Mode
 
@@ -457,15 +457,19 @@ Move with the cursor keys or:
 
 `g%` Repeat last substitution, but globally.
 
-`ea` Go to the end of the word.
+`gq` ?
 
-`<space> <enter>` : for command - Default move cursor to the next character.
+`e` Go to the end of the word.
 
-`<tab>` Jump between matching brackets under cursor.
+`: / **<space>** / **<enter>**` : for command - Default move cursor to the next character.
+
+`% / **<tab>**` Jump between matching brackets under cursor.
 
 `S / dd` Delete current line and go into insert mode
 
 `V` Start line visual selection at cursor
+
+`v` Start visual selection at cursor
 
 `<Ctrl+v>` Start character visual selection at cursor
 
