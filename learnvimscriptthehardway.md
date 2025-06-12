@@ -23,7 +23,7 @@ Vim.
 - [x] 12. Autocommands
 - [x] 13. Buffer-Local Abbreviations
 - [x] 14. Autocommand Groups
-- [ ] 15. Operator-Pending Mappings
+- [x] 15. Operator-Pending Mappings
 - [ ] 16. More Operator-Pending Mappings
 - [ ] 17. Status Lines
 - [ ] 18. Responsible Coding

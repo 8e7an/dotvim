@@ -74,6 +74,33 @@ Information about the vim setting for the file based on its type:
 
 `autocmd! bufwritepost .vimrc source %`
 
+## Operator-Pending Mappings
+
+`:onoremap {command1} {command2}` set Operator-Pending {command1} to perform {command2}.  
+
+With this:
+
+`:onoremap b /return<cr>`
+
+Make it so the follow actions:
+
+`db` Delete body of the function - delete from cursor to line with return statement.
+
+`:onoremap p i(` p as n operator-pending mapping will now act as `i(`.
+
+So `dp` will `di(` Delete text inside brackets ().
+
+Other examples of mappings for effecting next/last content in brackets () and braces:
+`onoremap in( :<c-u>normal! f(vi(<cr>`
+`onoremap il( :<c-u>normal! F(vi(<cr>`
+`onoremap an( :<c-u>normal! f(va(<cr>`
+`onoremap al( :<c-u>normal! F(va(<cr>`
+
+`onoremap in{ :<c-u>normal! f{vi{<cr>`
+`onoremap il{ :<c-u>normal! F{vi{<cr>`
+`onoremap an{ :<c-u>normal! f{va{<cr>`
+`onoremap al{ :<c-u>normal! F{va{<cr>`
+
 ## Insert Mode
 
 <Ctrl+t> Increment line
