@@ -24,8 +24,8 @@ Vim.
 - [x] 13. Buffer-Local Abbreviations
 - [x] 14. Autocommand Groups
 - [x] 15. Operator-Pending Mappings
-- [ ] 16. More Operator-Pending Mappings
-- [ ] 17. Status Lines
+- [x] 16. More Operator-Pending Mappings
+- [x] 17. Status Lines
 - [ ] 18. Responsible Coding
 - [ ] 19. Variables
 - [ ] 20. Variable Scoping

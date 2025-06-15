@@ -115,6 +115,16 @@ Other examples of mappings for effecting next/last content in brackets () and br
 
 `<Ctrl+r>{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
 
+`:execute "<command">` Execute the command in the string.
+
+`:execute "write"` Execute the write just as if you had typed `:write<cr>`.
+
+`:execute "normal! gg" Execute the normal command to move the cursor to the top of the document.
+
+`normal!` doesn't recognise "special characters" like `<cr>`. There are ways around this but it is best to use `execute` with `normal!`.
+
+More on `:execute` at: [More Operator-Pending Mappings / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/16.html)
+
 ## Configuration
 
 `:map {commands} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
@@ -366,7 +376,9 @@ When entering in : commands <Ctrl+D> will give a list of matching options; <TAB>
 
 `:q!` Quit without saving any changes
 
-`ZZ` Save and exit
+`ZZ` Save and exit.
+
+`ZQ` Exit without saving.
 
 `:x` Close file
 
@@ -456,6 +468,8 @@ Move with the cursor keys or:
 
 `<Ctrl+g>` Show file info and file status.
 
+`{buffernumber}<Ctrl+g>` Show file info and status with the {buffer} file's path.
+
 `gg` / [[ Move to the top of the file.
 
 `G` / ]] Move to the bottom of the file.
@@ -493,6 +507,8 @@ Move with the cursor keys or:
 `% / **<tab>**` Jump between matching brackets under cursor.
 
 `S / dd` Delete current line and go into insert mode
+
+`dl` Delete letter.
 
 `V` Start line visual selection at cursor
 
@@ -558,7 +574,7 @@ Move with the cursor keys or:
 
 `x` Delete (remove as copy) character the under the cursor.
 
-`{number}x` Delete (remove as copy) {number} of characters the under and right of the cursor.
+`{number}x` 'Delete' (remove as copy) {number} of characters the under and right of the cursor.
 
 `X` Delete (remove as copy) charactet left of the cursor.
 
@@ -569,6 +585,8 @@ Move with the cursor keys or:
 `cw` Cut (remove and go to insert mode) to the end of word.
 
 `ciw` Cut (remove and go to insert mode) word cursor is inside of?
+
+`cl` Cut (remove and go to insert mode) letter.
 
 `cc` / `S` Delete line at cursor and substitute text.
 
@@ -588,11 +606,13 @@ Move with the cursor keys or:
 
 `{number}dd` Delete a number of lines under cursor (where {number} is the number of lines starting).
 
-`dw` / `diw` Delete word (including following whitespace) - if the cursor is in the middle of the word deletes to the end of the word.
+`dw` Delete from cursor to the end of the word.
 
-`d{number}b` Delete multiple {number} of previous words.
+`diw` Delete inside word (including following whitespace).
 
-`d{number}w` Delete multiple {number} of following words.
+`d{number}b / {number}db` Delete multiple {number} of previous words.
+
+`d{number}w / {number}dw` Delete multiple {number} of following words.
 
 `d{number}j` Delete multiple lines {number} after the current line
 
@@ -704,6 +724,14 @@ Move with the cursor keys or:
 
 `<<{number}j` Decrement current and following {number} (inclusive) lines
 
+`.!{terminalcommand} Insert at the cursor the result of the terminal {termialcommand}. 
+
+Eg. 
+
+`.!whoami` Insert at the cursor the result of the Terminal command **whoami**.
+
+`.!date` Insert at the cursor the  result of the Terminal command **date**.
+
 `:.;+{linenumber}>` Indent range from current line to relative linenumber
 
 `:.;+{linenumber}<` Decrement range from current line to relative linenumber
@@ -729,6 +757,8 @@ Move with the cursor keys or:
 `guw` Make the word after the cursor all uppercase.
 
 `gUw` Make the word after the cursor all lowercase.
+
+`g_` Move the cursor to the last non-blank character in the line.
 
 `{number}guw` Make {number} of words all uppercase.
 
@@ -1295,6 +1325,20 @@ This will increment the list giving:
 6. Sixth
 7. Seventh
 
+Numbers do not have to be the first character, this also works with numbers further in the line like the following:
+
+arr[0] = 'foo';
+arr[0] = 'bar';
+arr[0] = 'zar';
+arr[0] = 'gallah';
+
+Becomes:
+
+arr[1] = 'foo';
+arr[2] = 'bar';
+arr[3] = 'zar';
+arr[4] = 'gallah';
+
 ### Math Calculations in Vim
 
 [Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
@@ -1458,7 +1502,9 @@ More on split windows in Vim:
 
 `:read` (of `:r`) {file path} Read in a copy of the specified file <file path> into the buffer and past to the cursor location, effectively writing that file into the document where the cursor is located. Can use absolute or relative (to the current file) paths.
 
-`:r!{command}` Read in the results of the terminal command (eg. :r!ls to read in the current directory listing or :r!date to read in the current date and time).
+`:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read in the current directory listing or :r!date to read in the current date and time).
+
+Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
 `:buffers` / `:ls` View buffers listing
 
@@ -1500,11 +1546,13 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:argdo %s/method_a/method/b/g | update` 
 
-`:split` Open a horizontal split
+`:split` / `:sp` Open a horizontal split with the current buffer.
 
 `:{number}split` Open a horizontal split of {number} characters high (including ui elements)
 
-`:vsplit` Open a vertical split
+`:vsplit` / `:vs` Open a vertical split with the current buffer.
+
+`:vnew` Open a vertical split with a new buffer.
 
 `:{number}vsplit` Open a vertical split of {number} characters wide (including ui elements)
 
@@ -1664,6 +1712,60 @@ Called ‘skeleton files’ in Vim, it provides a way to template files using Vi
 ## Plugins
 
 * [Surround](https://github.com/tpope/vim-surround)
+
+Copied from the vim-surround README:
+
+**surround.vim**
+
+Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+
+It's easiest to explain with examples. Press `cs"'` inside
+
+**"Hello world!"**
+
+to change it to
+
+**'Hello world!'**
+
+Now press `cs'<q>` to change it to
+
+**<q>Hello world!</q>**
+
+To go full circle, press `cst"` to get
+
+**"Hello world!"**
+
+To remove the delimiters entirely, press `ds"`.
+
+**Hello world!**
+
+Now with the cursor on `"Hello"`, press `ysiw]` (`iw` is a text object).
+
+**[Hello] world!**
+
+Let's make that braces and add some space `(use` `}` instead of `{` for no space): `cs]{`
+
+**{ Hello } world!**
+
+Now wrap the entire line in parentheses with yssb or yss).
+
+**({ Hello } world!)**
+
+Revert to the original text: `ds{ds)`
+
+**Hello world!**
+
+Emphasize hello: `ysiw<em>`
+
+**<em>Hello</em> world!**
+
+Finally, let's try out visual mode. Press a capital V (for linewise visual mode) followed by S<p class="important">.
+
+**
+<p class="important">
+  <em>Hello</em> world!
+</p>
+**
 
 * [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
 

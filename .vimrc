@@ -170,7 +170,7 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- 
+" CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- {{{
 
 " Set molokai as the color scheme (./vim/colors/molokai.vim).
 colorscheme molokai
@@ -185,7 +185,7 @@ colorscheme molokai
 " 231 is Grey100 (white)
 " 232 is Grey3 (very dark grey)
 " 236 is Grey19 (dark grey)
-"
+
 augroup filetype_colours
 	autocmd!
 
@@ -212,20 +212,32 @@ augroup filetype_colours
 	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * highlight LineNr ctermfg=40 ctermbg=232 cterm=bold
 	autocmd InsertEnter * highlight LineNr ctermfg=117
 augroup END
+" }}}
 
 " FILE-TYPE AUTO-COMMANDS ------------------------------------------------------------------ 
 
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Pico-8 file settings ---------------------- {{{
 augroup filetype_p8
 	autocmd!
 	" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
 	autocmd BufNewFile,BufRead *.p8 set ft=lua
 augroup END
+" }}}
 
+" CSS file settings ---------------------- {{{
 augroup filetype_css
 	autocmd!
 	" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
 	autocmd BufNewFile,BufRead *.scss set ft=css
 augroup END
+" }}}
 
 " Remove any trailing space on each line in HTML files on read (into the buffer) and write (from the buffer).
 " TODO Does not work but if/when I figure it out make the fix:
@@ -271,6 +283,19 @@ augroup filetype_html
 	autocmd FileType html iabbrev <buffer> --g &gt;
 augroup END
 
+augroup markdown_html
+	"Operator-Pending mappings for Markdown files
+	" 'in heading' of the previously found heading
+	autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+	" 'around heading' of the previously found heading
+	autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
+	" 'in sub-heading' of the previously found sub-heading
+	autocmd FileType markdown onoremap is :<c-u>execute "normal! ?^\\-\\-\\+$\r:nohlsearch\rkvg_"<cr>
+	" 'around sub-heading' of previously found sub-heading
+	autocmd FileType markdown onoremap as :<c-u>execute "normal! ?^\\-\\-\\+$\r:nohlsearch\rg_vk0"<cr>
+	" 'in next eamil address' (it's a rough regex for email but should work ok)
+	autocmd FileType markdown onoremap in@ :<c-u>execute "normal! /\[0-9a-zA-Z_\\.\\-\]@\[0-9a-zA-Z\\.\]\r:nohlsearch\rviW"<cr>
+augroup END
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
 
@@ -333,6 +358,10 @@ nnoremap <pagedown> ddp
 "nnoremap <down> <nop>
 "nnoremap <left> <nop>
 "unnoremap <right> <nop>
+
+" Map Ctrl k and Ctrl j to the half page scroll Ctrl commands d and u respectively.
+nnoremap <c-k> <c-u>
+nnoremap <c-j> <c-d>
 
 " Arrow keys to move page up and down in normal mode without changing cursor position
 nnoremap <up> <c-y>
@@ -465,32 +494,55 @@ vnoremap [ <esc>`<i[<esc>`>a]<esc>
 vnoremap { <esc>`<i{<esc>`>a}<esc>
 vnoremap < <esc>`<i<<esc>`>a><esc>
 
-" STATUS LINE ------------------------------------------------------------ 
+" STATUS LINE ------------------------------------------------------------ {{{
 "
+" %f – Display the relative path of the current file.
 " %F – Display the full path of the current file.
 " %M – Modified flag shows if file is unsaved.
+" %y – Type of file in the buffer.
 " %Y – Type of file in the buffer.
 " %R – Displays the read-only flag.
 " %b – Shows the ASCII/Unicode character under cursor.
 " 0x%B – Shows the hexadecimal character under cursor.
-" %l – Display the row number.
+" %l – Display the row number/current line.
 " %c – Display the column number.
 " %p%% – Show the cursor percentage from the top of the file.
+" %L – Display the total lines.
 "
+" Preceed a % code with a number to make it at least that length of
+" characters, Eg. %4l to make the line number at least four characters long.
+" Use a -{number} to have the value fill from the left.
+" Alterntively you can use 0 to preceed the {number} to have that value
+" instead of blank" spaces.
+" Truncate with a . E.g: %.20F so the file path is no longer than 20
+" characters.
+" =% aligns the folliwing staus info to the right.
 
-" Clear status line when vimrc is reloaded.
+" Clear status line when vimrc is reloaded:
 set statusline=
-" Status line left side.
+" Append status line left side:
 set statusline+=\ %F\ %M\ %Y\ %R
-" Use a divider to separate the left side from the right side.
+" Append use a divider to separate the left side from the right side:
 set statusline+=%=
-" Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-" Show the status on the second to last line.
+" Append status line right side:
+set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %03l\ (of\ %03L)\ col:\ %-3c\ percent:\ %p%%
+
+" Append show the status on the second to last line.
 set laststatus=2
 
-" ABBREVIATIONS ------------------------------------------------------------ 
+" }}}
 
+" JavaScript file settings ---------------------- {{{
+" Following doesn't work to only customise the local (buffer) status line of
+" javascript files. TODO look to finding out why if ever needed.
+"augroup statusline_javascript
+"	autocmd!
+"	autocmd FileType javascript setlocal statusline=
+"	autocmd FileType javascript setlocal statusline+=%02l\ /\ %03L
+"augroup END
+" }}}
+
+" ABBREVIATIONS ------------------------------------------------------------ {{{
 " Insert mode abbreviations
 iabbrev teh the
 iabbrev hte the
@@ -502,9 +554,11 @@ iabbrev bevs Bevan Sharp
 iabbrev @@ bevan.sharp@gmail.com
 iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
 iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
+" }}}
 
-" NETRW CUSOMISATIONS --------------------------------------------------
+" NETRW CUSOMISATIONS -------------------------------------------------- {{{
 
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 
+" }}}
