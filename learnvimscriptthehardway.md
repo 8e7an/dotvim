@@ -26,8 +26,8 @@ Vim.
 - [x] 15. Operator-Pending Mappings
 - [x] 16. More Operator-Pending Mappings
 - [x] 17. Status Lines
-- [ ] 18. Responsible Coding
-- [ ] 19. Variables
+- [x] 18. Responsible Coding
+- [x] 19. Variables
 - [ ] 20. Variable Scoping
 - [ ] 21. Conditionals
 - [ ] 22. Comparisons

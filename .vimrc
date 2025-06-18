@@ -1,4 +1,3 @@
-"        ___     ___    ___    ___        ___    _________     __________
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
 "      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
 "      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _____/ 
@@ -86,6 +85,9 @@ set showcmd
 
 " Default no text wrap
 set nowrap
+" Can also set nowrap with the following variable assignment but better not to
+" as is harder to read:
+"let &wrap=0
 
 " Enable CursorLine.
 set cursorline
@@ -155,6 +157,11 @@ set hidden
 
 " Set the commands to save in history default number is 20.
 set history=50
+" Following shows how to set the value of a setting with variables (let) and
+" (set):
+"let &history=40
+"let &history=&history + 10
+"set history?
 
 " Set the find path to include the current directory (of the file) and
 " decendant directories.
@@ -363,6 +370,9 @@ nnoremap <pagedown> ddp
 nnoremap <c-k> <c-u>
 nnoremap <c-j> <c-d>
 
+" Clear the search match highlighting (won't effect the next search).
+nnoremap <c-n> :noh<cr>
+
 " Arrow keys to move page up and down in normal mode without changing cursor position
 nnoremap <up> <c-y>
 nnoremap <down> <c-e>
@@ -484,8 +494,10 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 
 "nnoremap <leader>html :this is a test
 
-" VISUAL MODE REMAPPINGS --------------------------------------------------
+" VISUAL MODE REMAPPINGS ------------------------------------------- {{{
 
+" <space> to open the command input :
+vnoremap <space> :
 vnoremap ' <esc>`<i'<esc>`>a'<esc>
 vnoremap " <esc>`<i"<esc>`>a"<esc>
 vnoremap ` <esc>`<i`<esc>`>a`<esc>
@@ -494,7 +506,9 @@ vnoremap [ <esc>`<i[<esc>`>a]<esc>
 vnoremap { <esc>`<i{<esc>`>a}<esc>
 vnoremap < <esc>`<i<<esc>`>a><esc>
 
-" STATUS LINE ------------------------------------------------------------ {{{
+" }}}
+
+" STATUS LINE ------------------------------------------------------ {{{
 "
 " %f – Display the relative path of the current file.
 " %F – Display the full path of the current file.

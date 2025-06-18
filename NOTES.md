@@ -115,6 +115,18 @@ Other examples of mappings for effecting next/last content in brackets () and br
 
 `<Ctrl+r>{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
 
+`let @a="hello!"` Assign the `a` register to **"hello!"**.
+
+`"ap` Paste from register `a`.
+
+`:echo @a` Echo out the register `a`.
+
+`:echo @"` Echo the word just yanked. The `"` register is the "unnamed" register, which is where text you yank without specifying a destination will go.
+
+`:echo @/` Echo the search pattern just used. This lets you programmatically read and modify the current search pattern.
+
+`:let @/ = "{string}"` Write to the search register (`/`) with a `:let`.
+
 `:execute "<command">` Execute the command in the string.
 
 `:execute "write"` Execute the write just as if you had typed `:write<cr>`.
@@ -687,7 +699,6 @@ Move with the cursor keys or:
 `vi[` Visual select inside []
 
 `va"` Visual select around ""
-
 `vi"` Visual select inside ""
 
 `va"` Visual select around ''
@@ -703,6 +714,10 @@ Move with the cursor keys or:
 `"{character}p` Paste from the register {character} after the cursor
 
 `"{character}P` Paste from the register {character} before the cursor
+
+`"_dd` Delete line but NOT put into a register (not remebered but sent to the "Black hole").
+
+`"_dG` Delete from current line to the end of the document but NOT put into a register (not remebered but sent to the "Black hole").
 
 `r{character}` Replace {character}
 
@@ -1184,6 +1199,31 @@ See the vim files used to customise vim:
 Run Terminal command to add the current date and time:
 
 `:r!date `
+
+Can also use:
+
+`:.!date`
+
+`:.` reads in from `!{command}`.
+
+Execute a line, or lines, from the file as a Terminal command:
+
+`:.!sh`
+
+So if the line of the file has **pwd** running `:.!sh` will replace the **pwd**
+with the working directory of the buffer (file).
+
+Can sort multiple lines with the Terminal sort command; start selecting
+multiples lines with Visual mode then use the command (< and > added in
+with Visual select):
+
+`'<,'>.!sort`
+
+`'<,'>!sort` This will also work here.
+
+`'<,'>.!sort -n` Use this for sorting lines starting with numbers.
+
+`'<,'>.!sort -r` Use this for sorting lines at random.
 
 Copy from one part of the document to where the cursor is:
 
@@ -1774,4 +1814,27 @@ Finally, let's try out visual mode. Press a capital V (for linewise visual mode)
 ### How to Write a Vim Plugin
 
 --TODO--
+
+
+## Variables
+
+More on varaibles at: [Variables / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/19.html)
+
+`:let foo="bar"`
+
+`:echo foo` output **foo**
+
+`:let foo=42` Reassign foo a different value (`let` is required)
+
+`:echo foo`
+
+`:echo &wrap` The `&` refers to the option not any variable that has that name.
+
+`:set textwidth?` With `set` only one single literal value is assigned whereas with `let` more options are available: 
+
+`:let &textwidth = &textwidth + 10`
+
+`:set number?` Assign the value in the number variable to the number setting.
+
+`:let &l:number=1` Set local option for the buffer.
 
