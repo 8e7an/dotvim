@@ -28,9 +28,9 @@ Vim.
 - [x] 17. Status Lines
 - [x] 18. Responsible Coding
 - [x] 19. Variables
-- [ ] 20. Variable Scoping
-- [ ] 21. Conditionals
-- [ ] 22. Comparisons
+- [x] 20. Variable Scoping
+- [x] 21. Conditionals
+- [x] 22. Comparisons
 - [ ] 23. Functions
 - [ ] 24. Function Arguments
 - [ ] 25. Numbers

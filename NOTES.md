@@ -109,6 +109,10 @@ Other examples of mappings for effecting next/last content in brackets () and br
 
 ## Command Mode
 
+`:w !sudo tee %` Write the file as 'super user'. Useful if the file doesn't
+have write permissions (but will for the super user). May be prompted for your
+password.
+
 `: / <space>` Enter command mode.
 
 `<Ctrl+c>` Clear text.
@@ -259,7 +263,8 @@ Toggle:
 
 Opening files and effecting files with vim at the command line.
 
-Open a file at particular location/line number - Jump to particular line number from a shell prompt, enter:
+Open a file at particular location/line number - Jump to particular line number
+from a shell prompt, enter:
 
 `vi +linenumber file.c`
 
@@ -269,13 +274,14 @@ Open a file at particular location/line number - Jump to particular line number 
 
 `vi +/searchTermHere file.c`
 
-main or main function from a shell prompt, enter (note note shell escape done with \):
+main or main function from a shell prompt, enter (note note shell escape done
+with \):
 
 `vi +/main initlib.c`
 
 `vi +/main\( initlib.c`
 
-adduser(:
+`adduser(:`
 
 `vi +/addUser\( initlib.c`
 
@@ -284,6 +290,15 @@ adduser(:
 Take the concatenated files *.vim and pipe them to vim as the input:
 
 `cat *.vim | vim -`
+
+### Abbreviations
+
+Set up in **.vimrc** to have available in insert mode:
+
+`iabbrev teh the` Abbreviation to make **teh** **the**.
+
+To cancel an abbreviation from applying (in visual mode) type `Ctrl+v` at the
+end of the word.
 
 ### Jump List
 
@@ -512,6 +527,10 @@ Move with the cursor keys or:
 
 `gq` ?
 
+`gn` Go to next occurance of last searched term (buffer /) switching to visual mode.
+
+`gN` Go to previous occurance of last searched term (buffer /) switching to visual mode.
+
 `e` Go to the end of the word.
 
 `: / **<space>** / **<enter>**` : for command - Default move cursor to the next character.
@@ -739,6 +758,12 @@ Move with the cursor keys or:
 
 `<<{number}j` Decrement current and following {number} (inclusive) lines
 
+`:,+{number}>` Indent from the cursor to the +{number} by one indentation.
+
+`:,+{number}>>` Indent from the cursor to the +{number} by two indentations.
+
+`:{number},+{number}>` Indent from the line {number} to the +{number} by one indentation.
+
 `.!{terminalcommand} Insert at the cursor the result of the terminal {termialcommand}. 
 
 Eg. 
@@ -782,6 +807,10 @@ Eg.
 `gJ` Join following line without a space (continuous join).
 
 `gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 (which I have) it attempts to download the HTML as a file instead (which is not what I want.
+
+`cgn` Cut (go into insert mode), from visual mode, the next matched search term.
+
+`cgN` Cut (go into insert mode), from visual mode, the last matched search term.
 
 `cit` Jump into HTML tag.
 
@@ -1150,19 +1179,37 @@ Notes
 
 * Regular expressions are to be used where pattern is specified
 
-* To enter unicode characters into a command (eg. find and replace) enter <Ctrl+v>u, the unicode value, <enter>
+* To enter unicode characters into a command (eg. find and replace) enter
+  <Ctrl+v>u, the unicode value, <enter>
 
-Can back-reference the whole match with backslash zero - eg. (to globally change ‘apple’ to ‘apples’) :
+Can back-reference the whole match with backslash zero - eg. (to globally
+change ‘apple’ to ‘apples’) :
 
 `:%s/apple/\0s/g`
 
-Use back references to refer to (escaped) bracketed sections of text - eg (to globally change ‘apples’ to ‘allies’):
+Use back references to refer to (escaped) bracketed sections of text - eg (to
+globally change ‘apples’ to ‘allies’):
 
 `:%s/\(a\)pp\(les\)/\1lli\2/g`
 
-With * or # to search for next/previous occurrence of a word under the cursor that match becomes the {pattern}, or the result of a search (/ or ?),  you can use to substitute with the following ({pattern} is implied from the previous match/search):
+With * or # to search for next/previous occurrence of a word under the cursor
+that match becomes the {pattern}, or the result of a search (/ or ?),  you can
+use to substitute with the following ({pattern} is implied from the previous
+match/search):
 
 `:%s//{replace}`
+
+`:/{term}/m$` Move the next found line with {term} to the very end of the buffer.
+
+`:/{term}/m0` Move the next found line with {term} to the very start of the buffer.
+
+`:/{term}/m-1` Move the from the next found line with the {term} to the line
+above where the cursor is.
+
+`:/{term}/+1m-1` Move the line one down from the next found line with the
+{term} to the line above where the cursor is.
+
+`:/{term}/d` Delete the next found line with {term}.
 
 ### Add command
 
@@ -1170,7 +1217,8 @@ Add a block of content, including line breaks, as a command:
 
 `:a <enter>`
 
-Command space will let you add free text. Enter to go to a new line. When done press escape to add the new content to where the cursor is in the document.
+Command space will let you add free text. Enter to go to a new line. When done
+press escape to add the new content to where the cursor is in the document.
 
 Go to line number command
 
@@ -1365,7 +1413,8 @@ This will increment the list giving:
 6. Sixth
 7. Seventh
 
-Numbers do not have to be the first character, this also works with numbers further in the line like the following:
+Numbers do not have to be the first character, this also works with numbers
+further in the line like the following:
 
 arr[0] = 'foo';
 arr[0] = 'bar';
@@ -1379,11 +1428,20 @@ arr[2] = 'bar';
 arr[3] = 'zar';
 arr[4] = 'gallah';
 
+Instead of the <Ctrl>+v, move lines in visual mode, I, edit in insert mode,
+then exit to apply those changes to multiple lines you can use, from any
+multi-line visual selection, the following to achieve the same result:
+
+`'<,'>norm I"` From visual mode insert " at the start of each line.
+
+`'<,'>norm A"` From visual mode append " to the end of each line.
+
 ### Math Calculations in Vim
 
 [Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
 
-Mathematical calculations can be done when in insert mode. For instance to get the result of a math equation:
+Mathematical calculations can be done when in insert mode. For instance to 
+get the result of a math equation:
 Doesn't seem to provide decimal values on division.
 
 `<Ctrl+r>={math equation}<enter>`
@@ -1539,6 +1597,8 @@ More on split windows in Vim:
 * https://www.baeldung.com/linux/vim-windows#:~:text=The%20Ctrl%2Bw%20%2Bs%20and,use%20Ctrl%2Bw%20%2Bn.
 
 `:edit` (of `:e`) {filepath} Open a file (to the buffer) to edit
+
+`:edit!` (of `:e!`) Clear edits to the buffer.
 
 `:read` (of `:r`) {file path} Read in a copy of the specified file <file path> into the buffer and past to the cursor location, effectively writing that file into the document where the cursor is located. Can use absolute or relative (to the current file) paths.
 
@@ -1837,4 +1897,8 @@ More on varaibles at: [Variables / Learn Vimscript the Hard Way](https://learnvi
 `:set number?` Assign the value in the number variable to the number setting.
 
 `:let &l:number=1` Set local option for the buffer.
+
+
+
+`:echom "foo" | echom "bar"` Here the `|` is a way to have two commands on the one line.
 

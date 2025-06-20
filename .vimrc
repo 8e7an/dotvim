@@ -48,56 +48,60 @@ filetype plugin indent on
 " Turn syntax highlighting on.
 syntax on
 
-" Disable compatibility with vi which can cause unexpected issues.
+" [nocp] Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
-" Do not save backup files.
+" [nobk] Do not save backup files.
 set nobackup
 
 " Activate mouse interaction (so splits can be resized with the mouse etc.).
 set mouse=a
 
-" While searching though a file incrementally highlight matching characters as you type.
+" [is] Searching though a buffer incrementally highlight matching characters
+" as you type.
 set incsearch
 
 " Default to ignore case (case insensitive) for things like find & replace.
 set ignorecase
 
-" Override the ignorecase option if searching for capital letters.
+" [scs] Override the ignorecase option if searching for capital letters.
 " Allows you to search specifically for capital letters.
 set smartcase
 
-" Show partial command you type in the last line of the screen.
+" [sc] Show partial command you type in the last line of the screen.
 set showcmd
 
-" Set minimum number of columns to scroll horizontally (ss). Used in tandem with
-" 'wrap' option off and cursror is off the screen.
+" [ss] Set minimum number of columns to scroll horizontally. Used in tandem
+" with 'wrap' option off and cursror is off the screen.
 "set sidescroll
 
-" Show the mode you are on the last line (default).
+" [smd] Show the mode you are on the last line (default).
 "set showmode
 
-" Do not show the mode on the last line.
+" [nosmd] Do not show the mode on the last line.
 "set noshowmode
 
-" Default to no wrap scan.
+" [nows] Default to no wrap scan.
 "set nowrapscan
 
 " Default no text wrap
 set nowrap
+
 " Can also set nowrap with the following variable assignment but better not to
 " as is harder to read:
 "let &wrap=0
 
-" Enable CursorLine.
+" [cul] Enable CursorLine.
 set cursorline
 
-" Enable CursorColumn.
+" [cuc] Enable CursorColumn.
 set cursorcolumn
 
-" Tabstop length (override default of 8).
+" [ts] Tabstop length (override default of 8).
 set tabstop=4
 
+" [sts] Number of spaces that a <Tab> counts for while performing editing
+" operations, like inserting a <Tab> or using <BS>.
 set softtabstop=4
 
 set shiftwidth=4
@@ -105,13 +109,15 @@ set shiftwidth=4
 " (sr) Set indent (>< commands) to multiples of shiftwidth.
 set shiftround
 
-" (mat) Tenths of a second to show the matching paren, when 'showmatch' is set. Note that this is not in milliseconds.
+" [mat] Tenths of a second to show the matching paren, when 'showmatch' is
+" set. Note that this is not in milliseconds.
 "set matchtime=number
 
-" Expand tabstops to spaces.
+" [et] Expand tabstops to spaces.
 "set expandtab
 
-" Display hidden characters by default (set list! to toggle off or set nolist to turn off).
+" Display hidden characters by default (set list! to toggle off or set nolist
+" to turn off).
 set nolist
 set listchars+=tab:>·|
 set listchars+=trail:~
@@ -121,38 +127,39 @@ set listchars+=eol:⏎
 set listchars+=precedes:r
 set listchars+=extends:˺
 
-" Folding
+" [fdm] The type of folding used for the current window.
 "set foldmethod=indent
 
-" Smart indentation
+" [si] Smart indentation
 set smartindent
 
-" Set line numbers (nu) to display by default. nonumber to turn off, number! to
+" [nu] Set line numbers to display by default. nonumber to turn off, number! to
 " number! to toggle
 set number
 
-" Set the width of the number (nuw) column.
+" [nuw] Set the width of the number column.
 "set numberwidth=6
 
-" Set relative line numbers (rno) to display by default.
+" [rno] Set relative line numbers to display by default.
 set relativenumber
 
-" Set the cursor position (including % location in the file) in the status bar.
+" [ru] Set the cursor position (including % location in the file) in the
+" status bar.
 set ruler
 
-" auto-indent new lines.
+" [ai] auto-indent new lines.
 set autoindent
 
-" Incremental higlight search matches.
-set is
+" [is] Incremental higlight search matches.
+set incsearch
 
-" Higlight search matches.
+"  [hls] Higlight search matches
 set hlsearch
 
-" Show matching words during a search.
+" [sm] Show matching words during a search.
 set showmatch
 
-" Don't need to write changed buffer before switching to another one.
+" [hid] Don't need to write changed buffer before switching to another one.
 set hidden
 
 " Set the commands to save in history default number is 20.
@@ -163,17 +170,17 @@ set history=50
 "let &history=&history + 10
 "set history?
 
-" Set the find path to include the current directory (of the file) and
+" [pa] Set the find path to include the current directory (of the file) and
 " decendant directories.
 set path+=**
 
-" Enable auto completion menu after pressing TAB.
+" [wmnu] Enable auto completion menu after pressing TAB.
 set wildmenu
 
-" Make wildmenu behave like similar to Bash completion.
+" [wim] Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
 
-" There are certain files that we would never want to edit with Vim.
+" [wig] There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
