@@ -340,8 +340,9 @@ Note that tabs are also buffers in Vim so :buffers will list the tabs.
 
 ## Help
 
-f1 / :help
-:help {command} View a help entry (eg. :help user-manual)
+`f1` / `:help`
+
+`:help` / `h` `{command}` View a help entry (eg. :help user-manual)
 
 `<Ctrl-w Ctrl-w>` To jump from one window to another. Also works with splits.
 
@@ -515,11 +516,11 @@ Move with the cursor keys or:
 
 `gv` Go to last place text was in visual select mode.
 
-`gu` Make a line of text, all lowercase.
+`guu` Current line of text all lowercase.
 
-`gV` Make current line of text all uppercase.
+`gUU` Current line of text all uppercase.
 
-`g~` Make current line of text case-inverted.
+`g~~` Current line of text case-inverted.
 
 `gD` Goto Global Declaration of the variable under the cursor. Like gd but starts at line 1.
 
@@ -530,6 +531,21 @@ Move with the cursor keys or:
 `gn` Go to next occurance of last searched term (buffer /) switching to visual mode.
 
 `gN` Go to previous occurance of last searched term (buffer /) switching to visual mode.
+
+`:g/{term}` List the lines where the `{term}` is found. Can also use
+`:g/{term}/p` but the `p` for print is the default.
+
+`:v/{term}` / `:v/{term}/p` List the lines were `{term}` is not found.
+
+`:g/{term}/d` Delete the lines where the `{term}` is found.
+
+`:v/{term}/d` Delete the lines where the `{term}` is not found.
+
+`:g/{term}/norm {commands}` Run the normal {commands} on any the lines were
+`{term}` is found.
+
+`:v/{term}/norm {commands}` Run the normal {commands} on any the lines were
+`{term}` is not found.
 
 `e` Go to the end of the word.
 
@@ -546,6 +562,12 @@ Move with the cursor keys or:
 `v` Start visual selection at cursor
 
 `<Ctrl+v>` Start character visual selection at cursor
+
+When entering an ex command and entering strings in double quotes ("") you can
+enter special characters with a backslash escape `\` (like tab with `\t`). Another
+method is to enter the special character as its key input (ie. tab key) by
+proceeding it with `<Ctrl+v>` (so `<Ctrl+v>` `<tab>`. Vim will then insert its own special character
+representative of the key entered.
 
 `^v` Multi line visual selection 
 
@@ -663,7 +685,13 @@ Move with the cursor keys or:
 
 `d$` / D / d' Delete from cursor to the end of the line
 
-`diw` Delete inside word
+`daw` Delete around word.
+
+`diw` Delete inside word.
+
+`das` Delete around sentence.
+
+`dis` Delete inside sentence.
 
 `ciw` Cut inner word and go into insert mode
 
@@ -705,6 +733,10 @@ Move with the cursor keys or:
 
 `dG` Delete from cursor to end of file
 
+`vas` Visual select around the sentence. 
+
+`vis` Visual select in the sentence. 
+
 `va(` / vib Visual select around ()
 
 `vi(` / vib Visual select inside ()
@@ -718,6 +750,7 @@ Move with the cursor keys or:
 `vi[` Visual select inside []
 
 `va"` Visual select around ""
+
 `vi"` Visual select inside ""
 
 `va"` Visual select around ''
@@ -740,7 +773,9 @@ Move with the cursor keys or:
 
 `r{character}` Replace {character}
 
-`R{characters}` Replace the text where the cursor is at with {characters} - Each character you enter will replace the character the cursor is over moving onto the next one - Press <esc> to cancel out of this
+`R{characters}` Replace the text where the cursor is at with {characters} -
+Each character you enter will replace the character the cursor is over moving
+onto the next one - Press <esc> to cancel out of this
 
 `J` Join current and next line seperated with a space
 
@@ -762,11 +797,11 @@ Move with the cursor keys or:
 
 `:,+{number}>>` Indent from the cursor to the +{number} by two indentations.
 
-`:{number},+{number}>` Indent from the line {number} to the +{number} by one indentation.
+`:{number},+{number}>` Indent from the line {number} to the `+{number}` by one indentation.
 
-`.!{terminalcommand} Insert at the cursor the result of the terminal {termialcommand}. 
+`.!{terminalcommand}` Insert at the cursor the result of the terminal `{termialcommand}`. 
 
-Eg. 
+Eg.
 
 `.!whoami` Insert at the cursor the result of the Terminal command **whoami**.
 
@@ -1299,11 +1334,17 @@ Enter (and exit) block visual mode:
 
 `Shift+v`
 
-Enter (and exit) visual block mode (visual block mode allows for editing multiple lines at the same cursor point):
+Enter (and exit) visual block mode (visual block mode allows for editing
+multiple lines at the same cursor point):
 
 `Ctrl+v`
 
-In visual block mode move to select from the current cursor point with h, j, k and l and use commands like x, c, r (for replace) etc to effect that selection. To insert text across multiple lines with the visual block mode, move to select the multiple lines and characters then press Shift + i. Enter the text for the current line with the cursor then press <esc> to apply across multiple lines. Cannot delete with the insert mode.
+In visual block mode move to select from the current cursor point with h, j, k
+and l and use commands like x, c, r (for replace) etc to effect that selection.
+To insert text across multiple lines with the visual block mode, move to select
+the multiple lines and characters then press Shift + i. Enter the text for the
+current line with the cursor then press <esc> to apply across multiple lines.
+Cannot delete with the insert mode.
 
 From normal mode:
 
@@ -1337,7 +1378,7 @@ In visual select mode:
 
 `o` Move to other end of marked area.
 
-`O` Move to other corner of block.
+`O` Move to other side of the line of the marked area.
 
 `w` Select next word.
 
@@ -1596,11 +1637,17 @@ More on split windows in Vim:
 
 * https://www.baeldung.com/linux/vim-windows#:~:text=The%20Ctrl%2Bw%20%2Bs%20and,use%20Ctrl%2Bw%20%2Bn.
 
-`:edit` (of `:e`) {filepath} Open a file (to the buffer) to edit
+`:edit` / `:e` {filepath} Open a file (to the buffer) to edit
 
-`:edit!` (of `:e!`) Clear edits to the buffer.
+`:edit!` / `:e!` Clear edits to the buffer.
 
-`:read` (of `:r`) {file path} Read in a copy of the specified file <file path> into the buffer and past to the cursor location, effectively writing that file into the document where the cursor is located. Can use absolute or relative (to the current file) paths.
+`:read` / `:r` `{file path}` Read in a copy of the specified file `{file path}`
+into the buffer and past to the cursor location, effectively writing that
+file into the document where the cursor is located. Can use absolute or
+relative (to the current file) paths.
+
+`:0read` / `:0r` `{file path}` Read in a copy of the specified file `{file path}`
+into the top of the buffer writing the contents there.
 
 `:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read in the current directory listing or :r!date to read in the current date and time).
 
@@ -1692,6 +1739,9 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `/<Ctrl+f>` or `/<Ctrl+f>` Open up, and edit, the / or ? command history. Can use vim commands to navigate and edit here. Enter to fire the find the cursor is under. Enter on the default blank or <Ctrl+c> to escape. This can be a preferrable option over using cursor up and down keys to navigate the / or ? commands history.
 
+`<Ctrl+e>` Scroll the buffer down one line. 
+
+`<Ctrl+y>` Scroll the buffer up one line. 
 
 Assign local buffer hello the sting "world":
 
@@ -1901,4 +1951,31 @@ More on varaibles at: [Variables / Learn Vimscript the Hard Way](https://learnvi
 
 
 `:echom "foo" | echom "bar"` Here the `|` is a way to have two commands on the one line.
+
+
+
+## String Functions
+
+Get the length of the `{string}`
+
+`strlen({string})`
+
+Get the length of the `{string}`
+
+`len({string})`
+
+Make a string a list:
+
+`split({string}[,{stringseperator}])`
+
+Join a list to make a string:
+
+`join({string}[,{stringseperator}])`
+
+Certain Vim script functions can be used a methods on objects. For instance, the
+following takes a string, splits it by the default single character white-space, 
+then passes that list to the join function where it joins it to make a 
+string with the **,** character:
+
+`split("one two three")->join(',')`
 

@@ -31,10 +31,10 @@ Vim.
 - [x] 20. Variable Scoping
 - [x] 21. Conditionals
 - [x] 22. Comparisons
-- [ ] 23. Functions
-- [ ] 24. Function Arguments
-- [ ] 25. Numbers
-- [ ] 26. Strings
+- [x] 23. Functions
+- [x] 24. Function Arguments
+- [x] 25. Numbers
+- [x] 26. Strings
 - [ ] 27. String Functions
 - [ ] 28. Execute
 - [ ] 29. Normal
