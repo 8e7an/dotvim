@@ -1979,3 +1979,35 @@ string with the **,** character:
 
 `split("one two three")->join(',')`
 
+## Execute
+
+More about buffers at:
+
+[Execute / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/28.html)
+
+The `execute` command is used to evaluate a string as if it were a Vimscript
+command.
+
+`:execute "echom 'Hello, world!'"` evaluates `echom 'Hello, world!'"` as a
+command.
+
+`execute "rightbelow vsplit " . bufname('#')` Open the alternate buffer (`#`)
+in a new right split.
+
+`execute "rightbelow vsplit " . bufname('%')` Open the buffer in the current
+window (`%`) in a new right split.
+
+## Normal
+
+`:normal G` Run the nromal G command to go to the bottom of the buffer.
+
+`:normal ggdd` Go to the top of the buffers and delete the line.
+
+Use `:normal! {command}` To run the normal `{command}` not using any (normal) mappings.
+
+`:execute "normal! gg/foo\<cr>dd"` This will move to the top of the file,
+search for the first occurrence of **foo**, and delete the line that contains it.
+
+`:execute "normal! mqA;\<esc>`q"` Normal command to mark where the cursor is on
+the current line, append **;** to the end of the line then return the cursor
+back to where the mark was placed.

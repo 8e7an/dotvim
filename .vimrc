@@ -426,9 +426,11 @@ nnoremap <leader>C :bdelete<cr>
 " Set focus to right split
 nnoremap <leader>d <c-w>j
 " Set focus to top split
-nnoremap <leader>s <c-w>k
-" Create vertical split
-nnoremap <leader>u :vsplit<cr>
+nnoremap <leader>s <c-w>k<cr>
+" New horizontal split for the current buffer
+nnoremap <leader>Sh :sp<cr>
+" New vertical split for the current buffer
+nnoremap <leader>Sv :vs<cr>
 " Set focus to bottom split
 nnoremap <leader>f <c-w>l
 " Decrease split width by 1. {number}<leader>' to decreaese by {number}
@@ -474,7 +476,7 @@ nnoremap <leader>r :set wrap!<cr>
 " Replace text under cursor or visually selected text with yanked (register) tex
 nnoremap <leader>p diw"0P
 " Toggle spelling
-nnoremap <leader>S :set spell!<cr>
+nnoremap <leader>Sp :set spell!<cr>
 " Leader [ to change to previous buffer (last cycling around)
 nnoremap <leader>[ :bp<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)

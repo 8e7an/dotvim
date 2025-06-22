@@ -35,10 +35,10 @@ Vim.
 - [x] 24. Function Arguments
 - [x] 25. Numbers
 - [x] 26. Strings
-- [ ] 27. String Functions
-- [ ] 28. Execute
-- [ ] 29. Normal
-- [ ] 30. Execute Normal!
+- [x] 27. String Functions
+- [x] 28. Execute
+- [x] 29. Normal
+- [x] 30. Execute Normal!
 - [ ] 31. Basic Regular Expressions
 - [ ] 32. Case Study: Grep Operator, Part One
 - [ ] 33. Case Study: Grep Operator, Part Two
