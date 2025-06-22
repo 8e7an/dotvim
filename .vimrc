@@ -1,7 +1,7 @@
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
 "      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
-"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _____/ 
-"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###| 
+"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _____/
+"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###|
 "      | ###|  | ###| | ###| | ##############| | ###| | ###| | ###|
 "      | ###|  | ###| | ###| | ###  ####  ###| | #########/  | ###|
 "      | ###|  | ###| | ###| | ###\  ##/| ###| | #########\  | ###|
@@ -22,13 +22,13 @@
 " https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/
 "
 
-" PLUGINS ------------------------------------------------------------ 
+" PLUGINS ------------------------------------------------------------
 
 " Plugins installed in ~./vim/pack/*
 " Plugins are git version controlled with remotes to their respective
 " creators.
 " Look to make .vim my own git repo (`dotvim`) and the plugins sub-repos.
-" Installed plugins include: 
+" Installed plugins include:
 "   - Surround - https://github.com/tpope/vim-surround
 "   - Repeat - https://github.com/tpope/vim-repeat
 
@@ -212,16 +212,16 @@ augroup filetype_colours
 	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight Normal ctermfg=40 ctermbg=232
 	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
 	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight CursorColumn cterm=none ctermbg=236
-	" -- 
+	" --
 	" -- " Change Color when entering Insert Mode
-	" -- " Make the colour of the text in Vim lightblue when in Insert mode 
+	" -- " Make the colour of the text in Vim lightblue when in Insert mode
 	" -- autocmd InsertEnter * highlight Normal ctermfg=117 ctermbg=232
 	" -- "autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=18
 	" -- autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=236
 	" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
 
 	" Revert normal colors when back to Command/Normal mode
-	" Values sames as for BufReadPre,FileReadPre. 
+	" Values sames as for BufReadPre,FileReadPre.
 	" autocmd InsertLeave * highlight Normal ctermfg=40 ctermbg=232
 	" autocmd InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
 
@@ -233,7 +233,7 @@ augroup filetype_colours
 augroup END
 " }}}
 
-" FILE-TYPE AUTO-COMMANDS ------------------------------------------------------------------ 
+" FILE-TYPE AUTO-COMMANDS ------------------------------------------------------------------
 
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
@@ -316,7 +316,7 @@ augroup markdown_html
 	"autocmd FileType markdown onoremap in@ :<c-u>execute "normal! /\[0-9a-zA-Z_\\.\\-\]@\[0-9a-zA-Z\\.\]\r:nohlsearch\rviW"<cr>
 augroup END
 
-" OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------ 
+" OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------
 
 " Ctrl+d to delete the current line in insert mode.
 inoremap <c-d> <esc>ddi
@@ -339,7 +339,7 @@ inoremap jk <esc>l
 "inoremap <c-c> <nop>
 "inoremap <c-[> <nop>
 
-" No cursor keys in input mode 
+" No cursor keys in input mode
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
@@ -359,7 +359,7 @@ nnoremap <tab> %
 
 " Map Y to yank to the end of the current line
 nnoremap Y y$
- 
+
 " Ctrl+u to uppercase the full word in normal mode.
 nnoremap <c-u> viWU<esc>E
 
@@ -382,8 +382,8 @@ nnoremap <pagedown> ddp
 nnoremap <c-k> <c-u>
 nnoremap <c-j> <c-d>
 
-" Clear the search match highlighting (won't effect the next search).
-nnoremap <c-n> :noh<cr>
+" [noh] Clear the search match highlighting (won't effect the next search).
+nnoremap <silent> <c-n> :nohlsearch<cr>
 
 " Arrow keys to move page up and down in normal mode without changing cursor position
 nnoremap <up> <c-y>
@@ -404,8 +404,8 @@ nnoremap <right> 10<c-e>
 
 " Local leader mapped to \\ (single \).
 :let maplocalleader = "\\"
-  
-" CUSTOM LEADER COMMANDS ------------------------------------------------------------ 
+
+" CUSTOM LEADER COMMANDS ------------------------------------------------------------
 
 " Map tab to leader 1,2
 "nnoremap <c-left> :tabprevious<cr>
@@ -488,7 +488,7 @@ nnoremap <leader>{ :bfirst<cr>
 nnoremap <leader>} :blast<cr>
 " Leader v to open the .vimrc file in a vertical split
 nnoremap <leader>v :vsp $MYVIMRC<cr>
-" Reload/apply the .vimrc 
+" Reload/apply the .vimrc
 nnoremap <leader>V :source $MYVIMRC<cr>
 " Open NetRW in a left-sided split
 nnoremap <leader>E :Lex<cr>
@@ -505,6 +505,12 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 "vnoremap <Leader>name "0y :silent call system("~/.vim/getwebpagename.sh", @0)<cr>
 " Also if a page redirects its own way (not with redirect headers) this will
 " also break this.
+" Highlight trailing whitespace as an error.
+"nnoremap <leader>Sw gg:match Error /\v\s+$/<cr> " <- this works as does the next line:
+nnoremap <leader>Sw gg:execute "match Error " . '/\v\s+$/'<cr>
+" Clear highlight of whitespace error.
+"nnoremap <leader>SW :match none<cr> " <- this works as does the next line:
+nnoremap <leader>SW :execute "match none"<cr>
 
 "nnoremap <leader>html :this is a test
 

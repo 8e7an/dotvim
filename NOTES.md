@@ -302,9 +302,7 @@ end of the word.
 
 ### Jump List
 
-
-
-
+TODO
 
 ### Change List
 
@@ -560,6 +558,10 @@ Move with the cursor keys or:
 `V` Start line visual selection at cursor
 
 `v` Start visual selection at cursor
+
+`dH` Delete from cursor to the top line of what is displayed visually.
+
+`dL` Delete from cursor to the bottom line of what is displayed visually.
 
 `<Ctrl+v>` Start character visual selection at cursor
 
