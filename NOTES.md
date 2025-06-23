@@ -1,6 +1,6 @@
 # Vim Notes
 
-![Vim icon](vim-icon.png)
+![Vim icon](./vim-icon.png)
 
 Following commands for when in command **ex** mode:
 
