@@ -1,5 +1,7 @@
 # Vim Notes
 
+![Vim icon](vim-icon.png)
+
 Following commands for when in command **ex** mode:
 
 When in view **vi** mode the Escape key goes to **ex** mode. Various commands including `i`, `a`, `o`, `O` will automatically go to **vi** (insert) mode after the command is executed.
@@ -508,9 +510,9 @@ Move with the cursor keys or:
 
 `gh` Move cursor up line for wrapped text.
 
-`ga` / :as Show details about the character under the cursor - eg. <“> 8220, Hex 201c, Oct 20034, Digr "6.
+`ga` / :as Show details about the character under the cursor - eg. <“> 8220, Hex 201c, Octal 20034
 
-`gi` Go to last place text was in  insert mode.
+`gi` Go to last place text was in insert mode.
 
 `gv` Go to last place text was in visual select mode.
 
@@ -1420,9 +1422,9 @@ Paste from the register
 
 Useful to paste from a previous change (ie, cut, yank).
 
-View the registry (list of prior changes to the doc/buffer):
+`:registers` / `:reg` View the registry (list of prior changes to the doc/buffer).
 
-`:reg`
+`:reg {namedregisters}` View the registers of the {namedregisters} only.
 
 Note the "{character} against the text you want to paste
 
@@ -1655,9 +1657,11 @@ into the top of the buffer writing the contents there.
 
 Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
-`:buffers` / `:ls` View buffers listing
+`:buffers` / `:ls` View buffers listing.
 
-`:b {buffername}` Switch to the buffer
+`:b {buffername}` Switch to the buffer by name (or part of the name).
+
+`:%bd` Close all buffers.
 
 `:bprev` (of `:bp`) <leader>[ Go to previous buffer
 
@@ -1675,7 +1679,7 @@ Eg. to make a global change across all buffers (Update saves each buffer file af
 
 `:args` List the args - the one in [] is the current args file
 
-`:args {filepath ...}` Overrite the args list with the provided files
+`:args {filepath ...}` Overwrite the args list with the provided files
 
 `:arga {filepath}` Add the file to the args list
 
@@ -1727,13 +1731,15 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `<Ctrl+w>L` Moves the active split to a full-height split across the right
 
+`<Ctrl+w>=` Evenly size the splits.
+
 `{number}<Ctrl+w><` Decrease width of split by {number}
 
 `{number}<Ctrl+w>>` Increase width of split by {number}
 
 `:{number}bd` Delete (close) buffer {number} (current buffer if no number}
 
-`:{number}bw` Wipeout buffer (like bd but more severe) {number} (current buffer if no number}
+`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}
 
 `:only` / `:on` Close the other buffers/tabs leaving the current one only open
 
@@ -1911,7 +1917,7 @@ Emphasize hello: `ysiw<em>`
 
 **<em>Hello</em> world!**
 
-Finally, let's try out visual mode. Press a capital V (for linewise visual mode) followed by S<p class="important">.
+Finally, let's try out visual mode. Press a capital V (for line wise visual mode) followed by S<p class="important">.
 
 **
 <p class="important">
@@ -1930,7 +1936,7 @@ Finally, let's try out visual mode. Press a capital V (for linewise visual mode)
 
 ## Variables
 
-More on varaibles at: [Variables / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/19.html)
+More on variables at: [Variables / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/19.html)
 
 `:let foo="bar"`
 

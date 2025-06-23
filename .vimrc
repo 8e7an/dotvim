@@ -13,7 +13,7 @@
 "
 " Notes about this file:
 " Double quotes (") used to indicate comments.
-" 'ex' commands. Ommit the preceeding : as not required in this (.exrc) file.
+" 'ex' commands. Omit the preceding : as not required in this (.exrc) file.
 "
 " <cr> and <enter> do the same thing (I think)
 "
@@ -72,7 +72,7 @@ set smartcase
 set showcmd
 
 " [ss] Set minimum number of columns to scroll horizontally. Used in tandem
-" with 'wrap' option off and cursror is off the screen.
+" with 'wrap' option off and cursor is off the screen.
 "set sidescroll
 
 " [smd] Show the mode you are on the last line (default).
@@ -91,10 +91,10 @@ set nowrap
 " as is harder to read:
 "let &wrap=0
 
-" [cul] Enable CursorLine.
+" [cul] Enable cursor line.
 set cursorline
 
-" [cuc] Enable CursorColumn.
+" [cuc] Enable cursor column.
 set cursorcolumn
 
 " [ts] Tabstop length (override default of 8).
@@ -150,10 +150,10 @@ set ruler
 " [ai] auto-indent new lines.
 set autoindent
 
-" [is] Incremental higlight search matches.
+" [is] Incremental highlight search matches.
 set incsearch
 
-"  [hls] Higlight search matches
+"  [hls] Highlight search matches
 set hlsearch
 
 " [sm] Show matching words during a search.
@@ -171,7 +171,7 @@ set history=50
 "set history?
 
 " [pa] Set the find path to include the current directory (of the file) and
-" decendant directories.
+" descendant directories.
 set path+=**
 
 " [tw] Maximum width of text that is being inserted. A longer line will be
@@ -368,7 +368,7 @@ nnoremap <c-l> viWu<esc>E
 
 " Map page up and page down moves line under cursor up and down.
 " These break on the first and last lines of the document so
-" be carefule there (TODO: how to fix this behaviour)
+" be careful there (TODO: how to fix this behaviour)
 nnoremap <pageup> ddkP
 nnoremap <pagedown> ddp
 
@@ -433,19 +433,19 @@ nnoremap <leader>Sh :sp<cr>
 nnoremap <leader>Sv :vs<cr>
 " Set focus to bottom split
 nnoremap <leader>f <c-w>l
-" Decrease split width by 1. {number}<leader>' to decreaese by {number}
+" Decrease split width by 1. {number}<leader>' to decrease by {number}
 nnoremap <leader>, <c-w><
-" Increase split height by 1. {number}<leader>' to increaese by {number}
+" Increase split height by 1. {number}<leader>' to increase by {number}
 nnoremap <leader>. <c-w>>
-" Decrease split height by 1. {number}<leader>' to decreaese by {number}
+" Decrease split height by 1. {number}<leader>' to decrease by {number}
 nnoremap <leader>; <c-w>-
-" Increase split width by 1. {number}<leader>' to increaese by {number}
+" Increase split width by 1. {number}<leader>' to increase by {number}
 nnoremap <leader>' <c-w>+
 " Set focus to previous tab
 nnoremap <leader>n :tabp<cr>
 " Set focus to next tab,
 nnoremap <leader>m :tabn<cr>
-" Open a new tabset
+" Open a new tab set
 nnoremap <leader>N :tabnew<cr>
 " Leader 9 to move current line up one
 "nnoremap <leader>9 ddkP
@@ -470,10 +470,10 @@ nnoremap <leader>t :tabe<cr>
 " Redo
 "nnoremap <leader>x :x<cr>
 " Toggle hidden characters
-nnoremap <leader>h :set list!<cr>
+nnoremap <silent> <leader>h :set list!<cr>
 " Toggle text wrapping
-nnoremap <leader>r :set wrap!<cr>
-" Replace text under cursor or visually selected text with yanked (register) tex
+nnoremap <silent> <leader>r :set wrap!<cr>
+" Replace text under cursor or visually selected text with yanked (register) text
 nnoremap <leader>p diw"0P
 " Toggle spelling
 nnoremap <leader>Sp :set spell!<cr>
@@ -505,16 +505,25 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 "vnoremap <Leader>name "0y :silent call system("~/.vim/getwebpagename.sh", @0)<cr>
 " Also if a page redirects its own way (not with redirect headers) this will
 " also break this.
-" Highlight trailing whitespace as an error.
+" Highlight trailing white-space as an error.
 "nnoremap <leader>Sw gg:match Error /\v\s+$/<cr> " <- this works as does the next line:
 nnoremap <leader>Sw gg:execute "match Error " . '/\v\s+$/'<cr>
-" Clear highlight of whitespace error.
+" Clear highlight of white-space error.
 "nnoremap <leader>SW :match none<cr> " <- this works as does the next line:
 nnoremap <leader>SW :execute "match none"<cr>
+" Grep search whole word under the cursor in the directory (and sub-directories recursively)
+" providing results in the Vim 'quickfix' window. Adapted from: 
+" [Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way]
+" (https://learnvimscriptthehardway.stevelosh.com/chapters/32.html)
+nnoremap <leader>gg :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 20<cr>
+" 'quickfix' next
+nnoremap <leader>gn :silent cnext<cr>
+" 'quickfix' previous
+nnoremap <leader>gp :silent cprevious<cr>
 
 "nnoremap <leader>html :this is a test
 
-" VISUAL MODE REMAPPINGS ------------------------------------------- {{{
+" VISUAL MODE RE-MAPPINGS ------------------------------------------- {{{
 
 " <space> to open the command input :
 vnoremap <space> :
@@ -543,14 +552,14 @@ vnoremap < <esc>`<i<<esc>`>a><esc>
 " %p%% – Show the cursor percentage from the top of the file.
 " %L – Display the total lines.
 "
-" Preceed a % code with a number to make it at least that length of
+" Precede a % code with a number to make it at least that length of
 " characters, Eg. %4l to make the line number at least four characters long.
 " Use a -{number} to have the value fill from the left.
-" Alterntively you can use 0 to preceed the {number} to have that value
+" Alternatively you can use 0 to precede the {number} to have that value
 " instead of blank" spaces.
 " Truncate with a . E.g: %.20F so the file path is no longer than 20
 " characters.
-" =% aligns the folliwing staus info to the right.
+" =% aligns the following status info to the right.
 
 " Clear status line when vimrc is reloaded:
 set statusline=
@@ -568,7 +577,7 @@ set laststatus=2
 
 " JavaScript file settings ---------------------- {{{
 " Following doesn't work to only customise the local (buffer) status line of
-" javascript files. TODO look to finding out why if ever needed.
+" JavaScript files. TODO look to finding out why if ever needed.
 "augroup statusline_javascript
 "	autocmd!
 "	autocmd FileType javascript setlocal statusline=
@@ -590,9 +599,4 @@ iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
 iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
 " }}}
 
-" NETRW CUSOMISATIONS -------------------------------------------------- {{{
 
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-
-" }}}

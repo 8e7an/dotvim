@@ -40,7 +40,7 @@ Vim.
 - [x] 29. Normal
 - [x] 30. Execute Normal!
 - [x] 31. Basic Regular Expressions
-- [ ] 32. Case Study: Grep Operator, Part One
+- [x] 32. Case Study: Grep Operator, Part One
 - [ ] 33. Case Study: Grep Operator, Part Two
 - [ ] 34. Case Study: Grep Operator, Part Three
 - [ ] 35. Lists
