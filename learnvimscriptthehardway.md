@@ -41,7 +41,11 @@ Vim.
 - [x] 30. Execute Normal!
 - [x] 31. Basic Regular Expressions
 - [x] 32. Case Study: Grep Operator, Part One
-- [ ] 33. Case Study: Grep Operator, Part Two
+- [x] 33. Case Study: Grep Operator, Part Two
+          Completed this unit but the resulting Vim script file grep-operator.vim is buggy despite
+		  replicating the code in the article (even copied and pasted to be sure). Possibly something
+		  to do with my configuation (even tried without my .vimrc `.vim -u NONE` but still no luck).
+		  Maybe look into this again when my Vim script knowledge is further along.
 - [ ] 34. Case Study: Grep Operator, Part Three
 - [ ] 35. Lists
 - [ ] 36. Looping

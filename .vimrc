@@ -515,11 +515,11 @@ nnoremap <leader>SW :execute "match none"<cr>
 " providing results in the Vim 'quickfix' window. Adapted from: 
 " [Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way]
 " (https://learnvimscriptthehardway.stevelosh.com/chapters/32.html)
-nnoremap <leader>gg :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 20<cr>
+"nnoremap <leader>gg :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen 20<cr>
 " 'quickfix' next
-nnoremap <leader>gn :silent cnext<cr>
+"nnoremap <leader>gn :silent cnext<cr>
 " 'quickfix' previous
-nnoremap <leader>gp :silent cprevious<cr>
+"nnoremap <leader>gp :silent cprevious<cr>
 
 "nnoremap <leader>html :this is a test
 
