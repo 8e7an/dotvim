@@ -412,6 +412,10 @@ When entering in : commands <Ctrl+D> will give a list of matching options; <TAB>
 
 `:wall` / :wa write all files open in the buffer (splits and tabs)
 
+`:write {filepath}` / `:w {filepath}` Write the buffer to the `{filepath}`.
+
+`:{number},{number}write {filepath}` / `:{number},{number}w {filepath}` Write the range to the `{filepath}`.
+
 ## Move
 
 Move with the cursor keys or:
@@ -537,6 +541,8 @@ Move with the cursor keys or:
 
 `:v/{term}` / `:v/{term}/p` List the lines were `{term}` is not found.
 
+`:g!` is equivalent to `:v` (and presumably `:v!` is the equivalent to `:g`)
+
 `:g/{term}/d` Delete the lines where the `{term}` is found.
 
 `:v/{term}/d` Delete the lines where the `{term}` is not found.
@@ -546,6 +552,8 @@ Move with the cursor keys or:
 
 `:v/{term}/norm {commands}` Run the normal {commands} on any the lines were
 `{term}` is not found.
+
+`:g/^/m0` Effectively reverse the line order of the document.
 
 `e` Go to the end of the word.
 
@@ -869,7 +877,12 @@ Substitute ‘me’ to ‘you’ only on the lines that have the {regexpattern}:
 
 `:g/{regexpattern}/s/me/you`
 
-Append text on the current line via the command area (. on a new line after {enter text} to finish and bring the text to the file:
+Append text on the current line via the command area (. on a new line after
+{enter text} to finish and bring the text to the file:
+
+`:g/{regexpattern}/t$` Copy all lines that start with `{regexpattern}` to the end of the file.
+
+`:g/{regexpattern}/m$` Move all lines that start with `{regexpattern}` to the end of the file.
 
 ```
 :a
