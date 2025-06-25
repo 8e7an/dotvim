@@ -1192,23 +1192,25 @@ Special characters to escape
 
 [Regular Expressions · Vim Reference](https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html#search-pattern-modifiers)
 
-`\v` helps to avoid \ for pattern qualifiers, grouping pattern, etc
+`\v` helps to avoid \ for pattern qualifiers, grouping pattern, etc.
 
-`/\vc{5}` Match exactly 'ccccc'
+`/\vc{5}` Match exactly 'ccccc'.
 
-`/\vabc+` Match 'abc' or 'abccc' but not 'ab'
+`/\vabc+` Match 'abc' or 'abccc' but not 'ab'.
 
-`/\vabc?` Match 'ab' or 'abc' but not 'abcc'
+`/\vabc?` Match 'ab' or 'abc' but not 'abcc'.
 
-`/\v<his>` Match whole word 'his', not 'this' or 'history'
+`/\v<his>` Match whole word 'his', not 'this' or 'history'.
 
-`/\vmin|max` Match 'min' or 'max'
+`/\vmin|max` Match 'min' or 'max'.
 
-`/\vhand(y|ful)` Match 'handy' or 'handful'
+`/\vhand(y|ful)` Match 'handy' or 'handful'.
 
-`/\v(\a)\1` Match repeated alphabets
+`/\v(\a)\1` Match repeated alphabets.
 
-``\`s/\v(\d+)`\`` (\d+)/\2 \1/ swap two numbers separated by space
+[`s/\v(\d+) \v(\d+)/\2 \1` Swap two numbers separated by space.
+
+### More Advanced Search Pattern Modifiers
 
 `:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.** and append a **.** to those lines.
 
@@ -1218,6 +1220,8 @@ Special characters to escape
 Alternatively use the `g` and `v` commands with the following (`g` global and `v` opposite, or inverse, of global):
 
 `g/- /v/\./norm A.`
+
+### Search Settings
 
 `:set ic` Set search ingnore case.
 
@@ -1229,12 +1233,12 @@ Alternatively use the `g` and `v` commands with the following (`g` global and `v
 
 Notes
 
-* Regular expressions are case sensitive
+* Regular expressions are case sensitive.
 
-* Regular expressions are to be used where pattern is specified
+* Regular expressions are to be used where pattern is specified.
 
 * To enter unicode characters into a command (eg. find and replace) enter
-  <Ctrl+v>u, the unicode value, <enter>
+  `<Ctrl+v>u`, the unicode value, `<enter>`.
 
 Can back-reference the whole match with backslash zero - eg. (to globally
 change ‘apple’ to ‘apples’) :

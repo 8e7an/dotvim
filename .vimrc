@@ -367,10 +367,15 @@ nnoremap <c-u> viWU<esc>E
 nnoremap <c-l> viWu<esc>E
 
 " Map page up and page down moves line under cursor up and down.
-" These break on the first and last lines of the document so
-" be careful there (TODO: how to fix this behaviour)
-nnoremap <pageup> ddkP
-nnoremap <pagedown> ddp
+" For normal, insert and visual modes.
+" Mappings adapted from:
+" https://www.youtube.com/watch?v=L93-S4qksVA 
+nnoremap <pageup> :m .-2<cr>
+nnoremap <pagedown> :m .+1<cr>
+inoremap <pageup> <esc>:m .-2<cr>gi
+inoremap <pagedown> <esc>:m .+1<cr>gi
+vnoremap <pageup> :m '<-2<cr>gv
+vnoremap <pagedown> :m '>+1<cr>gv
 
 " No arrow keys in normal mode - use h, j, k and l
 "nnoremap <up> <nop>
@@ -598,5 +603,4 @@ iabbrev @@ bevan.sharp@gmail.com
 iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
 iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
 " }}}
-
 
