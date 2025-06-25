@@ -1269,6 +1269,9 @@ above where the cursor is.
 
 `:/{term}/d` Delete the next found line with {term}.
 
+`.*` is greedy. To match the minimum length match possible use `.\{-}` which will
+match the fewest characters possible to make a match.
+
 ### Add command
 
 Add a block of content, including line breaks, as a command:
