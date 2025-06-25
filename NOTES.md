@@ -927,6 +927,12 @@ Change text on the current line via the command area (. on a new line after {ent
 .
 ```
 
+[ve] Virtual editing means that the cursor can be positioned where there is no
+actual character.  This can be halfway into a tab or beyond the end of the
+line.  Useful for selecting a rectangle in Visual mode and editing a table.
+
+`set virtualedit=all` Allow virtual editing in all modes
+
 ### Numbers 
 
 `{number}%` Move the cursor to the {number} % place in the file.
@@ -1202,7 +1208,16 @@ Special characters to escape
 
 `/\v(\a)\1` Match repeated alphabets
 
-`\`s/\v(\d+)`\` (\d+)/\2 \1/ swap two numbers separated by space
+``\`s/\v(\d+)`\`` (\d+)/\2 \1/ swap two numbers separated by space
+
+`:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.** and append a **.** to those lines.
+
+`\.@<!$` means to not have the line end in **.**.
+`&` in the replace part is a back reference to the matched text.
+
+Alternatively use the `g` and `v` commands with the following (`g` global and `v` opposite, or inverse, of global):
+
+`g/- /v/\./norm A.`
 
 `:set ic` Set search ingnore case.
 
