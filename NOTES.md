@@ -1208,7 +1208,7 @@ Special characters to escape
 
 `/\v(\a)\1` Match repeated alphabets.
 
-[`s/\v(\d+) \v(\d+)/\2 \1` Swap two numbers separated by space.
+`s/\v(\d+) \v(\d+)/\2 \1` Swap two numbers separated by space.
 
 ### More Advanced Search Pattern Modifiers
 
