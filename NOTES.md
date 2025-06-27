@@ -123,8 +123,6 @@ password.
 
 `let @a="hello!"` Assign the `a` register to **"hello!"**.
 
-`"ap` Paste from register `a`.
-
 `:echo @a` Echo out the register `a`.
 
 `:echo @"` Echo the word just yanked. The `"` register is the "unnamed" register, which is where text you yank without specifying a destination will go.
@@ -1000,9 +998,7 @@ Autocomplete from the dictionary:
 
 `z-` Position screen with cursor at the bottom and start of the line.
 
-`<Ctrl+y>` Moves screen up one line (only change the cursor position if it would be moved off screen).
-
-`<Ctrl+e>` Moves screen down one line (only change the cursor position if it would be moved off screen).
+`<Ctrl+y>` / `<Ctrl+e>` Copy text from same column in the row above.
 
 `<Ctrl+u>` Moves cursor & screen up half of a page.
 
@@ -1016,13 +1012,11 @@ Autocomplete from the dictionary:
 
 `<Ctrl+u>` Undo in insert mode.`
 
-`<Ctrl+i>` Redraws the screen?
-
 `<Ctrl+r>` Redo last undo.
 
 `<Ctrl+g>` Gives the name of the file, the line number the cursor is currently at and the total number lines in the file, the percentage of how far down the document the cursor is and the column the cursor is at. Get cursor position info like current line number, column number and total number of lines. This info is displayed at the bottom of the screen.
 
-`<Ctrl+o>{normal cmnd}` Enter a normal command in insert mode. 
+`<Ctrl+o>{normalcommand}` Enter a normal command in insert mode. 
 
 `<Ctrl+w>` Delete a word in insert mode. 
 
@@ -1302,6 +1296,8 @@ Command to go to a line number:
 
 ## Miscellaneous 
 
+`:terminal` Open the terminal into a new buffer. To exit the terminal enter `exit`.
+
 Assign a value (here string) to register {character}:
 
 `:let @{character} = "something"`
@@ -1460,6 +1456,18 @@ Useful to paste from a previous change (ie, cut, yank).
 `:registers` / `:reg` View the registry (list of prior changes to the doc/buffer).
 
 `:reg {namedregisters}` View the registers of the {namedregisters} only.
+
+`"ayy` Copy the line to register a.
+
+`"bd$` Delete from cursor to the end of the line and put that into register b.
+
+`"cd0` Delete from cursor to the start of the line and put that into register c.
+
+`"ap` Paste from register `a`.
+
+`"+yy` Copy the current line to the system clipboard.
+
+`"+p` Paste from the system clipboard.
 
 Note the "{character} against the text you want to paste
 
@@ -1736,51 +1744,66 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:split` / `:sp` Open a horizontal split with the current buffer.
 
-`:{number}split` Open a horizontal split of {number} characters high (including ui elements)
+`:{number}split` Open a horizontal split of {number} characters high (including ui elements).
 
 `:vsplit` / `:vs` Open a vertical split with the current buffer.
 
 `:vnew` Open a vertical split with a new buffer.
 
-`:{number}vsplit` Open a vertical split of {number} characters wide (including ui elements)
+`:{number}vsplit` Open a vertical split of {number} characters wide (including ui elements).
 
-`:sp` filename Open a file in a new buffer and split window
+`:sp filename` Open a file in a new buffer and split window.
 
-`:next` Navigate to next open file
+`:{number}sp` Open a file in a new buffer and split window {number} characters wide (including ui elements).
 
-`:previous` Navigate to previous open file
+`:next` Navigate to next open file.
 
-`<Ctrl+w>s` - Split windows
+`:previous` Navigate to previous open file.
 
-`<Ctrl+w>w` - switch between windows
+`<Ctrl+w>s` - Split windows.
 
-`<Ctrl+w>q` - Quit a window
+`<Ctrl+w>w` - switch between windows.
 
-`<Ctrl+w>v` - Split windows vertically
+`<Ctrl+w>q` - Quit a window.
 
-`<Ctrl+w>H` Moves the active split to a full-height split across the left
+`<Ctrl+w>v` - Split windows vertically.
 
-`<Ctrl+w>J` Moves the active split to a full-width split across the bottom
+`<Ctrl+w>H` Moves the active split to a full-height split across the left.
 
-`<Ctrl+w>K` Moves the active split to a full-width split across the top
+`<Ctrl+w>J` Moves the active split to a full-width split across the bottom.
 
-`<Ctrl+w>L` Moves the active split to a full-height split across the right
+`<Ctrl+w>K` Moves the active split to a full-width split across the top.
+
+`<Ctrl+w>L` Moves the active split to a full-height split across the right.
+
+`<Ctrl+w>R` Swap position of the splits.
 
 `<Ctrl+w>=` Evenly size the splits.
 
-`{number}<Ctrl+w><` Decrease width of split by {number}
+`<Ctrl+w>|` Max width of the current split.
 
-`{number}<Ctrl+w>>` Increase width of split by {number}
+`<Ctrl+w>_` Max hight of the current split.
 
-`:{number}bd` Delete (close) buffer {number} (current buffer if no number}
+`{number}<Ctrl+w><` Decrease width of split by {number}.
 
-`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}
+`{number}<Ctrl+w>>` Increase width of split by {number}.
 
-`:only` / `:on` Close the other buffers/tabs leaving the current one only open
+`:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
 
-`:<Ctrl+f>` Open up, and edit, the : command history. Can use vim commands to navigate and edit here. Enter to fire the command the cursor is under. Enter on the default blank or <Ctrl+c> to escape. This can be a preferrable option over using cursor up and down keys to navigate the : commands history.
+`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}.
 
-`/<Ctrl+f>` or `/<Ctrl+f>` Open up, and edit, the / or ? command history. Can use vim commands to navigate and edit here. Enter to fire the find the cursor is under. Enter on the default blank or <Ctrl+c> to escape. This can be a preferrable option over using cursor up and down keys to navigate the / or ? commands history.
+`:only` / `:on` Close the other buffers/tabs leaving the current one only open.
+
+`:<Ctrl+f>` Open up, and edit, the : command history. Can use vim commands to
+navigate and edit here. Enter to fire the command the cursor is under. Enter on
+the default blank or `<Ctrl+c>` to escape. This can be a preferrable option over
+using cursor up and down keys to navigate the : commands history.
+
+`/<Ctrl+f>` or `/<Ctrl+f>` Open up, and edit, the / or ? command history. Can
+use vim commands to navigate and edit here. Enter to fire the find the cursor
+is under. Enter on the default blank or `<Ctrl+c>` to escape. This can be a
+preferrable option over using cursor up and down keys to navigate the / or ?
+commands history.
 
 `<Ctrl+e>` Scroll the buffer down one line. 
 

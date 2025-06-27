@@ -46,8 +46,8 @@ Vim.
 		  replicating the code in the article (even copied and pasted to be sure). Possibly something
 		  to do with my configuation (even tried without my .vimrc `.vim -u NONE` but still no luck).
 		  Maybe look into this again when my Vim script knowledge is further along.
-- [ ] 34. Case Study: Grep Operator, Part Three
-- [ ] 35. Lists
+- [x] 34. Case Study: Grep Operator, Part Three
+- [x] 35. Lists
 - [ ] 36. Looping
 - [ ] 37. Dictionaries
 - [ ] 38. Toggling

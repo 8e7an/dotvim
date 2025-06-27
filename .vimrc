@@ -1,18 +1,19 @@
-"       /###|   /###|  /###|  /###\      /###|  /#########\   /##########|
+"        ___     ___    ___    ___        ___    _________     _________
+"       /###|   /###|  /###|  /###\      /###|  /#########\   /#########\
 "      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
-"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _____/
-"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###|
+"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### __ ###|
+"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###|  |___/
 "      | ###|  | ###| | ###| | ##############| | ###| | ###| | ###|
 "      | ###|  | ###| | ###| | ###  ####  ###| | #########/  | ###|
-"      | ###|  | ###| | ###| | ###\  ##/| ###| | #########\  | ###|
-"   __ \ ###\__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|______
+"      | ###|  | ###| | ###| | ###|  ##/| ###| | #########\  | ###|   ___
+"   __ \ ###|__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|__|###\
 "  /##| \ #########/  | ###| | ###|     | ###| | ###| | ###| | ##########|
 " | ##|  \ #######/   | ###| | ###|     | ###| | ###| | ###| \ ##########|
 " |__/    \______/    |___/  |___/      |___/  |___/  |___/   \_________/
 "
 "
 " Notes about this file:
-" Double quotes (") used to indicate comments.
+" Double quotes (") comments.
 " 'ex' commands. Omit the preceding : as not required in this (.exrc) file.
 "
 " <cr> and <enter> do the same thing (I think)
@@ -170,6 +171,13 @@ set history=50
 "let &history=&history + 10
 "set history?
 
+" New horizontal and vertical splits are to the bottom and right (not top and
+" left)
+set splitbelow splitright
+
+" Set the character in the vertical split to \ (defaults to |)
+"set fillchars+=vert:\
+
 " [pa] Set the find path to include the current directory (of the file) and
 " descendant directories.
 set path+=**
@@ -221,15 +229,24 @@ augroup filetype_colours
 	" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
 
 	" Revert normal colors when back to Command/Normal mode
-	" Values sames as for BufReadPre,FileReadPre.
-	" autocmd InsertLeave * highlight Normal ctermfg=40 ctermbg=232
-	" autocmd InsertLeave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
+	" values sames as for bufreadpre,filereadpre.
+	" autocmd insertleave * highlight normal ctermfg=40 ctermbg=232
+	" autocmd insertleave * highlight cursorline cterm=none ctermfg=46 ctermbg=236
 
 	":highlight LineNr ctermfg=grey
 
-	" Set line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
-	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * highlight LineNr ctermfg=40 ctermbg=232 cterm=bold
-	autocmd InsertEnter * highlight LineNr ctermfg=117
+	" Set color overrides with:
+	" Line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
+	" Visual select IndianRed1 background, Grey100 (white) foreground
+	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * 
+				\ highlight LineNr ctermfg=40 ctermbg=232 cterm=bold |
+				\ highlight CursorLineNr ctermfg=232 ctermbg=40 cterm=bold |
+				\ highlight Visual ctermbg=203 ctermfg=231 |
+	autocmd insertenter * 
+				\ highlight LineNr ctermfg=117 ctermbg=232 |
+				\ highlight CursorLineNr ctermfg=232 ctermbg=117 |
+				"\ highlight Visual ctermbg=103 ctermfg=94
+
 augroup END
 " }}}
 
@@ -436,6 +453,10 @@ nnoremap <leader>s <c-w>k<cr>
 nnoremap <leader>Sh :sp<cr>
 " New vertical split for the current buffer
 nnoremap <leader>Sv :vs<cr>
+" Reposition horizontal split to  vertical split.
+nnoremap <leader>tt <c-w>t<c-w>H
+" Reposition vertical split to horizontal split.
+nnoremap <leader>tk <c-w>t<c-w>K
 " Set focus to bottom split
 nnoremap <leader>f <c-w>l
 " Decrease split width by 1. {number}<leader>' to decrease by {number}
@@ -466,8 +487,6 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 " Copy all text to the clipboard
 nnoremap <leader>e :%y+<cr>
-" Create new tab
-nnoremap <leader>t :tabe<cr>
 " Toggle fold
 "nnoremap <leader>z za
 " Undo
@@ -499,6 +518,8 @@ nnoremap <leader>V :source $MYVIMRC<cr>
 nnoremap <leader>E :Lex<cr>
 " Tidy the indentation the whole document.
 nnoremap <leader>= gg=G
+" Create new tab
+nnoremap <leader>St :tabe<cr>
 " Take the URL under the cursor and convert it to a Markdown link with the
 " name of the HTML page.
 " url -> [name of page](url)
@@ -530,15 +551,17 @@ nnoremap <leader>SW :execute "match none"<cr>
 
 " VISUAL MODE RE-MAPPINGS ------------------------------------------- {{{
 
-" <space> to open the command input :
+" <space> to open the command input : in visual mode
 vnoremap <space> :
-vnoremap ' <esc>`<i'<esc>`>a'<esc>
-vnoremap " <esc>`<i"<esc>`>a"<esc>
-vnoremap ` <esc>`<i`<esc>`>a`<esc>
-vnoremap ( <esc>`<i(<esc>`>a)<esc>
-vnoremap [ <esc>`<i[<esc>`>a]<esc>
-vnoremap { <esc>`<i{<esc>`>a}<esc>
-vnoremap < <esc>`<i<<esc>`>a><esc>
+
+" <leader> commands to wrap text in visual mode
+vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
+vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
+vnoremap <leader>` <esc>`<i`<esc>`>a`<esc>
+vnoremap <leader>( <esc>`<i(<esc>`>a)<esc>
+vnoremap <leader>[ <esc>`<i[<esc>`>a]<esc>
+vnoremap <leader>{ <esc>`<i{<esc>`>a}<esc>
+vnoremap <leader>< <esc>`<i<<esc>`>a><esc>
 
 " }}}
 
