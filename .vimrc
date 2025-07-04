@@ -197,6 +197,36 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" AUTO-COMPLETE WITH DICTIONARY ---------------------------------------------------- {{{
+
+"set dictionary?
+"set dictionary+=/usr/share/dict/words
+set dictionary=/usr/share/dict/words
+
+" The dictionary is included in the autocomplete without having to enter
+" ctrl+x then ctrl+k:
+set complete+=k
+
+" F12 to bring up the dictionary autocomplete (though ctrl+n is much easier).
+" }}}
+"
+
+" TOGGLE CODE FOLDING -------------------------------------------------------------- {{{
+" https://learnvimscriptthehardway.stevelosh.com/chapters/38.html
+
+nnoremap <leader>F :call FoldColumnToggle()<cr>
+
+function! FoldColumnToggle()
+	"echom &foldcolumn
+	if &foldcolumn
+		setlocal foldcolumn=0
+	else
+		setlocal foldcolumn=4
+	endif
+endfunction
+
+" }}}
+
 " CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- {{{
 
 " Set molokai as the color scheme (./vim/colors/molokai.vim).
@@ -356,7 +386,7 @@ inoremap jk <esc>l
 "inoremap <c-c> <nop>
 "inoremap <c-[> <nop>
 
-" No cursor keys in input mode
+" No cursor keys in input mode:
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
@@ -365,22 +395,22 @@ inoremap <right> <nop>
 " <space> to open the command input :
 nnoremap <space> :
 
-" Map semicolon (;) to $ (cursor to start of line)
+" Map semicolon (;) to _ (cursor to start of line):
 nnoremap ; _
 
-" Map semicolon (') to $ (cursor to end of line)
+" Map semicolon (') to $ (cursor to end of line):
 nnoremap ' $
 
-" Map <tab> key to % to swap between matching brackets - ({[j
+" Map <tab> key to % to swap between matching brackets - ({[j:
 nnoremap <tab> %
 
-" Map Y to yank to the end of the current line
+" Map Y to yank to the end of the current line:
 nnoremap Y y$
 
-" Ctrl+u to uppercase the full word in normal mode.
+" Ctrl+u to uppercase the full word in normal mode:
 nnoremap <c-u> viWU<esc>E
 
-" Ctrl+l to lowercase the full word in normal mode.
+" Ctrl+l to lowercase the full word in normal mode:
 nnoremap <c-l> viWu<esc>E
 
 " Map page up and page down moves line under cursor up and down.
@@ -394,20 +424,21 @@ inoremap <pagedown> <esc>:m .+1<cr>gi
 vnoremap <pageup> :m '<-2<cr>gv
 vnoremap <pagedown> :m '>+1<cr>gv
 
-" No arrow keys in normal mode - use h, j, k and l
+" No arrow keys in normal mode - use h, j, k and l:
 "nnoremap <up> <nop>
 "nnoremap <down> <nop>
 "nnoremap <left> <nop>
 "unnoremap <right> <nop>
 
-" Map Ctrl k and Ctrl j to the half page scroll Ctrl commands d and u respectively.
+" Map Ctrl k and Ctrl j to the half page scroll Ctrl commands d and u respectively:
 nnoremap <c-k> <c-u>
 nnoremap <c-j> <c-d>
 
-" [noh] Clear the search match highlighting (won't effect the next search).
+" [noh] Clear the search match highlighting (won't effect the next search):
 nnoremap <silent> <c-n> :nohlsearch<cr>
 
-" Arrow keys to move page up and down in normal mode without changing cursor position
+" Arrow keys to move page up and down in normal mode without changing cursor
+" position:
 nnoremap <up> <c-y>
 nnoremap <down> <c-e>
 nnoremap <left> 10<c-y>
@@ -421,15 +452,15 @@ nnoremap <right> 10<c-e>
 "noremap <c-left> <c-w>>
 "noremap <c-right> <c-w><
 
-" Leader mapped to , (replacing \).
+" Leader mapped to , (replacing \):
 :let mapleader = ","
 
-" Local leader mapped to \\ (single \).
+" Local leader mapped to \\ (single \):
 :let maplocalleader = "\\"
 
 " CUSTOM LEADER COMMANDS ------------------------------------------------------------
 
-" Map tab to leader 1,2
+" Map tab to leader 1, 2, 3 and 4:
 "nnoremap <c-left> :tabprevious<cr>
 "nnoremap <c-right> :tabnext<cr>
 noremap <leader>1 1gt
@@ -437,90 +468,94 @@ noremap <leader>2 2gt
 noremap <leader>3 3gt
 noremap <leader>4 4gt
 
-" Set focus to left split
-nnoremap <leader>a <c-w>h
-" View the buffers
+" Jump to next `f` / `F` / `t` / `T` match on the line:
+nnoremap <leader>; ;
+" View the buffers:
 nnoremap <leader>b :buffers<cr>
-" Close the buffer
+" Close the buffer:
 nnoremap <leader>c :close<cr>
-" Unload buffer [N] (default: current buffer) and delete it from the buffer list
+" Unload buffer [N] (default: current buffer) and delete it from the buffer list:
 nnoremap <leader>C :bdelete<cr>
-" Set focus to right split
+" Set focus to left split:
+nnoremap <leader>a <c-w>h
+" Set focus to top split:
+nnoremap <leader>s <c-w>k
+" Set focus to bottom split:
 nnoremap <leader>d <c-w>j
-" Set focus to top split
-nnoremap <leader>s <c-w>k<cr>
-" New horizontal split for the current buffer
-nnoremap <leader>Sh :sp<cr>
-" New vertical split for the current buffer
-nnoremap <leader>Sv :vs<cr>
-" Reposition horizontal split to  vertical split.
-nnoremap <leader>tt <c-w>t<c-w>H
-" Reposition vertical split to horizontal split.
-nnoremap <leader>tk <c-w>t<c-w>K
-" Set focus to bottom split
+" Set focus to right split:
 nnoremap <leader>f <c-w>l
-" Decrease split width by 1. {number}<leader>' to decrease by {number}
+" New horizontal split for the current buffer:
+nnoremap <leader>Sh :sp<cr>
+" New vertical split for the current buffer:
+nnoremap <leader>Sv :vs<cr>
+" Reposition horizontal split to  vertical split:
+nnoremap <leader>tt <c-w>t<c-w>H
+" Reposition vertical split to horizontal split:
+nnoremap <leader>tk <c-w>t<c-w>K
+" Decrease split width by 1. {number}<leader>' to decrease by {number}:
 nnoremap <leader>, <c-w><
-" Increase split height by 1. {number}<leader>' to increase by {number}
+" Increase split height by 1. {number}<leader>' to increase by {number}:
 nnoremap <leader>. <c-w>>
-" Decrease split height by 1. {number}<leader>' to decrease by {number}
-nnoremap <leader>; <c-w>-
-" Increase split width by 1. {number}<leader>' to increase by {number}
-nnoremap <leader>' <c-w>+
-" Set focus to previous tab
+" Decrease split height by 1. {number}<leader>' to decrease by {number}:
+"nnoremap <leader>; <c-w>-
+" Increase split height by 1. {number}<leader>' to increase by {number}:
+"nnoremap <leader>' <c-w>+
+" Set focus to previous tab:
 nnoremap <leader>n :tabp<cr>
-" Set focus to next tab,
+" Set focus to next tab:
 nnoremap <leader>m :tabn<cr>
-" Open a new tab set
+" Open a new tab set:
 nnoremap <leader>N :tabnew<cr>
-" Leader 9 to move current line up one
+" Leader 9 to move current line up one:
 "nnoremap <leader>9 ddkP
-" Leader 0 to move current line down one
+" Leader 0 to move current line down one:
 "nnoremap <leader>0 ddp
-" Inset a blank line (opposite of J). {number}<leader>i for {number} of lines
+" Inset a blank line (opposite of J). {number}<leader>i for {number} of lines:
 nnoremap <leader>i i<cr><esc>
-" Write changes.
+" Write changes:
 nnoremap <leader>w :w<cr>
-" Quit (no save)
+" Quit (no save):
 nnoremap <leader>q :q<cr>
-" Quit and discard any changes
+" Quit and discard any changes:
 nnoremap <leader>Q :q!<cr>
-" Copy all text to the clipboard
+" Copy line to the system clipboard:
+nnoremap <leader>l :.y+<cr>
+" Copy all text to the clipboard:
 nnoremap <leader>e :%y+<cr>
-" Toggle fold
+" Toggle fold:
 "nnoremap <leader>z za
-" Undo
+" Undo:
 "nnoremap <leader>z u
-" Redo
+" Redo:
 "nnoremap <leader>x :x<cr>
-" Toggle hidden characters
+" Toggle hidden characters:
 nnoremap <silent> <leader>h :set list!<cr>
-" Toggle text wrapping
+" Toggle text wrapping:
 nnoremap <silent> <leader>r :set wrap!<cr>
-" Replace text under cursor or visually selected text with yanked (register) text
+" Replace text under cursor or visually selected text with yanked (register) text:
 nnoremap <leader>p diw"0P
-" Toggle spelling
+" Toggle spelling:
 nnoremap <leader>Sp :set spell!<cr>
-" Leader [ to change to previous buffer (last cycling around)
+" Leader [ to change to previous buffer (last cycling around):
 nnoremap <leader>[ :bp<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
-" Leader ] to change to next buffer (first cycling around)
+" Leader ] to change to next buffer (first cycling around):
 nnoremap <leader>] :bn<cr>
-" Go to the first buffer
+" Go to the first buffer:
 nnoremap <leader>{ :bfirst<cr>
-" Go to the last buffer
+" Go to the last buffer:
 nnoremap <leader>} :blast<cr>
-" Leader v to open the .vimrc file in a vertical split
+" Leader v to open the .vimrc file in a vertical split:
 nnoremap <leader>v :vsp $MYVIMRC<cr>
-" Reload/apply the .vimrc
+" Reload/apply the .vimrc:
 nnoremap <leader>V :source $MYVIMRC<cr>
-" Open NetRW in a left-sided split
+" Open NetRW in a left-sided split:
 nnoremap <leader>E :Lex<cr>
-" Tidy the indentation the whole document.
+" Tidy the indentation the whole document:
 nnoremap <leader>= gg=G
-" Create new tab
+" Create new tab:
 nnoremap <leader>St :tabe<cr>
-" Take the URL under the cursor and convert it to a Markdown link with the
+" Take the URL under the cursor and convert it to a Markdown link with the:
 " name of the HTML page.
 " url -> [name of page](url)
 nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh <c-r>0<cr>kgJgJ
@@ -546,6 +581,8 @@ nnoremap <leader>SW :execute "match none"<cr>
 "nnoremap <leader>gn :silent cnext<cr>
 " 'quickfix' previous
 "nnoremap <leader>gp :silent cprevious<cr>
+"Delete the current line to the 'black hole' (not stored in the unnamed register).
+nnoremap <leader>D "_dd
 
 "nnoremap <leader>html :this is a test
 
@@ -562,6 +599,8 @@ vnoremap <leader>( <esc>`<i(<esc>`>a)<esc>
 vnoremap <leader>[ <esc>`<i[<esc>`>a]<esc>
 vnoremap <leader>{ <esc>`<i{<esc>`>a}<esc>
 vnoremap <leader>< <esc>`<i<<esc>`>a><esc>
+vnoremap <leader>** <esc>`<i**<esc>`>a**<esc>
+vnoremap <leader>* <esc>`<i*<esc>`>a*<esc>
 
 " }}}
 
@@ -603,7 +642,8 @@ set laststatus=2
 
 " }}}
 
-" JavaScript file settings ---------------------- {{{
+" JavaScript file settings ------------------------------------------------- {{{
+"
 " Following doesn't work to only customise the local (buffer) status line of
 " JavaScript files. TODO look to finding out why if ever needed.
 "augroup statusline_javascript
@@ -615,6 +655,7 @@ set laststatus=2
 
 " ABBREVIATIONS ------------------------------------------------------------ {{{
 " Insert mode abbreviations
+"
 iabbrev teh the
 iabbrev hte the
 iabbrev waht what
@@ -625,5 +666,10 @@ iabbrev bevs Bevan Sharp
 iabbrev @@ bevan.sharp@gmail.com
 iabbrev ccopy Copyright 2025 Bevan Sharp, all right reserved
 iabbrev ssig --<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
+iabbrev krsig Kind regards,<cr>Bevan Sharp
+iabbrev krlsig Kind regards,<cr>Bevan Sharp<cr>bevan.sharp@gmail.com
+iabbrev lorem  Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+iabbrev loremp Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<cr><cr>Aenean lacinia bibendum nulla sed consectetur. Maecenas sed diam eget risus varius blandit sit amet non magna.<cr><cr>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
 " }}}
 

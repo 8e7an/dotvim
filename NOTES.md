@@ -105,9 +105,9 @@ Other examples of mappings for effecting next/last content in brackets () and br
 
 ## Insert Mode
 
-`<Ctrl+t>` Increment line
+`ctrl+t` Increment line
 
-`<Ctrl+d>` Decrement line
+`ctrl+d` Decrement line
 
 ## Command Mode
 
@@ -117,9 +117,9 @@ password.
 
 `: / <space>` Enter command mode.
 
-`<Ctrl+c>` Clear text.
+`ctrl+c` Clear text.
 
-`<Ctrl+r>{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
+`ctrl+r{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
 
 `let @a="hello!"` Assign the `a` register to **"hello!"**.
 
@@ -152,6 +152,8 @@ Information on configuration options:
 [How To Show or Hide Line Numbers In vi / vim Text Editor - nixCraft](https://www.cyberciti.biz/faq/vi-show-line-numbers/)
 
 Note that :set can also be written as `:se`
+
+`:options` see the configuration options.
 
 Show the set options.
 
@@ -291,6 +293,16 @@ Take the concatenated files *.vim and pipe them to vim as the input:
 
 `cat *.vim | vim -`
 
+### Ex Mode
+
+`Q` Enter **ex mode**.
+
+`visual` to exit **ex mode**.
+
+Not sure how useful **ex mode** is but you can enter something like:
+
+`norm guu` then 'visual' (to exit) to make the text on the current line **ex mode** was called from all lower-case.
+
 ### Abbreviations
 
 Set up in **.vimrc** to have available in insert mode:
@@ -342,7 +354,7 @@ Note that tabs are also buffers in Vim so :buffers will list the tabs.
 
 `:help` / `h` `{command}` View a help entry (eg. :help user-manual)
 
-`<Ctrl-w Ctrl-w>` To jump from one window to another. Also works with splits.
+`<Ctrl+w Ctrl+w>` To jump from one window to another. Also works with splits.
 
 `:q` Close help.
 
@@ -410,7 +422,9 @@ When entering in : commands <Ctrl+D> will give a list of matching options; <TAB>
 
 `:wall` / :wa write all files open in the buffer (splits and tabs)
 
-`:write {filepath}` / `:w {filepath}` Write the buffer to the `{filepath}`.
+`:write {filepath}` / `:w {filepath}` Write the buffer to the `{filepath}`. Still editing the original file.
+
+`:save {filepath}` / `:sav {filepath}` Write the buffer to the `{filepath}` and switch to editing that file.
 
 `:{number},{number}write {filepath}` / `:{number},{number}w {filepath}` Write the range to the `{filepath}`.
 
@@ -484,19 +498,19 @@ Move with the cursor keys or:
 
 `F{character}` Move cursor to the previous <character> on the current line.
 
-`<Ctrl+f>` Forward one screen.
+`ctrl+f` Forward one screen.
 
-`<Ctrl+b>` Back one screen.
+`ctrl+b` Back one screen.
 
-`<Ctrl+d>` Forward 1/2 screen.
+`ctrl+d` Forward 1/2 screen.
 
-`<Ctrl+u>` Forward 1/2 screen.
+`ctrl+u` Forward 1/2 screen.
 
-`<Ctrl+e>` Scroll screen up one line.
+`ctrl+e` Scroll screen up one line.
 
-`<Ctrl+y>` Scroll screen down one line.
+`ctrl+y` Scroll screen down one line.
 
-`<Ctrl+g>` Show file info and file status.
+`ctrl+g` Show file info and file status.
 
 `{buffernumber}<Ctrl+g>` Show file info and status with the {buffer} file's path.
 
@@ -505,6 +519,10 @@ Move with the cursor keys or:
 `G` / ]] Move to the bottom of the file.
 
 `<number>G` / <number>gg / :<number> Move to that line number (or the last line if the number is greater than the number of line in the file).
+
+`ge` Move cursor back to last letter of the previous word.
+
+`gE` Move cursor back to last letter of the previous whole word.
 
 `gj` Move cursor down line for wrapped text.
 
@@ -571,29 +589,75 @@ Move with the cursor keys or:
 
 `dL` Delete from cursor to the bottom line of what is displayed visually.
 
-`<Ctrl+v>` Start character visual selection at cursor
+`ctrl+v` Start character visual selection at cursor
 
 When entering an ex command and entering strings in double quotes ("") you can
 enter special characters with a backslash escape `\` (like tab with `\t`). Another
 method is to enter the special character as its key input (ie. tab key) by
-proceeding it with `<Ctrl+v>` (so `<Ctrl+v>` `<tab>`. Vim will then insert its own special character
+proceeding it with `ctrl+v` (so `ctrl+v` `<tab>`. Vim will then insert its own special character
 representative of the key entered.
 
 `^v` Multi line visual selection 
 
-`%` / `<tab>` - Move cursor to the closest (and then toggle) to the associated brackets - ( ), { }, [ ] - on the current line.
+`%` / `<tab>` - Move cursor to the closest (and then toggle) to the associated
+brackets - ( ), { }, [ ] - on the current line.
 
 `gd` Goto local Declaration.
 
-> When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "*", but lines that look like a comment are ignored (see 'comments' option).
+> When the cursor is on a local variable, this command will jump to its
+> declaration.  First Vim searches for the start of the current function, just
+> like "[[".  If it is not found the search stops in line 1.  If it is found,
+> Vim goes back until a blank line is found.  From this position Vim searches
+> for the keyword under the cursor, like with "*", but lines that look like a
+> comment are ignored (see 'comments' option).
 
-> Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).
+> Note that this is not guaranteed to work, Vim does not really check the
+> syntax, it only searches for a match with the keyword.  If included files
+> also need to be searched use the commands listed in |include-search|.  After
+> this command |n| searches forward for the next match (not backward).
 
 ## Command window
 
 `q:` open command line window
 
 [Vim Command Line Window - VimTricks](https://vimtricks.com/p/vim-command-line-window/)
+
+## Special Characters
+
+In insert mode enter `ctrl+k {character} {glyph}` to insert the character with
+the glyph applied (can enter `{glyph}` before `{character}`.
+
+Examples:
+
+For "extraño", in insert mode type extra`ctrl+k n ?`, and n will become ñ. Will
+still be insert mode and can keep typing. For this glyph you use **~** instead
+of **?**.
+
+For "ö", in insert mode type extra`ctrl+k o :`, and n will become ö.
+
+For "ū", in insert mode type `ctrl+k u -`, and u will become ū.
+
+https://www.reddit.com/r/vim/comments/12eo93m/how_to_insert_special_characters/
+
+CHAR NAME               CHAR    MEANING
+---------------------------------------------------
+Exclamation mark        !       Grave
+Apostrophe              '       Acute accent
+Greater-Than sign       >       Circumflex accent
+Question mark           ?       Tilde
+Hyphen-Minus            -       Macron
+Left parenthesis        (       Breve
+Full stop               .       Dot above
+Colon                   :       Diaeresis
+Comma                   ,       Cedilla
+Underline               _       Underline
+Solidus                 /       Stroke
+Quotation mark          "       Double acute accent
+Semicolon               ;       Ogonek
+Less-Than sign          <       Caron
+Zero                    0       Ring above
+Two                     2       Hook
+Nine                    9       Horn
 
 ## Edit
 
@@ -615,7 +679,7 @@ representative of the key entered.
 
 `u` Undo
 
-`<Ctrl+r>` Redo
+`ctrl+r` Redo
 
 `yy` / :y Yank (copy) line.
 
@@ -626,6 +690,8 @@ representative of the key entered.
 `y$` / `y'` / `Y` Yank (copy) the from under the cursor to the end of the line.
 
 `"{character}yy` Yank the current line to register {character}.
+
+`"{capitalcharacter}yy` Append yank the current line to register {capitalcharacter}. {capitalcharacter} being {character} in upper-case.
 
 `yt{character}` Yank from the cursor to the next {character} on the current line.
 
@@ -825,9 +891,9 @@ Eg.
 
 `{number}==` Set indentation to logical surrounding indentation for the current and following {number} (inclusive) lines
 
-`<Ctrl+o>` Move cursor to previous place.
+`ctrl+o` Move cursor to previous place.
 
-`<Ctrl+i>` Move cursor to next place.
+`ctrl+i` Move cursor to next place.
 
 `gi` Go to the last insertion location.
 
@@ -939,20 +1005,62 @@ Change text on the current line via the command area (. on a new line after {ent
 ```
 
 [ve] Virtual editing means that the cursor can be positioned where there is no
-actual character.  This can be halfway into a tab or beyond the end of the
-line.  Useful for selecting a rectangle in Visual mode and editing a table.
+actual character. This can be halfway into a tab or beyond the end of the
+line. Useful for selecting a rectangle in Visual mode and editing a table.
 
 `set virtualedit=all` Allow virtual editing in all modes
+
+### Registers
+
+`:reg` / `:registers` to view the registers.
+
+`"0` is the last yanked text so if the unnamed register `""` has the last deleted
+text `"0` will have a record of the last yanked content to use.
+
+Copy current line to the system clipboard:
+`:y+`
+
+Copy all text to the system clipboard:
+`:%y+`
+
+Explanation:
+
+* % to refer the next command to work on all the lines
+
+* y to yank those lines
+
+* + to copy to the system clipboard
+
+Copy visual select lines to the system clipboard
+
+V and select lines
+
+:'<,'>y+
+
+The '<,'> is entered in for you as representative of the visual line select, so
+y, + and enter will copy the selected range into the system clipboard.
+
+### History
+
+`:history` / `:history c` / `:history :` See the history of commands.
+
+`:history i` See the history of input.
+
+`:history e` See the history of expressions.
+
+`:history /` See the history of searches.
+
+`:history d` See the history of debug.
 
 ### Numbers 
 
 `{number}%` Move the cursor to the {number} % place in the file.
 
-`<Ctrl+a>` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number
+`ctrl+a` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number
 
 `{number}<Ctrl+a>` Increase/decrease the number under the control by {number}
 
-`<Ctrl+x>` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number
+`ctrl+x` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number
 
 `{number}<Ctrl+x>` Decrement the number under the control by {number}
 
@@ -964,21 +1072,21 @@ Note with the above the cursor will jump to the next number on the line the curs
 
 In insert mode.
 
-`<Ctrl+n>` Autocomplete (first) word being entered and move to next if more than 1.
+`ctrl+n` Autocomplete (first) word being entered and move to next if more than 1.
 
-`<Ctrl+p>` Autocomplete (last) word being entered and move to previous if more than 1.
+`ctrl+p` Autocomplete (last) word being entered and move to previous if more than 1.
 
 Precede these with <Ctrl+n> to scope to just this file.
 
-`<Ctrl+e>` Cancel autocomplete.
+`ctrl+e` Cancel autocomplete.
 
-`<Ctrl+y>` Accept autocomplete option highlighted.
+`ctrl+y` Accept autocomplete option highlighted.
 
 `<Ctrl+x><Ctrl+f>` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
 
 Autocomplete from the dictionary:
 
-`<Ctrl+x><Ctrl+k>` then `<Ctrl+n>` and `<Ctrl+p>` to change autocompleted match.
+`<Ctrl+x><Ctrl+k>` then `ctrl+n` and `ctrl+p` to change autocompleted match.
 
 ### Screen Manipulation
 
@@ -998,29 +1106,34 @@ Autocomplete from the dictionary:
 
 `z-` Position screen with cursor at the bottom and start of the line.
 
-`<Ctrl+y>` / `<Ctrl+e>` Copy text from same column in the row above.
+`ctrl+y` / `ctrl+e` Copy text from same column in the row above.
 
-`<Ctrl+u>` Moves cursor & screen up half of a page.
+`ctrl+u` Moves cursor & screen up half of a page.
 
-`<Ctrl+d>` Moves cursor & screen down half of a page.
+`ctrl+d` Moves cursor & screen down half of a page.
 
-`<Ctrl+b>` Moves screen up one page, cursor to last line.
+`ctrl+b` Moves screen up one page, cursor to last line.
 
-`<Ctrl+f>` Moves screen down one page, cursor to first line.
+`ctrl+f` Moves screen down one page, cursor to first line.
 
-`<Ctrl+y>` and Ctrl-e only change the cursor position if it would be moved off screen.
+`ctrl+y` and Ctrl+e only change the cursor position if it would be moved off
+screen.
 
-`<Ctrl+u>` Undo in insert mode.`
+`ctrl+u` Undo in insert mode.`
 
-`<Ctrl+r>` Redo last undo.
+`ctrl+r` Redo last undo.
 
-`<Ctrl+g>` Gives the name of the file, the line number the cursor is currently at and the total number lines in the file, the percentage of how far down the document the cursor is and the column the cursor is at. Get cursor position info like current line number, column number and total number of lines. This info is displayed at the bottom of the screen.
+`ctrl+g` Gives the name of the file, the line number the cursor is currently at
+and the total number lines in the file, the percentage of how far down the
+document the cursor is and the column the cursor is at. Get cursor position
+info like current line number, column number and total number of lines. This
+info is displayed at the bottom of the screen.
 
-`<Ctrl+o>{normalcommand}` Enter a normal command in insert mode. 
+`ctrl+o{normalcommand}` Enter a normal command in insert mode.
 
-`<Ctrl+w>` Delete a word in insert mode. 
+`ctrl+w` Delete a word in insert mode. 
 
-`<Ctrl+i>` Delete from the cursor to the start of the line in insert mode. 
+`ctrl+i` Delete from the cursor to the start of the line in insert mode. 
 
 `:history View the history of commands`
 
@@ -1335,11 +1448,21 @@ Can sort multiple lines with the Terminal sort command; start selecting
 multiples lines with Visual mode then use the command (< and > added in
 with Visual select):
 
+`'<,'>sort` Sort selected lines alphabetically. 
+
+`'<,'>sort` Sort selected lines alphabetically and remove duplicates. 
+
+`'<,'>sort n` Sort selected lines by number. 
+
+`'<,'>sort n u` Sort selected lines by number and remove duplicates.
+
 `'<,'>.!sort`
 
 `'<,'>!sort` This will also work here.
 
 `'<,'>.!sort -n` Use this for sorting lines starting with numbers.
+
+`'<,'>.!sort -nu` Sort selected lines by number and remove duplicates.
 
 `'<,'>.!sort -r` Use this for sorting lines at random.
 
@@ -1351,13 +1474,21 @@ Eg.
 
 `:-16,-14co.`
 
-Move text at cursor and next line  to the end of the document (can omit the .; the 1 can also be omitted here): 
+Move text at cursor and next line  to the end of the document (can omit the .;
+the 1 can also be omitted here):
 `:.,+1m$`
 `:,+m$`
 
-Copy text at cursor and the next 2 lines to the start of the document (can omit the .):
+Copy text at cursor and the next 2 lines to the start of the document (can omit
+the .):
 
 `:.,+2t0`
+
+To insert a repeat of characters for a certain amount:
+
+`{number}i{character/s}{esc}` In normal mode.
+
+`ctrl+o{number}i{character/s}{esc}` In insert mode.
 
 ## Visual Mode 
 
@@ -1372,7 +1503,7 @@ Enter (and exit) block visual mode:
 Enter (and exit) visual block mode (visual block mode allows for editing
 multiple lines at the same cursor point):
 
-`Ctrl+v`
+`ctrl+v`
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1552,38 +1683,20 @@ Then in insert mode:
 
 `<Ctrl+r>=<Ctrl+r>{letter}<enter>`
 
-Will give the result of that equation. You may have to edit the equation before hitting enter as unwanted character(s) may appear.
+Will give the result of that equation. You may have to edit the equation before
+hitting enter as unwanted character(s) may appear.
 
-With the equation in the resister in vim, go to insert mode and enter Ctrl+r = then Ctrl+r " to paste the yanked text and press <enter>
+With the equation in the resister in vim, go to insert mode and enter `Ctrl+r =`
+then `Ctrl+r "` to paste the yanked text and press `<enter>`
 
 Edit multiple contiguous lines
 
-To edit multiple contiguous lines at the same column (ie. for commenting multiple lines), from the starting place go into visual mode with Ctrl + v (not V line mode), move up/down to the ending place, go into insert mode with I, enter the character(s) and escape out. The multiple lines will now have the same character in the same place. Can also use this to change case with ~ or delete with d/x.
-
-Copy current line to the system clipboard:
-`:y+`
-
-Copy all text to the system clipboard:
-`:%y+`
-
-Explanation:
-
-* % to refer the next command to work on all the lines
-
-* y to yank those lines
-
-* + to copy to the system clipboard
-
-Set to:
-`<leader>e`
-
-Copy visual select lines to the system clipboard
-
-V and select lines
-
-:'<,'>y+
-
-The '<,'> is entered in for you as representative of the visual line select, so y, + and enter will copy the selected range into the system clipboard.
+To edit multiple contiguous lines at the same column (ie. for commenting
+multiple lines), from the starting place go into visual mode with `Ctrl + v` (not
+V line mode), move up/down to the ending place, go into insert mode with I,
+enter the character(s) and escape out. The multiple lines will now have the
+same character in the same place. Can also use this to change case with ~ or
+delete with d/x.
 
 Substitution across different ranges:
 
@@ -1595,7 +1708,6 @@ Substitution in marked ranges:
 `:s'a,'b/before/after/gci`
 
 The above will search from marked range starting point a going to marked point b and confirm global replacement of ‘before’ with ‘after’.
-
 
 ## Code folding
 
@@ -1633,11 +1745,11 @@ When making certain movements, such as jumping to line 42 with 42G, Vim will sav
 
 `:jumps` You can list jumps
 
-To move backwards through the jump list to an older jump use `<ctrl-o>`.
+To move backwards through the jump list to an older jump use `ctrl+o`.
 
-To move to a newer jump use `<ctrl-i>`. You can also press <tab>.
+To move to a newer jump use `ctrl+i`. You can also press <tab>.
 
-`{number}<ctrl+i>` Jump to {number} in control list
+`{number}<Ctrl+i>` Jump to {number} in control list
 
 Vim will store up to 100 locations in your jump list. If you ever want to clear them all out, run the command `:clearjumps` and your jumplist history will be wiped clean.
 For more info, check out `:help jumplist` in Vim. Also be sure to read about the Vim change list which is similar to but different from the Vim jump list.
@@ -1796,18 +1908,18 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:<Ctrl+f>` Open up, and edit, the : command history. Can use vim commands to
 navigate and edit here. Enter to fire the command the cursor is under. Enter on
-the default blank or `<Ctrl+c>` to escape. This can be a preferrable option over
+the default blank or `ctrl+c` to escape. This can be a preferrable option over
 using cursor up and down keys to navigate the : commands history.
 
 `/<Ctrl+f>` or `/<Ctrl+f>` Open up, and edit, the / or ? command history. Can
 use vim commands to navigate and edit here. Enter to fire the find the cursor
-is under. Enter on the default blank or `<Ctrl+c>` to escape. This can be a
+is under. Enter on the default blank or `ctrl+c` to escape. This can be a
 preferrable option over using cursor up and down keys to navigate the / or ?
 commands history.
 
-`<Ctrl+e>` Scroll the buffer down one line. 
+`ctrl+e` Scroll the buffer down one line. 
 
-`<Ctrl+y>` Scroll the buffer up one line. 
+`ctrl+y` Scroll the buffer up one line. 
 
 Assign local buffer hello the sting "world":
 
@@ -1859,7 +1971,8 @@ Now you can use Ctrl ← to go left and Ctrl → to go right.
 
 `\`\`` Move the previous mark [jump back (to position in current buffer where jumped from)]
 
-`d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the marked position {bookmark letter} to the cursor position
+`d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the
+marked position {bookmark letter} to the cursor position
 
 More on marks in Vim:
 
@@ -1869,19 +1982,24 @@ More on marks in Vim:
 
 Macros let you record a series of ad-hoc commands that you can repeat to modify the file.
 
-When starting to record a macro with q you will see the text 'recording' at the bottom of the window with any commands you enter assigned, in sequence, to the register {number|letter} until q is pressed again to end recording.
+When starting to record a macro with q you will see the text 'recording' at the
+bottom of the window with any commands you enter assigned, in sequence, to the
+register {number|letter} until q is pressed again to end recording.
 
 You can find out more about macros at: 
 
-[Vi and Vim Macro Tutorial: How To Record and Play](http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/)
+[Vi and Vim Macro Tutorial: How To Record and
+Play](http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/)
 
-`q{number|leater}` Start (and end) the macro recording
+`q{number|letter}` Start (and end) the macro recording
 
 `@{number|letter}` - Run the macro assigned to the {number|letter}
 
 `{number}@{number|letter}` - Run the macro assigned to the {number|letter} {number of times}
 
-`@@` - repeat last macro
+`@@` Repeat the last macro.
+
+`{number}@@` Repeat the last macro {number} of times.
 
 ### Editing existing register
 
@@ -2017,10 +2135,13 @@ End the input string with a colon `:` followed by a command to execute it on
 the opening file(s): Use :25 to jump to line 25. Use `:diffthis` when opening
 multiple files to run `:diffthis` on the first 4 files.
 
+### CSS Color
+
+*Something to look into if I style in Vim and want to see the colours there.*
+
 ### How to Write a Vim Plugin
 
 --TODO--
-
 
 ## Variables
 

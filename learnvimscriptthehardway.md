@@ -48,8 +48,8 @@ Vim.
 		  Maybe look into this again when my Vim script knowledge is further along.
 - [x] 34. Case Study: Grep Operator, Part Three
 - [x] 35. Lists
-- [ ] 36. Looping
-- [ ] 37. Dictionaries
+- [x] 36. Looping
+- [x] 37. Dictionaries
 - [ ] 38. Toggling
 - [ ] 39. Functional Programming
 - [ ] 40. Paths
