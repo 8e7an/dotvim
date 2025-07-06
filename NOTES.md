@@ -6,7 +6,7 @@ Following commands for when in command **ex** mode:
 
 When in view **vi** mode the Escape key goes to **ex** mode. Various commands including `i`, `a`, `o`, `O` will automatically go to **vi** (insert) mode after the command is executed.
 
-`<Ctrl>` means to hold down the Control key in combination with pressing the following key.
+`ctrl` means to hold down the Control key in combination with pressing the following key.
 
 `^` + means, in **ex** mode, to hold down alt/option and press the following character (eg. `^+g` means hold down alt/option and press `g`).
 
@@ -119,7 +119,7 @@ password.
 
 `ctrl+c` Clear text.
 
-`ctrl+r{register}` Paste from register to the command input. Eg. `<Ctrl+r>0` for last yanked item.
+`ctrl+r{register}` Paste from register to the command input. Eg. `ctrl+r0` for last yanked item.
 
 `let @a="hello!"` Assign the `a` register to **"hello!"**.
 
@@ -230,19 +230,24 @@ Make it so searches are 'smartcase'. This will automatically switch to a case-se
 
 [How to stop line breaking in vim](https://stackoverflow.com/questions/2280030/how-to-stop-line-breaking-in-vim)
 
-To wrap lines visually, i.e. the line is still one line of text, but Vim displays it on multiple lines:
+To wrap lines visually, i.e. the line is still one line of text, but Vim
+displays it on multiple lines:
 
 `:set wrap`
 
-To display long lines as just one line (i.e. you have to scroll horizontally to see the entire line):
+To display long lines as just one line (i.e. you have to scroll horizontally to
+see the entire line):
 
 `:set nowrap`
 
-By default this will wrap at the first character that won't fit in the window. This means it will wrap in the middle of a word if that's where the window boundary lies. To change it to wrap on word boundaries, you can also:
+By default this will wrap at the first character that won't fit in the window.
+This means it will wrap in the middle of a word if that's where the window
+boundary lies. To change it to wrap on word boundaries, you can also:
 
 `:set linebreak`
 
-This will cause wrap to only wrap at the characters in the breakat setting, which defaults to space, tab, and small set of punctuation characters.
+This will cause wrap to only wrap at the characters in the break at setting,
+which defaults to space, tab, and small set of punctuation characters.
 
 `:set breatat= ^I!@*-+;:,./?`
 
@@ -259,7 +264,7 @@ Toggle:
 
 `z=` Give spelling suggestions for word under cursor
 
-`]s` Move cursor to next mispelt word
+`]s` Move cursor to next misspelt word
 
 `[s` Move cursor to previous misspelt word
 
@@ -309,7 +314,7 @@ Set up in **.vimrc** to have available in insert mode:
 
 `iabbrev teh the` Abbreviation to make **teh** **the**.
 
-To cancel an abbreviation from applying (in visual mode) type `Ctrl+v` at the
+To cancel an abbreviation from applying (in visual mode) type `ctrl+v` at the
 end of the word.
 
 ### Jump List
@@ -354,11 +359,11 @@ Note that tabs are also buffers in Vim so :buffers will list the tabs.
 
 `:help` / `h` `{command}` View a help entry (eg. :help user-manual)
 
-`<Ctrl+w Ctrl+w>` To jump from one window to another. Also works with splits.
+`<ctrl+w ctrl+w>` To jump from one window to another. Also works with splits.
 
 `:q` Close help.
 
-When entering in : commands <Ctrl+D> will give a list of matching options; <TAB> to auto complete.
+When entering in : commands ctrl+D will give a list of matching options; <TAB> to auto complete.
 
 ## File Browser - NetRW
 
@@ -454,7 +459,7 @@ Move with the cursor keys or:
 
 `b` Move to the start of the previous word (punctuation considered words).
 
-`B` Move to the start of the previous word following whitespace (no punctuation).
+`B` Move to the start of the previous word following white-space (no punctuation).
 
 `w` Move to the start of the (punctuation considered words).
 
@@ -462,7 +467,7 @@ Move with the cursor keys or:
 
 `e` Move to the end of the next word (punctuation considered words).
 
-`E` Move to the end of the next word following whitespace (including punctuation).
+`E` Move to the end of the next word following white-space (including punctuation).
 
 `0` Move cursor to the start of the line.
 
@@ -470,11 +475,11 @@ Move with the cursor keys or:
 
 `^` / - / ; First non-blank character of line.
 
-`+` Move cursor to the first non-whitespace character of the next line.
+`+` Move cursor to the first non-white-space character of the next line.
 
-`*` Move cursor to the next occurance of the word the cursor is over.
+`*` Move cursor to the next occurrence of the word the cursor is over.
 
-`#` Move cursor to the previous occurance of the word the cursor is over.
+`#` Move cursor to the previous occurrence of the word the cursor is over.
 
 `H` Move cursor to the top of the screen.
 
@@ -512,7 +517,7 @@ Move with the cursor keys or:
 
 `ctrl+g` Show file info and file status.
 
-`{buffernumber}<Ctrl+g>` Show file info and status with the {buffer} file's path.
+`{buffernumber}ctrl+g` Show file info and status with the {buffer} file's path.
 
 `gg` / [[ Move to the top of the file.
 
@@ -548,9 +553,9 @@ Move with the cursor keys or:
 
 `gq` ?
 
-`gn` Go to next occurance of last searched term (buffer /) switching to visual mode.
+`gn` Go to next occurrence of last searched term (buffer /) switching to visual mode.
 
-`gN` Go to previous occurance of last searched term (buffer /) switching to visual mode.
+`gN` Go to previous occurrence of last searched term (buffer /) switching to visual mode.
 
 `:g/{term}` List the lines where the `{term}` is found. Can also use
 `:g/{term}/p` but the `p` for print is the default.
@@ -737,7 +742,7 @@ Nine                    9       Horn
 
 `dw` Delete from cursor to the end of the word.
 
-`diw` Delete inside word (including following whitespace).
+`diw` Delete inside word (including following white-space).
 
 `d{number}b / {number}db` Delete multiple {number} of previous words.
 
@@ -843,23 +848,24 @@ Nine                    9       Horn
 
 `"{character}P` Paste from the register {character} before the cursor
 
-`"_dd` Delete line but NOT put into a register (not remebered but sent to the "Black hole").
+`"_dd` Delete line but NOT put into a register (not remembered but sent to the "Black hole").
 
-`"_dG` Delete from current line to the end of the document but NOT put into a register (not remebered but sent to the "Black hole").
+`"_dG` Delete from current line to the end of the document but NOT put into a
+register (not remembered but sent to the "Black hole").
 
 `r{character}` Replace {character}
 
 `R{characters}` Replace the text where the cursor is at with {characters} -
 Each character you enter will replace the character the cursor is over moving
-onto the next one - Press <esc> to cancel out of this
+onto the next one - Press `<esc>` to cancel out of this
 
-`J` Join current and next line seperated with a space
+`J` Join current and next line separated with a space
 
 `~` Change the case of the letter under the cursor (inclusive of the current line)
 
 `>>` Indent current line by one increment
 
-`<<` Decrent current line by one increment
+`<<` Decrement current line by one increment
 
 `{number}>>` Increment current and following {number} (inclusive) lines
 
@@ -901,7 +907,7 @@ Eg.
 
 `gf` Open file path under cursor into a new buffer.
 
-`g_` Go to the last non-whitespace character on the current line.
+`g_` Go to the last non-white-space character on the current line.
 
 `gg=G` To auto-indent entire document.
 
@@ -1058,11 +1064,11 @@ y, + and enter will copy the selected range into the system clipboard.
 
 `ctrl+a` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number
 
-`{number}<Ctrl+a>` Increase/decrease the number under the control by {number}
+`{number}ctrl+a` Increase/decrease the number under the control by {number}
 
 `ctrl+x` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number
 
-`{number}<Ctrl+x>` Decrement the number under the control by {number}
+`{number}ctrl+x` Decrement the number under the control by {number}
 
 Note with the above the cursor will jump to the next number on the line the cursor is on if not over a number.
 
@@ -1076,17 +1082,17 @@ In insert mode.
 
 `ctrl+p` Autocomplete (last) word being entered and move to previous if more than 1.
 
-Precede these with <Ctrl+n> to scope to just this file.
+Precede these with ctrl+n to scope to just this file.
 
 `ctrl+e` Cancel autocomplete.
 
 `ctrl+y` Accept autocomplete option highlighted.
 
-`<Ctrl+x><Ctrl+f>` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
+`ctrl+xctrl+f` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
 
 Autocomplete from the dictionary:
 
-`<Ctrl+x><Ctrl+k>` then `ctrl+n` and `ctrl+p` to change autocompleted match.
+`ctrl+xctrl+k` then `ctrl+n` and `ctrl+p` to change autocompleted match.
 
 ### Screen Manipulation
 
@@ -1116,7 +1122,7 @@ Autocomplete from the dictionary:
 
 `ctrl+f` Moves screen down one page, cursor to first line.
 
-`ctrl+y` and Ctrl+e only change the cursor position if it would be moved off
+`ctrl+y` and ctrl+e only change the cursor position if it would be moved off
 screen.
 
 `ctrl+u` Undo in insert mode.`
@@ -1131,7 +1137,7 @@ info is displayed at the bottom of the screen.
 
 `ctrl+o{normalcommand}` Enter a normal command in insert mode.
 
-`ctrl+w` Delete a word in insert mode. 
+`ctrl+w` Delete a word in insert mode. Doesn't put the deletion into the unnamed buffer.
 
 `ctrl+i` Delete from the cursor to the start of the line in insert mode. 
 
@@ -1302,7 +1308,7 @@ Search examples
 
 Special characters to escape
 
-`\s` for whitespace character
+`\s` for white-space character
 
 `\t` for tab character
 
@@ -1358,7 +1364,7 @@ Notes
 * Regular expressions are to be used where pattern is specified.
 
 * To enter unicode characters into a command (eg. find and replace) enter
-  `<Ctrl+v>u`, the unicode value, `<enter>`.
+  `ctrl+vu`, the unicode value, `<enter>`.
 
 Can back-reference the whole match with backslash zero - eg. (to globally
 change ‘apple’ to ‘apples’) :
@@ -1536,7 +1542,7 @@ v{number}word Select {number} of words.
 
 `v{number}>` Indent line by {number}.
 
-`v{number}<` Decremennt line by {number}.
+`v{number}<` Decrement line by {number}.
 
 In visual select mode:
 
@@ -1578,7 +1584,7 @@ In visual select mode:
 
 `:w` {filename} Write the visually selected text to the filename TEST.
 
-`{Ctrl}+v` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
+`{ctrl}+v` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
 
 Paste from the register
 
@@ -1620,7 +1626,7 @@ With a list like:
 
 Select the second to the last line in visual mode and enter:
 
-`g<Ctrl+a>`
+`g ctrl+a`
 
 This will increment the list giving:
 
@@ -1647,7 +1653,7 @@ arr[2] = 'bar';
 arr[3] = 'zar';
 arr[4] = 'gallah';
 
-Instead of the <Ctrl>+v, move lines in visual mode, I, edit in insert mode,
+Instead of the ctrl+v, move lines in visual mode, I, edit in insert mode,
 then exit to apply those changes to multiple lines you can use, from any
 multi-line visual selection, the following to achieve the same result:
 
@@ -1663,7 +1669,7 @@ Mathematical calculations can be done when in insert mode. For instance to
 get the result of a math equation:
 Doesn't seem to provide decimal values on division.
 
-`<Ctrl+r>={math equation}<enter>`
+`ctrl+r={math equation}<enter>`
 
 In normal mode use:
 
@@ -1681,18 +1687,18 @@ If you have a math equation on a line you can store that in the register with:
 
 Then in insert mode:
 
-`<Ctrl+r>=<Ctrl+r>{letter}<enter>`
+`ctrl+r=ctrl+r{letter}<enter>`
 
 Will give the result of that equation. You may have to edit the equation before
 hitting enter as unwanted character(s) may appear.
 
-With the equation in the resister in vim, go to insert mode and enter `Ctrl+r =`
-then `Ctrl+r "` to paste the yanked text and press `<enter>`
+With the equation in the resister in vim, go to insert mode and enter `ctrl+r =`
+then `ctrl+r "` to paste the yanked text and press `<enter>`
 
 Edit multiple contiguous lines
 
 To edit multiple contiguous lines at the same column (ie. for commenting
-multiple lines), from the starting place go into visual mode with `Ctrl + v` (not
+multiple lines), from the starting place go into visual mode with `ctrl + v` (not
 V line mode), move up/down to the ending place, go into insert mode with I,
 enter the character(s) and escape out. The multiple lines will now have the
 same character in the same place. Can also use this to change case with ~ or
@@ -1749,7 +1755,7 @@ To move backwards through the jump list to an older jump use `ctrl+o`.
 
 To move to a newer jump use `ctrl+i`. You can also press <tab>.
 
-`{number}<Ctrl+i>` Jump to {number} in control list
+`{number}ctrl+i` Jump to {number} in control list
 
 Vim will store up to 100 locations in your jump list. If you ever want to clear them all out, run the command `:clearjumps` and your jumplist history will be wiped clean.
 For more info, check out `:help jumplist` in Vim. Also be sure to read about the Vim change list which is similar to but different from the Vim jump list.
@@ -1794,7 +1800,7 @@ More on split windows in Vim:
 
 * [Vim Move Split - VimTricks](https://vimtricks.com/p/vim-move-split/)
 
-* https://www.baeldung.com/linux/vim-windows#:~:text=The%20Ctrl%2Bw%20%2Bs%20and,use%20Ctrl%2Bw%20%2Bn.
+* https://www.baeldung.com/linux/vim-windows#:~:text=The%20ctrl%2Bw%20%2Bs%20and,use%20ctrl%2Bw%20%2Bn.
 
 `:edit` / `:e` {filepath} Open a file (to the buffer) to edit
 
@@ -1812,21 +1818,31 @@ into the top of the buffer writing the contents there.
 
 Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
+### Buffers
+
 `:buffers` / `:ls` View buffers listing.
+
+`ctrl + Shift + 6` Switch between previous and current buffer into view.
 
 `:b {buffername}` Switch to the buffer by name (or part of the name).
 
 `:%bd` Close all buffers.
 
-`:bprev` (of `:bp`) <leader>[ Go to previous buffer
+`:bfirst` Go to first buffer.
 
-`:bnext` (or `:bn`) <leader>] Go to next buffer
+`:blast` Go to the last buffer. 
 
-`:{number}b` / `:b{number}` / :bu{number} Go to the buffer by number
+`:bprev` (of `:bp`) <leader>[ Go to previous buffer.
 
-`:bd` / `:bdelete` **<leader>C** Delete a buffer (close a file)
+`:bnext` (or `:bn`) <leader>] Go to next buffer.
 
-`:bufdo` Run an operation across all files open in the buffers
+`:{number}b` / `:b{number}` / :bu{number} Go to the buffer by number.
+
+`:bd` / `:bdelete` **<leader>C** Delete a buffer (close a file).
+
+`:bd {number}` / `:bdelete {number}` Delete the buffer by number.
+
+`:bufdo` Run an operation across all files open in the buffers.
 
 Eg. to make a global change across all buffers (Update saves each buffer file after substitution):
 
@@ -1872,33 +1888,33 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:previous` Navigate to previous open file.
 
-`<Ctrl+w>s` - Split windows.
+`ctrl+w s` - Split windows.
 
-`<Ctrl+w>w` - switch between windows.
+`ctrl+w w` - switch between windows.
 
-`<Ctrl+w>q` - Quit a window.
+`ctrl+w q` - Quit a window.
 
-`<Ctrl+w>v` - Split windows vertically.
+`ctrl+w v` - Split windows vertically.
 
-`<Ctrl+w>H` Moves the active split to a full-height split across the left.
+`ctrl+w H` Moves the active split to a full-height split across the left.
 
-`<Ctrl+w>J` Moves the active split to a full-width split across the bottom.
+`ctrl+w J` Moves the active split to a full-width split across the bottom.
 
-`<Ctrl+w>K` Moves the active split to a full-width split across the top.
+`ctrl+w K` Moves the active split to a full-width split across the top.
 
-`<Ctrl+w>L` Moves the active split to a full-height split across the right.
+`ctrl+w L` Moves the active split to a full-height split across the right.
 
-`<Ctrl+w>R` Swap position of the splits.
+`ctrl+w R` Swap position of the splits.
 
-`<Ctrl+w>=` Evenly size the splits.
+`ctrl+w =` Evenly size the splits.
 
-`<Ctrl+w>|` Max width of the current split.
+`ctrl+w |` Max width of the current split.
 
-`<Ctrl+w>_` Max hight of the current split.
+`ctrl+w _` Max hight of the current split.
 
-`{number}<Ctrl+w><` Decrease width of split by {number}.
+`{number}ctrl+w <` Decrease width of split by {number}.
 
-`{number}<Ctrl+w>>` Increase width of split by {number}.
+`{number}ctrl+w >` Increase width of split by {number}.
 
 `:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
 
@@ -1906,12 +1922,12 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:only` / `:on` Close the other buffers/tabs leaving the current one only open.
 
-`:<Ctrl+f>` Open up, and edit, the : command history. Can use vim commands to
+`:ctrl+f` Open up, and edit, the : command history. Can use vim commands to
 navigate and edit here. Enter to fire the command the cursor is under. Enter on
 the default blank or `ctrl+c` to escape. This can be a preferrable option over
 using cursor up and down keys to navigate the : commands history.
 
-`/<Ctrl+f>` or `/<Ctrl+f>` Open up, and edit, the / or ? command history. Can
+`/ ctrl+f` or `/ ctrl+f` Open up, and edit, the / or ? command history. Can
 use vim commands to navigate and edit here. Enter to fire the find the cursor
 is under. Enter on the default blank or `ctrl+c` to escape. This can be a
 preferrable option over using cursor up and down keys to navigate the / or ?
@@ -1951,7 +1967,7 @@ Add next lines to your .vimrc and enjoy it, more tricks about vim tabs here.
 
 `nnoremap <c-right> :tabnext<cr>`
 
-Now you can use Ctrl ← to go left and Ctrl → to go right.
+Now you can use ctrl ← to go left and ctrl → to go right.
 
 ## Marks
 
@@ -2112,12 +2128,12 @@ Finally, let's try out visual mode. Press a capital V (for line wise visual mode
 [CTRL P](https://github.com/ctrlpvim/ctrlp.vim)
 
 Basic Usage
-Run `:CtrlP` or `:CtrlP [starting-directory]` to invoke **CtrlP** in find file mode.
-Run `:CtrlPBuffer` or `:CtrlPMRU ` to invoke **CtrlP** in find buffer or find **MRU** file mode.
-Run `:CtrlPMixed` to search in Files, Buffers and **MRU** files at the same time.
-Check `:help ctrlp-commands` and `:help ctrlp-extensions` for other commands.
+Run `:ctrl P` or `:ctrl P [starting-directory]` to invoke **ctrlP** in find file mode.
+Run `:ctrl P Buffer` or `:ctrlPMRU ` to invoke **ctrl P** in find buffer or find **MRU** file mode.
+Run `:ctrl P Mixed` to search in Files, Buffers and **MRU** files at the same time.
+Check `:help ctrl p-commands` and `:help ctrlp-extensions` for other commands.
 
-Once **CtrlP** is open:
+Once **ctrlP** is open:
 Press `<F5>` to purge the cache for the current directory to get new files,
 remove deleted files and apply new ignore options.
 Press `<c-f>` and `<c-b>` to cycle between modes.
@@ -2128,7 +2144,7 @@ Use `<c-t>` or `<c-v>`, `<c-x>` to open the selected entry in a new tab or in a 
 Use `<c-n>`, `<c-p>` to select the next/previous string in the prompt's history.
 Use `<c-y>` to create a new file and its parent directories.
 Use `<c-z>` to mark/unmark multiple files and `<c-o>` to open them.
-Run `:help ctrlp-mappings` or submit `?` in **CtrlP** for more mapping help.
+Run `:help ctrlp-mappings` or submit `?` in **ctrlP** for more mapping help.
 
 Submit two or more dots `..` to go up the directory tree by one or multiple levels.
 End the input string with a colon `:` followed by a command to execute it on
@@ -2216,7 +2232,7 @@ window (`%`) in a new right split.
 
 ## Normal
 
-`:normal G` Run the nromal G command to go to the bottom of the buffer.
+`:normal G` Run the normal G command to go to the bottom of the buffer.
 
 `:normal ggdd` Go to the top of the buffers and delete the line.
 

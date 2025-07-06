@@ -209,23 +209,7 @@ set complete+=k
 
 " F12 to bring up the dictionary autocomplete (though ctrl+n is much easier).
 " }}}
-"
 
-" TOGGLE CODE FOLDING -------------------------------------------------------------- {{{
-" https://learnvimscriptthehardway.stevelosh.com/chapters/38.html
-
-nnoremap <leader>F :call FoldColumnToggle()<cr>
-
-function! FoldColumnToggle()
-	"echom &foldcolumn
-	if &foldcolumn
-		setlocal foldcolumn=0
-	else
-		setlocal foldcolumn=4
-	endif
-endfunction
-
-" }}}
 
 " CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- {{{
 
@@ -673,3 +657,33 @@ iabbrev loremp Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
 
 " }}}
 
+" TOGGLING ------------------------------------------------------------------------- {{{
+" https://learnvimscriptthehardway.stevelosh.com/chapters/38.html
+
+" Toggle fold column visibility
+nnoremap <leader>Sf :call <SID>FoldColumnToggle()<cr>
+function! s:FoldColumnToggle()
+	"echom &foldcolumn
+	if &foldcolumn
+		setlocal foldcolumn=0
+	else
+		setlocal foldcolumn=4
+	endif
+endfunction
+
+" Toggle quick fix window visibility 
+nnoremap <leader>Sq :call <SID>QuickfixToggle()<cr>
+let s:quickfix_is_open = 0
+function! s:QuickfixToggle()
+	if s:quickfix_is_open
+		cclose
+		let s:quickfix_is_open = 0
+		execute s:quitckfix_return_to_window . "wincmd w"
+	else
+		let s:quitckfix_return_to_window = winnr()
+		copen
+		let s:quickfix_is_open = 1
+	endif
+endfunction
+
+" }}}

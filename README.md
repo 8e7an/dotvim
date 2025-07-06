@@ -28,3 +28,4 @@ To clone down the plugins (held as git submodules) use the following:
 `git submodule init`
 
 `git submodule update`
+

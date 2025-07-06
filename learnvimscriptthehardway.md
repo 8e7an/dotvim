@@ -50,7 +50,7 @@ Vim.
 - [x] 35. Lists
 - [x] 36. Looping
 - [x] 37. Dictionaries
-- [ ] 38. Toggling
+- [x] 38. Toggling
 - [ ] 39. Functional Programming
 - [ ] 40. Paths
 - [ ] 41. Creating a Full Plugin
