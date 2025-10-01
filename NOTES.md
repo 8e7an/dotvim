@@ -1606,7 +1606,7 @@ Enter (and exit) block visual mode:
 Enter (and exit) visual block mode (visual block mode allows for editing
 multiple lines at the same cursor point):
 
-`ctrl+v`
+`Ctrl+v`
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1683,7 +1683,13 @@ In visual select mode:
 
 `{ctrl}+v` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
 
-Paste from the register
+`at` Expand visual selection (of tags) to around parent tags.
+
+`it` Expand visual selection (of tags) to inside parent tags.
+
+There doesn't appear to be a way (an equivalent built-in way) to Contract the visual selection of tags so as to shrink the selection to inside the selected tags.
+
+### Paste from the register
 
 Useful to paste from a previous change (ie, cut, yank).
 
