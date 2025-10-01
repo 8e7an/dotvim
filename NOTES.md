@@ -645,9 +645,31 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 
 `% / **<tab>**` Jump between matching brackets under cursor.
 
-`S / dd` Delete current line and go into insert mode
+`[{` When cursor is inside { and } go to the starting {.
+
+`]}` When cursor is inside { and } go to the ending }.
+
+`[(` When cursor is inside ( and ) go to the starting (.
+
+`])` When cursor is inside ( and ) go to the ending ).
+
+`[(` When cursor is inside ( and ) go to the starting (.
+
+`])` When cursor is inside ( and ) go to the ending ).
+
+For some reason `[[` and `]]` don't go to the starting / ending [ / ] when inside but to the start and end of the document. TODO: find out how?
+
+< and > aren't (seemingly) considered matching brackets in Vim so `[<` and `]>` don't do anything. TODO: find out how?
+
+`` `[ `` Jump to beginning of last yanked text.
+
+`` `] `` Jump to end of last yanked text.
+
+`dd` Delete current line (copy to unanemd register).
 
 `dl` Delete letter.
+
+`S` Substitute - Cut the current line to register and go into insert mode on that line?
 
 `V` Start line visual selection at cursor
 
@@ -1246,9 +1268,11 @@ Find the next instance of the text (pattern) (cases sensitive unless configured 
 
 `/\c{pattern}`
 
-`n` - Find the next instance of the searched pattern.
+`n` Find the next instance of the searched pattern.
 
-`N (Shift + n)` - Find the previous instance of the searched pattern.
+`N (Shift + n)` Find the previous instance of the searched pattern.
+
+`&` Repeat last substitution on current line.
 
 Use a `\c` to do a case-insensitive search or \C a case sensitive search (default) (eg. /search\c or /\csearch will search for 'search', 'Search', 'SEARCH' or 'searcH'; /\CSearch will only search for 'Search'). 
 
@@ -1404,6 +1428,7 @@ Special characters to escape
 `:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.** and append a **.** to those lines.
 
 `\.@<!$` means to not have the line end in **.**.
+
 `&` in the replace part is a back reference to the matched text.
 
 Alternatively use the `g` and `v` commands with the following (`g` global and `v` opposite, or inverse, of global):
@@ -2156,6 +2181,14 @@ Alternatively:
 
 `:let @{number|letter}=‘{copied and edited text}’ <enter>`
 
+Apply a macro with visual (line) select:
+
+`V{destination}:norm @{macro}`
+
+Eg. from the current line to the end of the file apply the macro q:
+
+`VG:norm @q`
+
 ## Other
 
 Set background colour indicator to 80th column
@@ -2296,11 +2329,7 @@ More on variables at: [Variables / Learn Vimscript the Hard Way](https://learnvi
 
 `:let &l:number=1` Set local option for the buffer.
 
-
-
 `:echom "foo" | echom "bar"` Here the `|` is a way to have two commands on the one line.
-
-
 
 ## String Functions
 
@@ -2359,3 +2388,9 @@ search for the first occurrence of **foo**, and delete the line that contains it
 `:execute "normal! mqA;\<esc>`q"` Normal command to mark where the cursor is on
 the current line, append **;** to the end of the line then return the cursor
 back to where the mark was placed.
+
+## TODO
+
+* Find out about gn/gN + cgn
+
+* Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
