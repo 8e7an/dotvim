@@ -349,7 +349,7 @@ Vim stores the last 100 changes in the change list.
 
 `:help` / `h` `{command}` View a help entry (eg. :help user-manual)
 
-`<ctrl+w ctrl+w>` To jump from one window to another. Also works with splits.
+`<Ctrl-w Ctrl-w>` To jump from one window to another. Also works with splits.
 
 `:q` Close help.
 
@@ -522,11 +522,13 @@ Move with the cursor keys or:
 
 `{buffernumber}ctrl+g` Show file info and status with the {buffer} file's path.
 
-`gg` / [[ Move to the top of the file.
+###Global Command
 
-`G` / ]] Move to the bottom of the file.
+`gg` / `go` / `[[` Move to the top of the file.
 
-`<number>G` / <number>gg / :<number> Move to that line number (or the last line if the number is greater than the number of line in the file).
+`G` / `]]` Move to the bottom of the file.
+
+`<number>G` / `<number>gg` / `:<number>` Move to that line number (or the last line if the number is greater than the number of line in the file).
 
 `ge` Move cursor back to last letter of the previous word.
 
@@ -536,6 +538,8 @@ Move with the cursor keys or:
 
 `gJ` Join the following line with the current line with no space separation.
 
+`gk` Down up line (useful for wrapped text).
+
 `gh` Move cursor up line for wrapped text.
 
 `ga` / :as Show details about the character under the cursor - eg. <“> 8220, Hex 201c, Octal 20034
@@ -544,23 +548,80 @@ Move with the cursor keys or:
 
 `gv` Go to last place text was in visual select mode.
 
+`gD` Goto Global Declaration of the variable under the cursor. Like gd but starts at line 1.
+
+`g%` Repeat last substitution, but globally.
+
+`gq` Auto indent line?
+
+`gn` Go to next occurrence of last searched term (buffer /) switching to visual mode.
+
+`gN` Go to previous occurrence of last searched term (buffer /) switching to visual mode.
+
+`g0` Go to the start of the (wrapped) line.
+
+`g$` Go to the end of the (wrapped) line.
+
+`gi` Go to the last insertion location.
+
+`gv` Reselect previous visual selection.
+
+`gf` Open file path under cursor into a new buffer. Relative but if full path will follow that absolute path.
+
+`g_` Go to the last non-whitespace character on the current line.
+
+`gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 (which I have) it attempts to download the HTML as a file instead (which is not what I want.
+
+`g;` Go to the last place of modification.
+
+`g;` Go to the next place of modification.
+
+`g+` Redo change.
+
+`g-` Undo change.
+
+`g&` Apply the last (one-line) substitution to the rest of the file.
+
 `guu` Current line of text all lowercase.
 
 `gUU` Current line of text all uppercase.
 
 `g~~` Current line of text case-inverted.
 
-`gD` Goto Global Declaration of the variable under the cursor. Like gd but starts at line 1.
+`guw` Make the word after the cursor all lowercase.
 
-`g%` Repeat last substitution, but globally.
+`gUw` Make the word after the cursor all uppercase.
 
-`gq` ?
+`{number}guw` Make {number} of words all uppercase.
 
-`gn` Go to next occurrence of last searched term (buffer /) switching to visual mode.
+`{number}gUw` Make {number} of words all lowercase.
 
-`gN` Go to previous occurrence of last searched term (buffer /) switching to visual mode.
+`gUiw` Uppercase entire word.
+
+`guiw` Lowercase entire word.
+
+`g~iw` Toggle case entire word.
+
+`gu$` Lowercase until the end of the line.
+
+`gU$` Uppercase until the end of the line.
+
+`g~$` Toggle case until the end of the line.
+
+`gu0` Lowercase until the start of the line.
+
+`gU0` Uppercase until the start of the line.
+
+`g~0` Toggle case until the start of the line.
+
+`gg=G` To auto-indent entire document.
+
+`g<Home/End>` and `g<Up/Down>` do same thing as `g0/$` and `gk/j`
+
+If trying to stay more in insert mode, there's a way to manually create and undo point (while still in insert mode): `Ctrl-gu`.
 
 `:g/{term}` List the lines where the `{term}` is found. Can also use
+
 `:g/{term}/p` but the `p` for print is the default.
 
 `:v/{term}` / `:v/{term}/p` List the lines were `{term}` is not found.
@@ -571,13 +632,15 @@ Move with the cursor keys or:
 
 `:v/{term}/d` Delete the lines where the `{term}` is not found.
 
-`:g/{term}/norm {commands}` Run the normal {commands} on any the lines were
+`:g/{term}/norm {commands}` Run the normal {commands} on any the lines where
 `{term}` is found.
 
-`:v/{term}/norm {commands}` Run the normal {commands} on any the lines were
+`:v/{term}/norm {commands}` Run the normal {commands} on any the lines where
 `{term}` is not found.
 
 `:g/^/m0` Effectively reverse the line order of the document.
+
+`:g/^$/d` Delete all blank lines in the document.
 
 `e` Go to the end of the word.
 
@@ -585,9 +648,31 @@ Move with the cursor keys or:
 
 `%` / `**<tab>**` Jump between matching brackets under cursor.
 
-`S / dd` Delete current line and go into insert mode
+`[{` When cursor is inside { and } go to the starting {.
+
+`]}` When cursor is inside { and } go to the ending }.
+
+`[(` When cursor is inside ( and ) go to the starting (.
+
+`])` When cursor is inside ( and ) go to the ending ).
+
+`[(` When cursor is inside ( and ) go to the starting (.
+
+`])` When cursor is inside ( and ) go to the ending ).
+
+For some reason `[[` and `]]` don't go to the starting / ending [ / ] when inside but to the start and end of the document. TODO: find out how?
+
+< and > aren't (seemingly) considered matching brackets in Vim so `[<` and `]>` don't do anything. TODO: find out how?
+
+`` `[ `` Jump to beginning of last yanked text.
+
+`` `] `` Jump to end of last yanked text.
+
+`dd` Delete current line (copy to unanemd register).
 
 `dl` Delete letter.
+
+`S` Substitute - Cut the current line to register and go into insert mode on that line?
 
 `V` Start line visual selection at cursor
 
@@ -1140,7 +1225,7 @@ info is displayed at the bottom of the screen.
 
 `ctrl+o{normalcommand}` Enter a normal command in insert mode.
 
-`ctrl+w` Delete a word in insert mode. Doesn't put the deletion into the unnamed buffer.
+`Ctrl-w` Delete a word in insert mode. Doesn't put the deletion into the unnamed buffer.
 
 `ctrl+i` Delete from the cursor to the start of the line in insert mode. 
 
@@ -1186,9 +1271,11 @@ Find the next instance of the text (pattern) (cases sensitive unless configured 
 
 `/\c{pattern}`
 
-`n` - Find the next instance of the searched pattern.
+`n` Find the next instance of the searched pattern.
 
-`N (Shift + n)` - Find the previous instance of the searched pattern.
+`N (Shift + n)` Find the previous instance of the searched pattern.
+
+`&` Repeat last substitution on current line.
 
 Use a `\c` to do a case-insensitive search or \C a case sensitive search (default) (eg. /search\c or /\csearch will search for 'search', 'Search', 'SEARCH' or 'searcH'; /\CSearch will only search for 'Search'). 
 
@@ -1344,6 +1431,7 @@ Special characters to escape
 `:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.** and append a **.** to those lines.
 
 `\.@<!$` means to not have the line end in **.**.
+
 `&` in the replace part is a back reference to the matched text.
 
 Alternatively use the `g` and `v` commands with the following (`g` global and `v` opposite, or inverse, of global):
@@ -1416,9 +1504,18 @@ Command to go to a line number:
 
 `:<number>`
 
-## Miscellaneous 
+## Terminal 
 
-`:terminal` Open the terminal into a new buffer. To exit the terminal enter `exit`.
+`:terminal` / `:term` Open the terminal into a new split/buffer.
+
+`exit` Close terminal.
+
+`Ctrl-w N` / `Ctrl-\ Ctrl-n` To enter normal mode in the terminal.
+
+`i` to go back to the regular terminal (like reverting back to insert mode).
+
+
+## Miscellaneous 
 
 Assign a value (here string) to register {character}:
 
@@ -1512,7 +1609,7 @@ Enter (and exit) block visual mode:
 Enter (and exit) visual block mode (visual block mode allows for editing
 multiple lines at the same cursor point):
 
-`ctrl+v`
+`Ctrl+v`
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1589,7 +1686,13 @@ In visual select mode:
 
 `{ctrl}+v` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
 
-Paste from the register
+`at` Expand visual selection (of tags) to around parent tags.
+
+`it` Expand visual selection (of tags) to inside parent tags.
+
+There doesn't appear to be a way (an equivalent built-in way) to Contract the visual selection of tags so as to shrink the selection to inside the selected tags.
+
+### Paste from the register
 
 Useful to paste from a previous change (ie, cut, yank).
 
@@ -1763,17 +1866,25 @@ To move to a newer jump use `ctrl+i`. You can also press <tab>.
 Vim will store up to 100 locations in your jump list. If you ever want to clear them all out, run the command `:clearjumps` and your jumplist history will be wiped clean.
 For more info, check out `:help jumplist` in Vim. Also be sure to read about the Vim change list which is similar to but different from the Vim jump list.
 
-## Change list
+`:jumps` / `:jump` / `:ju` See the jump list.
+
+`:clearjumps` Clear the jump list.
+
+`{number}Ctrl-o` Go back one/`{number}` place(s) in the jump list.
+
+`{number}Ctrl-i` Go to the one/`{number}` place(s) in the jump list.
+
+## Jump (Change) list
 
 [Vim Jump to Last Change - VimTricks](https://vimtricks.com/p/vim-jump-to-last-change/)
 
-Vim keeps track of the position of every undo-able change and makes the last 100 available to you when you call :changes. You can navigate backwards and forwards to these positions in your file without undoing the change by using g; and g,.
+Vim keeps track of the position of every undo-able change and makes the last 100 available to you when you call :changes.
 
 `:changes` – Show position of last 100 changes
 
-`g;` – Vim jumps to the last change you made
+`g;` Go to the last change made.
 
-`g,` – Vim jumps forward through the change list
+`g,` – Go forward to through the next change made.
 
 The change list is different to jump list as it tracks undoable changes. 
 
@@ -1825,9 +1936,21 @@ Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
 ### Buffers
 
+Following to clear the register a (I found the spaces around the = aren’t necessary):
+`:let @a = ''` / `:let @a=''` / `:let @9=''`
+
+Enter mathematical result when in insert mode (using the "= expression register):
+`:={expression}<enter><p>` (command mode)
+`Ctrl-r={expression}<enter>` (insert mode)
+
+Re-enter last expression register result (what is in "= register):
+`Ctrl-r=<enter>` (insert mode)
+
+When running a search with `:%s/` etc. `Ctrl-r/` will bring in the search term used in the `"/` search register.
+
 `:buffers` / `:files` / `:ls` View buffers listing.
 
-`ctrl + Shift + 6` Switch between previous and current buffer into view.
+`Ctrl + Shift + 6` (`Ctrl-^`) Switch between previous and current buffer into view (normal mode).
 
 `:b {buffername}` Switch to the buffer by name (or part of the name).
 
@@ -1847,11 +1970,24 @@ Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
 `:bd {number}` / `:bdelete {number}` Delete the buffer by number.
 
+`:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
+
+`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}.
+
 `:bufdo` Run an operation across all files open in the buffers.
 
 Eg. to make a global change across all buffers (Update saves each buffer file after substitution):
 
 `:bufdo %s/pancake/waffle/g | update`
+
+In command : mode Ctrl-d will provide contextual suggestions for the command. For instance, the following will list the buffers (the space here is important otherwise the suggestions will be commands that start with b):
+
+`:b <Ctrl-d>`
+
+`:b#` Go to the previous buffer.
+
+
+## windows
 
 `:args` List the args - the one in [] is the current args file
 
@@ -1893,37 +2029,51 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:previous` Navigate to previous open file.
 
-`ctrl+w s` - Split windows.
 
-`ctrl+w w` - switch between windows.
+Second key can have Ctrl held down too:
 
-`ctrl+w q` - Quit a window.
 
-`ctrl+w v` - Split windows vertically.
+`Ctrl-w s` View buffer in a horizontal split
 
-`ctrl+w H` Moves the active split to a full-height split across the left.
+`Ctrl-w v` View buffer in a vertical split.
 
-`ctrl+w J` Moves the active split to a full-width split across the bottom.
+`Ctrl-w w` - switch between windows.
 
-`ctrl+w K` Moves the active split to a full-width split across the top.
+`Ctrl-w q` - Close buffer/window or close Vim.
 
-`ctrl+w L` Moves the active split to a full-height split across the right.
+`Ctrl-w w` Cycle split focus.
 
-`ctrl+w R` Swap position of the splits.
+`Ctrl-w h` Focus buffer to the left.
 
-`ctrl+w =` Evenly size the splits.
+`Ctrl-w j` Focus lower buffer.
 
-`ctrl+w |` Max width of the current split.
+`Ctrl-w k` Focus above buffer.
 
-`ctrl+w _` Max hight of the current split.
+`Ctrl-w l` Focus buffer to the right.
 
-`{number}ctrl+w <` Decrease width of split by {number}.
+`Ctrl-w H` Moves the active split to a full-height split across the left.
 
-`{number}ctrl+w >` Increase width of split by {number}.
+`ctrl-w J` Moves the active split to a full-width split across the bottom.
 
-`:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
+`ctrl-w K` Moves the active split to a full-width split across the top.
 
-`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}.
+`Ctrl-w L` Moves the active split to a full-height split across the right.
+
+`Ctrl-w R` Swap position of the splits.
+
+`Ctrl-w =` Evenly size the splits.
+
+`Ctrl-w |` Max width of the current split.
+
+`Ctrl-w _` Max hight of the current split.
+
+`{number}Ctrl-w <` Decrease width of split by {number}.
+
+`{number}Ctrl-w >` Increase width of split by {number}.
+
+`Ctrl-e` Scroll the buffer down one line. 
+
+`Ctrl-y` Scroll the buffer up one line. 
 
 `:only` / `:on` Close the other buffers/tabs leaving the current one only open.
 
@@ -1937,10 +2087,6 @@ use vim commands to navigate and edit here. Enter to fire the find the cursor
 is under. Enter on the default blank or `ctrl+c` to escape. This can be a
 preferrable option over using cursor up and down keys to navigate the / or ?
 commands history.
-
-`ctrl+e` Scroll the buffer down one line. 
-
-`ctrl+y` Scroll the buffer up one line. 
 
 Assign local buffer hello the sting "world":
 
@@ -2075,6 +2221,14 @@ Alternatively:
 Copy from one register to another:
 
 `:let @{number|letter|symbol}=@{number|letter|symbol}`
+
+Apply a macro with visual (line) select:
+
+`V{destination}:norm @{macro}`
+
+Eg. from the current line to the end of the file apply the macro q:
+
+`VG:norm @q`
 
 ## Other
 
@@ -2216,11 +2370,7 @@ More on variables at: [Variables / Learn Vimscript the Hard Way](https://learnvi
 
 `:let &l:number=1` Set local option for the buffer.
 
-
-
 `:echom "foo" | echom "bar"` Here the `|` is a way to have two commands on the one line.
-
-
 
 ## String Functions
 
@@ -2280,7 +2430,6 @@ search for the first occurrence of **foo**, and delete the line that contains it
 the current line, append **;** to the end of the line then return the cursor
 back to where the mark was placed.
 
-
 ## Global
 
 `%s/\<\w/\u&/g` Make the first letter of each word (after <) in the document upper-case.
@@ -2288,7 +2437,6 @@ back to where the mark was placed.
 `%s/\w\>/\u&/g` Make the last letter of each word (before >) in the document upper-case.
 
 `s/https:\/\/www.\(.*\)\.com.*/\1` In URLs that match this pattern replace with the value in between www. and .com.
-
 
 ## TODO
 
@@ -2306,3 +2454,6 @@ Visual mode trick to look into:
 Esc, you want to repeat the same amount of selection but in other location,
 press 1v and voilá, our beloved vim gives you another perl :)"
 
+* Find out about gn/gN + cgn
+
+* Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
