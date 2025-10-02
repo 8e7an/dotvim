@@ -141,6 +141,12 @@ password.
 
 More on `:execute` at: [More Operator-Pending Mappings / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/16.html)
 
+`ctrl+z`/ `:stop` / `:suspend` Suspend process. `fg` in the Terminal to return back to Vim.
+
+Vim exists as a terminal command so you can use other terminal commands with Vim. For example view the output of `ls` in Vim:
+
+`ls -l | vim -`
+
 ## Configuration
 
 `:map {commands} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
@@ -337,22 +343,6 @@ Vim stores the last 100 changes in the change list.
 
 `g{number},` Jump to the `{number}` next change made (in the change list).
 
-### Tabs
-
-Open two or more files in tabs:
-
-`vim -p [filepath1] [filepath2] [filepath3]`
-
-Open all files in a directory in tabs:
-
-`vim -p *`
-
-Open all files in a directory of a file type in tabs:
-
-`vim -p *.{filetype}`
-
-Note that tabs are also buffers in Vim so :buffers will list the tabs.
-
 ## Help
 
 `f1` / `:help`
@@ -402,6 +392,9 @@ When entering in : commands ctrl+D will give a list of matching options; <TAB> t
 `o` Open file in a horizontal split
 
 `<enter>` Toggle tree directories open/close in tree view
+
+`{number}o{enter text when put into insert mode}<esc>` The text 'enter text
+when put into insert mode' will be entered for {number} of lines.
 
 ### Commands to save
 
@@ -477,9 +470,13 @@ Move with the cursor keys or:
 
 `+` Move cursor to the first non-white-space character of the next line.
 
-`*` Move cursor to the next occurrence of the word the cursor is over.
+`*` Move cursor to the next whole occurrence of the word the cursor is over.
 
-`#` Move cursor to the previous occurrence of the word the cursor is over.
+`g*` Move cursor to the next partial occurrence of the word the cursor is over.
+
+`#` Move cursor to the previous whole occurrence of the word the cursor is over.
+
+`g#` Move cursor to the previous partial occurrence of the word the cursor is over.
 
 `H` Move cursor to the top of the screen.
 
@@ -502,6 +499,12 @@ Move with the cursor keys or:
 `f{character}` Move cursor to the next <character> on the current line.
 
 `F{character}` Move cursor to the previous <character> on the current line.
+
+`ctrl+j` Insert line break when in insert mode. Hold to repeat for multiple lines.
+
+`ctrl+w` Delete the last word in insert mode. 
+
+`ctrl+o` Enter a normal command when in	insert mode. Stay in insert mode when completed.
 
 `ctrl+f` Forward one screen.
 
@@ -578,9 +581,9 @@ Move with the cursor keys or:
 
 `e` Go to the end of the word.
 
-`: / **<space>** / **<enter>**` : for command - Default move cursor to the next character.
+`:` / `**<space>**` / `**<enter>**` : for command - Default move cursor to the next character.
 
-`% / **<tab>**` Jump between matching brackets under cursor.
+`%` / `**<tab>**` Jump between matching brackets under cursor.
 
 `S / dd` Delete current line and go into insert mode
 
@@ -1818,9 +1821,11 @@ into the top of the buffer writing the contents there.
 
 Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
+`:find {filepath}` Find the `{filepath}` from the current directory. Use Tab key to auto-complete matches.
+
 ### Buffers
 
-`:buffers` / `:ls` View buffers listing.
+`:buffers` / `:files` / `:ls` View buffers listing.
 
 `ctrl + Shift + 6` Switch between previous and current buffer into view.
 
@@ -1947,9 +1952,19 @@ Output local buffer hello:
 
 When you see a variable that starts with a character and a colon it's describing a scoped variable.
 
-## Tabbing
+## Tabs
 
-`:tabnew` / `:tabe` Create a new tabset
+`:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tabset with the optional `{buffsr}` `{filename}`.
+
+`:tabclose` Close the tabset.
+
+`:tabnext` Go to the next tab.
+
+`:tabprevious` Go to the previous tab.
+
+`:tabfirst` Go to the first tab.
+
+`:tablast` Go to the last tab.
 
 `{number}gt` Go to tabset of {number}
 
@@ -1957,17 +1972,33 @@ When you see a variable that starts with a character and a colon it's describing
 
 `gT` / **`<leader>m`** Switch to left tabsets
 
-[Just a moment...](https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs) :
-
-This is the easiest way that I found, to switch between tabs faster and simple. 
-
-Add next lines to your .vimrc and enjoy it, more tricks about vim tabs here.
-
 `nnoremap <c-left> :tabprevious<cr>`
 
 `nnoremap <c-right> :tabnext<cr>`
 
 Now you can use ctrl ← to go left and ctrl → to go right.
+
+Open two or more files in tabs:
+
+`vim -p [filepath1] [filepath2] [filepath3]`
+
+Eg.:
+
+`vim -p file1.js file2.js file3.js`
+
+Open all files in a directory in tabs:
+
+`vim -p *`
+
+Open all files in a directory of a file type in tabs:
+
+`vim -p *.{filetype}`
+
+Note that tabs are also buffers in Vim so :buffers will list the tabs.
+
+More info about tabs in Vim:
+
+[Just a moment...](https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs) :
 
 ## Marks
 
@@ -2040,6 +2071,10 @@ Alternatively:
 3 - Paste and edit the changed text and put back into the macro:
 
 `:let @{number|letter}=‘{copied and edited text}’ <enter>`
+
+Copy from one register to another:
+
+`:let @{number|letter|symbol}=@{number|letter|symbol}`
 
 ## Other
 
@@ -2244,3 +2279,30 @@ search for the first occurrence of **foo**, and delete the line that contains it
 `:execute "normal! mqA;\<esc>`q"` Normal command to mark where the cursor is on
 the current line, append **;** to the end of the line then return the cursor
 back to where the mark was placed.
+
+
+## Global
+
+`%s/\<\w/\u&/g` Make the first letter of each word (after <) in the document upper-case.
+
+`%s/\w\>/\u&/g` Make the last letter of each word (before >) in the document upper-case.
+
+`s/https:\/\/www.\(.*\)\.com.*/\1` In URLs that match this pattern replace with the value in between www. and .com.
+
+
+## TODO
+
+Find out how to install colourschemes in vim (using the colo[rscheme] setting.
+
+One built-in colorscheme is called 'murphy', which can be enabled with:
+
+`colorscheme murphy`
+
+Find out more about the :vimgrep/:vim command for refactoring (making changes) across multiple files.
+
+Visual mode trick to look into:
+
+"You have just made a visual block selection, performed some action and pressed
+Esc, you want to repeat the same amount of selection but in other location,
+press 1v and voilá, our beloved vim gives you another perl :)"
+

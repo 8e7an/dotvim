@@ -26,24 +26,24 @@
 " PLUGINS ------------------------------------------------------------
 
 " Plugins installed in ~./vim/pack/*
-" Plugins are git version controlled with remotes to their respective
-" creators.
-" Look to make .vim my own git repo (`dotvim`) and the plugins sub-repos.
+" Plugins are git version controlled with remotes to their respective Github
+" accounts.
+" The .vim folder is my own git repo (`dotvim`) with the plugins as sub-repos
+" (pointing to their respective github accounts).
 " Installed plugins include:
 "   - Surround - https://github.com/tpope/vim-surround
 "   - Repeat - https://github.com/tpope/vim-repeat
-
-" Enable type file detection. Vim will be able to try to detect the type of file in use.
-"filetype on
-
-" Enable plugins and load plugin for the detected file type.
-"filetype plugin on
-
-" Load an indent file for the detected file type.
-"filetype indent on
+"	- Ctrl P - Full Path Fuzzy Finder - https://github.com/kien/ctrlp.vim
 
 " Filetype plugin customisations located at ~.vim/ftplugin/{filetype}.vim files
 " More at: https://vimtricks.com/p/per-file-type-configs/
+
+" Enable type file detection. Vim will be able to try to detect the type of
+" file in use.
+"filetype on
+
+" Enable plugins and load plugin for the detected file type. And
+" Load an indent file for the detected file type.
 filetype plugin indent on
 
 " Turn syntax highlighting on.
@@ -520,6 +520,8 @@ nnoremap <silent> <leader>r :set wrap!<cr>
 nnoremap <leader>p diw"0P
 " Toggle spelling:
 nnoremap <leader>Sp :set spell!<cr>
+" Output the date - day month year:
+nnoremap <leader>Sd :.!date<cr>4wD<esc>
 " Leader [ to change to previous buffer (last cycling around):
 nnoremap <leader>[ :bp<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
@@ -567,6 +569,12 @@ nnoremap <leader>SW :execute "match none"<cr>
 "nnoremap <leader>gp :silent cprevious<cr>
 "Delete the current line to the 'black hole' (not stored in the unnamed register).
 nnoremap <leader>D "_dd
+
+" Uppercase full word in insert mode.
+"nnoremap <leader>Su <esc>viWU<esc>Ei
+
+" Lowercase full word in insert mode.
+"nnoremap <leader>Sl <esc>viWu<esc>Ei
 
 "nnoremap <leader>html :this is a test
 
