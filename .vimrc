@@ -58,6 +58,10 @@ set nobackup
 " Activate mouse interaction (so splits can be resized with the mouse etc.).
 set mouse=a
 
+" Use new regular expression engine; more at:
+" https://jameschambers.co.uk/vim-typescript-slow
+set re=0
+
 " [is] Searching though a buffer incrementally highlight matching characters
 " as you type.
 set incsearch
@@ -205,16 +209,25 @@ set dictionary=/usr/share/dict/words
 
 " The dictionary is included in the autocomplete without having to enter
 " ctrl+x then ctrl+k:
-set complete+=k
+"set complete+=k
 
-" F12 to bring up the dictionary autocomplete (though ctrl+n is much easier).
+" with the following enter ':set spell' to enable spelling auto-complete
+set complete+=kspell
+
+" F12 to bring up the dictionary autocomplete (though ctrl+n is much easier).{{{}}}
 " }}}
 
+" Set molokai as the custom color scheme (./vim/colors/molokai.vim):
+"colorscheme molokai
+
+" Set murphy as the built-in color scheme:
+colorscheme murphy
+
+"highlight ColorColumn ctermbg=darkred
+"call matchadd('ColorColumn','\%81v',100)
 
 " CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- {{{
 
-" Set molokai as the color scheme (./vim/colors/molokai.vim).
-colorscheme molokai
 "
 " cterm has a set number of 256 color options. The colors are a number or color name.
 " cterm color names can be found here: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -317,6 +330,12 @@ augroup filetype_js
 	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 
+au BufRead,BufNewFile *.ts setfiletype typescript
+
+augroup typescript_js
+	autocmd!
+augroup END
+
 augroup filetype_html
 	autocmd!
 	" Auto indent HTML files on read (into the buffer) and write (from the buffer).
@@ -346,6 +365,14 @@ augroup markdown_html
 	" 'in next eamil address' (it's a rough regex for email but should work ok)
 	"autocmd FileType markdown onoremap in@ :<c-u>execute "normal! /\[0-9a-zA-Z_\\.\\-\]@\[0-9a-zA-Z\\.\]\r:nohlsearch\rviW"<cr>
 augroup END
+
+" COMMANDS ---------------------------------------------------------------------------------
+
+" Clear the Registry ---------------------- {{{
+augroup commands
+	command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+augroup END
+" }}}
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------
 

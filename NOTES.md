@@ -2446,6 +2446,9 @@ One built-in colorscheme is called 'murphy', which can be enabled with:
 
 `colorscheme murphy`
 
+Custom color shemes can be set in the (./vim/colors/molokai.vim) folder. Eg.:
+`./vim/colors/molokai.vim`
+
 Find out more about the :vimgrep/:vim command for refactoring (making changes) across multiple files.
 
 Visual mode trick to look into:
