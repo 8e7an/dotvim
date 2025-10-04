@@ -105,9 +105,9 @@ Other examples of mappings for effecting next/last content in brackets () and br
 
 ## Insert Mode
 
-`ctrl+t` Increment line
+`<ctrl-t>` Increment line
 
-`ctrl+d` Decrement line
+`<ctrl-d>` Decrement line
 
 ## Command Mode
 
@@ -117,9 +117,9 @@ password.
 
 `: / <space>` Enter command mode.
 
-`ctrl+c` Clear text.
+`<ctrl-c>` Clear text.
 
-`ctrl+r{register}` Paste from register to the command input. Eg. `ctrl+r0` for last yanked item.
+`<ctrl-r>{register}` Paste from register to the command input. Eg. `<ctrl-r>0` for last yanked item.
 
 `let @a="hello!"` Assign the `a` register to **"hello!"**.
 
@@ -141,7 +141,7 @@ password.
 
 More on `:execute` at: [More Operator-Pending Mappings / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/16.html)
 
-`ctrl+z`/ `:stop` / `:suspend` Suspend process. `fg` in the Terminal to return back to Vim.
+`<ctrl-z>`/ `:stop` / `:suspend` Suspend process. `fg` in the Terminal to return back to Vim.
 
 Vim exists as a terminal command so you can use other terminal commands with Vim. For example view the output of `ls` in Vim:
 
@@ -320,7 +320,7 @@ Set up in **.vimrc** to have available in insert mode:
 
 `iabbrev teh the` Abbreviation to make **teh** **the**.
 
-To cancel an abbreviation from applying (in visual mode) type `ctrl+v` at the
+To cancel an abbreviation from applying (in visual mode) type `<ctrl-v>` at the
 end of the word.
 
 ### Jump List
@@ -349,11 +349,11 @@ Vim stores the last 100 changes in the change list.
 
 `:help` / `h` `{command}` View a help entry (eg. :help user-manual)
 
-`<Ctrl-w Ctrl-w>` To jump from one window to another. Also works with splits.
+`<ctrl-w><ctrl-w>` To jump from one window to another. Also works with splits.
 
 `:q` Close help.
 
-When entering in : commands ctrl+D will give a list of matching options; <TAB> to auto complete.
+When entering in : commands <ctrl-D>will give a list of matching options; <TAB> to auto complete.
 
 ## File Browser - NetRW
 
@@ -418,7 +418,7 @@ when put into insert mode' will be entered for {number} of lines.
 
 `:x` Close file
 
-`:wall` / :wa write all files open in the buffer (splits and tabs)
+`:wall` / `:wa` write all files open in the buffer (splits and tabs)
 
 `:write {filepath}` / `:w {filepath}` Write the buffer to the `{filepath}`. Still editing the original file.
 
@@ -430,25 +430,25 @@ when put into insert mode' will be entered for {number} of lines.
 
 Move with the cursor keys or:
 
-`h` Move cursor cursor
+`h` Move cursor left.
 
-`{number}h` Move cursor left {number} characters
+`{number}h` Move cursor left {number} characters.
 
-`j` Move cursor down
+`j` Move cursor down.
 
-`{number}j` Move cursor down {number} characters
+`{number}j` Move cursor down {number} characters.
 
-`k` Move cursor up
+`k` Move cursor up.
 
-`{number}k` Move cursor up {number} characters
+`{number}k` Move cursor up {number} characters.
 
-`l` Move cursor right
+`l` Move cursor right.
 
-`{number}l` Move cursor right {number} characters
+`{number}l` Move cursor right {number} characters.
 
-`:+{number}` Move cursor up {number} of lines
+`:+{number}` Move cursor up {number} of lines.
 
-`:-{number}` Move cursor up {number} of lines
+`:-{number}` Move cursor up {number} of lines.
 
 `b` Move to the start of the previous word (punctuation considered words).
 
@@ -466,7 +466,7 @@ Move with the cursor keys or:
 
 `$` / ' Move cursor to the end of line.
 
-`^` / - / ; First non-blank character of line.
+`^` / `_` / ; First non-blank character of line.
 
 `+` Move cursor to the first non-white-space character of the next line.
 
@@ -480,47 +480,47 @@ Move with the cursor keys or:
 
 `H` Move cursor to the top of the screen.
 
-`yH` Yank from the first visible line to the cursor line (inclusive).
-
 `M` Move cursor to the middle of the screen.
 
 `L` Move cursor to the bottom of the screen.
 
+`yH` Yank from the first visible line to the cursor line (inclusive).
+
 `yL` Yank from the cursor line to the last visible line.
 
-`{` Move cursor to the start of previous paragraph
+`{` Move cursor to the start of previous paragraph.
 
-`}` Move cursor to the start of previous paragraph
+`}` Move cursor to the start of previous paragraph.
 
-`(` Move cursor to the start of the previous sentence
+`(` Move cursor to the start of the previous sentence.
 
-`)` Move cursor to the start of the next sentence
+`)` Move cursor to the start of the next sentence.
 
 `f{character}` Move cursor to the next <character> on the current line.
 
 `F{character}` Move cursor to the previous <character> on the current line.
 
-`ctrl+j` Insert line break when in insert mode. Hold to repeat for multiple lines.
+`<ctrl-j>` Insert line break when in insert mode. Hold to repeat for multiple lines.
 
-`ctrl+w` Delete the last word in insert mode. 
+`<ctrl-w>` Delete the last word in insert mode. 
 
-`ctrl+o` Enter a normal command when in	insert mode. Stay in insert mode when completed.
+`<ctrl-o>` Enter a normal command when in	insert mode. Stay in insert mode when completed.
 
-`ctrl+f` Forward one screen.
+`<ctrl-f>` Forward one screen.
 
-`ctrl+b` Back one screen.
+`<ctrl-b>` Back one screen.
 
-`ctrl+d` Forward 1/2 screen.
+`<ctrl-d>` Forward 1/2 screen.
 
-`ctrl+u` Forward 1/2 screen.
+`<ctrl-u>` Forward 1/2 screen.
 
-`ctrl+e` Scroll screen up one line.
+`<ctrl-e>` Scroll screen up one line.
 
-`ctrl+y` Scroll screen down one line.
+`<ctrl-y>` Scroll screen down one line.
 
-`ctrl+g` Show file info and file status.
+`<ctrl-g>` Show file info and file status.
 
-`{buffernumber}ctrl+g` Show file info and status with the {buffer} file's path.
+`{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's path.
 
 ###Global Command
 
@@ -618,9 +618,9 @@ Move with the cursor keys or:
 
 `g<Home/End>` and `g<Up/Down>` do same thing as `g0/$` and `gk/j`
 
-If trying to stay more in insert mode, there's a way to manually create and undo point (while still in insert mode): `Ctrl-gu`.
+If trying to stay more in insert mode, there's a way to manually create and undo point (while still in insert mode): `<ctrl-g>u`.
 
-`:g/{term}` List the lines where the `{term}` is found. Can also use
+`:g/{term}` List the lines where the `{term}` is found. Can also use:
 
 `:g/{term}/p` but the `p` for print is the default.
 
@@ -641,8 +641,6 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 `:g/^/m0` Effectively reverse the line order of the document.
 
 `:g/^$/d` Delete all blank lines in the document.
-
-`e` Go to the end of the word.
 
 `:` / `**<space>**` / `**<enter>**` : for command - Default move cursor to the next character.
 
@@ -674,28 +672,28 @@ For some reason `[[` and `]]` don't go to the starting / ending [ / ] when insid
 
 `S` Substitute - Cut the current line to register and go into insert mode on that line?
 
-`V` Start line visual selection at cursor
+`V` Start line visual selection at cursor.
 
-`v` Start visual selection at cursor
+`v` Start visual selection at cursor.
 
 `dH` Delete from cursor to the top line of what is displayed visually.
 
 `dL` Delete from cursor to the bottom line of what is displayed visually.
 
-`ctrl+v` Start character visual selection at cursor
+`<ctrl-v>` Start character visual selection at cursor
 
 When entering an ex command and entering strings in double quotes ("") you can
 enter special characters with a backslash escape `\` (like tab with `\t`). Another
 method is to enter the special character as its key input (ie. tab key) by
-proceeding it with `ctrl+v` (so `ctrl+v` `<tab>`. Vim will then insert its own special character
+proceeding it with `<ctrl-v>` (so `<ctrl-v>` `<tab>`. Vim will then insert its own special character
 representative of the key entered.
 
-`^v` Multi line visual selection 
+`^v` Multi line visual selection .
 
-`%` / `<tab>` - Move cursor to the closest (and then toggle) to the associated
+`%` / `**<tab>**` - Move cursor to the closest (and then toggle) to the associated
 brackets - ( ), { }, [ ] - on the current line.
 
-`gd` Goto local Declaration.
+`gd` Go to local Declaration.
 
 > When the cursor is on a local variable, this command will jump to its
 > declaration.  First Vim searches for the start of the current function, just
@@ -711,24 +709,24 @@ brackets - ( ), { }, [ ] - on the current line.
 
 ## Command window
 
-`q:` open command line window
+`q:` Open command line window.
 
 [Vim Command Line Window - VimTricks](https://vimtricks.com/p/vim-command-line-window/)
 
 ## Special Characters
 
-In insert mode enter `ctrl+k {character} {glyph}` to insert the character with
+In insert mode enter `<ctrl-k>{character} {glyph}` to insert the character with
 the glyph applied (can enter `{glyph}` before `{character}`.
 
 Examples:
 
-For "extraño", in insert mode type extra`ctrl+k n ?`, and n will become ñ. Will
+For "extraño", in insert mode type extra`<ctrl-k>n ?`, and n will become ñ. Will
 still be insert mode and can keep typing. For this glyph you use **~** instead
 of **?**.
 
-For "ö", in insert mode type extra`ctrl+k o :`, and n will become ö.
+For "ö", in insert mode type extra`<ctrl-k>o :`, and n will become ö.
 
-For "ū", in insert mode type `ctrl+k u -`, and u will become ū.
+For "ū", in insert mode type `<ctrl-k>u -`, and u will become ū.
 
 https://www.reddit.com/r/vim/comments/12eo93m/how_to_insert_special_characters/
 
@@ -770,9 +768,9 @@ Nine                    9       Horn
 
 `{number}.` Repeat last command {number} of times.
 
-`u` Undo
+`u` Undo.
 
-`ctrl+r` Redo
+`<ctrl-r>` Redo.
 
 `yy` / :y Yank (copy) line.
 
@@ -798,7 +796,7 @@ Nine                    9       Horn
 
 `{number}x` 'Delete' (remove as copy) {number} of characters the under and right of the cursor.
 
-`X` Delete (remove as copy) charactet left of the cursor.
+`X` Delete (remove as copy) character left of the cursor.
 
 `{number}X` Delete (actually copy) {number} of characters left of the cursor.
 
@@ -806,23 +804,27 @@ Nine                    9       Horn
 
 `cw` Cut (remove and go to insert mode) to the end of word.
 
-`ciw` Cut (remove and go to insert mode) word cursor is inside of?
-
 `cl` Cut (remove and go to insert mode) letter.
 
 `cc` / `S` Delete line at cursor and substitute text.
 
-`s` Delete character at cursor and subsitute text and enter insert mode.
+`ciw` Cut (remove and go to insert mode) word cursor is inside of.
 
-`S` Indent cursor to document indentation.
+`s` Delete character at cursor and substitute text and enter insert mode?
+
+`S` Indent cursor to document indentation?
+
+`**k**` Move the line up one.
+
+`**j**` Move the line down one.
 
 `c/{pattern}` From the cursor to the first matched pattern change (cut) the text and go into insert mode.
 
 `d/{pattern}` From the cursor to the first matched pattern delete the text.
 
-`c?{pattern}` From the cursor to the first matched pattern change (cut) the text and go into insert mode.
+`c?{pattern}` From the cursor to the last matched pattern change (cut) the text and go into insert mode.
 
-`d?{pattern}` From the cursor to the first matched pattern delete the text.
+`d?{pattern}` From the cursor to the last matched pattern delete the text.
 
 `dd` Delete line (stay in normal mode).
 
@@ -832,27 +834,27 @@ Nine                    9       Horn
 
 `diw` Delete inside word (including following white-space).
 
-`d{number}b / {number}db` Delete multiple {number} of previous words.
+`d{number}b` / `{number}db` Delete multiple {number} of previous words.
 
-`d{number}w / {number}dw` Delete multiple {number} of following words.
+`d{number}w` / `{number}dw` Delete multiple {number} of following words.
 
-`d{number}j` Delete multiple lines {number} after the current line
+`d{number}j` / `{number}dj` Delete multiple lines {number} after the current line.
 
-`d{number}k` Delete multiple lines {number} above the current line
+`d{number}k` / `{number}dk` Delete multiple lines {number} above the current line.
 
-`d{number}h` Delete multiple {number} of previous characters on the current line
+`d{number}h` / `{number}dh` Delete multiple {number} of previous characters on the current line.
 
-`d{number}l` Delete multiple {number} of following characters on the current line
+`d{number}l` / `{number}dl` Delete multiple {number} of following characters on the current line.
 
-`dt{character}` Delete from cursor to before next found character
+`dt{character}` Delete from cursor to before next found character.
 
-`dT{character}` Delete from cursor to after previous character
+`dT{character}` Delete from cursor to after previous character.
 
-`df{character}` Delete from cursor to including next found character
+`df{character}` Delete from cursor to including next found character.
 
-`dF{character}` Delete from cursor to including previous found character
+`dF{character}` Delete from cursor to including previous found character.
 
-`d$` / D / d' Delete from cursor to the end of the line
+`d$` / `D` / `d` Delete from cursor to the end of the line.
 
 `daw` Delete around word.
 
@@ -862,43 +864,43 @@ Nine                    9       Horn
 
 `dis` Delete inside sentence.
 
-`ciw` Cut inner word and go into insert mode
+`ciw` Cut inner word and go into insert mode.
 
-`cap` Cut around paragraph
+`cap` Cut around paragraph.
 
-`cit` Cut content between matching tags
+`cit` Cut content between matching tags.
 
-`cat` Cut content around matching tags
+`cat` Cut content around matching tags.
 
-`di"` Delete inside " marks
+`di"` Delete inside " marks.
 
-`da"` Delete around " marks
+`da"` Delete around " marks.
 
-`dit` Delete inside matching tags
+`dit` Delete inside matching tags.
 
-`dat` Delete arount matching tags
+`dat` Delete around matching tags.
 
-`dip` Delete inside paragraph
+`dip` Delete inside paragraph.
 
-`dap` Delete around paragraph
+`dap` Delete around paragraph.
 
-`di(` / dib Delete inside ()
+`di(` / `dib` Delete inside ().
 
-`da(` / dab Delete around ()
+`da(` / `dab` Delete around ().
 
-`di[` Delete inside []
+`di[` Delete inside [].
 
-`da[` Delete around []
+`da[` Delete around [].
 
-`di{` / di} Delete inside {}
+`di{` / `di}` Delete inside {}.
 
-`da{` / da} Delete around {}
+`da{` / `da}` Delete around {}.
 
-`di<` / di< Delete inside <>
+`di<` / `di<` Delete inside <>.
 
-`da>` / di> Delete around <>
+`da>` / `di>` Delete around <>.
 
-`dgg` Delete from cursor to start of the file
+`dgg` Delete from cursor to start of the file.
 
 `dG` Delete from cursor to end of file
 
@@ -906,35 +908,35 @@ Nine                    9       Horn
 
 `vis` Visual select in the sentence. 
 
-`va(` / vib Visual select around ()
+`va(` / `vib` Visual select around ().
 
-`vi(` / vib Visual select inside ()
+`vi(` / `vib` Visual select inside ().
 
-`va{` Visual select around {}
+`va{` Visual select around {}.
 
-`vi{` Visual select inside {}
+`vi{` Visual select inside {}.
 
-`va[` Visual select around []
+`va[` Visual select around [].
 
-`vi[` Visual select inside []
+`vi[` Visual select inside [].
 
-`va"` Visual select around ""
+`va"` Visual select around "".
 
-`vi"` Visual select inside ""
+`vi"` Visual select inside "".
 
-`va"` Visual select around ''
+`va"` Visual select around ''.
 
-`vi"` Visual select inside ''
+`vi"` Visual select inside ''.
 
-`viw` Visual select word under the cursor
+`viw` Visual select word under the cursor.
 
-`p` Paste under (after) the cursor 
+`p` Paste under (after) the cursor.
 
-`P` Paste over (before) the cursor
+`P` Paste over (before) the cursor.
 
-`"{character}p` Paste from the register {character} after the cursor
+`"{character}p` Paste from the register {character} after the cursor.
 
-`"{character}P` Paste from the register {character} before the cursor
+`"{character}P` Paste from the register {character} before the cursor.
 
 `"_dd` Delete line but NOT put into a register (not remembered but sent to the "Black hole").
 
@@ -945,23 +947,23 @@ register (not remembered but sent to the "Black hole").
 
 `R{characters}` Replace the text where the cursor is at with {characters} -
 Each character you enter will replace the character the cursor is over moving
-onto the next one - Press `<esc>` to cancel out of this
+onto the next one - Press `<esc>` to cancel out of this.
 
-`J` Join current and next line separated with a space
+`J` Join current and next line separated with a space.
 
-`~` Change the case of the letter under the cursor (inclusive of the current line)
+`~` Change the case of the letter under the cursor (inclusive of the current line).
 
-`>>` Indent current line by one increment
+`>>` Indent current line by one increment.
 
-`<<` Decrement current line by one increment
+`<<` Decrement current line by one increment.
 
-`{number}>>` Increment current and following {number} (inclusive) lines
+`{number}>>` Increment current and following {number} (inclusive) lines.
 
-`{number}<<` Decrement current and following {number} (inclusive) lines
+`{number}<<` Decrement current and following {number} (inclusive) lines.
 
-`>>{number}j` Increment current and following {number} (inclusive) lines
+`>>{number}j` Increment current and following {number} (inclusive) lines.
 
-`<<{number}j` Decrement current and following {number} (inclusive) lines
+`<<{number}j` Decrement current and following {number} (inclusive) lines.
 
 `:,+{number}>` Indent from the cursor to the +{number} by one indentation.
 
@@ -977,17 +979,17 @@ Eg.
 
 `.!date` Insert at the cursor the  result of the Terminal command **date**.
 
-`:.;+{linenumber}>` Indent range from current line to relative linenumber
+`:.;+{linenumber}>` Indent range from current line to relative linenumber.
 
-`:.;+{linenumber}<` Decrement range from current line to relative linenumber
+`:.;+{linenumber}<` Decrement range from current line to relative linenumber.
 
-`==` Set indentation to logical surrounding indentation
+`==` Set indentation to logical surrounding indentation.
 
-`{number}==` Set indentation to logical surrounding indentation for the current and following {number} (inclusive) lines
+`{number}==` Set indentation to logical surrounding indentation for the current and following {number} (inclusive) lines.
 
-`ctrl+o` Move cursor to previous place.
+`<ctrl-o>` Move cursor to previous place.
 
-`ctrl+i` Move cursor to next place.
+`<ctrl-i>` Move cursor to next place.
 
 `gi` Go to the last insertion location.
 
@@ -1150,37 +1152,37 @@ y, + and enter will copy the selected range into the system clipboard.
 
 `{number}%` Move the cursor to the {number} % place in the file.
 
-`ctrl+a` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number
+`<ctrl-a>` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number.
 
-`{number}ctrl+a` Increase/decrease the number under the control by {number}
+`{number}<ctrl-a>` Increase/decrease the number under the control by {number}.
 
-`ctrl+x` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number
+`<ctrl-x>` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number.
 
-`{number}ctrl+x` Decrement the number under the control by {number}
+`{number}<ctrl-x>` Decrement the number under the control by {number}.
 
 Note with the above the cursor will jump to the next number on the line the cursor is on if not over a number.
 
-`"%p` Insert file name at cursor
+`"%p` Insert file name at cursor.
 
 ## Autocomplete
 
 In insert mode.
 
-`ctrl+n` Autocomplete (first) word being entered and move to next if more than 1.
+`<ctrl-n>` Autocomplete (first) word being entered and move to next if more than 1.
 
-`ctrl+p` Autocomplete (last) word being entered and move to previous if more than 1.
+`<ctrl-p>` Autocomplete (last) word being entered and move to previous if more than 1.
 
-Precede these with ctrl+n to scope to just this file.
+Precede these with <ctrl-n>to scope to just this file.
 
-`ctrl+e` Cancel autocomplete.
+`<ctrl-e>` Cancel autocomplete.
 
-`ctrl+y` Accept autocomplete option highlighted.
+`<ctrl-y>` Accept autocomplete option highlighted.
 
-`ctrl+xctrl+f` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
+`<ctrl-x><ctrl-f>` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
 
 Autocomplete from the dictionary:
 
-`ctrl+xctrl+k` then `ctrl+n` and `ctrl+p` to change autocompleted match.
+`<ctrl-x><ctrl-k>` then `<ctrl-n>` and `<ctrl-p>` to change autocompleted match.
 
 ### Screen Manipulation
 
@@ -1200,40 +1202,39 @@ Autocomplete from the dictionary:
 
 `z-` Position screen with cursor at the bottom and start of the line.
 
-`ctrl+y` / `ctrl+e` Copy text from same column in the row above.
+`<ctrl-y>` / `<ctrl-e>` Copy text from same column in the row above.
 
-`ctrl+u` Moves cursor & screen up half of a page.
+`<ctrl-u>` Moves cursor & screen up half of a page.
 
-`ctrl+d` Moves cursor & screen down half of a page.
+`<ctrl-d>` Moves cursor & screen down half of a page.
 
-`ctrl+b` Moves screen up one page, cursor to last line.
+`<ctrl-b>` Moves screen up one page, cursor to last line.
 
-`ctrl+f` Moves screen down one page, cursor to first line.
+`<ctrl-f>` Moves screen down one page, cursor to first line.
 
-`ctrl+y` and ctrl+e only change the cursor position if it would be moved off
-screen.
+`<ctrl-y>` and <ctrl-e> only change the cursor position if it would be moved off screen.
 
-`ctrl+u` Undo in insert mode.`
+`<ctrl-u>` Undo in insert mode.`
 
-`ctrl+r` Redo last undo.
+`<ctrl-r>` Redo last undo.
 
-`ctrl+g` Gives the name of the file, the line number the cursor is currently at
+`<ctrl-g>` Gives the name of the file, the line number the cursor is currently at
 and the total number lines in the file, the percentage of how far down the
 document the cursor is and the column the cursor is at. Get cursor position
 info like current line number, column number and total number of lines. This
 info is displayed at the bottom of the screen.
 
-`ctrl+o{normalcommand}` Enter a normal command in insert mode.
+`<ctrl-o>{normalcommand}` Enter a normal command in insert mode.
 
-`Ctrl-w` Delete a word in insert mode. Doesn't put the deletion into the unnamed buffer.
+`<ctrl-w>` Delete a word in insert mode. Doesn't put the deletion into the unnamed buffer.
 
-`ctrl+i` Delete from the cursor to the start of the line in insert mode. 
+`<ctrl-i>` Delete from the cursor to the start of the line in insert mode. 
 
-`:history View the history of commands`
+`:history` View the history of commands.
 
-Execute Terminal Commands
+Execute Terminal Commands.
 
-`:!{command}`
+`:!{command}`.
 
 Eg. List files in the current directory:
 
@@ -1355,7 +1356,7 @@ Use flag n to count - not replace- occurrences:
 
 `:%s/pattern/replace/n`
 
-Whole file all instances, confirm change and case insensitive:
+whole file all instances, confirm change and case insensitive:
 
 `:%s/pattern/replace/gci`
 
@@ -1455,7 +1456,7 @@ Notes
 * Regular expressions are to be used where pattern is specified.
 
 * To enter unicode characters into a command (eg. find and replace) enter
-  `ctrl+vu`, the unicode value, `<enter>`.
+  `<ctrl-v>u`, the unicode value, `<enter>`.
 
 Can back-reference the whole match with backslash zero - eg. (to globally
 change ‘apple’ to ‘apples’) :
@@ -1510,7 +1511,7 @@ Command to go to a line number:
 
 `exit` Close terminal.
 
-`Ctrl-w N` / `Ctrl-\ Ctrl-n` To enter normal mode in the terminal.
+`<ctrl-w>N` / `<ctrl-\><ctrl-n>` To enter normal mode in the terminal.
 
 `i` to go back to the regular terminal (like reverting back to insert mode).
 
@@ -1594,7 +1595,7 @@ To insert a repeat of characters for a certain amount:
 
 `{number}i{character/s}{esc}` In normal mode.
 
-`ctrl+o{number}i{character/s}{esc}` In insert mode.
+`<ctrl-o>{number} i {character/s} {esc}` In insert mode.
 
 ## Visual Mode 
 
@@ -1609,7 +1610,7 @@ Enter (and exit) block visual mode:
 Enter (and exit) visual block mode (visual block mode allows for editing
 multiple lines at the same cursor point):
 
-`Ctrl+v`
+`<ctrl-v>`
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1732,7 +1733,7 @@ With a list like:
 
 Select the second to the last line in visual mode and enter:
 
-`g ctrl+a`
+`g <ctrl-a>`
 
 This will increment the list giving:
 
@@ -1759,7 +1760,7 @@ arr[2] = 'bar';
 arr[3] = 'zar';
 arr[4] = 'gallah';
 
-Instead of the ctrl+v, move lines in visual mode, I, edit in insert mode,
+Instead of the <ctrl-v>, move lines in visual mode, I, edit in insert mode,
 then exit to apply those changes to multiple lines you can use, from any
 multi-line visual selection, the following to achieve the same result:
 
@@ -1775,7 +1776,7 @@ Mathematical calculations can be done when in insert mode. For instance to
 get the result of a math equation:
 Doesn't seem to provide decimal values on division.
 
-`ctrl+r={math equation}<enter>`
+`<ctrl-r>={math equation}<enter>`
 
 In normal mode use:
 
@@ -1793,13 +1794,13 @@ If you have a math equation on a line you can store that in the register with:
 
 Then in insert mode:
 
-`ctrl+r=ctrl+r{letter}<enter>`
+`<ctrl-r>=<ctrl-r>{letter}<enter>`
 
 Will give the result of that equation. You may have to edit the equation before
 hitting enter as unwanted character(s) may appear.
 
-With the equation in the resister in vim, go to insert mode and enter `ctrl+r =`
-then `ctrl+r "` to paste the yanked text and press `<enter>`
+With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=`
+then `<ctrl-r>"` to paste the yanked text and press `<enter>`
 
 Edit multiple contiguous lines
 
@@ -1857,11 +1858,11 @@ When making certain movements, such as jumping to line 42 with 42G, Vim will sav
 
 `:jumps` You can list jumps
 
-To move backwards through the jump list to an older jump use `ctrl+o`.
+To move backwards through the jump list to an older jump use `<ctrl-o>`.
 
-To move to a newer jump use `ctrl+i`. You can also press <tab>.
+To move to a newer jump use `<ctrl-i>`. You can also press <tab>.
 
-`{number}ctrl+i` Jump to {number} in control list
+`{number}<ctrl-i>` Jump to {number} in control list
 
 Vim will store up to 100 locations in your jump list. If you ever want to clear them all out, run the command `:clearjumps` and your jumplist history will be wiped clean.
 For more info, check out `:help jumplist` in Vim. Also be sure to read about the Vim change list which is similar to but different from the Vim jump list.
@@ -1870,9 +1871,9 @@ For more info, check out `:help jumplist` in Vim. Also be sure to read about the
 
 `:clearjumps` Clear the jump list.
 
-`{number}Ctrl-o` Go back one/`{number}` place(s) in the jump list.
+`{number}<ctrl-o>` Go back one/`{number}` place(s) in the jump list.
 
-`{number}Ctrl-i` Go to the one/`{number}` place(s) in the jump list.
+`{number}<ctrl-i>` Go to the one/`{number}` place(s) in the jump list.
 
 ## Jump (Change) list
 
@@ -1941,16 +1942,16 @@ Following to clear the register a (I found the spaces around the = aren’t nece
 
 Enter mathematical result when in insert mode (using the "= expression register):
 `:={expression}<enter><p>` (command mode)
-`Ctrl-r={expression}<enter>` (insert mode)
+`<ctrl-r>={expression}<enter>` (insert mode)
 
 Re-enter last expression register result (what is in "= register):
-`Ctrl-r=<enter>` (insert mode)
+`<ctrl-r>=<enter>` (insert mode)
 
-When running a search with `:%s/` etc. `Ctrl-r/` will bring in the search term used in the `"/` search register.
+When running a search with `:%s/` etc. `<ctrl-r>/` will bring in the search term used in the `"/` search register.
 
 `:buffers` / `:files` / `:ls` View buffers listing.
 
-`Ctrl + Shift + 6` (`Ctrl-^`) Switch between previous and current buffer into view (normal mode).
+`ctrl + Shift + 6` (`<ctrl-^>`) Switch between previous and current buffer into view (normal mode).
 
 `:b {buffername}` Switch to the buffer by name (or part of the name).
 
@@ -1980,9 +1981,9 @@ Eg. to make a global change across all buffers (Update saves each buffer file af
 
 `:bufdo %s/pancake/waffle/g | update`
 
-In command : mode Ctrl-d will provide contextual suggestions for the command. For instance, the following will list the buffers (the space here is important otherwise the suggestions will be commands that start with b):
+In command : mode <ctrl-d>will provide contextual suggestions for the command. For instance, the following will list the buffers (the space here is important otherwise the suggestions will be commands that start with b):
 
-`:b <Ctrl-d>`
+`:b<ctrl-d>`
 
 `:b#` Go to the previous buffer.
 
@@ -2029,62 +2030,60 @@ Eg. to make a global change across all files in the args (Update saves each buff
 
 `:previous` Navigate to previous open file.
 
+Note that for the following the second key can have ctrl held down too:
 
-Second key can have Ctrl held down too:
+`<ctrl-w>s` View buffer in a horizontal split
 
+`<ctrl-w>v` View buffer in a vertical split.
 
-`Ctrl-w s` View buffer in a horizontal split
+`<ctrl-w>w` - switch between windows.
 
-`Ctrl-w v` View buffer in a vertical split.
+`<ctrl-w>q` - Close buffer/window or close Vim.
 
-`Ctrl-w w` - switch between windows.
+`<ctrl-w>w` Cycle split focus.
 
-`Ctrl-w q` - Close buffer/window or close Vim.
+`<ctrl-w>h` Focus buffer to the left.
 
-`Ctrl-w w` Cycle split focus.
+`<ctrl-w>j` Focus lower buffer.
 
-`Ctrl-w h` Focus buffer to the left.
+`<ctrl-w>k` Focus above buffer.
 
-`Ctrl-w j` Focus lower buffer.
+`<ctrl-w>l` Focus buffer to the right.
 
-`Ctrl-w k` Focus above buffer.
+`<ctrl-w>H` Moves the active split to a full-height split across the left.
 
-`Ctrl-w l` Focus buffer to the right.
+`<ctrl-w>J` Moves the active split to a full-width split across the bottom.
 
-`Ctrl-w H` Moves the active split to a full-height split across the left.
+`<ctrl-w>K` Moves the active split to a full-width split across the top.
 
-`ctrl-w J` Moves the active split to a full-width split across the bottom.
+`<ctrl-w>L` Moves the active split to a full-height split across the right.
 
-`ctrl-w K` Moves the active split to a full-width split across the top.
+`<ctrl-w>R` Swap position of the splits.
 
-`Ctrl-w L` Moves the active split to a full-height split across the right.
+`<ctrl-w>=` Evenly size the splits.
 
-`Ctrl-w R` Swap position of the splits.
+`<ctrl-w>|` Max width of the current split.
 
-`Ctrl-w =` Evenly size the splits.
+`<ctrl-w>_` Max hight of the current split.
 
-`Ctrl-w |` Max width of the current split.
+`{number}<ctrl-w><` Decrease width of split by {number}.
 
-`Ctrl-w _` Max hight of the current split.
+`{number}<ctrl-w>>` Increase width of split by {number}.
 
-`{number}Ctrl-w <` Decrease width of split by {number}.
+`<ctrl-e>` Scroll the buffer down one line. 
 
-`{number}Ctrl-w >` Increase width of split by {number}.
-
-`Ctrl-e` Scroll the buffer down one line. 
-
-`Ctrl-y` Scroll the buffer up one line. 
+`<ctrl-y>` Scroll the buffer up one line. 
 
 `:only` / `:on` Close the other buffers/tabs leaving the current one only open.
 
-`:ctrl+f` Open up, and edit, the : command history. Can use vim commands to
+`:<ctrl-f>` Open up, and edit, the : command history. Can use vim commands to
 navigate and edit here. Enter to fire the command the cursor is under. Enter on
-the default blank or `ctrl+c` to escape. This can be a preferrable option over
+the default blank or `<ctrl-c>` to escape. This can be a preferrable option over
 using cursor up and down keys to navigate the : commands history.
 
-`/ ctrl+f` or `/ ctrl+f` Open up, and edit, the / or ? command history. Can
+`/ <ctrl-f>` or `/ <ctrl-f>` Open up, and edit, the / or ? command history. Can
 use vim commands to navigate and edit here. Enter to fire the find the cursor
-is under. Enter on the default blank or `ctrl+c` to escape. This can be a
+is under. Enter on the default blank or `<ctrl-c>` to escape. This can be a
 preferrable option over using cursor up and down keys to navigate the / or ?
 commands history.
 

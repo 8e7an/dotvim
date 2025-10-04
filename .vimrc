@@ -431,10 +431,10 @@ inoremap <right> <nop>
 nnoremap <leader><space> :
 
 " Map semicolon (;) to _ (cursor to start of line):
-nnoremap ; _
+"nnoremap ; _
 
 " Map semicolon (') to $ (cursor to end of line):
-nnoremap ' $
+"nnoremap ' $
 
 " Map <tab> key to % to swap between matching brackets - ({[j:
 nnoremap <tab> %
@@ -459,8 +459,11 @@ inoremap <silent> <pagedown> <esc>:m .+1<cr>gi
 vnoremap <silent> <pageup> :m '<-2<cr>gv
 vnoremap <silent> <pagedown> :m '>+1<cr>gv
 
-nnoremap <silent> s <esc>:m .-2<cr>
-nnoremap <silent> S <esc>:m .+1<cr>
+"nnoremap <silent> s <esc>:m .-2<cr>
+"nnoremap <silent> S <esc>:m .+1<cr>
+
+nnoremap <silent> <leader>k <esc>:m .-2<cr>
+nnoremap <silent> <leader>j <esc>:m .+1<cr>
 
 "nnoremap <c-s-k> <esc>:m .-2<cr>
 "nnoremap <c-s-j> <esc>:m .+1<cr>
@@ -504,9 +507,15 @@ noremap <leader>3 3gt
 noremap <leader>4 4gt
 
 " Jump to next `f` / `F` / `t` / `T` match on the line:
-nnoremap <leader>; ;
+	"nnoremap <leader>; ;
+" Map semicolon (;) to _ (cursor to the first non-white space character on the line):
+nnoremap <silent> <leader>; _
+" Map semicolon (,) to $ (cursor to end of line):
+nnoremap <silent> <leader>, $
+" View the registers:
+nnoremap <leader>R :reg<cr>
 " View the buffers:
-nnoremap <leader>b :buffers<cr>
+nnoremap <leader>B :buffers<cr>
 " Close the buffer:
 nnoremap <leader>c :close<cr>
 " Unload buffer [N] (default: current buffer) and delete it from the buffer list:
@@ -528,9 +537,9 @@ nnoremap <leader>tt <c-w>t<c-w>H
 " Reposition vertical split to horizontal split:
 nnoremap <leader>tk <c-w>t<c-w>K
 " Decrease split width by 1. {number}<leader>' to decrease by {number}:
-nnoremap <leader>, <c-w><
+"nnoremap <leader>, <c-w><
 " Increase split height by 1. {number}<leader>' to increase by {number}:
-nnoremap <leader>. <c-w>>
+"nnoremap <leader>. <c-w>>
 " Decrease split height by 1. {number}<leader>' to decrease by {number}:
 "nnoremap <leader>; <c-w>-
 " Increase split height by 1. {number}<leader>' to increase by {number}:
@@ -554,19 +563,16 @@ nnoremap <silent> <leader>q :q<cr>
 " Quit and discard any changes:
 nnoremap <silent> <leader>Q :q!<cr>
 " Copy line to the system clipboard:
-nnoremap <silent> <leader>l :.y+<cr>
-" As above
+"nnoremap <silent> <leader>l :.y+<cr>
 nnoremap <silent> \ :.y+<cr>
 " Paste from the system clipboard with the pipe (shift+\) - needs to be escaped
 nnoremap <silent> \| "*p<cr>
 " Copy all text to the clipboard:
 nnoremap <leader>e :%y+<cr>
 " Toggle fold:
-"nnoremap <leader>z za
-" Undo:
-"nnoremap <leader>z u
-" Redo:
-"nnoremap <leader>x :x<cr>
+nnoremap <leader>z za
+" Write and quite file:
+nnoremap <leader>x :x<cr>
 " Toggle hidden characters:
 nnoremap <silent> <leader>h :set list!<cr>
 " Toggle text wrapping:
