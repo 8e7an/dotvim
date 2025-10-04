@@ -17,3 +17,6 @@ setlocal spell
 
 " Turn off the molokai color scheme.
 "colorscheme default
+
+
+set foldmethod=syntax

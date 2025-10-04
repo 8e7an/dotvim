@@ -103,13 +103,13 @@ set cursorline
 set cursorcolumn
 
 " [ts] Tabstop length (override default of 8).
-set tabstop=4
+set tabstop=2
 
 " [sts] Number of spaces that a <Tab> counts for while performing editing
 " operations, like inserting a <Tab> or using <BS>.
-set softtabstop=4
+set softtabstop=2
 
-set shiftwidth=4
+set shiftwidth=2
 
 " (sr) Set indent (>< commands) to multiples of shiftwidth.
 set shiftround
@@ -330,10 +330,14 @@ augroup filetype_js
 	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 
-au BufRead,BufNewFile *.ts setfiletype typescript
-
 augroup typescript_js
 	autocmd!
+  au BufRead,BufNewFile *.ts setfiletype typescript
+	" Local leader (\) for various file types (javascript and python)
+	" Commented-out here as handled in respective (if there) file type *.vim
+	" config files.
+	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 augroup END
 
 augroup filetype_html
@@ -350,6 +354,13 @@ augroup filetype_html
 	autocmd FileType html iabbrev <buffer> --a &amp;
 	autocmd FileType html iabbrev <buffer> --l &lt;
 	autocmd FileType html iabbrev <buffer> --g &gt;
+  " Other HTML settings
+  autocmd FileType html syntax on
+  autocmd FileType html set tabstop=2
+  autocmd FileType html set softtabstop=2
+  autocmd FileType html set shiftwidth=2
+  autocmd FileType html set expandtab
+  autocmd FileType html set foldmethod=indent
 augroup END
 
 augroup markdown_html
@@ -375,6 +386,17 @@ augroup END
 " }}}
 
 " OVERRIDE/SET KEY COMMANDS ------------------------------------------------------------
+
+" Leader Remapping ---------------------- {{{
+
+" Leader mapped to , (replacing \):
+"let mapleader = ","
+"
+let mapleader = "\<space>"
+" Local leader mapped to \\ (escaped \):
+"let maplocalleader = "\\"
+let maplocalleader = "\<cr>"
+" }}}
 
 " Ctrl+d to delete the current line in insert mode.
 inoremap <c-d> <esc>ddi
@@ -403,8 +425,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" <space> to open the command input :
-nnoremap <space> :
+" <space> to open the command input : in normal mode
+"nnoremap <space> :
+" <leader><space> to open the command input : in normal mode
+nnoremap <leader><space> :
 
 " Map semicolon (;) to _ (cursor to start of line):
 nnoremap ; _
@@ -428,12 +452,18 @@ nnoremap <c-l> viWu<esc>E
 " For normal, insert and visual modes.
 " Mappings adapted from:
 " https://www.youtube.com/watch?v=L93-S4qksVA 
-nnoremap <pageup> :m .-2<cr>
-nnoremap <pagedown> :m .+1<cr>
-inoremap <pageup> <esc>:m .-2<cr>gi
-inoremap <pagedown> <esc>:m .+1<cr>gi
-vnoremap <pageup> :m '<-2<cr>gv
-vnoremap <pagedown> :m '>+1<cr>gv
+nnoremap <silent> <pageup> :m .-2<cr>
+nnoremap <silent> <pagedown> :m .+1<cr>
+inoremap <silent> <pageup> <esc>:m .-2<cr>gi
+inoremap <silent> <pagedown> <esc>:m .+1<cr>gi
+vnoremap <silent> <pageup> :m '<-2<cr>gv
+vnoremap <silent> <pagedown> :m '>+1<cr>gv
+
+nnoremap <silent> s <esc>:m .-2<cr>
+nnoremap <silent> S <esc>:m .+1<cr>
+
+"nnoremap <c-s-k> <esc>:m .-2<cr>
+"nnoremap <c-s-j> <esc>:m .+1<cr>
 
 " No arrow keys in normal mode - use h, j, k and l:
 "nnoremap <up> <nop>
@@ -462,12 +492,6 @@ nnoremap <right> 10<c-e>
 "noremap <c-down> <c-w>-
 "noremap <c-left> <c-w>>
 "noremap <c-right> <c-w><
-
-" Leader mapped to , (replacing \):
-:let mapleader = ","
-
-" Local leader mapped to \\ (single \):
-:let maplocalleader = "\\"
 
 " CUSTOM LEADER COMMANDS ------------------------------------------------------------
 
@@ -522,15 +546,19 @@ nnoremap <leader>N :tabnew<cr>
 " Leader 0 to move current line down one:
 "nnoremap <leader>0 ddp
 " Inset a blank line (opposite of J). {number}<leader>i for {number} of lines:
-nnoremap <leader>i i<cr><esc>
+nnoremap <silent> <leader>i i<cr><esc>
 " Write changes:
 nnoremap <leader>w :w<cr>
 " Quit (no save):
-nnoremap <leader>q :q<cr>
+nnoremap <silent> <leader>q :q<cr>
 " Quit and discard any changes:
-nnoremap <leader>Q :q!<cr>
+nnoremap <silent> <leader>Q :q!<cr>
 " Copy line to the system clipboard:
-nnoremap <leader>l :.y+<cr>
+nnoremap <silent> <leader>l :.y+<cr>
+" As above
+nnoremap <silent> \ :.y+<cr>
+" Paste from the system clipboard with the pipe (shift+\) - needs to be escaped
+nnoremap <silent> \| "*p<cr>
 " Copy all text to the clipboard:
 nnoremap <leader>e :%y+<cr>
 " Toggle fold:
@@ -544,7 +572,7 @@ nnoremap <silent> <leader>h :set list!<cr>
 " Toggle text wrapping:
 nnoremap <silent> <leader>r :set wrap!<cr>
 " Replace text under cursor or visually selected text with yanked (register) text:
-nnoremap <leader>p diw"0P
+nnoremap <silent> <leader>p diw"0P
 " Toggle spelling:
 nnoremap <leader>Sp :set spell!<cr>
 " Output the date - day month year:
@@ -594,8 +622,12 @@ nnoremap <leader>SW :execute "match none"<cr>
 "nnoremap <leader>gn :silent cnext<cr>
 " 'quickfix' previous
 "nnoremap <leader>gp :silent cprevious<cr>
-"Delete the current line to the 'black hole' (not stored in the unnamed register).
+"Delete the current line to the 'black hole' (not stored in the unnamed
+"register) and remove the current line.
 nnoremap <leader>D "_dd
+"Map the backspace/delete <bs> key to delete the current line to the 'black
+"hole' and leave the current line blank.
+nnoremap <bs> _"_D
 
 " Uppercase full word in insert mode.
 "nnoremap <leader>Su <esc>viWU<esc>Ei
@@ -608,7 +640,9 @@ nnoremap <leader>D "_dd
 " VISUAL MODE RE-MAPPINGS ------------------------------------------- {{{
 
 " <space> to open the command input : in visual mode
-vnoremap <space> :
+"vnoremap <space> :
+" <leader><space> to open the command input : in visual mode
+vnoremap <leader><space> :
 
 " <leader> commands to wrap text in visual mode
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>

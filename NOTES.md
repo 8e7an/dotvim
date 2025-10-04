@@ -1966,7 +1966,7 @@ When running a search with `:%s/` etc. `Ctrl-r/` will bring in the search term u
 
 `:{number}b` / `:b{number}` / :bu{number} Go to the buffer by number.
 
-`:bd` / `:bdelete` **<leader>C** Delete a buffer (close a file).
+`:bd` / `:bdelete` **<leader>C** Delete buffer (close a file).
 
 `:bd {number}` / `:bdelete {number}` Delete the buffer by number.
 
@@ -2104,13 +2104,21 @@ When you see a variable that starts with a character and a colon it's describing
 
 `:tabclose` Close the tabset.
 
-`:tabnext` Go to the next tab.
+`:tabnext`/ `:tabn` Go to the next tab.
 
-`:tabprevious` Go to the previous tab.
+`:tabprevious` / `:tabp` Go to the previous tab.
 
-`:tabfirst` Go to the first tab.
+`:tabfirst`/ `:tabfir` Go to the first tab.
 
-`:tablast` Go to the last tab.
+`:tablast` / `:tabl` Go to the last tab.
+
+`:tabc` Close the current tab.
+k
+`:tabo` Close all other tabs.
+
+`:tabm +{number}` / `:tabm+{number}` Move the current tab {number} or places to the right.
+
+`:tabm -{number}` / `:tabm-{number}` Move the current tab {number} or places to the left.
 
 `{number}gt` Go to tabset of {number}
 
