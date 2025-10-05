@@ -147,6 +147,10 @@ Vim exists as a terminal command so you can use other terminal commands with Vim
 
 `ls -l | vim -`
 
+Eg. take the concatenated files *.vim and pipe them to vim as the input:
+
+`cat *.vim | vim -`
+
 ## Configuration
 
 `:map {commands} {commands}` Map the key `{letter}` to a string of Vi/Vim `{commands}`
@@ -300,19 +304,17 @@ with \):
 
 `vi +/addUser\(arg1\) initlib.c`
 
-Take the concatenated files *.vim and pipe them to vim as the input:
-
-`cat *.vim | vim -`
-
 ### Ex Mode
 
 `Q` Enter **ex mode**.
 
 `visual` to exit **ex mode**.
 
-Not sure how useful **ex mode** is but you can enter something like:
+Enter normal commands like:
 
-`norm guu` then 'visual' (to exit) to make the text on the current line **ex mode** was called from all lower-case.
+`norm guu` then 'visual' (to exit) to make the text on the current line **ex mode** was called on from all lower-case.
+
+Can enter multiple normal commands like this and enter `visual` to apply those changes (to that same line).
 
 ### Abbreviations
 
@@ -321,11 +323,6 @@ Set up in **.vimrc** to have available in insert mode:
 `iabbrev teh the` Abbreviation to make **teh** **the**.
 
 To cancel an abbreviation from applying (in visual mode) type `<ctrl-v>` at the
-end of the word.
-
-### Jump List
-
-TODO
 
 ### Change List
 
@@ -2424,24 +2421,24 @@ window (`%`) in a new right split.
 
 ## Normal
 
-`:normal G` Run the normal G command to go to the bottom of the buffer.
+`:normal G` Run the normal G command to go to the bottom of the file.
 
-`:normal ggdd` Go to the top of the buffers and delete the line.
+`:normal ggdd` Go to the top of the file and delete the line.
 
 Use `:normal! {command}` To run the normal `{command}` not using any (normal) mappings.
 
 `:execute "normal! gg/foo\<cr>dd"` This will move to the top of the file,
 search for the first occurrence of **foo**, and delete the line that contains it.
 
-`:execute "normal! mqA;\<esc>`q"` Normal command to mark where the cursor is on
+`` :execute "normal! mqA;\<esc>`q" `` Normal command to mark where the cursor is on
 the current line, append **;** to the end of the line then return the cursor
 back to where the mark was placed.
 
 ## Global
+hello this is <testing>
+`%s/\<\w/\u&/g` Make the first letter of each word (after bounding symbol <) in the document upper-case.
 
-`%s/\<\w/\u&/g` Make the first letter of each word (after <) in the document upper-case.
-
-`%s/\w\>/\u&/g` Make the last letter of each word (before >) in the document upper-case.
+`%s/\w\>/\u&/g` Make the last letter of each word (before bounding symbol >) in the document upper-case.
 
 `s/https:\/\/www.\(.*\)\.com.*/\1` In URLs that match this pattern replace with the value in between www. and .com.
 

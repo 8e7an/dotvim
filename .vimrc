@@ -545,11 +545,11 @@ nnoremap <leader>tk <c-w>t<c-w>K
 " Increase split height by 1. {number}<leader>' to increase by {number}:
 "nnoremap <leader>' <c-w>+
 " Set focus to previous tab:
-nnoremap <leader>n :tabp<cr>
+nnoremap <leader>n :tabp<cr>:echo "Focus previous tab"<cr>
 " Set focus to next tab:
-nnoremap <leader>m :tabn<cr>
+nnoremap <leader>m :tabn<cr>:echo "Focus next tab"<cr>
 " Open a new tab set:
-nnoremap <leader>N :tabnew<cr>
+nnoremap <leader>N :tabnew<cr>:echo "New tab"<cr>
 " Leader 9 to move current line up one:
 "nnoremap <leader>9 ddkP
 " Leader 0 to move current line down one:
@@ -557,16 +557,16 @@ nnoremap <leader>N :tabnew<cr>
 " Inset a blank line (opposite of J). {number}<leader>i for {number} of lines:
 nnoremap <silent> <leader>i i<cr><esc>
 " Write changes:
-nnoremap <leader>w :w<cr>
+nnoremap <leader>w :w<cr>:echo "Written file"<cr>
 " Quit (no save):
 nnoremap <silent> <leader>q :q<cr>
 " Quit and discard any changes:
 nnoremap <silent> <leader>Q :q!<cr>
 " Copy line to the system clipboard:
 "nnoremap <silent> <leader>l :.y+<cr>
-nnoremap <silent> \ :.y+<cr>
+nnoremap \ :.y+<cr>:echo "Line copied to clipboard"<cr>
 " Paste from the system clipboard with the pipe (shift+\) - needs to be escaped
-nnoremap <silent> \| "*p<cr>
+nnoremap \| "*p<cr>:echo "Line pasted from clipboard"<cr>
 " Copy all text to the clipboard:
 nnoremap <leader>e :%y+<cr>
 " Toggle fold:
@@ -630,10 +630,10 @@ nnoremap <leader>SW :execute "match none"<cr>
 "nnoremap <leader>gp :silent cprevious<cr>
 "Delete the current line to the 'black hole' (not stored in the unnamed
 "register) and remove the current line.
-nnoremap <leader>D "_dd
+nnoremap <leader>D "_dd:echo "Delete into the 'black hole' and removed line"<cr>
 "Map the backspace/delete <bs> key to delete the current line to the 'black
 "hole' and leave the current line blank.
-nnoremap <bs> _"_D
+nnoremap <bs> _"_D:echo "Also delete into the 'black hole' and leave line"<cr>
 
 " Uppercase full word in insert mode.
 "nnoremap <leader>Su <esc>viWU<esc>Ei
