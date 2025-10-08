@@ -508,14 +508,18 @@ noremap <leader>4 4gt
 
 " Jump to next `f` / `F` / `t` / `T` match on the line:
 	"nnoremap <leader>; ;
-" Map semicolon (;) to _ (cursor to the first non-white space character on the line):
-nnoremap <silent> <leader>; _
-" Map semicolon (,) to $ (cursor to end of line):
-nnoremap <silent> <leader>, $
+" Map comma (,) to _ (cursor to the first non-white space character on the line):
+nnoremap <silent> <leader>, _
+" Map semicolon (;) to $ (cursor to end of line):
+nnoremap <silent> <leader>; $
 " View the registers:
 nnoremap <leader>R :reg<cr>
 " View the buffers:
 nnoremap <leader>B :buffers<cr>
+" View the jumps:
+nnoremap <leader>J :jumps<cr>
+" View the marks:
+nnoremap <leader>M :marks<cr>
 " Close the buffer:
 nnoremap <leader>c :close<cr>
 " Unload buffer [N] (default: current buffer) and delete it from the buffer list:
@@ -530,7 +534,8 @@ nnoremap <leader>d <c-w>j
 nnoremap <leader>f <c-w>l
 " New horizontal split for the current buffer:
 nnoremap <leader>Sh :sp<cr>
-" New vertical split for the current buffer:
+
+
 nnoremap <leader>Sv :vs<cr>
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H

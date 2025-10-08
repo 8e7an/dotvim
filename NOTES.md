@@ -499,8 +499,6 @@ Move with the cursor keys or:
 
 `<ctrl-j>` Insert line break when in insert mode. Hold to repeat for multiple lines.
 
-`<ctrl-w>` Delete the last word in insert mode. 
-
 `<ctrl-o>` Enter a normal command when in	insert mode. Stay in insert mode when completed.
 
 `<ctrl-f>` Forward one screen.
@@ -1765,22 +1763,6 @@ multi-line visual selection, the following to achieve the same result:
 
 `'<,'>norm A"` From visual mode append " to the end of each line.
 
-### Math Calculations in Vim
-
-[Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
-
-Mathematical calculations can be done when in insert mode. For instance to 
-get the result of a math equation:
-Doesn't seem to provide decimal values on division.
-
-`<ctrl-r>={math equation}<enter>`
-
-In normal mode use:
-
-`:put={math equation}<enter>`
-
-An example of a math function here is:
-
 `:put=range(1,10)`
 
 This will give 1 to 10 on seperate lines.
@@ -1819,7 +1801,7 @@ Substitution in marked ranges:
 
 The above will search from marked range starting point a going to marked point b and confirm global replacement of ‘before’ with ‘after’.
 
-## Code folding
+## Folding
 
 [Vim Code Folding - VimTricks](https://vimtricks.com/p/vim-code-folding/)
 
@@ -1829,7 +1811,7 @@ For Lua and python the following fold method is most suitable:
 
 Vim Folding Commands
 
-The most important Vim code folding commands:
+The most important Neovim code folding commands:
 
 `za` / ,z Toggles the current fold open or closed – the most useful command to know of all of these.
 
@@ -1937,14 +1919,41 @@ Eg. `r!curl {url}` will read in the HTML from the `{url}`
 Following to clear the register a (I found the spaces around the = aren’t necessary):
 `:let @a = ''` / `:let @a=''` / `:let @9=''`
 
-Enter mathematical result when in insert mode (using the "= expression register):
-`:={expression}<enter><p>` (command mode)
+#### Math Expression Buffer
+
+[Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
+
+Mathematical calculations can be done when in insert mode. 
+
+Doesn't seem to provide decimal values on division.
+
+Doesn't do decimal / floating point values - only integer.
+
+For instance to get the result of a math equation.
+
+In insert mode use:
+
 `<ctrl-r>={expression}<enter>` (insert mode)
 
-Re-enter last expression register result (what is in "= register):
-`<ctrl-r>=<enter>` (insert mode)
+In normal mode use:
+
+`={expression}<enter><p>` (command mode)
+
+`:put={math equation}<enter>`
+
+An example of a math function here is:
+
+Enter mathematical result when in insert mode (using the "= expression register):
+
+#### Unnamed register
+
+Re-enter last expression register result (what is in "= unnamed register):
+
+#### Search Register
 
 When running a search with `:%s/` etc. `<ctrl-r>/` will bring in the search term used in the `"/` search register.
+
+### Buffers
 
 `:buffers` / `:files` / `:ls` View buffers listing.
 
