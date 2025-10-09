@@ -1,10 +1,10 @@
 # DotVim Repository Notes
 
-Repository to store my *.vim* configuation and plugins (submodules) for my Vim installation.
+Repository to store my *.vim* configuration and plugins (submodules) for my Vim installation.
 
 * Includes **\*.vimrc**
 * colors folder for vim color themes
-* ftplugin folder for filetype **\*.vim** configuation files
+* ftplugin folder for filetype **\*.vim** configuration files
 * pack folder for the Plugins (submodules)
 
 This repository is intended to be cloned into the `/User/{username}` / `~` (Home) directory. 
@@ -29,3 +29,10 @@ To clone down the plugins (held as git submodules) use the following:
 
 `git submodule update`
 
+Following command does the same thing:
+
+`git submodule update --init --recursive`
+
+To initialise and update submodules when cloning down the main *dotvim* repository user the following:
+
+`git clone --recurse-submodules git@github.com:8e7an/dotvim.git .vim`

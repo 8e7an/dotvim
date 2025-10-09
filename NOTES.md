@@ -272,11 +272,15 @@ Disable:
 Toggle:
 `:set spell!` *`<leader>S`*
 
-`z=` Give spelling suggestions for word under cursor
+`z=` Give spelling suggestions for word under cursor.
 
-`]s` Move cursor to next misspelt word
+`zg` Add missspelt word under cursor to the spelling dictionary.
 
-`[s` Move cursor to previous misspelt word
+`zw` Remove word under cursor from the spelling dictionary.
+
+`]s` Move cursor to next misspelt word.
+
+`[s` Move cursor to previous misspelt word.
 
 Opening files and effecting files with vim at the command line.
 
@@ -419,9 +423,21 @@ when put into insert mode' will be entered for {number} of lines.
 
 `:write {filepath}` / `:w {filepath}` Write the buffer to the `{filepath}`. Still editing the original file.
 
+`:write! {filepath}` / `:w! {filepath}` Write current contents over a pre-existing file named prevfile.
+
 `:save {filepath}` / `:sav {filepath}` Write the buffer to the `{filepath}` and switch to editing that file.
 
 `:{number},{number}write {filepath}` / `:{number},{number}w {filepath}` Write the range to the `{filepath}`.
+
+Eg.:
+
+Absolute lines:
+
+`:10,20w {filepath}`
+
+Relative (from the current line):
+
+`:,+12w {filepath}`
 
 ## Move
 
@@ -469,11 +485,7 @@ Move with the cursor keys or:
 
 `*` Move cursor to the next whole occurrence of the word the cursor is over.
 
-`g*` Move cursor to the next partial occurrence of the word the cursor is over.
-
 `#` Move cursor to the previous whole occurrence of the word the cursor is over.
-
-`g#` Move cursor to the previous partial occurrence of the word the cursor is over.
 
 `H` Move cursor to the top of the screen.
 
@@ -531,7 +543,7 @@ Move with the cursor keys or:
 
 `gj` Move cursor down line for wrapped text.
 
-`gJ` Join the following line with the current line with no space separation.
+`gJ` Join the following line with the current line with no space separation (continuous join).
 
 `gk` Down up line (useful for wrapped text).
 
@@ -563,7 +575,7 @@ Move with the cursor keys or:
 
 `gf` Open file path under cursor into a new buffer. Relative but if full path will follow that absolute path.
 
-`g_` Go to the last non-whitespace character on the current line.
+`g_` Move the cursor to the last non-blank character in the line.
 
 `gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 (which I have) it attempts to download the HTML as a file instead (which is not what I want.
 
@@ -576,6 +588,10 @@ Move with the cursor keys or:
 `g-` Undo change.
 
 `g&` Apply the last (one-line) substitution to the rest of the file.
+
+`g*` Move cursor to the next partial occurrence of the word the cursor is over.
+
+`g#` Move cursor to the previous partial occurrence of the word the cursor is over.
 
 `guu` Current line of text all lowercase.
 
@@ -619,6 +635,21 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 
 `:g/{term}/p` but the `p` for print is the default.
 
+Delete lines which include the {regexpattern}:
+
+`:g/{regexpattern}/d`
+
+Substitute ‘me’ to ‘you’ only on the lines that have the {regexpattern}:
+
+`:g/{regexpattern}/s/me/you`
+
+Append text on the current line via the command area (. on a new line after
+{enter text} to finish and bring the text to the file:
+
+`:g/{regexpattern}/t$` Copy all lines that start with `{regexpattern}` to the end of the file.
+
+`:g/{regexpattern}/m$` Move all lines that start with `{regexpattern}` to the end of the file.
+
 `:v/{term}` / `:v/{term}/p` List the lines were `{term}` is not found.
 
 `:g!` is equivalent to `:v` (and presumably `:v!` is the equivalent to `:g`)
@@ -636,8 +667,6 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 `:g/^/m0` Effectively reverse the line order of the document.
 
 `:g/^$/d` Delete all blank lines in the document.
-
-`:` / `**<space>**` / `**<enter>**` : for command - Default move cursor to the next character.
 
 `%` / `**<tab>**` Jump between matching brackets under cursor.
 
@@ -665,25 +694,11 @@ For some reason `[[` and `]]` don't go to the starting / ending [ / ] when insid
 
 `dl` Delete letter.
 
-`S` Substitute - Cut the current line to register and go into insert mode on that line?
-
-`V` Start line visual selection at cursor.
-
-`v` Start visual selection at cursor.
-
 `dH` Delete from cursor to the top line of what is displayed visually.
 
 `dL` Delete from cursor to the bottom line of what is displayed visually.
 
-`<ctrl-v>` Start character visual selection at cursor
-
-When entering an ex command and entering strings in double quotes ("") you can
-enter special characters with a backslash escape `\` (like tab with `\t`). Another
-method is to enter the special character as its key input (ie. tab key) by
-proceeding it with `<ctrl-v>` (so `<ctrl-v>` `<tab>`. Vim will then insert its own special character
-representative of the key entered.
-
-`^v` Multi line visual selection .
+`S` Substitute - Cut the current line to register and go into insert mode on that line?
 
 `%` / `**<tab>**` - Move cursor to the closest (and then toggle) to the associated
 brackets - ( ), { }, [ ] - on the current line.
@@ -849,7 +864,7 @@ Nine                    9       Horn
 
 `dF{character}` Delete from cursor to including previous found character.
 
-`d$` / `D` / `d` Delete from cursor to the end of the line.
+`d$` / `D` Delete from cursor to the end of the line.
 
 `daw` Delete around word.
 
@@ -986,30 +1001,6 @@ Eg.
 
 `<ctrl-i>` Move cursor to next place.
 
-`gi` Go to the last insertion location.
-
-`gv` Reselect previous visual selection.
-
-`gf` Open file path under cursor into a new buffer.
-
-`g_` Go to the last non-white-space character on the current line.
-
-`gg=G` To auto-indent entire document.
-
-`guw` Make the word after the cursor all uppercase.
-
-`gUw` Make the word after the cursor all lowercase.
-
-`g_` Move the cursor to the last non-blank character in the line.
-
-`{number}guw` Make {number} of words all uppercase.
-
-`{number}gUw` Make {number} of words all lowercase.
-
-`gJ` Join following line without a space (continuous join).
-
-`gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 (which I have) it attempts to download the HTML as a file instead (which is not what I want.
-
 `cgn` Cut (go into insert mode), from visual mode, the next matched search term.
 
 `cgN` Cut (go into insert mode), from visual mode, the last matched search term.
@@ -1023,21 +1014,6 @@ Eg.
 `{number}i{characters}<Esc>` Repeat the `{characters}` `{number}` of times on the one line.
 
 `:{number},{number}d` Delete lines by range of numbers (y instead of d to yank?).
-
-Delete lines which include the {regexpattern}:
-
-`:g/{regexpattern}/d`
-
-Substitute ‘me’ to ‘you’ only on the lines that have the {regexpattern}:
-
-`:g/{regexpattern}/s/me/you`
-
-Append text on the current line via the command area (. on a new line after
-{enter text} to finish and bring the text to the file:
-
-`:g/{regexpattern}/t$` Copy all lines that start with `{regexpattern}` to the end of the file.
-
-`:g/{regexpattern}/m$` Move all lines that start with `{regexpattern}` to the end of the file.
 
 ```
 :a
@@ -1130,6 +1106,101 @@ V and select lines
 
 The '<,'> is entered in for you as representative of the visual line select, so
 y, + and enter will copy the selected range into the system clipboard.
+
+If you have a math equation on a line you can store that in the register with:
+
+`“{letter}yy`
+
+Then in insert mode:
+
+`<ctrl-r>=<ctrl-r>{letter}<enter>`
+
+Will give the result of that equation. You may have to edit the equation before
+hitting enter as unwanted character(s) may appear.
+
+With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=`
+then `<ctrl-r>"` to paste the yanked text and press `<enter>`
+
+### Paste from the register
+
+Useful to paste from a previous change (ie, cut, yank).
+
+`:registers` / `:reg` View the registry (list of prior changes to the doc/buffer).
+
+`:reg {namedregisters}` View the registers of the {namedregisters} only.
+
+`"ayy` Copy the line to register a.
+
+`"bd$` Delete from cursor to the end of the line and put that into register b.
+
+`"cd0` Delete from cursor to the start of the line and put that into register c.
+
+`"ap` Paste from register `a`.
+
+`"+yy` Copy the current line to the system clipboard.
+
+`"+p` Paste from the system clipboard.
+
+Note the "{character} against the text you want to paste
+
+In normal mode paste from the register:
+
+`"{character}p Paste from register {character} after cursor.`
+
+`"{character}P Paste from register {character} before cursor. `
+
+### Increment Lines
+
+With a list like:
+
+1. First
+1. Second
+1. Third
+1. Forth
+1. Fifth
+1. Sixth
+1. Seventh
+
+Select the second to the last line in visual mode and enter:
+
+`g <ctrl-a>`
+
+This will increment the list giving:
+
+1. First
+2. Second
+3. Third
+4. Forth
+5. Fifth
+6. Sixth
+7. Seventh
+
+Numbers do not have to be the first character, this also works with numbers
+further in the line like the following:
+
+arr[0] = 'foo';
+arr[0] = 'bar';
+arr[0] = 'zar';
+arr[0] = 'gallah';
+
+Becomes:
+
+arr[1] = 'foo';
+arr[2] = 'bar';
+arr[3] = 'zar';
+arr[4] = 'gallah';
+
+Instead of the <ctrl-v>, move lines in visual mode, I, edit in insert mode,
+then exit to apply those changes to multiple lines you can use, from any
+multi-line visual selection, the following to achieve the same result:
+
+`'<,'>norm I"` From visual mode insert " at the start of each line.
+
+`'<,'>norm A"` From visual mode append " to the end of each line.
+
+`:put=range(1,10)`
+
+This will give 1 to 10 on seperate lines.
 
 ### History
 
@@ -1594,18 +1665,17 @@ To insert a repeat of characters for a certain amount:
 
 ## Visual Mode 
 
-Enter (and exit) visual mode:
+`V` Start line visual selection at cursor.
 
-`v`
+`v` Start visual selection at cursor.
 
-Enter (and exit) block visual mode:
+`<ctrl-v>` Start character visual selection at cursor
 
-`Shift+v`
-
-Enter (and exit) visual block mode (visual block mode allows for editing
-multiple lines at the same cursor point):
-
-`<ctrl-v>`
+When entering an ex command and entering strings in double quotes ("") you can
+enter special characters with a backslash escape `\` (like tab with `\t`). Another
+method is to enter the special character as its key input (ie. tab key) by
+proceeding it with `<ctrl-v>` (so `<ctrl-v>` `<tab>`. Vim will then insert its own special character
+representative of the key entered.
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1618,7 +1688,7 @@ From normal mode:
 
 `vaw` Select a word.
 
-v{number}word Select {number} of words.
+`v{number}word` Select {number} of words.
 
 `vip` Select a paragraph inside.
 
@@ -1680,106 +1750,13 @@ In visual select mode:
 
 `:w` {filename} Write the visually selected text to the filename TEST.
 
-`{ctrl}+v` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
+`<ctrl-v>` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
 
 `at` Expand visual selection (of tags) to around parent tags.
 
 `it` Expand visual selection (of tags) to inside parent tags.
 
 There doesn't appear to be a way (an equivalent built-in way) to Contract the visual selection of tags so as to shrink the selection to inside the selected tags.
-
-### Paste from the register
-
-Useful to paste from a previous change (ie, cut, yank).
-
-`:registers` / `:reg` View the registry (list of prior changes to the doc/buffer).
-
-`:reg {namedregisters}` View the registers of the {namedregisters} only.
-
-`"ayy` Copy the line to register a.
-
-`"bd$` Delete from cursor to the end of the line and put that into register b.
-
-`"cd0` Delete from cursor to the start of the line and put that into register c.
-
-`"ap` Paste from register `a`.
-
-`"+yy` Copy the current line to the system clipboard.
-
-`"+p` Paste from the system clipboard.
-
-Note the "{character} against the text you want to paste
-
-In normal mode paste from the register:
-
-`"{character}p Paste from register {character} after cursor.`
-
-`"{character}P Paste from register {character} before cursor. `
-
-With a list like:
-
-1. First
-1. Second
-1. Third
-1. Forth
-1. Fifth
-1. Sixth
-1. Seventh
-
-Select the second to the last line in visual mode and enter:
-
-`g <ctrl-a>`
-
-This will increment the list giving:
-
-1. First
-2. Second
-3. Third
-4. Forth
-5. Fifth
-6. Sixth
-7. Seventh
-
-Numbers do not have to be the first character, this also works with numbers
-further in the line like the following:
-
-arr[0] = 'foo';
-arr[0] = 'bar';
-arr[0] = 'zar';
-arr[0] = 'gallah';
-
-Becomes:
-
-arr[1] = 'foo';
-arr[2] = 'bar';
-arr[3] = 'zar';
-arr[4] = 'gallah';
-
-Instead of the <ctrl-v>, move lines in visual mode, I, edit in insert mode,
-then exit to apply those changes to multiple lines you can use, from any
-multi-line visual selection, the following to achieve the same result:
-
-`'<,'>norm I"` From visual mode insert " at the start of each line.
-
-`'<,'>norm A"` From visual mode append " to the end of each line.
-
-`:put=range(1,10)`
-
-This will give 1 to 10 on seperate lines.
-
-If you have a math equation on a line you can store that in the register with:
-
-`“{letter}yy`
-
-Then in insert mode:
-
-`<ctrl-r>=<ctrl-r>{letter}<enter>`
-
-Will give the result of that equation. You may have to edit the equation before
-hitting enter as unwanted character(s) may appear.
-
-With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=`
-then `<ctrl-r>"` to paste the yanked text and press `<enter>`
 
 Edit multiple contiguous lines
 
@@ -1993,8 +1970,11 @@ In command : mode <ctrl-d>will provide contextual suggestions for the command. F
 
 `:b#` Go to the previous buffer.
 
+## Windows
 
-## windows
+### Arguments
+
+Files passed into vim when it is opened from the command line.
 
 `:args` List the args - the one in [] is the current args file
 
@@ -2427,6 +2407,10 @@ in a new right split.
 
 `execute "rightbelow vsplit " . bufname('%')` Open the buffer in the current
 window (`%`) in a new right split.
+
+## HTML
+
+`:TOhtml` to make a split/buffer with the file made into a HTML file.
 
 ## Normal
 
