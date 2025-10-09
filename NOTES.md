@@ -149,7 +149,7 @@ Vim exists as a terminal command so you can use other terminal commands with Vim
 
 Eg. take the concatenated files *.vim and pipe them to vim as the input:
 
-`cat *.vim | vim -`
+`cat *.vim` | `vim -`
 
 ## Configuration
 
@@ -479,7 +479,7 @@ Move with the cursor keys or:
 
 `$` / ' Move cursor to the end of line.
 
-`^` / `_` / ; First non-blank character of line.
+`^` / `_` `**;**` First non-blank character of line.
 
 `+` Move cursor to the first non-white-space character of the next line.
 
@@ -729,7 +729,7 @@ In insert mode enter `<ctrl-k>{character} {glyph}` to insert the character with
 the glyph applied (can enter `{glyph}` before `{character}`.
 
 Examples:
-
+eae7452e261e64d2206a6436d2dbfa962f2eeb27
 For "extraño", in insert mode type extra`<ctrl-k>n ?`, and n will become ñ. Will
 still be insert mode and can keep typing. For this glyph you use **~** instead
 of **?**.
@@ -2107,9 +2107,9 @@ k
 
 `{number}gt` Go to tabset of {number}
 
-`gt` / **`<leader>n`** Switch to right tabsets
+`gt` / `**<leader>n**` Switch to right tabsets
 
-`gT` / **`<leader>m`** Switch to left tabsets
+`gT` / `**<leader>m**` Switch to left tabsets
 
 `nnoremap <c-left> :tabprevious<cr>`
 
@@ -2155,7 +2155,7 @@ More info about tabs in Vim:
 
 `{bookmark letter}` Jump to the specific column on the specific line bookmarked
 
-`\`\`` Move the previous mark [jump back (to position in current buffer where jumped from)]
+`` `` `` Move the previous mark [jump back (to position in current buffer where jumped from)]
 
 `d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the
 marked position {bookmark letter} to the cursor position
