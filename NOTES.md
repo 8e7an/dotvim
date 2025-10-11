@@ -2457,3 +2457,5 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 * Find out about gn/gN + cgn
 
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
+
+* `vim --clean` Does it open a standard vim without customisation and plugins?
