@@ -282,6 +282,7 @@ augroup END
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
 	autocmd!
+	" These settings in addition to ftplugin/vim.vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
@@ -289,6 +290,7 @@ augroup END
 " Pico-8 file settings ---------------------- {{{
 augroup filetype_p8
 	autocmd!
+	" These settings in addition to ftplugin/lua.vim
 	" Make PICO-8 *.p8 files recognised as Lua files (to use the lua.vim settings).
 	autocmd BufNewFile,BufRead *.p8 set ft=lua
 augroup END
@@ -297,6 +299,7 @@ augroup END
 " CSS file settings ---------------------- {{{
 augroup filetype_css
 	autocmd!
+	" These settings in addition to ftplugin/css.vim
 	" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
 	autocmd BufNewFile,BufRead *.scss set ft=css
 augroup END
@@ -313,6 +316,7 @@ augroup END
 
 augroup filetype_python
 	autocmd!
+	" These settings in addition to ftplugin/python.vim
 	" Local leader (\) for various file types (javascript and python)
 	" Commented-out here as handled in respective (if there) file type *.vim
 	" config files.
@@ -323,6 +327,7 @@ augroup END
 
 augroup filetype_js
 	autocmd!
+	" These settings in addition to ftplugin/javascript.vim
 	" Local leader (\) for various file types (javascript and python)
 	" Commented-out here as handled in respective (if there) file type *.vim
 	" config files.
@@ -332,7 +337,8 @@ augroup END
 
 augroup typescript_js
 	autocmd!
-  au BufRead,BufNewFile *.ts setfiletype typescript
+	" These settings in addition to ftplugin/typescript.vim
+  autocmd BufRead,BufNewFile *.ts setfiletype typescript
 	" Local leader (\) for various file types (javascript and python)
 	" Commented-out here as handled in respective (if there) file type *.vim
 	" config files.
@@ -342,28 +348,14 @@ augroup END
 
 augroup filetype_html
 	autocmd!
+	" These settings in addition to ftplugin/html.vim
 	" Auto indent HTML files on read (into the buffer) and write (from the buffer).
 	autocmd BufWritePre,BufRead *.html :normal gg=G
-	" HTML comment
-	autocmd FileType html nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
-	" Fold section
-	"autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
-	" Entity references shorthands
-	autocmd FileType html iabbrev <buffer> --- &ndash;
-	autocmd FileType html iabbrev <buffer> --= &mdash;
-	autocmd FileType html iabbrev <buffer> --a &amp;
-	autocmd FileType html iabbrev <buffer> --l &lt;
-	autocmd FileType html iabbrev <buffer> --g &gt;
-  " Other HTML settings
-  autocmd FileType html syntax on
-  autocmd FileType html set tabstop=2
-  autocmd FileType html set softtabstop=2
-  autocmd FileType html set shiftwidth=2
-  autocmd FileType html set expandtab
-  autocmd FileType html set foldmethod=indent
 augroup END
 
-augroup markdown_html
+augroup filetype_markdown
+	autocmd!
+	" These settings in addition to ftplugin/markdown.vim
 	"Operator-Pending mappings for Markdown files
 	" 'in heading' of the previously found heading
 	"autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
@@ -520,6 +512,8 @@ nnoremap <leader>B :buffers<cr>
 nnoremap <leader>J :jumps<cr>
 " View the marks:
 nnoremap <leader>M :marks<cr>
+" View the full path of the file/buffer:
+nnoremap <leader>F :echo expand('%:p')<cr>
 " Close the buffer:
 nnoremap <leader>c :close<cr>
 " Unload buffer [N] (default: current buffer) and delete it from the buffer list:
@@ -534,8 +528,7 @@ nnoremap <leader>d <c-w>j
 nnoremap <leader>f <c-w>l
 " New horizontal split for the current buffer:
 nnoremap <leader>Sh :sp<cr>
-
-
+" New vertical split for the current buffer:
 nnoremap <leader>Sv :vs<cr>
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
@@ -557,10 +550,8 @@ nnoremap <leader>m :tabn<cr>:echo "Focus next tab"<cr>
 nnoremap <leader>N :tabnew<cr>:echo "New tab"<cr>
 " Leader 9 to move current line up one:
 "nnoremap <leader>9 ddkP
-" Leader 0 to move current line down one:
-"nnoremap <leader>0 ddp
-" Inset a blank line (opposite of J). {number}<leader>i for {number} of lines:
-nnoremap <silent> <leader>i i<cr><esc>
+" Add a blank line ({number}<leader>o to add {number} of blank lines):
+nnoremap <silent> <leader>o o<esc>
 " Write changes:
 nnoremap <leader>w :w<cr>:echo "Written file"<cr>
 " Quit (no save):
@@ -671,7 +662,7 @@ vnoremap <leader>* <esc>`<i*<esc>`>a*<esc>
 " STATUS LINE ------------------------------------------------------ {{{
 "
 " %f – Display the relative path of the current file.
-" %F – Display the full path of the current file.
+" %F – Display the full path of the current file (includes ~ if located in the home directory).
 " %M – Modified flag shows if file is unsaved.
 " %y – Type of file in the buffer.
 " %Y – Type of file in the buffer.

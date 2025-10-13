@@ -62,17 +62,14 @@ Or:
 
 `:source ~/.vimrc`
 
-Information about the file (including full file name, line cursor is at how far down the document as a %):
+`:file` / `:f` Information about the file (including full file name, line cursor is at how far down the document as a %).
 
-`:file`
 
 Information about the vim setting for the file based on its type:
 
 `:filetype`
 
 > “This line will automatically reload you .vimrc whenever you update it.”
-
-[How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
 
 `autocmd! bufwritepost .vimrc source %`
 
@@ -409,11 +406,9 @@ when put into insert mode' will be entered for {number} of lines.
 
 `:qa` Quit all files open in the buffer (splits and tabs)
 
-`:wq` Write an quit (same as ZZ)
+`:wq` / `ZZ` Write an quit.
 
 `:q!` Quit without saving any changes
-
-`ZZ` Save and exit.
 
 `ZQ` Exit without saving.
 
@@ -527,7 +522,7 @@ Move with the cursor keys or:
 
 `<ctrl-g>` Show file info and file status.
 
-`{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's path.
+`{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's path. This gives the full file path (of the buffer).
 
 ###Global Command
 
@@ -1581,7 +1576,6 @@ Command to go to a line number:
 
 `i` to go back to the regular terminal (like reverting back to insert mode).
 
-
 ## Miscellaneous 
 
 Assign a value (here string) to register {character}:
@@ -1873,9 +1867,9 @@ More on split windows in Vim:
 
 * https://www.baeldung.com/linux/vim-windows#:~:text=The%20ctrl%2Bw%20%2Bs%20and,use%20ctrl%2Bw%20%2Bn.
 
-`:edit` / `:e` {filepath} Open a file (to the buffer) to edit
+`:edit` / `:e` {filepath} Open a file (to the buffer) to edit. Do not include the {filepath} and this will give info about the file opened.
 
-`:edit!` / `:e!` Clear edits to the buffer.
+`:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back to its saved state.
 
 `:read` / `:r` `{file path}` Read in a copy of the specified file `{file path}`
 into the buffer and past to the cursor location, effectively writing that
@@ -2243,6 +2237,10 @@ Called ‘skeleton files’ in Vim, it provides a way to template files using Vi
 
 ## Plugins
 
+[Airline Vim Plugin](https://github.com/vim-airline/vim-airline?tab=readme-ov-file)
+
+[How to Do 90% of What Plugins Do (With Just Vim)](https://www.youtube.com/watch?v=XA2WjJbmmoM)
+
 ### Surround
 
 * [Surround](https://github.com/tpope/vim-surround)
@@ -2285,7 +2283,7 @@ Now wrap the entire line in parentheses with yssb or yss).
 
 **({ Hello } world!)**
 
-Revert to the original text: `ds{ds)`
+Revert to the original text: `ds{ds}`
 
 **Hello world!**
 
@@ -2435,6 +2433,12 @@ hello this is <testing>
 
 `s/https:\/\/www.\(.*\)\.com.*/\1` In URLs that match this pattern replace with the value in between www. and .com.
 
+## Git
+
+If the project is tracked in git use the following to restore the file from the git repository:
+
+`:!git checkout -- %` then press <l> and <enter> to load back from the repo.
+
 ## TODO
 
 Find out how to install colourschemes in vim (using the colo[rscheme] setting.
@@ -2459,3 +2463,5 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
 
 * `vim --clean` Does it open a standard vim without customisation and plugins?
+
+
