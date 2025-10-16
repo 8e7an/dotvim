@@ -1,9 +1,9 @@
 "
 " go.vim
 "
-"
 
-" syntax on
+" Syntax highlighting on
+syntax on
 
 " Tabstop length (override default of 2).
 set tabstop=4

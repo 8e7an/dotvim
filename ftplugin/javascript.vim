@@ -1,11 +1,12 @@
 "
-" javascript.vim
+" javascript.vim 
 "
+" For JavaScript and TypeScript files.
 "
 
-" syntax on
+" Turn syntax highlighting on.
+syntax on
 
-" Tabstop length (override default of 2).
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -14,15 +15,27 @@ set shiftwidth=2
 set expandtab
 
 " Code folding
-set foldmethod=indent
+set foldmethod=syntax
 " Depth of default folding
-set foldlevel=3
+set foldlevel=4
 "
 " Code (JavaScript etc.) add comment (starting //) to the current line
 nnoremap <buffer> <localleader>j I//<esc>
 " Code (Javascript etc.) remove comment (starting //) from the current line
-nnoremap <buffer> <localleader>k :.s/\v^(\s*)(\/\/+)/\1/<cr>
-" Insert function template
-nnoremap <buffer> <localleader>fun ifunction () {<cr><cr>}<esc>ki<tab>
+" Function template
+nnoremap <buffer> <localleader>fun ifunction () {<cr><tab><cr>}<esc>2k_f(i
+" If Template
+nnoremap <buffer> <localleader>if iif () {<cr><tab><cr>}<esc>2k_f(a
 " For loop template
-nnoremap <buffer> <localleader>loop ifor (let i=0; i<10; i++) {<cr><cr>}<esc>ki<tab>
+nnoremap <buffer> <localleader>loop ifor (let i=0; i<10; i++) {<cr><tab><cr>}<esc>ki
+" While loop template
+nnoremap <buffer> <localleader>while iwhile () {<cr><tab><cr>}<esc>2k_f(a
+" Do while loop template
+nnoremap <buffer> <localleader>do ido {<cr><tab><cr>} while ()<esc>i
+
+" set formatoptions in .vimrc is (seemingly) being overriden by a plugin
+" so the following autocmd takes out the (r and o flags) again for the
+" JavaScript (and TypeScript) file type:
+"autocmd BufEnter,BufReadPre,InsertLeave * setlocal formatoptions=cql
+autocmd BufEnter,BufReadPre,InsertLeave * setlocal formatoptions-=r
+autocmd BufEnter,BufReadPre,InsertLeave * setlocal formatoptions-=o

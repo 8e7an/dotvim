@@ -36,9 +36,13 @@ Leader commands `(,+cmd)` set in the **.vimrc** file. Here displayed in **bold**
 
 ## Customising Vim
 
-Vi/Vim can be customised in the ~/.vimrc file.
+Vi/Vim can be customised in the **~/.vimrc** file.
 
 To put comments in this file start the line with single double-quotes (").
+
+Open vim from the command line without (**.vimrc**) customisations:
+
+`vim --clean`
 
 Here colours can be set for modes. eg.:
 
@@ -2016,9 +2020,9 @@ Note that for the following the second key can have ctrl held down too:
 
 `<ctrl-w>v` View buffer in a vertical split.
 
-`<ctrl-w>w` - switch between windows.
+`<ctrl-w>w` Switch between windows.
 
-`<ctrl-w>q` - Close buffer/window or close Vim.
+`<ctrl-w>q` Close buffer/window or close Vim.
 
 `<ctrl-w>w` Cycle split focus.
 
@@ -2217,6 +2221,27 @@ Eg. from the current line to the end of the file apply the macro q:
 
 `VG:norm @q`
 
+## Sessions
+
+Vim's session management allows you to save the entire state of your editing
+environment, including open buffers, window layouts, and other settings.
+
+### Save a session
+
+`:mksession {filename.vim}` Saves the current session to a Vim script file. If
+{filename.vim} is omitted, it defaults to **Session.vim**. This file contains
+commands to recreate your session.
+
+`:mksession! {filename.vim} Overwrites an existing session file.
+
+### To restore a session:
+
+`vim -S {filename.vim}`: Opens Vim and sources the specified session file,
+restoring your previous state. Eg. `vim -S Session.vim`
+
+`:source {filename.vim}` If you are already in Vim, you can source the session
+file to restore the session. Eg. `:source Session.vim`
+
 ## Other
 
 Set background colour indicator to 80th column
@@ -2231,7 +2256,8 @@ Open the .vimrc in a vertical split:
 
 ## Vim File Templates
 
-Called ‘skeleton files’ in Vim, it provides a way to template files using Vim’s event scripting. See more at:
+Called ‘skeleton files’ in Vim, it provides a way to template files using Vim’s
+event scripting. See more at:
 
 [Vim File Templates - VimTricks](https://vimtricks.com/p/vim-file-templates/)
 
@@ -2250,6 +2276,28 @@ Copied from the vim-surround README:
 **surround.vim**
 
 Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+
+Add double-quotes `"..."` tags around the text hello: `ysiw"`
+
+**"Hello" world!**
+
+The same but with single-quotes `'...'`: `ysiw"`
+
+**'Hello' world!**
+
+Other examples:
+
+`ysiw(` Surround word with ( ... ) 
+
+`ysiw)` Surround word with (...)
+
+`ysiw{` Surround word with { ... } 
+
+`ysiw}` Surround word with {...}
+
+Add `<em>...</em>` tags around the text hello: `ysiw<em>`
+
+**<em>Hello</em> world!**
 
 It's easiest to explain with examples. Press `cs"'` inside
 
@@ -2271,11 +2319,11 @@ To remove the delimiters entirely, press `ds"`.
 
 **Hello world!**
 
-Now with the cursor on `"Hello"`, press `ysiw]` (`iw` is a text object).
+Now with the cursor on `"Hello"`, press `ysiw]`.
 
-**[Hello] world!**
+**[Hello] ( world )!**
 
-Let's make that braces and add some space `(use` `}` instead of `{` for no space): `cs]{`
+Let's make that braces and add some space with `{`, or use `}` (for no space): `cs]{` / `cs]}`
 
 **{ Hello } world!**
 
@@ -2283,15 +2331,11 @@ Now wrap the entire line in parentheses with yssb or yss).
 
 **({ Hello } world!)**
 
-Revert to the original text: `ds{ds}`
+Revert to the original text: `ds{ds)` (delete the surrounding { } then delete the surrounding ( ):
 
 **Hello world!**
 
-Emphasize hello: `ysiw<em>`
-
-**<em>Hello</em> world!**
-
-Finally, let's try out visual mode. Press a capital V (for line wise visual mode) followed by S<p class="important">.
+Surround the whole line with visual mode; press a V (for line wise visual mode) followed by S<p class="important">:
 
 **
 <p class="important">
@@ -2334,10 +2378,6 @@ multiple files to run `:diffthis` on the first 4 files.
 ### CSS Color
 
 *Something to look into if I style in Vim and want to see the colours there.*
-
-### How to Write a Vim Plugin
-
---TODO--
 
 ## Variables
 
@@ -2462,6 +2502,9 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
 
-* `vim --clean` Does it open a standard vim without customisation and plugins?
+
+
+### How to Write a Vim Plugin
+
 
 

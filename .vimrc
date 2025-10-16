@@ -33,7 +33,7 @@
 " Installed plugins include:
 "   - Surround - https://github.com/tpope/vim-surround
 "   - Repeat - https://github.com/tpope/vim-repeat
-"	- Ctrl P - Full Path Fuzzy Finder - https://github.com/kien/ctrlp.vim
+"   - Ctrl P - Full Path Fuzzy Finder - https://github.com/kien/ctrlp.vim
 
 " Filetype plugin customisations located at ~.vim/ftplugin/{filetype}.vim files
 " More at: https://vimtricks.com/p/per-file-type-configs/
@@ -61,6 +61,11 @@ set mouse=a
 " Use new regular expression engine; more at:
 " https://jameschambers.co.uk/vim-typescript-slow
 set re=0
+
+" Prevent auto-commenting on new lines (r flag for <enter> when in insert mode
+" and o flag for o/O command in normal mode)
+set formatoptions-=r
+set formatoptions-=o
 
 " [is] Searching though a buffer incrementally highlight matching characters
 " as you type.
@@ -109,6 +114,10 @@ set tabstop=2
 " operations, like inserting a <Tab> or using <BS>.
 set softtabstop=2
 
+" shiftwidth determines the size of an indentation level." It specifies the
+" number of spaces to use for each step " of indentation when commands like >>
+" (indent line), << (unindent line), and automatic indentation features (like
+" cindent or autoindent) are used.
 set shiftwidth=2
 
 " (sr) Set indent (>< commands) to multiples of shiftwidth.
@@ -317,38 +326,28 @@ augroup END
 augroup filetype_python
 	autocmd!
 	" These settings in addition to ftplugin/python.vim
-	" Local leader (\) for various file types (javascript and python)
-	" Commented-out here as handled in respective (if there) file type *.vim
-	" config files.
-	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-	"autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
-	"autocmd FileType python :iabbrev <buffer> iff if:<left>
+	"
 augroup END
 
 augroup filetype_js
 	autocmd!
 	" These settings in addition to ftplugin/javascript.vim
-	" Local leader (\) for various file types (javascript and python)
-	" Commented-out here as handled in respective (if there) file type *.vim
-	" config files.
-	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+	"
 augroup END
 
 augroup typescript_js
 	autocmd!
+	" Treat TypeScript files as JavaScript files 
+	autocmd BufNewFile,BufRead *.ts set ft=javascript
 	" These settings in addition to ftplugin/typescript.vim
-  autocmd BufRead,BufNewFile *.ts setfiletype typescript
-	" Local leader (\) for various file types (javascript and python)
-	" Commented-out here as handled in respective (if there) file type *.vim
-	" config files.
-	"autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-	"autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+  "autocmd BufRead,BufNewFile *.ts setfiletype typescript
+	"
 augroup END
 
 augroup filetype_html
 	autocmd!
 	" These settings in addition to ftplugin/html.vim
+	"
 	" Auto indent HTML files on read (into the buffer) and write (from the buffer).
 	autocmd BufWritePre,BufRead *.html :normal gg=G
 augroup END
@@ -356,17 +355,7 @@ augroup END
 augroup filetype_markdown
 	autocmd!
 	" These settings in addition to ftplugin/markdown.vim
-	"Operator-Pending mappings for Markdown files
-	" 'in heading' of the previously found heading
-	"autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
-	" 'around heading' of the previously found heading
-	"autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
-	" 'in sub-heading' of the previously found sub-heading
-	"autocmd FileType markdown onoremap is :<c-u>execute "normal! ?^\\-\\-\\+$\r:nohlsearch\rkvg_"<cr>
-	" 'around sub-heading' of previously found sub-heading
-	"autocmd FileType markdown onoremap as :<c-u>execute "normal! ?^\\-\\-\\+$\r:nohlsearch\rg_vk0"<cr>
-	" 'in next eamil address' (it's a rough regex for email but should work ok)
-	"autocmd FileType markdown onoremap in@ :<c-u>execute "normal! /\[0-9a-zA-Z_\\.\\-\]@\[0-9a-zA-Z\\.\]\r:nohlsearch\rviW"<cr>
+	"
 augroup END
 
 " COMMANDS ---------------------------------------------------------------------------------
@@ -529,11 +518,23 @@ nnoremap <leader>f <c-w>l
 " New horizontal split for the current buffer:
 nnoremap <leader>Sh :sp<cr>
 " New vertical split for the current buffer:
-nnoremap <leader>Sv :vs<cr>
+nnoremap <leader>Sv :vs<cr>>
+" Save the session (to the default Session.vim file):
+nnoremap <leader>Ss :mksession!<cr>:echo "Session saved to Session.vim"<cr>
+" Restore the session (from the default Session.vim file):
+nnoremap <leader>Sr :source Session.vim<cr>:echo "Session restored from Session.vim"<cr>
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
 " Reposition vertical split to horizontal split:
 nnoremap <leader>tk <c-w>t<c-w>K
+" Decrease split width by 15:
+nnoremap <leader>< 15<c-w><:echo "Decrease split width by 15"<cr>
+" Increase split width by 15:
+nnoremap <leader>> 15<c-w>>:echo "Increase split width by 15"<cr>
+" Decrease split height by 12:
+nnoremap <leader>9 10<c-w>-:echo "Decrease split height by 12"<cr>
+" Increase split height by 12:
+nnoremap <leader>0 10<c-w>+:echo "Increase split height by 12"<cr>
 " Decrease split width by 1. {number}<leader>' to decrease by {number}:
 "nnoremap <leader>, <c-w><
 " Increase split height by 1. {number}<leader>' to increase by {number}:
@@ -548,16 +549,19 @@ nnoremap <leader>n :tabp<cr>:echo "Focus previous tab"<cr>
 nnoremap <leader>m :tabn<cr>:echo "Focus next tab"<cr>
 " Open a new tab set:
 nnoremap <leader>N :tabnew<cr>:echo "New tab"<cr>
-" Leader 9 to move current line up one:
-"nnoremap <leader>9 ddkP
-" Add a blank line ({number}<leader>o to add {number} of blank lines):
+" Inset blank line ({number}<leader>i for {number} of lines) - good for moving
+" text after the cursor down one line:
+nnoremap <silent> <leader>i i<cr><esc>
+" Add blank line ({number}<leader>o to add {number} of blank lines):
 nnoremap <silent> <leader>o o<esc>
 " Write changes:
-nnoremap <leader>w :w<cr>:echo "Written file"<cr>
-" Quit (no save):
+nnoremap <leader>w :w<cr>:echo "Write changes to file."<cr>
+" Write changes to all:
+nnoremap <leader>W :wa<cr>:echo "Write changes to all files."<cr>
+" Quit (no save) - unsaved files warning issued on buffer closed:
 nnoremap <silent> <leader>q :q<cr>
-" Quit and discard any changes:
-nnoremap <silent> <leader>Q :q!<cr>
+" Quit and discard any changes (for all files) - the nuclear option:
+nnoremap <silent> <leader>Q :qa!<cr>
 " Copy line to the system clipboard:
 "nnoremap <silent> <leader>l :.y+<cr>
 nnoremap \ :.y+<cr>:echo "Line copied to clipboard"<cr>
@@ -568,7 +572,7 @@ nnoremap <leader>e :%y+<cr>
 " Toggle fold:
 nnoremap <leader>z za
 " Write and quite file:
-nnoremap <leader>x :x<cr>
+nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"
 " Toggle hidden characters:
 nnoremap <silent> <leader>h :set list!<cr>
 " Toggle text wrapping:
@@ -577,8 +581,10 @@ nnoremap <silent> <leader>r :set wrap!<cr>
 nnoremap <silent> <leader>p diw"0P
 " Toggle spelling:
 nnoremap <leader>Sp :set spell!<cr>
-" Output the date - day month year:
-nnoremap <leader>Sd :.!date<cr>4wD<esc>
+" Output the date - day month year (note the escaping of % with \ - otherwise
+" it outputs the file path):
+nnoremap <leader>Sd :.!date '+\%d \%B \%Y'<cr>
+"nnoremap <leader>Sd :.!date<cr>4wD<esc>
 " Leader [ to change to previous buffer (last cycling around):
 nnoremap <leader>[ :bp<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
@@ -595,7 +601,7 @@ nnoremap <leader>V :source $MYVIMRC<cr>
 " Open NetRW in a left-sided split:
 nnoremap <leader>E :Lex<cr>
 " Tidy the indentation the whole document:
-nnoremap <leader>= gg=G
+nnoremap <leader>= gg=Gg;
 " Create new tab:
 nnoremap <leader>St :tabe<cr>
 " Take the URL under the cursor and convert it to a Markdown link with the:
