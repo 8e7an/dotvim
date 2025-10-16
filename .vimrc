@@ -572,7 +572,7 @@ nnoremap <leader>e :%y+<cr>
 " Toggle fold:
 nnoremap <leader>z za
 " Write and quite file:
-nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"
+nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"<cr>
 " Toggle hidden characters:
 nnoremap <silent> <leader>h :set list!<cr>
 " Toggle text wrapping:
