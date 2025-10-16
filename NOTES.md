@@ -1,5 +1,7 @@
 # Vim Notes
 
+This document contains my notes and various bits-and-pieces about Vim.
+
 ![Vim icon](./vim-icon.png?raw=true "A Little Vim Icon")
 
 Following commands for when in command **ex** mode:
@@ -2503,8 +2505,10 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
 
 
-
 ### How to Write a Vim Plugin
 
+I have startd on this with the learn Vim The Hard Way website.
+
+This can be seen in the **./pack/learnvimthehardway** folder.
 
 
