@@ -1878,7 +1878,8 @@ More on split windows in Vim:
 `:edit` / `:e` {filepath} Open a file (to the buffer) to edit. Do not include
 the {filepath} and this will give info about the file opened.
 
-`:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back to its saved state.
+`:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back
+to its saved state.
 
 `:read` / `:r` `{file path}` Read in a copy of the specified file `{file path}`
 into the buffer and past to the cursor location, effectively writing that
@@ -1888,11 +1889,14 @@ relative (to the current file) paths.
 `:0read` / `:0r` `{file path}` Read in a copy of the specified file `{file path}`
 into the top of the buffer writing the contents there.
 
-`:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read in the current directory listing or :r!date to read in the current date and time).
+`:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read
+in the current directory listing or :r!date to read in the current date and
+time).
 
 Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
-`:find {filepath}` Find the `{filepath}` from the current directory. Use Tab key to auto-complete matches.
+`:find {filepath}` Find the `{filepath}` from the current directory. Use Tab
+key to auto-complete matches.
 
 ### Buffers
 
@@ -1931,7 +1935,8 @@ Re-enter last expression register result (what is in "= unnamed register):
 
 #### Search Register
 
-When running a search with `:%s/` etc. `<ctrl-r>/` will bring in the search term used in the `"/` search register.
+When running a search with `:%s/` etc. `<ctrl-r>/` will bring in the search
+term used in the `"/` search register.
 
 ### Buffers
 
@@ -1967,7 +1972,9 @@ Eg. to make a global change across all buffers (Update saves each buffer file af
 
 `:bufdo %s/pancake/waffle/g | update`
 
-In command : mode <ctrl-d>will provide contextual suggestions for the command. For instance, the following will list the buffers (the space here is important otherwise the suggestions will be commands that start with b):
+In command : mode <ctrl-d>will provide contextual suggestions for the command.
+For instance, the following will list the buffers (the space here is important
+otherwise the suggestions will be commands that start with b):
 
 `:b<ctrl-d>`
 
@@ -2084,11 +2091,13 @@ Output local buffer hello:
 
 `:echo b:hello`
 
-When you see a variable that starts with a character and a colon it's describing a scoped variable.
+When you see a variable that starts with a character and a colon it's
+describing a scoped variable.
 
 ## Tabs
 
-`:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tabset with the optional `{buffsr}` `{filename}`.
+`:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tabset
+with the optional `{buffsr}` `{filename}`.
 
 `:tabclose` Close the tabset.
 
