@@ -6,15 +6,21 @@ This document contains my notes and various bits-and-pieces about Vim.
 
 Following commands for when in command **ex** mode:
 
-When in view **vi** mode the Escape key goes to **ex** mode. Various commands including `i`, `a`, `o`, `O` will automatically go to **vi** (insert) mode after the command is executed.
+When in view **vi** mode the Escape key goes to **ex** mode. Various commands
+including `i`, `a`, `o`, `O` will automatically go to **vi** (insert) mode
+after the command is executed.
 
 `ctrl` means to hold down the Control key in combination with pressing the following key.
 
-`^` + means, in **ex** mode, to hold down alt/option and press the following character (eg. `^+g` means hold down alt/option and press `g`).
+`^` + means, in **ex** mode, to hold down alt/option and press the following
+character (eg. `^+g` means hold down alt/option and press `g`).
 
-You can traverse back though he history of your `:,` `/` and `?` commands by typing `:,` `/` or `?` and pressing the up and down cursor keys. / and `?` share the same history.
+You can traverse back though he history of your `:,` `/` and `?` commands by
+typing `:,` `/` or `?` and pressing the up and down cursor keys. / and `?`
+share the same history.
 
-In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent) will move the cursor up and down lines.
+In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent)
+will move the cursor up and down lines.
 
 ## Useful Links
 
@@ -68,14 +74,14 @@ Or:
 
 `:source ~/.vimrc`
 
-`:file` / `:f` Information about the file (including full file name, line cursor is at how far down the document as a %).
-
+`:file` / `:f` Information about the file (including full file name, line
+cursor is at how far down the document as a %).
 
 Information about the vim setting for the file based on its type:
 
 `:filetype`
 
-> “This line will automatically reload you .vimrc whenever you update it.”
+“The following will automatically reload your .vimrc whenever you update it.”:
 
 `autocmd! bufwritepost .vimrc source %`
 
@@ -96,11 +102,11 @@ Make it so the follow actions:
 So `dp` will `di(` Delete text inside brackets ().
 
 Other examples of mappings for effecting next/last content in brackets () and braces:
+
 `onoremap in( :<c-u>normal! f(vi(<cr>`
 `onoremap il( :<c-u>normal! F(vi(<cr>`
 `onoremap an( :<c-u>normal! f(va(<cr>`
 `onoremap al( :<c-u>normal! F(va(<cr>`
-
 `onoremap in{ :<c-u>normal! f{vi{<cr>`
 `onoremap il{ :<c-u>normal! F{vi{<cr>`
 `onoremap an{ :<c-u>normal! f{va{<cr>`
@@ -228,7 +234,8 @@ Find out the file type of the open file:
 
 ### Smartcase
 
-Make it so searches are 'smartcase'. This will automatically switch to a case-sensitive search if you use any capital letters:
+Make it so searches are 'smartcase'. This will automatically switch to a
+case-sensitive search if you use any capital letters:
 
 `:set smartcase`
 `:map!` Show all mapping
@@ -1347,9 +1354,14 @@ Find the next instance of the text (pattern) (cases sensitive unless configured 
 
 `&` Repeat last substitution on current line.
 
-Use a `\c` to do a case-insensitive search or \C a case sensitive search (default) (eg. /search\c or /\csearch will search for 'search', 'Search', 'SEARCH' or 'searcH'; /\CSearch will only search for 'Search'). 
+Use a `\c` to do a case-insensitive search or \C a case sensitive search
+(default) (eg. /search\c or /\csearch will search for 'search', 'Search',
+'SEARCH' or 'searcH'; /\CSearch will only search for 'Search'). Eg.:
 
-Find and replace on the current line  (. is not required to indicate the current line but is here to demonstrate its use):
+`/\CTODO` Will find the occurrences that only match TODO (not todo, Todo ToDo etc.)
+
+Find and replace on the current line (. is not required to indicate the
+current line but is here to demonstrate its use):
 
 `:s/{pattern}/{replace}/{flags}`
 
