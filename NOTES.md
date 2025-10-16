@@ -574,14 +574,12 @@ Move with the cursor keys or:
 
 `gv` Reselect previous visual selection.
 
-`gf` Open file path under cursor into a new buffer. Relative but if full path
-will follow that absolute path.
+`gf` Open the file path under cursor into a new buffer. Relative but if full path will follow that absolute path.
 
 `g_` Move the cursor to the last non-blank character in the line.
 
-`gx` Open file/url under cursor - urls should open in the browser but, due to a
-bug in Vim 8.2 (which I have) it attempts to download the HTML as a file
-instead (which is not what I want.
+`gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 
+(which I have) it attempts to download the HTML as a file instead (which is not what I want.
 
 `g;` Go to the last place of modification.
 
@@ -633,8 +631,8 @@ instead (which is not what I want.
 
 `g<Home/End>` and `g<Up/Down>` do same thing as `g0/$` and `gk/j`
 
-If trying to stay more in insert mode, there's a way to manually create and
-undo point (while still in insert mode): `<ctrl-g>u`.
+If trying to stay more in insert mode, there's a way to manually create and undo point 
+(while still in insert mode): `<ctrl-g>u`.
 
 `:g/{term}` List the lines where the `{term}` is found. Can also use:
 
@@ -1880,8 +1878,7 @@ More on split windows in Vim:
 `:edit` / `:e` {filepath} Open a file (to the buffer) to edit. Do not include
 the {filepath} and this will give info about the file opened.
 
-`:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back
-to its saved state.
+`:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back to its saved state.
 
 `:read` / `:r` `{file path}` Read in a copy of the specified file `{file path}`
 into the buffer and past to the cursor location, effectively writing that
@@ -1891,14 +1888,11 @@ relative (to the current file) paths.
 `:0read` / `:0r` `{file path}` Read in a copy of the specified file `{file path}`
 into the top of the buffer writing the contents there.
 
-`:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read
-in the current directory listing or :r!date to read in the current date and
-time).
+`:r!{command}` Read in the results of the Terminal command (eg. :r!ls to read in the current directory listing or :r!date to read in the current date and time).
 
 Eg. `r!curl {url}` will read in the HTML from the `{url}`
 
-`:find {filepath}` Find the `{filepath}` from the current directory. Use Tab
-key to auto-complete matches.
+`:find {filepath}` Find the `{filepath}` from the current directory. Use Tab key to auto-complete matches.
 
 ### Buffers
 
