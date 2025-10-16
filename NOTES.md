@@ -2401,6 +2401,58 @@ End the input string with a colon `:` followed by a command to execute it on
 the opening file(s): Use :25 to jump to line 25. Use `:diffthis` when opening
 multiple files to run `:diffthis` on the first 4 files.
 
+### Vim Signature
+
+[Vim Signature](https://github.com/kshenoy/vim-signature)
+
+Vim-signature is a plugin to place, toggle and display marks.
+
+Apart from the default mark behavior in Vim, you can also:
+
+* Navigate forward/backward by position/alphabetical order
+* Displaying multiple marks (upto 2, limited by the signs feature)
+* Placing custom signs !@#$%^&*() as visual markerslug-in to
+
+Mappings include:
+
+`mx`           Toggle mark 'x' and display it in the leftmost column
+`dmx`          Remove mark 'x' where x is a-zA-Z
+
+`m,`           Place the next available mark
+`m.`           If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+`m-`           Delete all marks from the current line
+`m<Space>`     Delete all marks from the current buffer
+`` ]` ``       Jump to next mark
+`` [` ``       Jump to prev mark
+`]'`           Jump to start of next line containing a mark
+`['`           Jump to start of prev line containing a mark
+``]`           Jump by alphabetical order to next mark
+``[`           Jump by alphabetical order to prev mark
+`']`           Jump by alphabetical order to start of next line having a mark
+`'[`           Jump by alphabetical order to start of prev line having a mark
+`m/`           Open location list and display marks from current buffer
+
+`m[0-9]`       Toggle the corresponding marker `!@#$%^&*()`
+`m<S-[0-9]>`   Remove all markers of the same type
+`]-`           Jump to next line having a marker of the same type
+`[-`           Jump to prev line having a marker of the same type
+`]=`           Jump to next line having a marker of any type
+`[=`           Jump to prev line having a marker of any type
+`m?`           Open location list and display markers from current buffer
+`m<BS>`        Remove all markers
+
+This will allow the use of default behavior of m to set marks and, if the line
+already contains the mark, it'll be unset. The default behavior of ]', [',`` ` ``
+and [`` ` `` is supported and enhanced by wrapping around when beginning or end of
+file is reached.
+
+The command :SignatureToggle can be used to show/hide the signs. Note that this
+does not delete any of the marks but only hides them. This is a buffer-specific
+command.
+
+If for some reason, the marks and their sign displays go out of sync, use
+:SignatureRefresh to refresh them.
+
 ### CSS Color
 
 *Something to look into if I style in Vim and want to see the colours there.*
