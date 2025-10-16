@@ -2361,12 +2361,14 @@ Revert to the original text: `ds{ds)` (delete the surrounding { } then delete th
 
 **Hello world!**
 
-Surround the whole line with visual mode; press a V (for line wise visual mode) followed by S<p class="important">:
+Surround the whole line with visual mode; press a V (for line wise visual mode) followed by S`<p class="important">`:
 
 **
+```
 <p class="important">
   <em>Hello</em> world!
 </p>
+```
 **
 
 * [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
@@ -2378,23 +2380,39 @@ Surround the whole line with visual mode; press a V (for line wise visual mode) 
 [CTRL P](https://github.com/ctrlpvim/ctrlp.vim)
 
 Basic Usage
+
 Run `:ctrl P` or `:ctrl P [starting-directory]` to invoke **ctrlP** in find file mode.
+
 Run `:ctrl P Buffer` or `:ctrlPMRU ` to invoke **ctrl P** in find buffer or find **MRU** file mode.
+
 Run `:ctrl P Mixed` to search in Files, Buffers and **MRU** files at the same time.
+
 Check `:help ctrl p-commands` and `:help ctrlp-extensions` for other commands.
 
+
 Once **ctrlP** is open:
+
 Press `<F5>` to purge the cache for the current directory to get new files,
 remove deleted files and apply new ignore options.
+
 Press `<c-f>` and `<c-b>` to cycle between modes.
+
 Press `<c-d>` to switch to filename only search instead of full path.
+
 Press `<c-r>` to switch to regexp mode.
+
 Use `<c-j>`, `<c-k>` or the arrow keys to navigate the result list.
+
 Use `<c-t>` or `<c-v>`, `<c-x>` to open the selected entry in a new tab or in a new split.
+
 Use `<c-n>`, `<c-p>` to select the next/previous string in the prompt's history.
+
 Use `<c-y>` to create a new file and its parent directories.
+
 Use `<c-z>` to mark/unmark multiple files and `<c-o>` to open them.
+
 Run `:help ctrlp-mappings` or submit `?` in **ctrlP** for more mapping help.
+
 
 Submit two or more dots `..` to go up the directory tree by one or multiple levels.
 End the input string with a colon `:` followed by a command to execute it on
@@ -2411,34 +2429,54 @@ Apart from the default mark behavior in Vim, you can also:
 
 * Navigate forward/backward by position/alphabetical order
 * Displaying multiple marks (upto 2, limited by the signs feature)
-* Placing custom signs !@#$%^&*() as visual markerslug-in to
+* Placing custom signs `!@#$%^&*()` as visual markerslug-in to
 
 Mappings include:
 
 `mx`           Toggle mark 'x' and display it in the leftmost column
+
 `dmx`          Remove mark 'x' where x is a-zA-Z
 
 `m,`           Place the next available mark
+
 `m.`           If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+
 `m-`           Delete all marks from the current line
+
 `m<Space>`     Delete all marks from the current buffer
+
 `` ]` ``       Jump to next mark
+
 `` [` ``       Jump to prev mark
+
 `]'`           Jump to start of next line containing a mark
+
 `['`           Jump to start of prev line containing a mark
+
 ``]`           Jump by alphabetical order to next mark
+
 ``[`           Jump by alphabetical order to prev mark
+
 `']`           Jump by alphabetical order to start of next line having a mark
+
 `'[`           Jump by alphabetical order to start of prev line having a mark
+
 `m/`           Open location list and display marks from current buffer
 
 `m[0-9]`       Toggle the corresponding marker `!@#$%^&*()`
+
 `m<S-[0-9]>`   Remove all markers of the same type
+
 `]-`           Jump to next line having a marker of the same type
+
 `[-`           Jump to prev line having a marker of the same type
+
 `]=`           Jump to next line having a marker of any type
+
 `[=`           Jump to prev line having a marker of any type
+
 `m?`           Open location list and display markers from current buffer
+
 `m<BS>`        Remove all markers
 
 This will allow the use of default behavior of m to set marks and, if the line
