@@ -2453,17 +2453,17 @@ Mappings include:
 
 `m<space>`     Delete all marks from the current buffer
 
-`` ]\` ``       Jump to next mark
+`]\``        Jump to next mark
 
-`` [\` ``       Jump to prev mark
+`[\``        Jump to prev mark
 
 `]'`           Jump to start of next line containing a mark
 
 `['`           Jump to start of prev line containing a mark
 
-``]`           Jump by alphabetical order to next mark
+`\`]`        Jump by alphabetical order to next mark
 
-``[`           Jump by alphabetical order to prev mark
+`\`[`           Jump by alphabetical order to prev mark
 
 `']`           Jump by alphabetical order to start of next line having a mark
 
@@ -2488,8 +2488,8 @@ Mappings include:
 `m<bs>`        Remove all markers
 
 This will allow the use of default behavior of m to set marks and, if the line
-already contains the mark, it'll be unset. The default behavior of `]'`, `['`, `` \` ``
-and [`` \` `` is supported and enhanced by wrapping around when beginning or end of
+already contains the mark, it'll be unset. The default behavior of `]'`, `['`, `\``
+and `[\`` is supported and enhanced by wrapping around when beginning or end of
 file is reached.
 
 The command `:SignatureToggle` can be used to show/hide the signs. Note that this
