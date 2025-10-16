@@ -58,11 +58,13 @@ Here colours can be set for modes. eg.:
 
 `autocmd InsertLeave * highlight Normal ctermfg=green`
 
-And keyboard mapping overriding the default. eg. to set jj to fire the escape key in input mode:
+And keyboard mapping overriding the default. eg. to set jj to fire the escape
+key in input mode:
 
 `inoremap jj<esc>`
 
-Or ; to replace the $ for moving the cursor to the end of the line in command mode:
+Or ; to replace the $ for moving the cursor to the end of the line in command
+mode:
 
 `inoremap ; $`
 
@@ -128,15 +130,19 @@ password.
 
 `<ctrl-c>` Clear text.
 
-`<ctrl-r>{register}` Paste from register to the command input. Eg. `<ctrl-r>0` for last yanked item.
+`<ctrl-r>{register}` Paste from register to the command input. Eg. `<ctrl-r>0`
+for last yanked item.
 
 `let @a="hello!"` Assign the `a` register to **"hello!"**.
 
 `:echo @a` Echo out the register `a`.
 
-`:echo @"` Echo the word just yanked. The `"` register is the "unnamed" register, which is where text you yank without specifying a destination will go.
+`:echo @"` Echo the word just yanked. The `"` register is the "unnamed"
+register, which is where text you yank without specifying a destination will
+go.
 
-`:echo @/` Echo the search pattern just used. This lets you programmatically read and modify the current search pattern.
+`:echo @/` Echo the search pattern just used. This lets you programmatically
+read and modify the current search pattern.
 
 `:let @/ = "{string}"` Write to the search register (`/`) with a `:let`.
 
@@ -144,9 +150,11 @@ password.
 
 `:execute "write"` Execute the write just as if you had typed `:write<cr>`.
 
-`:execute "normal! gg" Execute the normal command to move the cursor to the top of the document.
+`:execute "normal! gg" Execute the normal command to move the cursor to the top
+of the document.
 
-`normal!` doesn't recognise "special characters" like `<cr>`. There are ways around this but it is best to use `execute` with `normal!`.
+`normal!` doesn't recognise "special characters" like `<cr>`. There are ways
+around this but it is best to use `execute` with `normal!`.
 
 More on `:execute` at: [More Operator-Pending Mappings / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/16.html)
 
@@ -2179,7 +2187,7 @@ More info about tabs in Vim:
 
 `{bookmark letter}` Jump to the specific column on the specific line bookmarked
 
-`` `` `` Move the previous mark [jump back (to position in current buffer where jumped from)]
+`` \`\` `` Move the previous mark [jump back (to position in current buffer where jumped from)]
 
 `d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the
 marked position {bookmark letter} to the cursor position
@@ -2443,11 +2451,11 @@ Mappings include:
 
 `m-`           Delete all marks from the current line
 
-`m<Space>`     Delete all marks from the current buffer
+`m<space>`     Delete all marks from the current buffer
 
-`` ]` ``       Jump to next mark
+`` ]\` ``       Jump to next mark
 
-`` [` ``       Jump to prev mark
+`` [\` ``       Jump to prev mark
 
 `]'`           Jump to start of next line containing a mark
 
@@ -2477,19 +2485,19 @@ Mappings include:
 
 `m?`           Open location list and display markers from current buffer
 
-`m<BS>`        Remove all markers
+`m<bs>`        Remove all markers
 
 This will allow the use of default behavior of m to set marks and, if the line
-already contains the mark, it'll be unset. The default behavior of ]', [',`` ` ``
-and [`` ` `` is supported and enhanced by wrapping around when beginning or end of
+already contains the mark, it'll be unset. The default behavior of `]'`, `['`, `` \` ``
+and [`` \` `` is supported and enhanced by wrapping around when beginning or end of
 file is reached.
 
-The command :SignatureToggle can be used to show/hide the signs. Note that this
+The command `:SignatureToggle` can be used to show/hide the signs. Note that this
 does not delete any of the marks but only hides them. This is a buffer-specific
 command.
 
 If for some reason, the marks and their sign displays go out of sync, use
-:SignatureRefresh to refresh them.
+`:SignatureRefresh` to refresh them.
 
 ### CSS Color
 
