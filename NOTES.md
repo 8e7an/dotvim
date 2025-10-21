@@ -551,7 +551,8 @@ Move with the cursor keys or:
 
 `G` / `]]` Move to the bottom of the file.
 
-`<number>G` / `<number>gg` / `:<number>` Move to that line number (or the last line if the number is greater than the number of line in the file).
+`<number>G` / `<number>gg` / `:<number>` Move to that line number (or the last
+line if the number is greater than the number of line in the file).
 
 `ge` Move cursor back to last letter of the previous word.
 
@@ -559,27 +560,32 @@ Move with the cursor keys or:
 
 `gj` Move cursor down line for wrapped text.
 
-`gJ` Join the following line with the current line with no space separation (continuous join).
+`gJ` Join the following line with the current line with no space separation
+(continuous join).
 
 `gk` Down up line (useful for wrapped text).
 
 `gh` Move cursor up line for wrapped text.
 
-`ga` / :as Show details about the character under the cursor - eg. <“> 8220, Hex 201c, Octal 20034
+`ga` / :as Show details about the character under the cursor - eg. <“> 8220,
+Hex 201c, Octal 20034
 
 `gi` Go to last place text was in insert mode.
 
 `gv` Go to last place text was in visual select mode.
 
-`gD` Goto Global Declaration of the variable under the cursor. Like gd but starts at line 1.
+`gD` Goto Global Declaration of the variable under the cursor. Like gd but
+starts at line 1.
 
 `g%` Repeat last substitution, but globally.
 
 `gq` Auto indent line?
 
-`gn` Go to next occurrence of last searched term (buffer /) switching to visual mode.
+`gn` Go to next occurrence of last searched term (buffer /) switching to visual
+mode.
 
-`gN` Go to previous occurrence of last searched term (buffer /) switching to visual mode.
+`gN` Go to previous occurrence of last searched term (buffer /) switching to
+visual mode.
 
 `g0` Go to the start of the (wrapped) line.
 
@@ -589,12 +595,14 @@ Move with the cursor keys or:
 
 `gv` Reselect previous visual selection.
 
-`gf` Open the file path under cursor into a new buffer. Relative but if full path will follow that absolute path.
+`gf` Open the file path under cursor into a new buffer. Relative but if full
+path will follow that absolute path.
 
 `g_` Move the cursor to the last non-blank character in the line.
 
-`gx` Open file/url under cursor - urls should open in the browser but, due to a bug in Vim 8.2 
-(which I have) it attempts to download the HTML as a file instead (which is not what I want.
+`gx` Open file/url under cursor - urls should open in the browser but, due to a
+bug in Vim 8.2 (which I have) it attempts to download the HTML as a file
+instead (which is not what I want.
 
 `g;` Go to the last place of modification.
 
@@ -727,7 +735,7 @@ brackets - ( ), { }, [ ] - on the current line.
 > declaration.  First Vim searches for the start of the current function, just
 > like "[[".  If it is not found the search stops in line 1.  If it is found,
 > Vim goes back until a blank line is found.  From this position Vim searches
-> for the keyword under the cursor, like with "*", but lines that look like a
+> for the keyword under the cursor, like with "\*", but lines that look like a
 > comment are ignored (see 'comments' option).
 
 > Note that this is not guaranteed to work, Vim does not really check the
@@ -1120,7 +1128,7 @@ Copy visual select lines to the system clipboard
 
 V and select lines
 
-:'<,'>y+
+:Mark a word?'<,'>y+
 
 The '<,'> is entered in for you as representative of the visual line select, so
 y, + and enter will copy the selected range into the system clipboard.
@@ -1379,7 +1387,8 @@ Find and replace one instance of text (pattern) in the whole file first instance
 
 `:%s/{pattern}/{replace}/{flags}`
 
-Substitute instances of text {pattern} with {replace} from {linestart} to {linend}:
+Substitute instances of text `{pattern}` with `{replace}` from `{linestart}` to
+`{linend}`:
 
 `:{linestart},{lineend}s/{pattern}/{replace}/{flags}`
 
@@ -1429,6 +1438,16 @@ Current line all instances:
 
 `:s/pattern/replace/g`
 
+Substitute instances of text `{pattern}` with `{replace}` from line marked
+`{startingmark}` to line marked `{endingmark}`:
+
+`:'{startingmark},'{endingmark}s/pattern/replace/flags
+
+Eg. From line marked **a** to line marked **b** replace all occurances of **hello**
+with **goodbye** on each line:
+
+`'a,'bs/hello/goodbye/g`
+
 Whole file all instances:
 
 `:%s/pattern/replace/g`
@@ -1449,8 +1468,10 @@ whole file all instances, confirm change and case insensitive:
 
 `:%s/pattern/replace/gci`
 
-With /c you will go into ‘confirmation mode’. In this mode, you’ll be presented with the following option: replace with 
-UU (y/n/a/q/l/^E/^Y)?
+With /c you will go into ‘confirmation mode’. In this mode, you’ll be presented
+with the following:
+
+`(y/n/a/q/l/^E/^Y)?`
 
 The choices:
 
@@ -1476,14 +1497,15 @@ Search examples
 
 `/^[a-zA-Z]` Matches if the line starts with any letter
 
-`/^[a-z].*` Matches if the first character of the line is a-z and there is at least one more of any character following it
+`/^[a-z].*` Matches if the first character of the line is a-z and there is at
+least one more of any character following it
 
 `/2134$` Matches if line ends with 2134
 
-`/\(21|35\)` Matches is the line contains 21 or 35 -  Note the use of ( ) with the pipe symbol to specify the 'or' condition
+`/\(21|35\)` Matches is the line contains 21 or 35 -  Note the use of ( ) with
+the pipe symbol to specify the 'or' condition
 
 `/[0-9]*` Matches if there are zero or more numbers in the line
-
 `/^[^#]` Matches if the first character is not a # in the line
 
 Special characters to escape
@@ -1518,13 +1540,15 @@ Special characters to escape
 
 ### More Advanced Search Pattern Modifiers
 
-`:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.** and append a **.** to those lines.
+`:%s/- .*\.\@<!$/&.` Find lines starting with **- ** but not ending with **.**
+and append a **.** to those lines.
 
 `\.@<!$` means to not have the line end in **.**.
 
 `&` in the replace part is a back reference to the matched text.
 
-Alternatively use the `g` and `v` commands with the following (`g` global and `v` opposite, or inverse, of global):
+Alternatively use the `g` and `v` commands with the following (`g` global and
+`v` opposite, or inverse, of global):
 
 `g/- /v/\./norm A.`
 
@@ -1694,10 +1718,10 @@ To insert a repeat of characters for a certain amount:
 `<ctrl-v>` Start character visual selection at cursor
 
 When entering an ex command and entering strings in double quotes ("") you can
-enter special characters with a backslash escape `\` (like tab with `\t`). Another
-method is to enter the special character as its key input (ie. tab key) by
-proceeding it with `<ctrl-v>` (so `<ctrl-v>` `<tab>`. Vim will then insert its own special character
-representative of the key entered.
+enter special characters with a backslash escape `\` (like tab with `\t`).
+Another method is to enter the special character as its key input (ie. tab key)
+by proceeding it with `<ctrl-v>` (so `<ctrl-v>` `<tab>`. Vim will then insert
+its own special character representative of the key entered.
 
 In visual block mode move to select from the current cursor point with h, j, k
 and l and use commands like x, c, r (for replace) etc to effect that selection.
@@ -1710,7 +1734,15 @@ From normal mode:
 
 `vaw` Select a word.
 
-`v{number}word` Select {number} of words.
+`{number}v` Select {number} of lines from the cursor down?
+
+`v{number}w` Select {number} of words forwards.
+
+`v{number}W` Select {number} of whole words forwards.
+
+`v{number}b` Select {number} of words backwards.
+
+`v{number}B` Select {number} of whole words backwards.
 
 `vip` Select a paragraph inside.
 
@@ -1736,9 +1768,9 @@ In visual select mode:
 
 `d` Deletes the visually selected text.
 
-`o` Move to other end of marked area.
+`o` Move to other end of the visually selected area.
 
-`O` Move to other side of the line of the marked area.
+`O` Move to other side of the line of the visually selected area.
 
 `w` Select next word.
 
@@ -1764,7 +1796,8 @@ In visual select mode:
 
 `U` Change the selected text to uppercase.
 
-`aw` Mark a word?
+`aw` Advance visual selection a word depending on the location of the cursor
+(at the start `aw` advances back, at the end `aw` advances forward).
 
 `v{selection}{character}y` Yank the selected text into register {character}.
 
@@ -1772,13 +1805,17 @@ In visual select mode:
 
 `:w` {filename} Write the visually selected text to the filename TEST.
 
-`<ctrl-v>` To enter visual select mode, move vertically to select multiple lines and enter either I or A to insert or append (respectively) entered changes over multiple lines when exiting insert mode.
+`<ctrl-v>` To enter visual select mode, move vertically to select multiple
+lines and enter either I or A to insert or append (respectively) entered
+changes over multiple lines when exiting insert mode.
 
 `at` Expand visual selection (of tags) to around parent tags.
 
 `it` Expand visual selection (of tags) to inside parent tags.
 
-There doesn't appear to be a way (an equivalent built-in way) to Contract the visual selection of tags so as to shrink the selection to inside the selected tags.
+There doesn't appear to be a way (an equivalent built-in way) to Contract the
+visual selection of tags so as to shrink the selection to inside the selected
+tags.
 
 Edit multiple contiguous lines
 
@@ -1798,7 +1835,8 @@ Substitution in marked ranges:
 
 `:s'a,'b/before/after/gci`
 
-The above will search from marked range starting point a going to marked point b and confirm global replacement of ‘before’ with ‘after’.
+The above will search from marked range starting point a going to marked point
+b and confirm global replacement of ‘before’ with ‘after’.
 
 ## Folding
 
@@ -1812,9 +1850,12 @@ Vim Folding Commands
 
 The most important Neovim code folding commands:
 
-`za` / ,z Toggles the current fold open or closed – the most useful command to know of all of these.
+`za` / ,z Toggles the current fold open or closed – the most useful command to
+know of all of these.
 
-`zA` Same as za except it toggles all folds beneath as well. Since folds can be nested (such as with indent folding), this will toggle the state of all the folds underneath of it, not just the current fold.
+`zA` Same as za except it toggles all folds beneath as well. Since folds can be
+nested (such as with indent folding), this will toggle the state of all the
+folds underneath of it, not just the current fold.
 
 `zc` Close the current fold under the cursor.
 
@@ -1832,7 +1873,8 @@ The most important Neovim code folding commands:
 
 [Vim Jump List - VimTricks](https://vimtricks.com/p/vim-jump-list/)
 
-When making certain movements, such as jumping to line 42 with 42G, Vim will save it as a “jump” in the jump list. 
+When making certain movements, such as jumping to line 42 with 42G, Vim will
+save it as a “jump” in the jump list. 
 
 `:jumps` You can list jumps
 
@@ -1842,8 +1884,12 @@ To move to a newer jump use `<ctrl-i>`. You can also press <tab>.
 
 `{number}<ctrl-i>` Jump to {number} in control list
 
-Vim will store up to 100 locations in your jump list. If you ever want to clear them all out, run the command `:clearjumps` and your jumplist history will be wiped clean.
-For more info, check out `:help jumplist` in Vim. Also be sure to read about the Vim change list which is similar to but different from the Vim jump list.
+Vim will store up to 100 locations in your jump list. If you ever want to clear
+them all out, run the command `:clearjumps` and your jumplist history will be
+wiped clean.
+
+For more info, check out `:help jumplist` in Vim. Also be sure to read about
+the Vim change list which is similar to but different from the Vim jump list.
 
 `:jumps` / `:jump` / `:ju` See the jump list.
 
@@ -1857,7 +1903,8 @@ For more info, check out `:help jumplist` in Vim. Also be sure to read about the
 
 [Vim Jump to Last Change - VimTricks](https://vimtricks.com/p/vim-jump-to-last-change/)
 
-Vim keeps track of the position of every undo-able change and makes the last 100 available to you when you call :changes.
+Vim keeps track of the position of every undo-able change and makes the last
+100 available to you when you call :changes.
 
 `:changes` – Show position of last 100 changes
 
@@ -2175,7 +2222,9 @@ More info about tabs in Vim:
 
 `:help` marks Help on the Vim marks feature
 
-`:marks` List bookmarks
+`:marks` List marks.
+
+`:marks {markname}` List {markname} only in the marks listing.
 
 `:delmarks` {mark/range} delete the mark or range of bookmarks a-z, A-Z (letters only)
 
@@ -2602,6 +2651,12 @@ hello this is <testing>
 If the project is tracked in git use the following to restore the file from the git repository:
 
 `:!git checkout -- %` then press <l> and <enter> to load back from the repo.
+
+## VimDiff
+
+Use Vim - its VimDiff mode - to resolve git merge conflicts. More at:
+
+https://gist.github.com/karenyyng/f19ff75c60f18b4b8149#concepts-for-resolving-git-conflicts
 
 ## TODO
 

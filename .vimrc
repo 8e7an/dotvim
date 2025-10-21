@@ -429,25 +429,26 @@ nnoremap <c-u> viWU<esc>E
 " Ctrl+l to lowercase the full word in normal mode:
 nnoremap <c-l> viWu<esc>E
 
-" Map page up and page down moves line under cursor up and down.
+" Map leader d and leader f + page up and page down moves line 
+" under cursor up and down.
 " For normal, insert and visual modes.
 " Mappings adapted from:
 " https://www.youtube.com/watch?v=L93-S4qksVA 
-nnoremap <silent> <pageup> :m .-2<cr>
+"  Move the line down one (descend line - increase by 1 line number):
+nnoremap <silent> <leader>d :m .+1<cr>
 nnoremap <silent> <pagedown> :m .+1<cr>
-inoremap <silent> <pageup> <esc>:m .-2<cr>gi
 inoremap <silent> <pagedown> <esc>:m .+1<cr>gi
-vnoremap <silent> <pageup> :m '<-2<cr>gv
+vnoremap <silent> <leader>d :m .+1<cr>gv
 vnoremap <silent> <pagedown> :m '>+1<cr>gv
+"  Move the line up one (further line up - decrease by 1 line number):
+nnoremap <silent> <leader>f :m .-2<cr>
+nnoremap <silent> <pageup> :m .-2<cr>
+inoremap <silent> <pageup> <esc>:m .-2<cr>gi
+vnoremap <silent> <leader>f :m '>-2<cr>gv
+vnoremap <silent> <pageup> :m '<-2<cr>gv
 
-"nnoremap <silent> s <esc>:m .-2<cr>
-"nnoremap <silent> S <esc>:m .+1<cr>
-
-nnoremap <silent> <leader>k <esc>:m .-2<cr>
-nnoremap <silent> <leader>j <esc>:m .+1<cr>
-
-"nnoremap <c-s-k> <esc>:m .-2<cr>
 "nnoremap <c-s-j> <esc>:m .+1<cr>
+"nnoremap <c-s-k> <esc>:m .-2<cr>
 
 " No arrow keys in normal mode - use h, j, k and l:
 "nnoremap <up> <nop>
@@ -501,28 +502,67 @@ nnoremap <leader>B :buffers<cr>
 nnoremap <leader>J :jumps<cr>
 " View the marks:
 nnoremap <leader>M :marks<cr>
-" View the full path of the file/buffer:
-nnoremap <leader>F :echo expand('%:p')<cr>
 " Close the buffer:
 nnoremap <leader>c :close<cr>
 " Unload buffer [N] (default: current buffer) and delete it from the buffer list:
 nnoremap <leader>C :bdelete<cr>
 " Set focus to left split:
-nnoremap <leader>a <c-w>h
+nnoremap <leader>h <c-w>h
 " Set focus to top split:
-nnoremap <leader>s <c-w>k
+nnoremap <leader>k <c-w>k
 " Set focus to bottom split:
-nnoremap <leader>d <c-w>j
+nnoremap <leader>j <c-w>j
 " Set focus to right split:
-nnoremap <leader>f <c-w>l
+nnoremap <leader>l <c-w>l
+
+" 'Special' leader commands. 's' is rather arbitrary for these leader
+" short-cuts commands but it's a handy pneumonic
+"
+" Available leader s commands:
+" nnoremap <leader>sa
+" nnoremap <leader>sb
+" nnoremap <leader>sc
+" nnoremap <leader>se
+" nnoremap <leader>se
+" nnoremap <leader>sf
+" nnoremap <leader>sg
+" nnoremap <leader>sj
+" nnoremap <leader>sk
+" nnoremap <leader>sm
+" nnoremap <leader>sn
+" nnoremap <leader>so
+" nnoremap <leader>sq
+" nnoremap <leader>su
+" nnoremap <leader>sv
+" nnoremap <leader>sx
+" nnoremap <leader>sy
+" nnoremap <leader>sz
+"
+" Replace the current line with the date - day month year (note the escaping
+" of % with \ - otherwise it outputs the file path):
+nnoremap <silent> <leader>sd :.!date '+\%d \%B \%Y'<cr>
+"nnoremap <leader>sd :.!date<cr>4wD<esc>
+" View the full path of the file/buffer:
+nnoremap <leader>sf :echo expand('%:p')<cr>
+" Toggle hidden characters (i for invisible):
+nnoremap <silent> <leader>si :set list!<cr>
 " New horizontal split for the current buffer:
-nnoremap <leader>Sh :sp<cr>
+nnoremap <silent> <leader>sh :sp<cr>
 " New vertical split for the current buffer:
-nnoremap <leader>Sv :vs<cr>>
+nnoremap <silent> <leader>sv :vs<cr>>
 " Save the session (to the default Session.vim file):
-nnoremap <leader>Ss :mksession!<cr>:echo "Session saved to Session.vim"<cr>
+nnoremap <leader>ss :mksession!<cr>:echo "Session saved to Session.vim"<cr>
 " Restore the session (from the default Session.vim file):
-nnoremap <leader>Sr :source Session.vim<cr>:echo "Session restored from Session.vim"<cr>
+nnoremap <leader>sr :source Session.vim<cr>:echo "Session restored from Session.vim"<cr>
+" Toggle text wrapping:
+nnoremap <silent> <leader>sw :set wrap!<cr>
+" Toggle spelling:
+nnoremap <silent> <leader>sp :set spell!<cr>
+" Create new tab:
+nnoremap <silent> <leader>st :tabe<cr>
+" Tidy the indentation the whole document:
+nnoremap <silent> <leader>s= gg=Gg;
+
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
 " Reposition vertical split to horizontal split:
@@ -573,18 +613,8 @@ nnoremap <leader>e :%y+<cr>
 nnoremap <leader>z za
 " Write and quite file:
 nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"<cr>
-" Toggle hidden characters:
-nnoremap <silent> <leader>h :set list!<cr>
-" Toggle text wrapping:
-nnoremap <silent> <leader>r :set wrap!<cr>
 " Replace text under cursor or visually selected text with yanked (register) text:
-nnoremap <silent> <leader>p diw"0P
-" Toggle spelling:
-nnoremap <leader>Sp :set spell!<cr>
-" Output the date - day month year (note the escaping of % with \ - otherwise
-" it outputs the file path):
-nnoremap <leader>Sd :.!date '+\%d \%B \%Y'<cr>
-"nnoremap <leader>Sd :.!date<cr>4wD<esc>
+nnoremap <silent> <leader>r diw"0P
 " Leader [ to change to previous buffer (last cycling around):
 nnoremap <leader>[ :bp<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
@@ -600,10 +630,6 @@ nnoremap <leader>v :vsp $MYVIMRC<cr>
 nnoremap <leader>V :source $MYVIMRC<cr>
 " Open NetRW in a left-sided split:
 nnoremap <leader>E :Lex<cr>
-" Tidy the indentation the whole document:
-nnoremap <leader>= gg=Gg;
-" Create new tab:
-nnoremap <leader>St :tabe<cr>
 " Take the URL under the cursor and convert it to a Markdown link with the:
 " name of the HTML page.
 " url -> [name of page](url)
@@ -616,11 +642,11 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 " Also if a page redirects its own way (not with redirect headers) this will
 " also break this.
 " Highlight trailing white-space as an error.
-"nnoremap <leader>Sw gg:match Error /\v\s+$/<cr> " <- this works as does the next line:
-nnoremap <leader>Sw gg:execute "match Error " . '/\v\s+$/'<cr>
+"nnoremap <leader>sm gg:match Error /\v\s+$/<cr> " <- this works as does the next line:
+"nnoremap <leader>se gg:execute "match Error " . '/\v\s+$/'<cr>
 " Clear highlight of white-space error.
-"nnoremap <leader>SW :match none<cr> " <- this works as does the next line:
-nnoremap <leader>SW :execute "match none"<cr>
+"nnoremap <leader>sW :match none<cr> " <- this works as does the next line:
+"nnoremap <leader>sW :execute "match none"<cr>
 " Grep search whole word under the cursor in the directory (and sub-directories recursively)
 " providing results in the Vim 'quickfix' window. Adapted from: 
 " [Case Study: Grep Operator, Part One / Learn Vimscript the Hard Way]
@@ -638,10 +664,10 @@ nnoremap <leader>D "_dd:echo "Delete into the 'black hole' and removed line"<cr>
 nnoremap <bs> _"_D:echo "Also delete into the 'black hole' and leave line"<cr>
 
 " Uppercase full word in insert mode.
-"nnoremap <leader>Su <esc>viWU<esc>Ei
+"nnoremap <leader>su <esc>viWU<esc>Ei
 
 " Lowercase full word in insert mode.
-"nnoremap <leader>Sl <esc>viWu<esc>Ei
+"nnoremap <leader>sl <esc>viWu<esc>Ei
 
 "nnoremap <leader>html :this is a test
 
@@ -764,3 +790,12 @@ function! s:QuickfixToggle()
 endfunction
 
 " }}}
+
+" TODO: does this apply for calling the `git mergetool` (for vimdiff):
+if &diff
+	nnoremap <leader>1 :diffget LOCAL<cr>echo "Selected LOCAL"
+  nnoremap <leader>2 :diffget BASE<cr>echo "Selected BASE"
+  nnoremap <leader>3 :diffget REMOTE<cr>echo "Selected REMOTE"
+	colorscheme zaibatsu
+endif
+

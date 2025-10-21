@@ -27,7 +27,7 @@ nnoremap <buffer> <silent> <localleader>k :.s/\v^(\s*)(\/\*\s*)/\1/<cr>:.s/\v\s*
 "  Second: Add any spaces after : that do not have them before them (ignoring not ::)
 "  Third:  Add any spaces after the { that do not have a space before them
 "  Fourth: Add any missing trailing ; characters on lines that should have  them
-nnoremap <buffer> <silent> <localleader>= gg=G<esc>:g/\S[^:]:\S/s/:/: /<cr>:g/\S{/s/{/ {/<cr>:g/\S[^;,\/\{]$/norm A;<cr>g;
+nnoremap <buffer> <silent> <localleader>= gg=G<esc>:g/\S[^:]:\S/s/:/: /<cr>:g/\S{/s/{/ {/<cr>:g/[^;,\/\{\}]$/norm A;<cr>g;
 
 " Entity references shorthands
 iabbrev bb box-sizing: border-box; 
@@ -62,6 +62,8 @@ iabbrev bn border: none;
 iabbrev b1 border: 1px solid var(--black);
 iabbrev td text-decoration:
 iabbrev tdn text-decoration: none;
+iabbrev fs font-size:
+iabbrev fs0 font-size: 0;
 iabbrev fw font-weight:
 iabbrev fwn font-weight: normal;
 iabbrev fwb font-weight: bold;
