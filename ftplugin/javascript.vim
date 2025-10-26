@@ -23,7 +23,7 @@ set foldlevel=4
 " Code (JavaScript etc.) add comment (starting //) to the current line
 nnoremap <buffer> <localleader>j I//<esc>
 " Code (Javascript etc.) remove comment (starting //) from the current line
-nnoremap <buffer> <localleader>k :.s/\v^(\s*)(\/\/+)\s*/\1/<cr>
+nnoremap <buffer> <localleader>k :.s/\v^(\s*)(\/\/+)\s*/\1/<cr>:silent noh<cr>
 " Function template
 nnoremap <buffer> <localleader>fun ifunction () {<cr><tab><cr>}<esc>2k_f(i
 " If Template

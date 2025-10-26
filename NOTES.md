@@ -52,6 +52,10 @@ Open vim from the command line without (**.vimrc**) customisations:
 
 `vim --clean`
 
+Open vim without plugins:
+
+`vim --noplugin`
+
 Here colours can be set for modes. eg.:
 
 `autocmd InsertEnter * highlight Normal ctermfg=lightblue`
@@ -334,9 +338,11 @@ with \):
 
 Enter normal commands like:
 
-`norm guu` then 'visual' (to exit) to make the text on the current line **ex mode** was called on from all lower-case.
+`norm guu` then 'visual' (to exit) to make the text on the current line **ex
+mode** was called on from all lower-case.
 
-Can enter multiple normal commands like this and enter `visual` to apply those changes (to that same line).
+Can enter multiple normal commands like this and enter `visual` to apply those
+changes (to that same line).
 
 ### Abbreviations
 
@@ -345,6 +351,7 @@ Set up in **.vimrc** to have available in insert mode:
 `iabbrev teh the` Abbreviation to make **teh** **the**.
 
 To cancel an abbreviation from applying (in visual mode) type `<ctrl-v>` at the
+end of the abbreviation.
 
 ### Change List
 
@@ -664,6 +671,9 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 Delete lines which include the {regexpattern}:
 
 `:g/{regexpattern}/d`
+
+`:g/^Obsolete/d _` Using the underscore after :d avoids clobbering registers or
+the clipboard. This also makes it faster.
 
 Substitute ‘me’ to ‘you’ only on the lines that have the {regexpattern}:
 
@@ -1106,6 +1116,9 @@ line. Useful for selecting a rectangle in Visual mode and editing a table.
 ### Registers
 
 `:reg` / `:registers` to view the registers.
+
+`:reg {letter|lowercaseletter}` / `:registers {letter|lowercaseletter}` to view
+the register fir {letter|lowercaseletter}.
 
 `"0` is the last yanked text so if the unnamed register `""` has the last deleted
 text `"0` will have a record of the last yanked content to use.
@@ -2258,11 +2271,15 @@ You can find out more about macros at:
 [Vi and Vim Macro Tutorial: How To Record and
 Play](http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/)
 
-`q{number|letter}` Start (and end) the macro recording
+`q{number|lowercaseletter}` Start (and end) the macro recording
 
-`@{number|letter}` - Run the macro assigned to the {number|letter}
+`@{number|lowercaseletter}` - Run the macro assigned to the {number|letter}
 
-`{number}@{number|letter}` - Run the macro assigned to the {number|letter} {number of times}
+`{number}@{number|lowercaseletter}` - Run the macro assigned to the
+{number|letter} {number of times}
+
+`q{uppercaseletter}` Append to the macro of the lowercase version of
+{uppercaseletter}.
 
 `@@` Repeat the last macro.
 
@@ -2552,6 +2569,28 @@ If for some reason, the marks and their sign displays go out of sync, use
 
 *Something to look into if I style in Vim and want to see the colours there.*
 
+### Other plugins to look into
+
+* Vim sass colors - https://github.com/shmargum/vim-sass-colors
+
+* Vim Airline - https://github.com/vim-airline/vim-airline
+
+* CoC - Conquer of Completion - https://github.com/neoclide/coc.nvim
+
+With CoC is there any need for language-specific plugins like with the following:
+
+* SCSS Syntax - https://github.com/cakebaker/scss-syntax.vim
+
+* JavaScript Syntax - https://github.com/pangloss/vim-javascript
+
+* TypeScript Syntax - https://github.com/leafgarland/typescript-vim
+
+### How to Write a Vim Plugin
+
+I have startd on this with the learn Vim The Hard Way website. This can be
+seen in the **./pack/learnvimthehardway** folder.
+
+
 ## Variables
 
 More on variables at: [Variables / Learn Vimscript the Hard Way](https://learnvimscriptthehardway.stevelosh.com/chapters/19.html)
@@ -2654,9 +2693,32 @@ If the project is tracked in git use the following to restore the file from the 
 
 ## VimDiff
 
-Use Vim - its VimDiff mode - to resolve git merge conflicts. More at:
+Use Vim - its **VimDiff** mode - to resolve git merge conflicts. More at:
 
 https://gist.github.com/karenyyng/f19ff75c60f18b4b8149#concepts-for-resolving-git-conflicts
+
+Tutorial video on **VimDiff**:
+
+https://m.youtube.com/watch?v=kFVjoIish0E
+
+`:diffo` Switch off diff mode for the current window. Resets related options
+also when 'diff' was not set.
+
+`:difft` Switch on diff mode for the current window.
+
+`:diffu` Update the diff view for all windows.
+
+`:diffg REMOTE` / `:diffg RE`  Get from REMOTE.
+
+`:diffg BASE` /`:diffg BA` Get from BASE.
+
+`:diffg LOCAL` / `:diffg LO` Get from LOCAL.
+ 
+`]c` Jump to the next change.
+
+`[c` Jump to the previous change.
+
+`:cquit` Exit **vimdiff** properly and start the merge again in case of issues.
 
 ## TODO
 
@@ -2680,10 +2742,3 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 * Find out about gn/gN + cgn
 
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
-
-### How to Write a Vim Plugin
-
-I have startd on this with the learn Vim The Hard Way website. This can be
-seen in the **./pack/learnvimthehardway** folder.
-
-

@@ -12,7 +12,7 @@
 " |__/    \______/    |___/  |___/      |___/  |___/  |___/   \_________/
 "
 "
-" Notes about this file:
+"Notes about this file:
 " Double quotes (") comments.
 " 'ex' commands. Omit the preceding : as not required in this (.exrc) file.
 "
@@ -31,9 +31,10 @@
 " The .vim folder is my own git repo (`dotvim`) with the plugins as sub-repos
 " (pointing to their respective github accounts).
 " Installed plugins include:
-"   - Surround - https://github.com/tpope/vim-surround
-"   - Repeat - https://github.com/tpope/vim-repeat
+"   - Surround - Surround text with character and HTML tags - https://github.com/tpope/vim-surround
+"   - Repeat - Repeat the last Surround command - https://github.com/tpope/vim-repeat
 "   - Ctrl P - Full Path Fuzzy Finder - https://github.com/kien/ctrlp.vim
+"   - Vim-Signature - Place, toggle and display marks - https://github.com/kshenoy/vim-signature.git
 
 " Filetype plugin customisations located at ~.vim/ftplugin/{filetype}.vim files
 " More at: https://vimtricks.com/p/per-file-type-configs/
@@ -42,9 +43,15 @@
 " file in use.
 "filetype on
 
-" Enable plugins and load plugin for the detected file type. And
-" Load an indent file for the detected file type.
+" Enable plugins and load plugin for the detected file type and load indent
+" for the detected file type:
 filetype plugin indent on
+
+" Uncomment on the following line to disable the installed plugin:
+"let g:loaded_surround = 1
+"let g:loaded_repeat = 1
+"let g:loaded_ctrlp = 1
+"let g:loaded_Signature = 1
 
 " Turn syntax highlighting on.
 syntax on
@@ -229,6 +236,9 @@ set complete+=kspell
 " Set molokai as the custom color scheme (./vim/colors/molokai.vim):
 "colorscheme molokai
 
+" Set wildcharm as the built-in color scheme:
+"colorscheme wildcharm
+
 " Set murphy as the built-in color scheme:
 colorscheme murphy
 
@@ -388,11 +398,12 @@ inoremap <c-u> <esc>viWU<esc>Ei
 " Ctrl+l to lowercase full word in insert mode.
 inoremap <c-l> <esc>viWu<esc>Ei
 
-" <esc> in insert mode remapped to jk
+" <esc> in insert mode remapped to jk / JK
 " l to move the cursor back to where (in most cases) the cursor was in insert
 " mode
 inoremap jk <esc>l
-"
+inoremap JK <esc>l
+
 " No <esc>, <Ctrl+c> or <Ctrl+[> to exit insert mode - use jk instead
 " Commented as setting <esc>, <Ctrl+c> or <Ctrl+[> to <nop> seems to break
 " things like cursor keys putting in junk characters."
@@ -461,7 +472,7 @@ nnoremap <c-k> <c-u>
 nnoremap <c-j> <c-d>
 
 " [noh] Clear the search match highlighting (won't effect the next search):
-nnoremap <silent> <c-n> :nohlsearch<cr>
+nnoremap <silent> <c-n> :noh<cr>
 
 " Arrow keys to move page up and down in normal mode without changing cursor
 " position:
@@ -531,13 +542,15 @@ nnoremap <leader>l <c-w>l
 " nnoremap <leader>sm
 " nnoremap <leader>sn
 " nnoremap <leader>so
-" nnoremap <leader>sq
 " nnoremap <leader>su
 " nnoremap <leader>sv
 " nnoremap <leader>sx
 " nnoremap <leader>sy
 " nnoremap <leader>sz
-"
+
+" With 4 vertical splits move the far-right one down below the others:
+nnoremap <leader>sq 4<c-w>l<c-w>J
+
 " Replace the current line with the date - day month year (note the escaping
 " of % with \ - otherwise it outputs the file path):
 nnoremap <silent> <leader>sd :.!date '+\%d \%B \%Y'<cr>
@@ -793,9 +806,11 @@ endfunction
 
 " TODO: does this apply for calling the `git mergetool` (for vimdiff):
 if &diff
-	nnoremap <leader>1 :diffget LOCAL<cr>echo "Selected LOCAL"
-  nnoremap <leader>2 :diffget BASE<cr>echo "Selected BASE"
-  nnoremap <leader>3 :diffget REMOTE<cr>echo "Selected REMOTE"
+	"nnoremap <leader>1 :diffget LOCAL<cr>"echo "Selected LOCAL"<cr>
+	nnoremap <leader>1 :diffget LOCAL<cr>
+  nnoremap <leader>2 :diffget BASE<cr>
+  nnoremap <leader>3 :diffget REMOTE<cr>
 	colorscheme zaibatsu
 endif
+
 

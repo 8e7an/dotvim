@@ -104,3 +104,12 @@ If there are any updates to the submodules/plugins git will proceed to pull
 those down. You will also need to commit these changes to the DotVim (.vim)
 repository. 
 
+### Scripts folder
+
+There is the */scripts*  folder which has shell scripts for dealing with Vim.
+
+*myvimdiff* is used to open `git mergetool` in a custom vimdiff setup. This is
+set in the git config file (global) as .vimrc config options for vimdiff don't
+apply so a script is used to call this instead and have the custom .vimrc options
+apply.
+

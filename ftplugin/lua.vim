@@ -21,7 +21,7 @@ set foldlevel=4
 " Insert comment (--) current line.
 nnoremap <leader>j I--<esc>
 " Remove comment (remove --) current line.
-nnoremap <leader>k :.s/\v^(\s*)(--+)/\1/<cr>
+nnoremap <leader>k :.s/\v^(\s*)(--+)/\1/<cr>:silent noh<cr>
 
 " TODO: block-level quoting and unquoting in Lua
 

@@ -19,15 +19,15 @@ set foldmethod=syntax
 set foldlevel=4
 
 " Code (CSS) comment (/* ... */) current line
-nnoremap <buffer> <silent> <localleader>j I/* <esc>A ~ */<esc>
+nnoremap <buffer> <silent> <localleader>j I/* <esc>A */<esc>
 " Code (CSS) remove comment (remove /* ... */) current line
-nnoremap <buffer> <silent> <localleader>k :.s/\v^(\s*)(\/\*\s*)/\1/<cr>:.s/\v\s*\*\/$//<cr>
-" Tidy the indentation the whole document and tidy values afert the ':':
+nnoremap <buffer> <silent> <localleader>k :.s/\v^(\s*)(\/\*\s*)/\1/<cr>:.s/\v\s*\*\/$//<cr>:silent noh<cr>
+" Tidy the indentation the whole document and tidy values after the ':':
 "  First:  Tidy the indentation
 "  Second: Add any spaces after : that do not have them before them (ignoring not ::)
 "  Third:  Add any spaces after the { that do not have a space before them
 "  Fourth: Add any missing trailing ; characters on lines that should have  them
-nnoremap <buffer> <silent> <localleader>= gg=G<esc>:g/\S[^:]:\S/s/:/: /<cr>:g/\S{/s/{/ {/<cr>:g/[^;,\/\{\}]$/norm A;<cr>g;
+nnoremap <buffer> <silent> <localleader>= gg=G<esc>:g/\S[^:]:\S/s/:/: /<cr>:g/\S{/s/{/ {/<cr>:g/[^;,\/\{\}]$/norm A;<cr>:silent noh<cr>g;
 
 " Entity references shorthands
 iabbrev bb box-sizing: border-box; 
@@ -60,8 +60,10 @@ iabbrev bg background:
 iabbrev bgc background-color:
 iabbrev bn border: none;
 iabbrev b1 border: 1px solid var(--black);
-iabbrev td text-decoration:
-iabbrev tdn text-decoration: none;
+iabbrev txd text-decoration:
+iabbrev txdn text-decoration: none;
+iabbrev txdu text-decoration: underline;
+iabbrev txds text-decoration: strike-through;
 iabbrev fs font-size:
 iabbrev fs0 font-size: 0;
 iabbrev fw font-weight:

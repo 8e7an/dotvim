@@ -1,0 +1,6 @@
+#!/bin/bash
+# Save this as 'myvimdiff' and make it executable (chmod +x myvimdiff)
+# Ensure it's in your PATH or specify the full path in git config
+
+vim -f -d -c 'normal! G' "$1" "$2" "$3" "$4"
+#vim -f -d "$1" "$2" "$3" "$4"
