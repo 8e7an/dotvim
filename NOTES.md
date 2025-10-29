@@ -1531,6 +1531,21 @@ Special characters to escape
 
 ### Search Pattern Modifiers
 
+#### Magic Modes:
+
+Vim has different "magic" modes that affect how special characters in regex are
+interpreted.
+
+`\m`: Default "magic" mode. Most special characters need escaping with `\`.
+
+`\M`: "nomagic" mode. Most special characters are treated literally unless
+escaped.
+
+\v: "very magic" mode. Most special characters are treated as special without
+escaping. This is often preferred for readability.
+
+\V: "very nomagic" mode. Almost all characters are treated literally.
+
 [Regular Expressions · Vim Reference](https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html#search-pattern-modifiers)
 
 `\v` helps to avoid \ for pattern qualifiers, grouping pattern, etc.
@@ -1548,6 +1563,9 @@ Special characters to escape
 `/\vhand(y|ful)` Match 'handy' or 'handful'.
 
 `/\v(\a)\1` Match repeated alphabets.
+
+`%s/\v(css|theme|colors)/funtimes/gc` Find css, theme or colors and confirm to
+replace multiple occurrences on each line.
 
 `s/\v(\d+) \v(\d+)/\2 \1` Swap two numbers separated by space.
 
