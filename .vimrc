@@ -753,6 +753,17 @@ set laststatus=2
 "augroup END
 " }}}
 
+" NetRW -------------------------------------------------------------------- {{{
+"
+" NetRW opens previews in vertical (not horizontal splits) by default:
+let g:netrw_preview = 1
+" NetRW opens previews to the right (not to the left) by default:
+let g:netrw_alto = 0
+"
+"let g:netrw_altv = 0
+"
+" }}}
+
 " ABBREVIATIONS ------------------------------------------------------------ {{{
 " Insert mode abbreviations
 "

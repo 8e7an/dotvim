@@ -385,39 +385,41 @@ When entering in : commands <ctrl-D>will give a list of matching options; <TAB> 
 
 `:Explore` / `:Ex`
 
-`:Lex` NetRW explorer on the left (stays open on file open)
+`:Lex` NetRW explorer on the left (stays open on file open).
 
-`:Lex!` NetRW explorer on the right
+`:Lex!` NetRW explorer on the right.
 
-`:Sex` NetRW explorer on top (stays open on file open)
+`:Sex` NetRW explorer on top (stays open on file open).
 
-`:Sex!` NetRW explorer on the left (stays open on file open)
+`:Sex!` NetRW explorer on the left (stays open on file open).
 
-`%` Create new file
+`%` Create new file.
 
-`D` Delete file
+`D` Delete file.
 
-`s` Sort listing
+`s` Sort listing.
 
-`r` Reverse sorting order
+`r` Reverse sorting order.
 
-`x` Special - opens the file in the web browser
+`x` Special - opens the file in the web browser.
 
-`R` Move - rename the file
+`R` Move - rename the file.
 
-`p` Preview file - effectively open a new split
+`p` Preview file - open a new horizontal split but keep focus in NetRW.
+Settings in **.vimrc** to customise NetRW so `p` open previews in a vertical
+split to the right by default.
 
-`I` Toggle banner visibility
+`I` Toggle banner visibility.
 
-`i` Cycle view types
+`i` Cycle view types.
 
-`x` Open file in associated program (HTML in the web browser, images in Preview etc.)
+`x` Open file in associated program (HTML in the web browser, images in Preview etc.).
 
-`v` Open file in a vertical split
+`v` Open file in a vertical split and move focus to the new split.
 
-`o` Open file in a horizontal split
+`o` Open file in a horizontal split and move focus to the new split.
 
-`<enter>` Toggle tree directories open/close in tree view
+`<enter>` Toggle tree directories open/close in tree view.
 
 `{number}o{enter text when put into insert mode}<esc>` The text 'enter text
 when put into insert mode' will be entered for {number} of lines.
@@ -633,15 +635,19 @@ instead (which is not what I want.
 
 `guw` Make the word after the cursor all lowercase.
 
-`gUw` Make the word after the cursor all uppercase.
+`gUw` Make the word AFTER the cursor all uppercase.
 
 `{number}guw` Make {number} of words all uppercase.
 
 `{number}gUw` Make {number} of words all lowercase.
 
+`guiw` Lowercase entire word.
+
 `gUiw` Uppercase entire word.
 
-`guiw` Lowercase entire word.
+`guaw` Make the whole word under the cursor all lowercase.
+
+`gUaw` Make the whole word under the cursor all lowercase.
 
 `g~iw` Toggle case entire word.
 
