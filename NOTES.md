@@ -379,11 +379,18 @@ Vim stores the last 100 changes in the change list.
 
 `:q` Close help.
 
-When entering in : commands <ctrl-D>will give a list of matching options; <TAB> to auto complete.
+`:help normal-index` Help info about normal commands.
+
+`:help insert-index` Help info about insert commands.
+
+`:help visual-index` Help info about visual commands.
+
+When entering in : commands `<ctrl-D>` will give a list of matching options;
+`<TAB>` to auto complete.
 
 ## File Browser - NetRW
 
-`:Explore` / `:Ex`
+`:Explore` / `:Ex` / `:e .`
 
 `:Lex` NetRW explorer on the left (stays open on file open).
 
@@ -395,9 +402,12 @@ When entering in : commands <ctrl-D>will give a list of matching options; <TAB> 
 
 `%` Create new file.
 
-`D` Delete file.
+`d` Create new directory.
 
-`s` Sort listing.
+`D` Delete file or delete marked files (with confirmations).
+
+`s` Sort listing and toggle through different sorting options such as by name,
+time, or size.
 
 `r` Reverse sorting order.
 
@@ -411,7 +421,7 @@ split to the right by default.
 
 `I` Toggle banner visibility.
 
-`i` Cycle view types.
+`i` Cycle view types, including tree view.
 
 `x` Open file in associated program (HTML in the web browser, images in Preview etc.).
 
@@ -423,6 +433,20 @@ split to the right by default.
 
 `{number}o{enter text when put into insert mode}<esc>` The text 'enter text
 when put into insert mode' will be entered for {number} of lines.
+
+`mf` Mark/unmark file/directory (for moving/copying).
+
+`mF` Unmark marked files/directories.
+
+`mt` Mark target destination (folder). The destination will be listed in the
+NetRW banner.
+
+`mm` Move marked files to target destination (folder).
+
+`mc` Copy marked files to target destination (folder).
+
+Note that the current working directory (as indicated by `:pwd`) is reflected
+in NetRW. Use of `:cd` effects NetRW.
 
 ### Commands to save
 
@@ -534,10 +558,6 @@ Move with the cursor keys or:
 
 `F{character}` Move cursor to the previous <character> on the current line.
 
-`<ctrl-j>` Insert line break when in insert mode. Hold to repeat for multiple lines.
-
-`<ctrl-o>` Enter a normal command when in	insert mode. Stay in insert mode when completed.
-
 `<ctrl-f>` Forward one screen.
 
 `<ctrl-b>` Back one screen.
@@ -546,9 +566,9 @@ Move with the cursor keys or:
 
 `<ctrl-u>` Forward 1/2 screen.
 
-`<ctrl-e>` Scroll screen up one line.
+`<ctrl-e>` Scroll the buffer/screen down one line. 
 
-`<ctrl-y>` Scroll screen down one line.
+`<ctrl-y>` Scroll the buffer/screen up one line. 
 
 `<ctrl-g>` Show file info and file status.
 
@@ -588,13 +608,21 @@ starts at line 1.
 
 `g%` Repeat last substitution, but globally.
 
-`gq` Auto indent line?
+`gqq` Auto indent line and move cursor to new line.
 
-`gn` Go to next occurrence of last searched term (buffer /) switching to visual
-mode.
+`gqis` Auto indent in sentence and move cursor to new line.
 
-`gN` Go to previous occurrence of last searched term (buffer /) switching to
-visual mode.
+`gqas` Auto indent around paragraph and move cursor to new line.
+
+`gwq` Auto indent line and keep cursor in the same place.
+
+`gwis` Auto indent in sentence and keep cursor in the same place.
+
+`gwas` Auto indent around paragraph and keep cursor in the same place.
+
+`gn` Go to next occurrence of last searched term (buffer /) switching to visual mode.
+
+`gN` Go to previous occurrence of last searched term (buffer /) switching to visual mode.
 
 `g0` Go to the start of the (wrapped) line.
 
@@ -604,8 +632,7 @@ visual mode.
 
 `gv` Reselect previous visual selection.
 
-`gf` Open the file path under cursor into a new buffer. Relative but if full
-path will follow that absolute path.
+`gf` Open the file path under cursor into a new buffer. Relative but if full path will follow that absolute path.
 
 `g_` Move the cursor to the last non-blank character in the line.
 
@@ -1263,19 +1290,56 @@ This will give 1 to 10 on seperate lines.
 
 `{number}%` Move the cursor to the {number} % place in the file.
 
-`<ctrl-a>` Increment/increase the number under the cursor by 1 - hold this combination to more rapidly increase the number.
+`<ctrl-a>` Increment/increase the number under the cursor by 1 - hold this
+combination to more rapidly increase the number.
 
 `{number}<ctrl-a>` Increase/decrease the number under the control by {number}.
 
-`<ctrl-x>` Decrement the number the cursor is over by one - hold this combination to more rapidly increase the number.
+`<ctrl-x>` Decrement the number the cursor is over by one - hold this
+combination to more rapidly increase the number.
 
 `{number}<ctrl-x>` Decrement the number under the control by {number}.
 
-Note with the above the cursor will jump to the next number on the line the cursor is on if not over a number.
+Note with the above the cursor will jump to the next number on the line the
+cursor is on if not over a number.
 
 `"%p` Insert file name at cursor.
 
-## Autocomplete
+## Insert Mode
+
+`<ctrl-c>` Cancel (escape) out of insert mode. Set up in **.vimrc** to trigger
+the Esc key from insert mode so the InsertLeave autocmd is also triggered.
+
+`<ctrl-y>` Insert the character in the line above.
+
+`<ctrl-e>` Insert the character in the line below.
+
+`<ctrl-h>` Delete a single character.
+
+`<ctrl-w>` Delete a whole word.
+
+`<ctrl-t>` Tab indent the line.
+
+`<ctrl-d>` Tab de-indent the line.
+
+`<ctrl-g>j` Move cursor down one line.
+
+`<ctrl-g>k` Move cursor up one line.
+
+`<ctrl-j>` Insert line break when in insert mode. Hold to repeat for multiple
+lines.
+
+`<ctrl-o>{normal command}` One shot a normal command. Once the normal command
+is complete goes back insert mode. Enter a normal command when in insert mode.
+Stay in insert mode when completed. Eg.:
+
+`<ctrl-o>h` Move cursor backward one letter.
+
+`<ctrl-o>l` Move cursor forward one letter.
+
+`<ctrl-o>w` Move cursor forward one word.
+
+### Autocomplete
 
 In insert mode.
 
@@ -1283,13 +1347,15 @@ In insert mode.
 
 `<ctrl-p>` Autocomplete (last) word being entered and move to previous if more than 1.
 
-Precede these with <ctrl-n>to scope to just this file.
+Precede these with `<ctrl-n>` to scope to just this file.
 
 `<ctrl-e>` Cancel autocomplete.
 
 `<ctrl-y>` Accept autocomplete option highlighted.
 
-`<ctrl-x><ctrl-f>` Autocomplete to directory names and filenames in the path (where path is set in the .vimrc). If no preceeding text will list all directory and filenames.
+`<ctrl-x><ctrl-f>` Autocomplete to directory names and filenames in the path
+(where path is set in the .vimrc). If no preceeding text will list all
+directory and filenames.
 
 Autocomplete from the dictionary:
 
@@ -1394,6 +1460,10 @@ Use a `\c` to do a case-insensitive search or \C a case sensitive search
 'SEARCH' or 'searcH'; /\CSearch will only search for 'Search'). Eg.:
 
 `/\CTODO` Will find the occurrences that only match TODO (not todo, Todo ToDo etc.)
+
+`{number}/{pattern}` Find the next {number} occurance of {pattern}.
+
+`{number}?{pattern}` Find the previous {number} occurance of {pattern}.
 
 Find and replace on the current line (. is not required to indicate the
 current line but is here to demonstrate its use):
@@ -1700,27 +1770,9 @@ Execute a line, or lines, from the file as a Terminal command:
 So if the line of the file has **pwd** running `:.!sh` will replace the **pwd**
 with the working directory of the buffer (file).
 
-Can sort multiple lines with the Terminal sort command; start selecting
-multiples lines with Visual mode then use the command (< and > added in
-with Visual select):
+`:pwd` Print the working directory.
 
-`'<,'>sort` Sort selected lines alphabetically. 
-
-`'<,'>sort` Sort selected lines alphabetically and remove duplicates. 
-
-`'<,'>sort n` Sort selected lines by number. 
-
-`'<,'>sort n u` Sort selected lines by number and remove duplicates.
-
-`'<,'>.!sort`
-
-`'<,'>!sort` This will also work here.
-
-`'<,'>.!sort -n` Use this for sorting lines starting with numbers.
-
-`'<,'>.!sort -nu` Sort selected lines by number and remove duplicates.
-
-`'<,'>.!sort -r` Use this for sorting lines at random.
+`:cd {pathname}` Change the working directory to the {pathname}.
 
 Copy from one part of the document to where the cursor is:
 
@@ -1841,6 +1893,28 @@ In visual select mode:
 `v{selection}{character}Y` Yank the selected lines into register {character}.
 
 `:w` {filename} Write the visually selected text to the filename TEST.
+
+Can sort multiple lines with the Terminal sort command; start selecting
+multiples lines with Visual mode then use the command (< and > added in
+with Visual select):
+
+`'<,'>sort` Sort selected lines alphabetically. 
+
+`'<,'>sort` Sort selected lines alphabetically and remove duplicates. 
+
+`'<,'>sort n` Sort selected lines by number. 
+
+`'<,'>sort n u` Sort selected lines by number and remove duplicates.
+
+`'<,'>.!sort`
+
+`'<,'>!sort` This will also work here.
+
+`'<,'>.!sort -n` Use this for sorting lines starting with numbers.
+
+`'<,'>.!sort -nu` Sort selected lines by number and remove duplicates.
+
+`'<,'>.!sort -r` Use this for sorting lines at random.
 
 `<ctrl-v>` To enter visual select mode, move vertically to select multiple
 lines and enter either I or A to insert or append (respectively) entered
@@ -1977,7 +2051,7 @@ More on split windows in Vim:
 
 * [Vim Move Split - VimTricks](https://vimtricks.com/p/vim-move-split/)
 
-* https://www.baeldung.com/linux/vim-windows#:~:text=The%20ctrl%2Bw%20%2Bs%20and,use%20ctrl%2Bw%20%2Bn.
+* [https://www.baeldung.com/linux/vim-windows#:~:text=The%20ctrl%2Bw%20%2Bs%20and,use%20ctrl%2Bw%20%2Bn]
 
 `:edit` / `:e` {filepath} Open a file (to the buffer) to edit. Do not include
 the {filepath} and this will give info about the file opened.
@@ -2056,9 +2130,9 @@ term used in the `"/` search register.
 
 `:blast` Go to the last buffer. 
 
-`:bprev` (of `:bp`) <leader>[ Go to previous buffer.
+`:bprev` (of `:bp`) **<leader>[** Go to previous buffer.
 
-`:bnext` (or `:bn`) <leader>] Go to next buffer.
+`:bnext` (or `:bn`) **<leader>]** Go to next buffer.
 
 `:{number}b` / `:b{number}` / :bu{number} Go to the buffer by number.
 
@@ -2066,11 +2140,15 @@ term used in the `"/` search register.
 
 `:bd {number}` / `:bdelete {number}` Delete the buffer by number.
 
+`:bw` Wipe the current buffer.
+
 `:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
 
 `:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}.
 
 `:bufdo` Run an operation across all files open in the buffers.
+
+`:e #` Toggle between the current and previous buffers.
 
 Eg. to make a global change across all buffers (Update saves each buffer file after substitution):
 
@@ -2170,21 +2248,17 @@ Note that for the following the second key can have ctrl held down too:
 
 `{number}<ctrl-w>>` Increase width of split by {number}.
 
-`<ctrl-e>` Scroll the buffer down one line. 
-
-`<ctrl-y>` Scroll the buffer up one line. 
-
 `:only` / `:on` Close the other buffers/tabs leaving the current one only open.
 
 `:<ctrl-f>` Open up, and edit, the : command history. Can use vim commands to
 navigate and edit here. Enter to fire the command the cursor is under. Enter on
-the default blank or `<ctrl-c>` to escape. This can be a preferrable option over
+the default blank or `<ctrl-c>` to escape. This can be a preferable option over
 using cursor up and down keys to navigate the : commands history.
 
 `/ <ctrl-f>` or `/ <ctrl-f>` Open up, and edit, the / or ? command history. Can
 use vim commands to navigate and edit here. Enter to fire the find the cursor
 is under. Enter on the default blank or `<ctrl-c>` to escape. This can be a
-preferrable option over using cursor up and down keys to navigate the / or ?
+preferable option over using cursor up and down keys to navigate the / or ?
 commands history.
 
 Assign local buffer hello the sting "world":
@@ -2214,7 +2288,7 @@ with the optional `{buffsr}` `{filename}`.
 `:tablast` / `:tabl` Go to the last tab.
 
 `:tabc` Close the current tab.
-k
+
 `:tabo` Close all other tabs.
 
 `:tabm +{number}` / `:tabm+{number}` Move the current tab {number} or places to the right.
@@ -2487,7 +2561,6 @@ Run `:ctrl P Mixed` to search in Files, Buffers and **MRU** files at the same ti
 
 Check `:help ctrl p-commands` and `:help ctrlp-extensions` for other commands.
 
-
 Once **ctrlP** is open:
 
 Press `<F5>` to purge the cache for the current directory to get new files,
@@ -2755,7 +2828,7 @@ One built-in colorscheme is called 'murphy', which can be enabled with:
 Custom color shemes can be set in the (./vim/colors/molokai.vim) folder. Eg.:
 `./vim/colors/molokai.vim`
 
-Find out more about the :vimgrep/:vim command for refactoring (making changes) across multiple files.
+Find out more about the :vimgrep/:vim command for searching and refactoring (making changes) across multiple files.
 
 Visual mode trick to look into:
 

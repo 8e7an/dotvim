@@ -18,7 +18,7 @@ set expandtab
 "set foldmethod=syntax
 set foldmethod=indent
 " Depth of default folding
-set foldlevel=4
+set foldlevel=6
 "
 " Code (JavaScript etc.) add comment (starting //) to the current line
 nnoremap <buffer> <localleader>j I//<esc>
@@ -34,6 +34,8 @@ nnoremap <buffer> <localleader>loop ifor (let i=0; i<10; i++) {<cr><tab><cr>}<es
 nnoremap <buffer> <localleader>while iwhile () {<cr><tab><cr>}<esc>2k_f(a
 " Do while loop template
 nnoremap <buffer> <localleader>do ido {<cr><tab><cr>} while ()<esc>i
+" Console.log template
+nnoremap <buffer> <localleader>log iconsole.log()<esc>i
 
 " set formatoptions in .vimrc is (seemingly) being overriden by a plugin
 " so the following autocmd takes out the (r and o flags) again for the

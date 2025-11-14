@@ -85,8 +85,12 @@ set ignorecase
 " Allows you to search specifically for capital letters.
 set smartcase
 
-" [sc] Show partial command you type in the last line of the screen.
+" [sc] Show the partial command typed in the last line of the screen.
 set showcmd
+
+" [lbr] When line wrapping is activated words break to the next line so not
+" split over two lines at the right end of the window.
+set linebreak
 
 " [ss] Set minimum number of columns to scroll horizontally. Used in tandem
 " with 'wrap' option off and cursor is off the screen.
@@ -165,11 +169,19 @@ set number
 set relativenumber
 
 " [ru] Set the cursor position (including % location in the file) in the
-" status bar.
+
 set ruler
 
 " [ai] auto-indent new lines.
 set autoindent
+
+" [ar] auto-read changed files.
+set autoread
+" Suggestions to add these two lines to make the autoread immediate but it
+" seems fine to me without them:
+"au CursorHold,CursorHoldI * checktime
+"au FocusGained,BufEnter * checktime
+
 
 " [is] Incremental highlight search matches.
 set incsearch
@@ -259,7 +271,7 @@ colorscheme murphy
 " 232 is Grey3 (very dark grey)
 " 236 is Grey19 (dark grey)
 
-augroup filetype_colours
+augroup filetype_colors
 	autocmd!
 
 	" -- " color on file open (read and buffer).
@@ -288,7 +300,8 @@ augroup filetype_colours
 				\ highlight LineNr ctermfg=40 ctermbg=232 cterm=bold |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=40 cterm=bold |
 				\ highlight Visual ctermbg=203 ctermfg=231 |
-	autocmd insertenter * 
+        \ highlight StatusLine ctermbg=2 ctermfg=0 |
+	autocmd InsertEnter * 
 				\ highlight LineNr ctermfg=117 ctermbg=232 |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=117 |
 				"\ highlight Visual ctermbg=103 ctermfg=94
@@ -389,8 +402,12 @@ let mapleader = "\<space>"
 let maplocalleader = "\<cr>"
 " }}}
 
+" Ctrl-c leaves Insert mode like the Esc key but doesn't trigger the
+" InsertLeave autocmd. Setting of the following makes it follow the behaviour.
+inoremap <c-c> <esc>
+
 " Ctrl+d to delete the current line in insert mode.
-inoremap <c-d> <esc>ddi
+"inoremap <c-d> <esc>ddi
 
 " Ctrl+u to uppercase full word in insert mode.
 inoremap <c-u> <esc>viWU<esc>Ei
@@ -531,7 +548,6 @@ nnoremap <leader>l <c-w>l
 "
 " Available leader s commands:
 " nnoremap <leader>sa
-" nnoremap <leader>sb
 " nnoremap <leader>sc
 " nnoremap <leader>se
 " nnoremap <leader>se
@@ -569,6 +585,8 @@ nnoremap <leader>ss :mksession!<cr>:echo "Session saved to Session.vim"<cr>
 nnoremap <leader>sr :source Session.vim<cr>:echo "Session restored from Session.vim"<cr>
 " Toggle text wrapping:
 nnoremap <silent> <leader>sw :set wrap!<cr>
+" Toggle line breaking:
+nnoremap <silent> <leader>sb :set linebreak!<cr>
 " Toggle spelling:
 nnoremap <silent> <leader>sp :set spell!<cr>
 " Create new tab:
@@ -642,7 +660,7 @@ nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc:
 nnoremap <leader>V :source $MYVIMRC<cr>
 " Open NetRW in a left-sided split:
-nnoremap <leader>E :Lex<cr>
+nnoremap <leader>E :20Lex<cr>
 " Take the URL under the cursor and convert it to a Markdown link with the:
 " name of the HTML page.
 " url -> [name of page](url)
@@ -736,6 +754,11 @@ set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%=
 " Append status line right side:
 set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %03l\ (of\ %03L)\ col:\ %-3c\ percent:\ %p%%
+
+" Status line active colors of dark-green background and black foreground (text):
+"  Set in the augroup of filtype_colors as the autocmd there overrides this set
+"  here:
+"highlight StatusLine ctermbg=2 ctermfg=0
 
 " Append show the status on the second to last line.
 set laststatus=2
