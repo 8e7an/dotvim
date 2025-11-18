@@ -548,7 +548,6 @@ nnoremap <leader>l <c-w>l
 "
 " Available leader s commands:
 " nnoremap <leader>sa
-" nnoremap <leader>sc
 " nnoremap <leader>se
 " nnoremap <leader>se
 " nnoremap <leader>sf
@@ -564,9 +563,10 @@ nnoremap <leader>l <c-w>l
 " nnoremap <leader>sy
 " nnoremap <leader>sz
 
+" Clear the current quickfix list (replace with an empty list).
+nnoremap <silent> <leader>sc :call setqflist([], 'r')<cr>:echo "Quicklist menu cleared"<cr>
 " With 4 vertical splits move the far-right one down below the others:
 nnoremap <leader>sq 4<c-w>l<c-w>J
-
 " Replace the current line with the date - day month year (note the escaping
 " of % with \ - otherwise it outputs the file path):
 nnoremap <silent> <leader>sd :.!date '+\%d \%B \%Y'<cr>
@@ -794,6 +794,7 @@ iabbrev teh the
 iabbrev hte the
 iabbrev waht what
 iabbrev tehn then
+iabbrev wehn when
 iabbrev adn and
 iabbrev fro for
 iabbrev bevs Bevan Sharp

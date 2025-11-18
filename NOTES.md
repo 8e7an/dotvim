@@ -56,6 +56,22 @@ Open vim without plugins:
 
 `vim --noplugin`
 
+Open two or more files in tabs from the terminal:
+
+`vim -p [filepath1] [filepath2] [filepath3]`
+
+Eg.:
+
+`vim -p file1.js file2.js file3.js`
+
+Open all files in a directory in tabs:
+
+`vim -p *`
+
+Open all files in a directory of a file type in tabs:
+
+`vim -p *.{filetype}`
+
 Here colours can be set for modes. eg.:
 
 `autocmd InsertEnter * highlight Normal ctermfg=lightblue`
@@ -478,6 +494,8 @@ in NetRW. Use of `:cd` effects NetRW.
 
 `:{number},{number}write {filepath}` / `:{number},{number}w {filepath}` Write the range to the `{filepath}`.
 
+`:update` / `:up` Writes changes to the file only if there are changes.
+
 Eg.:
 
 Absolute lines:
@@ -751,9 +769,11 @@ Append text on the current line via the command area (. on a new line after
 
 `])` When cursor is inside ( and ) go to the ending ).
 
-For some reason `[[` and `]]` don't go to the starting / ending [ / ] when inside but to the start and end of the document. TODO: find out how?
+For some reason `[[` and `]]` don't go to the starting / ending [ / ] when
+inside but to the start and end of the document. TODO: find out how?
 
-< and > aren't (seemingly) considered matching brackets in Vim so `[<` and `]>` don't do anything. TODO: find out how?
+< and > aren't (seemingly) considered matching brackets in Vim so `[<` and `]>`
+don't do anything. TODO: find out how?
 
 `` `[ `` Jump to beginning of last yanked text.
 
@@ -909,7 +929,7 @@ Nine                    9       Horn
 
 `{number}dd` Delete a number of lines under cursor (where {number} is the number of lines starting).
 
-`dw` Delete from cursor to the end of the word.
+`sdw` Delete from cursor to the end of the word.
 
 `diw` Delete inside word (including following white-space).
 
@@ -1527,6 +1547,15 @@ Current line all instances:
 
 `:s/pattern/replace/g`
 
+Search and replace from a starting string to an ending string:
+
+`:?{startingstring}?;/{endingstring}/s/{pattern}/{replace}/{flags}
+
+Eg.: From the **body** to **/body** replace all occurrences (on each each line)
+of **div** with **span**:
+
+`:?body?;/\/body/s/div/span/g`
+
 Substitute instances of text `{pattern}` with `{replace}` from line marked
 `{startingmark}` to line marked `{endingmark}`:
 
@@ -1709,6 +1738,13 @@ above where the cursor is.
 
 `.*` is greedy. To match the minimum length match possible use `.\{-}` which will
 match the fewest characters possible to make a match.
+
+### Find and Replce Across Files
+
+Search for 'how to search and replace across multiple files in vim' in Google
+to find out more:
+
+[https://www.google.com/search?q=how+to+search+and+replace+across+multiple+files+in+vim&sca_esv=bf72031bb8079921&ei=EY8aaaanDcfm1e8PqqCwyQc&ved=0ahUKEwjm86GMmPiQAxVHc_UHHSoQLHkQ4dUDCBA&uact=5&oq=how+to+search+and+replace+across+multiple+files+in+vim&gs_lp=Egxnd3Mtd2l6LXNlcnAiNmhvdyB0byBzZWFyY2ggYW5kIHJlcGxhY2UgYWNyb3NzIG11bHRpcGxlIGZpbGVzIGluIHZpbTIFECEYoAEyBRAhGJ8FSO-DAVDJK1j2f3AFeAGQAQCYAf4CoAG1QKoBCTAuMTUuMTguNLgBA8gBAPgBAZgCJ6ACpDvCAgoQABiwAxjWBBhHwgILEAAYgAQYkQIYigXCAgsQABiABBixAxiDAcICERAuGIAEGLEDGNEDGIMBGMcBwgIOEAAYgAQYsQMYgwEYigXCAg4QLhiABBixAxjRAxjHAcICBRAAGIAEwgIQEC4YgAQY0QMYQxjHARiKBcICDhAuGIAEGLEDGIMBGIoFwgIIEAAYgAQYsQPCAgsQLhiABBixAxiDAcICCxAuGIAEGLEDGNQCwgILEAAYgAQYsQMYigXCAggQLhiABBixA8ICBBAAGAPCAgYQABgWGB7CAgUQABjvBcICCxAAGIAEGIYDGIoFmAMAiAYBkAYIkgcJNS4xNS4xNS40oAe6ggKyBwkwLjE1LjE1LjS4B5E7wgcHMC4xNS4yNMgHfQ&sclient=gws-wiz-serp]
 
 ### Add command
 
@@ -2138,19 +2174,23 @@ term used in the `"/` search register.
 
 `:bd` / `:bdelete` **<leader>C** Delete buffer (close a file).
 
-`:bd {number}` / `:bdelete {number}` Delete the buffer by number.
+`:bd {number}` / `:bdelete {number}` Delete the buffer by number
+.
+`:bd {number} {number}` / `:bdelete {number} {number}` Delete multiple buffers by number.
 
 `:bw` Wipe the current buffer.
 
 `:{number}bd` Delete (close) buffer {number} (current buffer if no number}.
 
-`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current buffer if no number}.
-
-`:bufdo` Run an operation across all files open in the buffers.
+`:{number}bw` Wipe out buffer (like `bd` but more severe) {number} (current
+buffer if no number}.
 
 `:e #` Toggle between the current and previous buffers.
 
-Eg. to make a global change across all buffers (Update saves each buffer file after substitution):
+`:bufdo` Run an operation across all files open in the buffers.
+
+Eg. to make a global change across all buffers (Update saves each buffer file
+after substitution):
 
 `:bufdo %s/pancake/waffle/g | update`
 
@@ -2164,45 +2204,53 @@ otherwise the suggestions will be commands that start with b):
 
 ## Windows
 
+`:windo {command}` Executes the {command} on all files open in different
+windows within the current tab.
+
 ### Arguments
 
 Files passed into vim when it is opened from the command line.
 
-`:args` List the args - the one in [] is the current args file
+`:args` / `:ar` List the args - the one in [] is the current args file.
 
-`:args {filepath ...}` Overwrite the args list with the provided files
+`:args {filepath ...}` Overwrite the args list with the provided files.
 
-`:arga {filepath}` Add the file to the args list
+`:arga {filepath}` Add the file to the args list.
 
-`:argd {file}` Delete the file in the args list
+`:argd {file}` Delete the file in the args list.
 
-`:next` Go to next in the args
+`:next` Go to next in the args.
 
-`:prev` Go to previous in the args
+`:prev` Go to previous in the args.
 
-`:first` Go to first in the args 
+`:first` Go to first in the args .
 
-`:last` Go to last in the args
+`:last` Go to last in the args.
 
-`:argdo` Run an operation across all files in the args
+`:argdo` Run an operation across all files in the args.
 
-Eg. to make a global change across all files in the args (Update saves each buffer file after substitution):
+Eg. to make a global change across all files in the args (Update saves each
+modified buffer file after substitution):
 
 `:argdo %s/method_a/method/b/g | update` 
 
+## Splits
+
 `:split` / `:sp` Open a horizontal split with the current buffer.
 
-`:{number}split` Open a horizontal split of {number} characters high (including ui elements).
+`:{number}split` Open a horizontal split of {number} characters high (including
+UI elements).
 
 `:vsplit` / `:vs` Open a vertical split with the current buffer.
 
 `:vnew` Open a vertical split with a new buffer.
 
-`:{number}vsplit` Open a vertical split of {number} characters wide (including ui elements).
+`:{number}vsplit` Open a vertical split of {number} characters wide (including
+UI elements).
 
 `:sp filename` Open a file in a new buffer and split window.
 
-`:{number}sp` Open a file in a new buffer and split window {number} characters wide (including ui elements).
+`:{number}sp` Open a file in a new buffer and split window {number} characters wide (including UI elements).
 
 `:next` Navigate to next open file.
 
@@ -2274,16 +2322,16 @@ describing a scoped variable.
 
 ## Tabs
 
-`:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tabset
+`:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tab set
 with the optional `{buffsr}` `{filename}`.
 
-`:tabclose` Close the tabset.
+`:tabclose` Close the tab set.
 
 `:tabnext`/ `:tabn` Go to the next tab.
 
 `:tabprevious` / `:tabp` Go to the previous tab.
 
-`:tabfirst`/ `:tabfir` Go to the first tab.
+`:tabrewind` / `:tabr` / `:tabfirst` / `:tabfir` Go to the first tab.
 
 `:tablast` / `:tabl` Go to the last tab.
 
@@ -2295,11 +2343,11 @@ with the optional `{buffsr}` `{filename}`.
 
 `:tabm -{number}` / `:tabm-{number}` Move the current tab {number} or places to the left.
 
-`{number}gt` Go to tabset of {number}
+`{number}gt` Go to tab sets of {number}.
 
-`gt` / `**<leader>n**` Switch to right tabsets
+`gt` / `**<leader>n**` Switch to right tab sets.
 
-`gT` / `**<leader>m**` Switch to left tabsets
+`gT` / `**<leader>m**` Switch to left tab sets.
 
 `nnoremap <c-left> :tabprevious<cr>`
 
@@ -2307,21 +2355,7 @@ with the optional `{buffsr}` `{filename}`.
 
 Now you can use ctrl ← to go left and ctrl → to go right.
 
-Open two or more files in tabs:
-
-`vim -p [filepath1] [filepath2] [filepath3]`
-
-Eg.:
-
-`vim -p file1.js file2.js file3.js`
-
-Open all files in a directory in tabs:
-
-`vim -p *`
-
-Open all files in a directory of a file type in tabs:
-
-`vim -p *.{filetype}`
+`:tabdo {command}` Executes the {command} on all files open in different tabs.
 
 Note that tabs are also buffers in Vim so :buffers will list the tabs.
 
@@ -2439,6 +2473,16 @@ restoring your previous state. Eg. `vim -S Session.vim`
 
 `:source {filename.vim}` If you are already in Vim, you can source the session
 file to restore the session. Eg. `:source Session.vim`
+
+## Quick List
+
+`:copen` / `:cope` Open the quicklist window (ie. to see a list of the current
+errors).
+
+`:cclose` / `:ccl` Close the quicklist window.
+
+`:call setqflist([], 'r')` Clear the current quickfix list (replaces with an
+empty list).
 
 ## Other
 
@@ -2828,7 +2872,8 @@ One built-in colorscheme is called 'murphy', which can be enabled with:
 Custom color shemes can be set in the (./vim/colors/molokai.vim) folder. Eg.:
 `./vim/colors/molokai.vim`
 
-Find out more about the :vimgrep/:vim command for searching and refactoring (making changes) across multiple files.
+Find out more about the :vimgrep/:vim command for searching and refactoring
+(making changes) across multiple files.
 
 Visual mode trick to look into:
 
@@ -2839,3 +2884,9 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 * Find out about gn/gN + cgn
 
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
+
+* Find out if there's a plug-in that can do the 'sticky scroll' outlineModel
+  like in VSCode.
+
+* Find out if there's a plug-in that can give a preview of the replace when
+  doing a find and replace (with confirm). 
