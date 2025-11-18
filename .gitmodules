@@ -10,3 +10,6 @@
 [submodule "pack/kshenoy/start/signature"]
 	path = pack/kshenoy/start/signature
 	url = https://github.com/kshenoy/vim-signature.git
+[submodule "pack/wellle/start/context"]
+	path = pack/wellle/start/context
+	url = https://github.com/wellle/context.vim.git
