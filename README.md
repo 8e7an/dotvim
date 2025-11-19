@@ -56,7 +56,9 @@ repository user the following:
 
 From .vim/ folder add a submodule from a GitHub account with the following format:
 
-`git submodule add {https_git[hub]_repository_url} ./pack/{repository_author}/start/{plugin_name_alias_name}`
+`git submodule add --depth 1 {https_git[hub]_repository_url} ./pack/{repository_author}/start/{plugin_name_alias_name}`
+
+`{https_git[hub]_repository_url}` is the (SSH) url from the git remote (ie. GitHub) to clone down from.
 
 `{repository_author}` is the author's user name/handle from their GitHub profile.
 
@@ -68,7 +70,7 @@ built-in package manager location and part of Vim's start behavior.
 
 For example to add the Vim Signature Plugin (https://github.com/kshenoy/vim-signature) enter:
 
-`git submodule add https://github.com/kshenoy/vim-signature.git ./pack/kshenoy/start/signature`
+`git submodule add --depth 1 https://github.com/kshenoy/vim-signature.git ./pack/kshenoy/start/signature`
 
 This will proceed to add this submodule to the DotVim (.vim) repository and
 clone it down from GitHub. 
@@ -76,7 +78,11 @@ clone it down from GitHub.
 With the submodule added you will have to commit it to the DotVim (.vim)
 repository with a commit message like:
 
-`git commit -m "Add submodule {submodule} Vim plugin {plugin_name}"`
+`git commit -m "Add submodule Vim plugin {plugin_name}"`
+
+For example with the Vim Signature Plugin enter:
+
+`git commit -m "Add submodule Vim plugin Vim Signature"`
 
 In the `.gitmodules` the submodule will include the newly added submodule. Eg.:
 
