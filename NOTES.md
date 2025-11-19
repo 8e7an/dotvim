@@ -2591,7 +2591,7 @@ Surround the whole line with visual mode; press a V (for line wise visual mode) 
 
 * [GitHub - junegunn/fzf.vim: fzf vim](https://github.com/junegunn/fzf.vim)
 
-### Surround
+### CTRL P
 
 [CTRL P](https://github.com/ctrlpvim/ctrlp.vim)
 
@@ -2705,6 +2705,32 @@ command.
 
 If for some reason, the marks and their sign displays go out of sync, use
 `:SignatureRefresh` to refresh them.
+
+### Context
+
+Display the document context of the cursor.  This plugin emulates the 'sticky scroll' outlineModel of VSCode really well.
+
+[Context](https://github.com/wellle/context.vim)
+
+Website has info about usage and customisation.
+
+`:ContextEnable` If you let `g:context_enabled = 0` to disable it by default or
+have disabled it with one of the commands below you can use this command to
+enable it.
+
+`:ContextDisable` Use this command to disable the plugin. This also hides the
+context window. Use `:ContextEnable` to enable it again later.
+
+`:ContextToggle` Use this command to toggle between enabling and disabling this
+plugin. This is useful in mappings.
+
+### Traces
+
+Display preview of search replacements when entering in the search command.
+
+[Traces]( https://github.com/markonm/traces.vim)
+
+Website has info about usage.
 
 ### CSS Color
 
@@ -2885,8 +2911,10 @@ press 1v and voilá, our beloved vim gives you another perl :)"
 
 * Find out how to enable omnifunc for JS/TS (vim set omnifunc=...)
 
-* Find out if there's a plug-in that can do the 'sticky scroll' outlineModel
-  like in VSCode.
-
 * Find out if there's a plug-in that can give a preview of the replace when
   doing a find and replace (with confirm). 
+
+  - Installed the Traces plugin and it kinda works but doesn't provide a
+    preview at the confirm stage of a find-and-replace which is what I was
+    hoping for.
+

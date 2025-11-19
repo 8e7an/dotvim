@@ -52,6 +52,8 @@ filetype plugin indent on
 "let g:loaded_repeat = 1
 "let g:loaded_ctrlp = 1
 "let g:loaded_Signature = 1
+"let g:context_enabled = 0
+"let g:loaded_traces_plugin = 1
 
 " Turn syntax highlighting on.
 syntax on
@@ -559,7 +561,6 @@ nnoremap <leader>l <c-w>l
 " nnoremap <leader>so
 " nnoremap <leader>su
 " nnoremap <leader>sv
-" nnoremap <leader>sx
 " nnoremap <leader>sy
 " nnoremap <leader>sz
 
@@ -593,6 +594,8 @@ nnoremap <silent> <leader>sp :set spell!<cr>
 nnoremap <silent> <leader>st :tabe<cr>
 " Tidy the indentation the whole document:
 nnoremap <silent> <leader>s= gg=Gg;
+" Toggle the Context Plugin:
+nnoremap <silent> <leader>sx :ContextToggle<cr>
 
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
