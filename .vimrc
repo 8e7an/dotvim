@@ -46,6 +46,9 @@
 " Enable plugins and load plugin for the detected file type and load indent
 " for the detected file type:
 filetype plugin indent on
+"filetype plugin on
+"
+"syntax enable
 
 " Uncomment on the following line to disable the installed plugin:
 "let g:loaded_surround = 1
@@ -254,14 +257,15 @@ set complete+=kspell
 "colorscheme wildcharm
 
 " Set murphy as the built-in color scheme:
-colorscheme murphy
+"colorscheme murphy
+colorscheme industry
 
 "highlight ColorColumn ctermbg=darkred
 "call matchadd('ColorColumn','\%81v',100)
 
 " CONFIG COLORS WITH AUTO-COMMANDS ------------------------------------------------- {{{
 
-"
+" See :help :highlight for info about colorscheme customizations with colors etc.
 " cterm has a set number of 256 color options. The colors are a number or color name.
 " cterm color names can be found here: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
 " cterm can be set to underline, bold or none (default underline)
@@ -273,7 +277,7 @@ colorscheme murphy
 " 232 is Grey3 (very dark grey)
 " 236 is Grey19 (dark grey)
 
-augroup filetype_colors
+augroup ColorScheming
 	autocmd!
 
 	" -- " color on file open (read and buffer).
@@ -297,12 +301,22 @@ augroup filetype_colors
 
 	" Set color overrides with:
 	" Line numbers to bold and toggle colors from normal mode (green) and insert mode (light blue).
-	" Visual select IndianRed1 background, Grey100 (white) foreground
-	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave * 
+	" Visual select IndianRed1 background, Grey100 (white) foreground.
+
+	" cterm=bold or cterm=underline to style property accordingly.
+
+	" TabLineFill - Tab background
+	" TabLine - In-active tab
+	" TabLineSel - Active Tab
+
+	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave,ColorScheme * 
 				\ highlight LineNr ctermfg=40 ctermbg=232 cterm=bold |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=40 cterm=bold |
 				\ highlight Visual ctermbg=203 ctermfg=231 |
-        \ highlight StatusLine ctermbg=2 ctermfg=0 |
+        \ highlight StatusLine ctermbg=2 |
+        \ highlight TabLineFill ctermbg=234 |                        
+        \ highlight TabLine ctermbg=237 ctermfg=246 |								 
+        \ highlight TabLineSel ctermbg=16 ctermfg=40 cterm=bold |
 	autocmd InsertEnter * 
 				\ highlight LineNr ctermfg=117 ctermbg=232 |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=117 |
@@ -336,6 +350,11 @@ augroup filetype_css
 	" These settings in addition to ftplugin/css.vim
 	" Make SCSS (Sass) files recognised as CSS files (to use the css.vim settings).
 	autocmd BufNewFile,BufRead *.scss set ft=css
+	
+	" This works but effect the whole of Vim, not just the file of type
+	" css:
+	"autocmd FileType css colorscheme zaibatsu
+
 augroup END
 " }}}
 
@@ -366,7 +385,11 @@ augroup typescript_js
 	autocmd BufNewFile,BufRead *.ts set ft=javascript
 	" These settings in addition to ftplugin/typescript.vim
   "autocmd BufRead,BufNewFile *.ts setfiletype typescript
-	"
+	
+	" This works but effect the whole of Vim, not just the file of type
+	" javascript:
+	"autocmd FileType javascript colorscheme torte
+
 augroup END
 
 augroup filetype_html
@@ -725,6 +748,17 @@ vnoremap <leader>* <esc>`<i*<esc>`>a*<esc>
 
 " }}}
 
+" TERMINAL MODE RE-MAPPINGS ---------------------------------------- {{{
+
+" From normal mode open a new Terminal buffer 8 lines high:
+nnoremap <leader>T <cmd>belowright split <bar> resize 8 <bar> terminal ++curwin <cr>
+" Esc or ctrl-[ to escape from insert mode in the Terminal:
+
+tnoremap <esc> <c-\><c-n>
+tnoremap <c-[> <c-\><c-n>
+
+" }}}
+
 " STATUS LINE ------------------------------------------------------ {{{
 "
 " %f – Display the relative path of the current file.
@@ -785,6 +819,10 @@ set laststatus=2
 let g:netrw_preview = 1
 " NetRW opens previews to the right (not to the left) by default:
 let g:netrw_alto = 0
+" NetRW opens in tree view by default:
+let g:netrw_liststyle = 3
+" NetRW opens without the banner displayed by default:
+let g:netrw_banner = 0
 "
 "let g:netrw_altv = 0
 "

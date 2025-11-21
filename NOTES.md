@@ -103,6 +103,10 @@ Information about the vim setting for the file based on its type:
 
 `:filetype`
 
+Get the filetype of the current file/buffer:
+
+`:echo &filetype`
+
 “The following will automatically reload your .vimrc whenever you update it.”:
 
 `autocmd! bufwritepost .vimrc source %`
@@ -1763,7 +1767,13 @@ Command to go to a line number:
 
 ## Terminal 
 
-`:terminal` / `:term` Open the terminal into a new split/buffer.
+`:terminal` / `:term` Open the terminal into a new horizontal split/buffer.
+
+`:terminal ++curwin` Open the terminal in the current split/buffer.
+
+`:vertical terminal` / `:vert term` Open in a new vertical split.
+
+`:tab terminal` Open in a new tab.
 
 `exit` Close terminal.
 
@@ -2371,7 +2381,7 @@ More info about tabs in Vim:
 
 `:marks {markname}` List {markname} only in the marks listing.
 
-`:delmarks` {mark/range} delete the mark or range of bookmarks a-z, A-Z (letters only)
+`:delmarks {mark/range}` delete the mark or range of bookmarks a-z, A-Z (letters only)
 
 `m{lower case letter}` Bookmark to local file
 
@@ -2897,6 +2907,16 @@ One built-in colorscheme is called 'murphy', which can be enabled with:
 
 Custom color shemes can be set in the (./vim/colors/molokai.vim) folder. Eg.:
 `./vim/colors/molokai.vim`
+
+More on colorschemes:
+
+[https://steemit.com/vim/@not-a-bird/customizing-vim-color-schemes]
+
+`:help colorscheme`
+
+Can use `colo` as short-hand for `colorscheme`.
+
+`:highlight` / `:hi` List all the colorscheme values active.
 
 Find out more about the :vimgrep/:vim command for searching and refactoring
 (making changes) across multiple files.

@@ -18,6 +18,8 @@ set foldmethod=syntax
 " Depth of default folding
 set foldlevel=4
 
+"colorscheme zaibatsu
+
 " Code (CSS) comment (/* ... */) current line
 nnoremap <buffer> <silent> <localleader>j I/* <esc>A */<esc>
 " Code (CSS) remove comment (remove /* ... */) current line
