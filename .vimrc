@@ -70,11 +70,15 @@ set nobackup
 " Activate mouse interaction (so splits can be resized with the mouse etc.).
 set mouse=a
 
-" Use new regular expression engine; more at:
+" [re] Use new regular expression engine; more at:
 " https://jameschambers.co.uk/vim-typescript-slow
-set re=0
+set regexpengine=0
 
-" Prevent auto-commenting on new lines (r flag for <enter> when in insert mode
+" [acd] Automatically changes Vim's current directory to the active buffer's directory:
+" (This setting active may effect plugins).
+"set autochdir
+
+" [fo] Prevent auto-commenting on new lines (r flag for <enter> when in insert mode
 " and o flag for o/O command in normal mode)
 set formatoptions-=r
 set formatoptions-=o
@@ -187,7 +191,6 @@ set autoread
 "au CursorHold,CursorHoldI * checktime
 "au FocusGained,BufEnter * checktime
 
-
 " [is] Incremental highlight search matches.
 set incsearch
 
@@ -234,6 +237,11 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" [wic] When set case is ignored when completing file names and directories.  Has no
+" effect when 'fileignorecase' is set.  Does not apply when the shell is used
+" to expand wildcards, which happens when there are special characters.
+"set wildignorecase
+
 " AUTO-COMPLETE WITH DICTIONARY ---------------------------------------------------- {{{
 
 "set dictionary?
@@ -244,11 +252,22 @@ set dictionary=/usr/share/dict/words
 " ctrl+x then ctrl+k:
 "set complete+=k
 
-" with the following enter ':set spell' to enable spelling auto-complete
+" With the following enter ':set spell' to enable spelling auto-complete from
+" the dictionary:
 set complete+=kspell
 
-" F12 to bring up the dictionary autocomplete (though ctrl+n is much easier).{{{}}}
+" Set the spelling languages:
+set spelllang=en_au
+set spelllang+=en_gb
+"set spelllang+=en_us
+"set spelllang+=de_de
+
+" F12 to bring up the dictionary autocomplete (though Ctrl+n is much easier).{{{}}}
 " }}}
+
+" Vim searches in the (c)tags in the current and parent directories:
+" (The semicolon ; tells Vim to search upwards in the directory tree.)
+"set tags=./tags,tags;
 
 " Set molokai as the custom color scheme (./vim/colors/molokai.vim):
 "colorscheme molokai
@@ -257,8 +276,9 @@ set complete+=kspell
 "colorscheme wildcharm
 
 " Set murphy as the built-in color scheme:
+"colorscheme industry
 "colorscheme murphy
-colorscheme industry
+colorscheme slate
 
 "highlight ColorColumn ctermbg=darkred
 "call matchadd('ColorColumn','\%81v',100)
@@ -278,7 +298,18 @@ colorscheme industry
 " 236 is Grey19 (dark grey)
 
 augroup ColorScheming
+	"  Removes any existing autocommands in this group to avoid duplication:
 	autocmd!
+
+	" FocusGained and FocusLost is for when the whole terminal window gains and
+	" loses focus.
+
+	" WinLeave and WinEnter is for when splits/windows gain and lose focus.
+	" Unfortunately you cannot effect the highlight (colors) of splits
+	" independently in Vim ( Changing the highlight is always global and can't
+	" be changed only for a scope. --
+	" https://stackoverflow.com/questions/49301534/vim-highlight-setting-local )
+	" setlocal doesn't work - I tried
 
 	" -- " color on file open (read and buffer).
 	" -- autocmd BufReadPre,FileReadPre,InsertLeave * highlight Normal ctermfg=40 ctermbg=232
@@ -292,10 +323,14 @@ augroup ColorScheming
 	" -- autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=236
 	" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
 
+	" Other Vim autocmd events:
+	" BufRead
+	" BufNewFile
+
 	" Revert normal colors when back to Command/Normal mode
 	" values sames as for bufreadpre,filereadpre.
 	" autocmd insertleave * highlight normal ctermfg=40 ctermbg=232
-	" autocmd insertleave * highlight cursorline cterm=none ctermfg=46 ctermbg=236
+	" autocmd insertleave * highlight CursorLine cterm=none ctermfg=46 ctermbg=236
 
 	":highlight LineNr ctermfg=grey
 
@@ -304,23 +339,43 @@ augroup ColorScheming
 	" Visual select IndianRed1 background, Grey100 (white) foreground.
 
 	" cterm=bold or cterm=underline to style property accordingly.
+	" cterm=none to clear styling for the property.
 
 	" TabLineFill - Tab background
 	" TabLine - In-active tab
 	" TabLineSel - Active Tab
 
+	" Set the Cursor "cross-hair" colors:
+	highlight CursorLine ctermbg=235
+	highlight CursorColumn ctermbg=236
+
 	autocmd BufEnter,BufReadPre,FileReadPre,InsertLeave,ColorScheme * 
 				\ highlight LineNr ctermfg=40 ctermbg=232 cterm=bold |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=40 cterm=bold |
 				\ highlight Visual ctermbg=203 ctermfg=231 |
-        \ highlight StatusLine ctermbg=2 |
+        \ highlight StatusLine ctermbg=40 ctermfg=16 cterm=bold |
         \ highlight TabLineFill ctermbg=234 |                        
         \ highlight TabLine ctermbg=237 ctermfg=246 |								 
         \ highlight TabLineSel ctermbg=16 ctermfg=40 cterm=bold |
+				\ highlight Normal ctermbg=16 |
+				\ highlight Comment ctermfg=151 |
 	autocmd InsertEnter * 
 				\ highlight LineNr ctermfg=117 ctermbg=232 |
 				\ highlight CursorLineNr ctermfg=232 ctermbg=117 |
+        \ highlight StatusLine ctermbg=117 |
 				"\ highlight Visual ctermbg=103 ctermfg=94
+	"autocmd FocusGained *
+			  "\ highlight LineNr ctermfg=20 cterm=bold
+	"autocmd FocusLost *
+			  "\ highlight LineNr ctermfg=30 cterm=none
+	"autocmd WinLeave *
+			  "\ setlocal nocursorline |
+			  "\ setlocal nocursorcolumn |
+			  "\ setlocal nonumber |
+	"autocmd WinEnter *
+			  "\ setlocal cursorline |
+			  "\ setlocal cursorcolumn |
+			  "\ setlocal number |
 
 augroup END
 " }}}
@@ -471,16 +526,19 @@ nnoremap <leader><space> :
 "nnoremap ' $
 
 " Map <tab> key to % to swap between matching brackets - ({[j:
-nnoremap <tab> %
+" Remapping <tab> to % also causes the <c-i> to be remapped 
+" (c-i points to tab) which means the tab key calls the jump list newest
+" command. Instead leader-tab gets around this issue.
+nnoremap <silent> <leader><tab> %
 
 " Map Y to yank to the end of the current line:
 nnoremap Y y$
 
 " Ctrl+u to uppercase the full word in normal mode:
-nnoremap <c-u> viWU<esc>E
+"nnoremap <leader> <c-u> viWU<esc>E
 
 " Ctrl+l to lowercase the full word in normal mode:
-nnoremap <c-l> viWu<esc>E
+"nnoremap <leader> <c-l> viWu<esc>E
 
 " Map leader d and leader f + page up and page down moves line 
 " under cursor up and down.
@@ -580,13 +638,13 @@ nnoremap <leader>l <c-w>l
 " nnoremap <leader>sj
 " nnoremap <leader>sk
 " nnoremap <leader>sm
-" nnoremap <leader>sn
-" nnoremap <leader>so
 " nnoremap <leader>su
 " nnoremap <leader>sv
 " nnoremap <leader>sy
 " nnoremap <leader>sz
 
+" Create new tabset:
+nnoremap <leader>sa :tabe<cr>
 " Clear the current quickfix list (replace with an empty list).
 nnoremap <silent> <leader>sc :call setqflist([], 'r')<cr>:echo "Quicklist menu cleared"<cr>
 " With 4 vertical splits move the far-right one down below the others:
@@ -613,12 +671,16 @@ nnoremap <silent> <leader>sw :set wrap!<cr>
 nnoremap <silent> <leader>sb :set linebreak!<cr>
 " Toggle spelling:
 nnoremap <silent> <leader>sp :set spell!<cr>
-" Create new tab:
-nnoremap <silent> <leader>st :tabe<cr>
+" Open a tag definition for the term under the cusor in a new horizontal split:
+nnoremap <silent> <leader>st :stag<cr>
 " Tidy the indentation the whole document:
 nnoremap <silent> <leader>s= gg=Gg;
 " Toggle the Context Plugin:
 nnoremap <silent> <leader>sx :ContextToggle<cr>
+" Display NetRW in the current buffer.
+nnoremap <leader>sn :Ntree .<cr>
+" Call the custom BuffOnly command to clear all but the current buffer:
+nnoremap <leader>so :BuffOnly<cr>
 
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
@@ -730,8 +792,6 @@ nnoremap <bs> _"_D:echo "Also delete into the 'black hole' and leave line"<cr>
 
 " VISUAL MODE RE-MAPPINGS ------------------------------------------- {{{
 
-" <space> to open the command input : in visual mode
-"vnoremap <space> :
 " <leader><space> to open the command input : in visual mode
 vnoremap <leader><space> :
 
@@ -754,8 +814,8 @@ vnoremap <leader>* <esc>`<i*<esc>`>a*<esc>
 nnoremap <leader>T <cmd>belowright split <bar> resize 8 <bar> terminal ++curwin <cr>
 " Esc or ctrl-[ to escape from insert mode in the Terminal:
 
-tnoremap <esc> <c-\><c-n>
-tnoremap <c-[> <c-\><c-n>
+tnoremap <esc> <c-\><c-n> " This mapping works in Terminal app but not iTerm.
+tnoremap <c-[> <c-\><c-n> " This mapping works in both Terminal apps.
 
 " }}}
 
@@ -820,12 +880,20 @@ let g:netrw_preview = 1
 " NetRW opens previews to the right (not to the left) by default:
 let g:netrw_alto = 0
 " NetRW opens in tree view by default:
+" (apparently the Tree view is buggy in NetRW so maybe should be avoided)
 let g:netrw_liststyle = 3
 " NetRW opens without the banner displayed by default:
 let g:netrw_banner = 0
-"
-"let g:netrw_altv = 0
-"
+" Create the split of the netrw window to the left
+"let g:netrw_altv = 1
+" Automatically set Vim's working directory to be the same as netrw's current
+" directory:
+"let g:netrw_keepdir=0
+" Set the width of the NetRW window:
+let g:netrw_winsize = 16 
+" Open files in previous window emulating the typical 'drawer' behavior:
+let g:netrw_browse_split = 4
+
 " }}}
 
 " ABBREVIATIONS ------------------------------------------------------------ {{{
@@ -888,5 +956,18 @@ if &diff
   nnoremap <leader>3 :diffget REMOTE<cr>
 	colorscheme zaibatsu
 endif
+
+" Clear all but the current buffer (sourced from Google AI):
+" This command is a sequence of three separate commands chained together using
+" the pipe symbol (|). 
+" - :%bd (or :%bdelete): This command deletes all buffers, including the current
+"   one, leaving you in a new, empty (unlisted) buffer.
+" - :e# (or :edit #): The # is a special register that refers to the 'alternate file'
+"   (the buffer you were in immediately before the deletion process started). 
+"   This command re-opens your original, current buffer for editing.
+" - :bd# (or :bdelete #): After the previous step, the new empty buffer becomes
+"   the alternate file. This command deletes that empty, unneeded buffer. 
+command! BuffOnly silent! execute "%bd|e#|bd#"
+
 
 

@@ -4,6 +4,8 @@ This document contains my notes and various bits-and-pieces about Vim.
 
 ![Vim icon](./vim-icon.png?raw=true "A Little Vim Icon")
 
+Das ist gut ya!
+
 Following commands for when in command **ex** mode:
 
 When in view **vi** mode the Escape key goes to **ex** mode. Various commands
@@ -23,6 +25,8 @@ In Mac OS Terminal the mouse scrolling function (scroll-wheel or equivalent)
 will move the cursor up and down lines.
 
 ## Useful Links
+
+`:help quickref` See a quick reference list in the Vim help.
 
 * [Vimrc Configuration Guide - How to Customize Your Vim Code Editor with Mappings, Vimscript, Status Line, and More](https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor/)
 
@@ -303,6 +307,12 @@ which defaults to space, tab, and small set of punctuation characters.
 
 `:set breatat= ^I!@*-+;:,./?`
 
+These only work when 'wrap' is off:
+`zh` | `{number}zh` Scroll screen N characters to the right.
+`zl` | `{number}zl` Scroll screen N characters to the left.
+`zH` | `{number}zH` Scroll screen half a screenwidth to the right.
+`zL` | `{number}zL` Scroll screen half a screenwidth to the left.
+
 ### Spelling
 
 Enable:
@@ -420,6 +430,10 @@ When entering in : commands `<ctrl-D>` will give a list of matching options;
 
 `:Sex!` NetRW explorer on the left (stays open on file open).
 
+`:Ntree {directory}` Set the current (tree-view) directory of NetRW to the
+{directory}. Can set the NetRW current directory to the active file with:
+`:Ntree .`
+
 `%` Create new file.
 
 `d` Create new directory.
@@ -467,6 +481,13 @@ NetRW banner.
 
 Note that the current working directory (as indicated by `:pwd`) is reflected
 in NetRW. Use of `:cd` effects NetRW.
+
+`ctrl-l` Refresh NetRW.
+
+Moving files in NetRW is flaky. Before moving a file/files, try first
+refreshing the listing with `ctrl-l`, select the target destination with `mt`,
+select the file/files to move with `mf`, then move with `mm` or copy with `mc`.
+After `mm`/`mc` refresh again even if it appears the file didn't move.
 
 ### Commands to save
 
@@ -556,13 +577,23 @@ Move with the cursor keys or:
 
 `*` Move cursor to the next whole occurrence of the word the cursor is over.
 
-`#` Move cursor to the previous whole occurrence of the word the cursor is over.
+`g*` Move cursor to the next partial occurrence of the word the cursor is over.
+
+`#` Move cursor to the previous whole occurrence of the word the cursor is
+over.
+
+`g#` Move cursor to the previous partial occurrence of the word the cursor is
+over.
 
 `H` Move cursor to the top of the screen.
+
+`{number}H` Move cursor {number} lines from the top of the screen.
 
 `M` Move cursor to the middle of the screen.
 
 `L` Move cursor to the bottom of the screen.
+
+`{number}L` Move cursor {number} lines from the bottom of the screen.
 
 `yH` Yank from the first visible line to the cursor line (inclusive).
 
@@ -582,21 +613,37 @@ Move with the cursor keys or:
 
 `<ctrl-f>` Forward one screen.
 
+`{number}<ctrl-f>` Forward {number} screens.
+
 `<ctrl-b>` Back one screen.
 
-`<ctrl-d>` Forward 1/2 screen.
+`{number}<ctrl-b>` Back {number} screens.
 
-`<ctrl-u>` Forward 1/2 screen.
+`<ctrl-d>` / **`<ctrl-j>`** Forward 1/2 screen.
+
+`{number}<ctrl-d>` Forward 1/2 {number} screens.
+
+`<ctrl-u>` / **`<ctrl-k>`** Forward 1/2 screen.
+
+`{number}<ctrl-u>` Forward 1/2 screen {number} screens.
 
 `<ctrl-e>` Scroll the buffer/screen down one line. 
 
+`{number}<ctrl-e>` Scroll the buffer/screen down {number} lines. 
+
 `<ctrl-y>` Scroll the buffer/screen up one line. 
+
+`{number><ctrl-y>` Scroll the buffer/screen up {number} line. 
 
 `<ctrl-g>` Show file info and file status.
 
 `{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's path. This gives the full file path (of the buffer).
 
-###Global Command
+### Global Command
+
+`gm` Move cursor to the middle of the screen line.
+
+`gM` Move cursor to the middle of the line.
 
 `gg` / `go` / `[[` Move to the top of the file.
 
@@ -783,6 +830,10 @@ don't do anything. TODO: find out how?
 
 `` `] `` Jump to end of last yanked text.
 
+`[*` Jump to the start of the previous /* comment.
+
+`]*` Jump to the end of the next */ comment.
+
 `dd` Delete current line (copy to unanemd register).
 
 `dl` Delete letter.
@@ -812,7 +863,8 @@ brackets - ( ), { }, [ ] - on the current line.
 
 ## Command window
 
-`q:` Open command line window.
+`q:` Open command line window. From here you can navigate to previous commands
+(modifying if needed).
 
 [Vim Command Line Window - VimTricks](https://vimtricks.com/p/vim-command-line-window/)
 
@@ -859,6 +911,8 @@ Nine                    9       Horn
 
 `I` Insert at the start of the current line.
 
+`gI` | `{number}gI` Insert text in column 1 ({number} times).
+
 `a` Insert (append) at the cursor (after the current character).
 
 `A` (Shift + a) Insert (append) at the end of the current line.
@@ -866,6 +920,14 @@ Nine                    9       Horn
 `o` (letter o) Insert new line under/after cursor.
 
 `O` (capital letter O) Insert new line before cursor.
+
+`:start` / `:star` Start insert mode.
+
+`:start!` / `:star!` Start append mode.
+
+`:startreplace` / `:startr` Start replace mode.
+
+`:startreplace!` / `:startr!` Start replace mode at EOL.
 
 `.` Repeat last command.
 
@@ -941,9 +1003,13 @@ Nine                    9       Horn
 
 `d{number}w` / `{number}dw` Delete multiple {number} of following words.
 
-`d{number}j` / `{number}dj` Delete multiple lines {number} after the current line.
+`d{number}j` / `{number}dj` Delete multiple lines {number} after the current line.  
+
+`dj` Delete current and next line (copy to unanemd register).
 
 `d{number}k` / `{number}dk` Delete multiple lines {number} above the current line.
+
+`dk` Delete current and above line (copy to unanemd register).
 
 `d{number}h` / `{number}dh` Delete multiple {number} of previous characters on the current line.
 
@@ -1217,6 +1283,8 @@ hitting enter as unwanted character(s) may appear.
 With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=`
 then `<ctrl-r>"` to paste the yanked text and press `<enter>`
 
+`@:` Repeat the last Ex command (from its register).
+
 ### Paste from the register
 
 Useful to paste from a previous change (ie, cut, yank).
@@ -1393,7 +1461,7 @@ Autocomplete from the dictionary:
 
 `zz` Position screen with cursor in the middle.
 
-`zt` Position screen with cursor at the top.
+`zt` / `z<Enter>` Position screen with cursor at the top.
 
 `zb` Position screen with cursor at the bottom.
 
@@ -1915,18 +1983,6 @@ In visual select mode:
 
 `` \` `` Toggle case.
 
-`ib` Select a () block inside.
-
-`ab` Select a () block includes.
-
-`i`{ Select a {} block inside.
-
-`a`{ Select a {} block includes.
-
-`i`[ Select a [] block inside.
-
-`a`[ Select a [] block includes.
-
 `u` Change the selected text to lowercase.
 
 `U` Change the selected text to uppercase.
@@ -1962,6 +2018,8 @@ with Visual select):
 
 `'<,'>.!sort -r` Use this for sorting lines at random.
 
+`,+12!sort` Sort from the current line to 12 additional lines down.
+
 `<ctrl-v>` To enter visual select mode, move vertically to select multiple
 lines and enter either I or A to insert or append (respectively) entered
 changes over multiple lines when exiting insert mode.
@@ -1974,6 +2032,8 @@ There doesn't appear to be a way (an equivalent built-in way) to Contract the
 visual selection of tags so as to shrink the selection to inside the selected
 tags.
 
+`a{` Expand / contract visual selection in **{** ... **}**.
+
 Edit multiple contiguous lines
 
 To edit multiple contiguous lines at the same column (ie. for commenting
@@ -1983,17 +2043,19 @@ enter the character(s) and escape out. The multiple lines will now have the
 same character in the same place. Can also use this to change case with ~ or
 delete with d/x.
 
-Substitution across different ranges:
+`/{expression}` Expand visual selection forward to next matching {expression}.
+`n` to expand further forward; `N` to move visual selection in the other
+direction. If visual line mode then this is retained in forward/backward
+selection. Selection will also loop around in the document (possibly due to a
+Vim find customisation).
 
-`:for range in split('6,10 14,18')| exe range 's/<search_string>/<replace_string>/g' | endfor`
+`?{expression}` Inverse of above.
 
+`/\%V{expression}` Search for {expression} only in the last visual selection.
 
-Substitution in marked ranges:
-
-`:s'a,'b/before/after/gci`
-
-The above will search from marked range starting point a going to marked point
-b and confirm global replacement of ‘before’ with ‘after’.
+With a visual selection `:` will open up an Ex command where certain commands
+apply only to that visual selection. For instance `:'<,'>s/{from}/{to}/g` will
+run a substitution on that visual selection only.
 
 ## Folding
 
@@ -2026,14 +2088,18 @@ folds underneath of it, not just the current fold.
 
 `zM` Close all folds.
 
-## Jump list
+## Jump List
+
+`<c-i>` Jump forward?
+
+`<c-o>` Jump back.
 
 [Vim Jump List - VimTricks](https://vimtricks.com/p/vim-jump-list/)
 
 When making certain movements, such as jumping to line 42 with 42G, Vim will
 save it as a “jump” in the jump list. 
 
-`:jumps` You can list jumps
+`:jumps` / `:ju`  Display the jump list.
 
 To move backwards through the jump list to an older jump use `<ctrl-o>`.
 
@@ -2054,20 +2120,26 @@ the Vim change list which is similar to but different from the Vim jump list.
 
 `{number}<ctrl-o>` Go back one/`{number}` place(s) in the jump list.
 
-`{number}<ctrl-i>` Go to the one/`{number}` place(s) in the jump list.
+`{number}<ctrl-i>` / `<tab>` Go to the one/`{number}` place(s) in the jump list.
 
-## Jump (Change) list
+## Change List
 
 [Vim Jump to Last Change - VimTricks](https://vimtricks.com/p/vim-jump-to-last-change/)
 
 Vim keeps track of the position of every undo-able change and makes the last
 100 available to you when you call :changes.
 
-`:changes` – Show position of last 100 changes
+`:changes` – Show position of last 100 changes. Here press <space> to page down
+to see the latest changes.
 
-`g;` Go to the last change made.
+`g;` Go to the previous change made.
 
-`g,` – Go forward to through the next change made.
+`{number}g;` Go to the {number} previous change made.
+
+`g,` – Go to the next change made.
+
+`{number}g,` – Go to the {number} next change made. Eg. 100g, goes to the
+lastest change.
 
 The change list is different to jump list as it tracks undoable changes. 
 
@@ -2185,8 +2257,10 @@ term used in the `"/` search register.
 `:bd` / `:bdelete` **<leader>C** Delete buffer (close a file).
 
 `:bd {number}` / `:bdelete {number}` Delete the buffer by number
-.
-`:bd {number} {number}` / `:bdelete {number} {number}` Delete multiple buffers by number.
+
+`:bdelete {number} {number}` / `:bd {number} {number}` Delete multiple buffers by number.
+
+`%bdelete` / `%bd` Delete all the buffers.
 
 `:bw` Wipe the current buffer.
 
@@ -2265,6 +2339,12 @@ UI elements).
 `:next` Navigate to next open file.
 
 `:previous` Navigate to previous open file.
+
+`:vertical resize {number}` Set the vertical split size to {number}.
+
+`:vertical resize +{number}` Increase the vertical split size by {number}.
+
+`:vertical resize -{number}` Decrease the vertical split size by {number}.
 
 Note that for the following the second key can have ctrl held down too:
 
@@ -2396,6 +2476,16 @@ More info about tabs in Vim:
 `d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the
 marked position {bookmark letter} to the cursor position
 
+Substitution across different ranges:
+
+`:for range in split('6,10 14,18')| exe range 's/<search_string>/<replace_string>/g' | endfor`
+
+Substitution in marked ranges:
+
+`:s'a,'b/before/after/gci`
+
+The above will search from marked range starting point a going to marked point
+b and confirm global replacement of ‘before’ with ‘after’.
 More on marks in Vim:
 
 [Bookmark frequent locations - VimTricks](https://vimtricks.com/p/bookmark-frequent-locations/)
@@ -2527,7 +2617,9 @@ Copied from the vim-surround README:
 
 **surround.vim**
 
-Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML
+tags, and more. The plugin provides mappings to easily delete, change and add
+such surroundings in pairs.
 
 Add double-quotes `"..."` tags around the text hello: `ysiw"`
 
@@ -2537,7 +2629,7 @@ The same but with single-quotes `'...'`: `ysiw"`
 
 **'Hello' world!**
 
-Other examples:
+Other `examples`:
 
 `ysiw(` Surround word with ( ... ) 
 
@@ -2548,6 +2640,9 @@ Other examples:
 `ysiw}` Surround word with {...}
 
 Add `<em>...</em>` tags around the text hello: `ysiw<em>`
+
+To make a word surrounded with < and > you need to use `ysiw>` as
+`ysiw{lessthancharacter}` doesn't work.
 
 **<em>Hello</em> world!**
 
@@ -2897,6 +2992,36 @@ also when 'diff' was not set.
 
 `:cquit` Exit **vimdiff** properly and start the merge again in case of issues.
 
+## Tags - Ctags
+
+Install with `brew install universal-ctags`. This is the Universal version of
+Ctags so includes TypeScript (and a bunch of other languages).
+
+Create the **tags** file in the current directory to recursively include files:
+
+`ctag -R .`
+
+### Navigate Using Tags 
+
+`<ctrl-]>` Jump to the definition of the tag under the cursor.
+
+`:tag {name}` Jump to a specific named tag. Supports tab completion.
+
+`<ctrl-t>` Jump back to your previous location (uses the tag stack).
+
+`:tags`	List the contents of the tag stack.
+
+`:tselect {name}` / `g]` List all matching tags if there are multiple
+definitions and let you select one.
+
+`:tjump {name}` / `g<ctrl-]>` Jumps directly to the tag if there's one match;
+otherwise, displays a list of choices.
+
+`:stag {name}` / `<ctrl-w>]` Open a tag definition in a new horizontal split
+window.
+
+`:vert stag` Open a tag definition in a new vertical split window.
+
 ## TODO
 
 Find out how to install colourschemes in vim (using the colo[rscheme] setting.
@@ -2937,4 +3062,24 @@ press 1v and voilá, our beloved vim gives you another perl :)"
   - Installed the Traces plugin and it kinda works but doesn't provide a
     preview at the confirm stage of a find-and-replace which is what I was
     hoping for.
+
+### Plugins to look into:
+
+vim-vinegar: A simple plugin that enhances Vim's built-in netrw file explorer,
+making file management operations like creating, renaming, and deleting files
+more intuitive.
+
+    - NetRW is very buggy so might not be worth looking into this but instead
+      use an alternate tree file-viewer plugin (or none at all).
+
+vim-obsession: Simplifies Vim's session management, allowing you to easily save
+and restore your open buffers and window layouts for different projects. 
+
+vim-markdown: From tpope
+
+vim-css-color: Display hex and rgb colours in the background of these values.
+
+vim-airline and vim-airline-themes
+
+vim-gitgutter: Display git effects in a gutter.
 
