@@ -142,12 +142,6 @@ Other examples of mappings for effecting next/last content in brackets () and br
 `onoremap an{ :<c-u>normal! f{va{<cr>`
 `onoremap al{ :<c-u>normal! F{va{<cr>`
 
-## Insert Mode
-
-`<ctrl-t>` Increment line
-
-`<ctrl-d>` Decrement line
-
 ## Command Mode
 
 `:w !sudo tee %` Write the file as 'super user'. Useful if the file doesn't
@@ -174,7 +168,7 @@ read and modify the current search pattern.
 
 `:let @/ = "{string}"` Write to the search register (`/`) with a `:let`.
 
-`:execute "<command">` Execute the command in the string.
+`:execute "<command>"` Execute the command in the string.
 
 `:execute "write"` Execute the write just as if you had typed `:write<cr>`.
 
@@ -457,7 +451,8 @@ split to the right by default.
 
 `i` Cycle view types, including tree view.
 
-`x` Open file in associated program (HTML in the web browser, images in Preview etc.).
+`x` Open file in associated program (HTML in the web browser, images in Preview
+etc.).
 
 `v` Open file in a vertical split and move focus to the new split.
 
@@ -637,7 +632,8 @@ over.
 
 `<ctrl-g>` Show file info and file status.
 
-`{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's path. This gives the full file path (of the buffer).
+`{buffernumber}<ctrl-g>` Show file info and status with the {buffer} file's
+path. This gives the full file path (of the buffer).
 
 ### Global Command
 
@@ -645,9 +641,14 @@ over.
 
 `gM` Move cursor to the middle of the line.
 
-`gg` / `go` / `[[` Move to the top of the file.
+`gg` / `go` / Move to the top of the file. `go` is something about going to the
+first byte.
 
-`G` / `]]` Move to the bottom of the file.
+`G` Move to the bottom of the file.
+
+`[[`  Go to the start of the previous section. 
+
+`]]`  Go to the start of the next section.
 
 `<number>G` / `<number>gg` / `:<number>` Move to that line number (or the last
 line if the number is greater than the number of line in the file).
@@ -867,6 +868,12 @@ brackets - ( ), { }, [ ] - on the current line.
 (modifying if needed).
 
 [Vim Command Line Window - VimTricks](https://vimtricks.com/p/vim-command-line-window/)
+
+## Digraph
+
+`:dig` Show current list of digraphs.
+
+`<ctrl-k>{char}{char}` Enter digraph (in insert mode).
 
 ## Special Characters
 
@@ -1103,9 +1110,19 @@ Nine                    9       Horn
 
 `P` Paste over (before) the cursor.
 
+`]p` Paste under (after) the cursor matching indentation of the current line.
+
+`[p` Paste over (before) the cursor matching indentation of the current line.
+
 `"{character}p` Paste from the register {character} after the cursor.
 
 `"{character}P` Paste from the register {character} before the cursor.
+
+`"{register}]p` Paste from the register under (after) the cursor matching
+indentation of the current line.
+
+`{register}[p` Paste from the register over (before) the cursor matching
+indentation of the current line.
 
 `"_dd` Delete line but NOT put into a register (not remembered but sent to the "Black hole").
 
@@ -1241,7 +1258,7 @@ line. Useful for selecting a rectangle in Visual mode and editing a table.
 `:reg` / `:registers` to view the registers.
 
 `:reg {letter|lowercaseletter}` / `:registers {letter|lowercaseletter}` to view
-the register fir {letter|lowercaseletter}.
+the register for {letter|lowercaseletter}.
 
 `"0` is the last yanked text so if the unnamed register `""` has the last deleted
 text `"0` will have a record of the last yanked content to use.
@@ -1284,6 +1301,12 @@ With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=
 then `<ctrl-r>"` to paste the yanked text and press `<enter>`
 
 `@:` Repeat the last Ex command (from its register).
+
+`:{range}d {register}` Delete the [range into {register}. 
+Eg. `:33,57d x` Will take lines 33 to 57 and delete them putting them into
+register **x**.
+Eg. `:,+5d y` Will take the line the cursor in currently on and next 5 lines
+and delete them putting them into register **y**.
 
 ### Paste from the register
 
@@ -1399,27 +1422,48 @@ cursor is on if not over a number.
 
 ## Insert Mode
 
+`<ctrl-v>` Insert character literally, or enter decimal byte value.
+
+`<ctrl-m>` / `<ctrl-j>` New line. Insert line break when in insert
+mode. Hold to repeat for multiple lines.
+
+`<ctrl-e>` Insert character from the line immediately below the cursor.
+
+`<ctrl-y>` Insert character from the line immediately above the cursor.
+
+`<ctrl-r>{register}` Insert the contents of a {register}.
+
+`<ctrl-t>` Increment line.
+
+`<ctrl-i>` Increment line (after cursor).
+
+`<ctrl-d>` Decrement whole line.
+
+`0<ctrl-d>` Delete all increments on the current line.
+ 
+`^<ctrl-d>` Delete all increments on the current line and restore indent on the
+next line? Not sure how this works exactly but noted here nonetheless.
+
+`<ctrl-n>` Match (next) of identifier before the cursor.
+
+`<ctrl-p>` Match (previous) of identifier before the cursor.
+
+`<ctrl-x><...>` Complete the word before the cursor in various ways. 
+Eg. `<ctrl-x><ctrl-l>` to complete by matching line.
+Eg. `<ctrl-x><ctrl-p>` to complete by matching word-by-word.
+
+`<ctrl-h>` Delete character before the cursor.
+
+`<ctrl-w>` Delete word before the cursor.
+
+`<ctrl-u> Delete all entered characters in the current line.
+
 `<ctrl-c>` Cancel (escape) out of insert mode. Set up in **.vimrc** to trigger
 the Esc key from insert mode so the InsertLeave autocmd is also triggered.
-
-`<ctrl-y>` Insert the character in the line above.
-
-`<ctrl-e>` Insert the character in the line below.
-
-`<ctrl-h>` Delete a single character.
-
-`<ctrl-w>` Delete a whole word.
-
-`<ctrl-t>` Tab indent the line.
-
-`<ctrl-d>` Tab de-indent the line.
 
 `<ctrl-g>j` Move cursor down one line.
 
 `<ctrl-g>k` Move cursor up one line.
-
-`<ctrl-j>` Insert line break when in insert mode. Hold to repeat for multiple
-lines.
 
 `<ctrl-o>{normal command}` One shot a normal command. Once the normal command
 is complete goes back insert mode. Enter a normal command when in insert mode.
@@ -1430,6 +1474,8 @@ Stay in insert mode when completed. Eg.:
 `<ctrl-o>l` Move cursor forward one letter.
 
 `<ctrl-o>w` Move cursor forward one word.
+
+`<ctrl-k>{char}{char}` Enter digraph.
 
 ### Autocomplete
 
@@ -1976,6 +2022,10 @@ In visual select mode:
 `O` Move to other side of the line of the visually selected area.
 
 `w` Select next word.
+
+`J` Join selected lines.
+
+`gJ` Join selected lines but without inserting spaces.
 
 `r{character}` Replace selected characters with the new character.
 

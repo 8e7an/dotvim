@@ -489,8 +489,10 @@ inoremap <c-c> <esc>
 " Ctrl+d to delete the current line in insert mode.
 "inoremap <c-d> <esc>ddi
 
-" Ctrl+u to uppercase full word in insert mode.
-inoremap <c-u> <esc>viWU<esc>Ei
+" Ctrl+u to uppercase full word in insert mode. Would use Ctrl+u, but this is
+" used by default for deleting all entered chatacters in the current line.
+" Ctrl+b for 'BIG' text
+inoremap <c-b> <esc>viWU<esc>Ei
 
 " Ctrl+l to lowercase full word in insert mode.
 inoremap <c-l> <esc>viWu<esc>Ei

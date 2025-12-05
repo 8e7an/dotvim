@@ -27,5 +27,3 @@ function! MyFocusGainedFunction()
   setlocal highlight CursorLineNr ctermbg=blue " Change status line color for focused window
   echomsg "Focus gained by a split"
 endfunction
-
-
