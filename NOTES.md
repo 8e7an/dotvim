@@ -3121,9 +3121,59 @@ plugin. This is useful in mappings.
 
 Display preview of search replacements when entering in the search command.
 
-[Traces]( https://github.com/markonm/traces.vim)
+[Traces](https://github.com/markonm/traces.vim)
 
 Website has info about usage.
+
+### Taboo
+
+Taboo aims to ease the way you set the vim tabline. In addition, Taboo provides
+a few useful utilities for renaming tabs.
+
+[Taboo](https://github.com/gcmt/taboo.vim)
+
+#### Commands
+
+TabooRename <tabname> Renames the current tab with the name provided.
+
+TabooOpen <tabname> Opens a new tab and and gives it the name provided.
+
+TabooReset Removes the custom label associated with the current tab.
+
+#### Basic options
+
+g:taboo_tab_format
+
+With this option you can customize the look of tabs. Below all the available
+items:
+
+%f: the name of the first buffer open in the tab
+%F: the name of the buffer open in the current window of the tab
+%a: the path relative to $HOME of the first buffer open in the tab
+%A: the path relative to $HOME of the buffer open in the current window of the
+tab
+%r: the path relative to the current working directory
+%R: the path relative to the current working directory of the buffer in the
+current window of the tab
+%n: the tab number, but only on the active tab
+%N: the tab number on each tab
+%i: same as %n, but using superscript numbers (eg. ²)
+%I: same as %N, but using superscript numbers
+%w: the number of windows opened into the tab, but only on the active tab
+%W: the number of windows opened into the tab, on each tab
+%u: same as %w, but using superscript numbers (eg. ³)
+%U: same as %W, but using superscript numbers
+%m: the modified flag
+%p: the tab current working directory
+%P: the last component of the tab current working directory
+%S: the shortened tab current working directory
+%x: close tab button, see g:taboo_close_tab_label
+
+Default: " %f%m "
+
+Website has info about usage including format options and other features.
+
+## Plugins To Look Into
 
 ### CSS Color
 
@@ -3147,9 +3197,8 @@ With CoC is there any need for language-specific plugins like with the following
 
 ### How to Write a Vim Plugin
 
-I have startd on this with the learn Vim The Hard Way website. This can be
+I have started on this with the learn Vim The Hard Way website. This can be
 seen in the **./pack/learnvimthehardway** folder.
-
 
 ## Variables
 
