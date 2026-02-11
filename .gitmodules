@@ -16,3 +16,6 @@
 [submodule "pack/markonm/start/traces"]
 	path = pack/markonm/start/traces
 	url = https://github.com/markonm/traces.vim.git
+[submodule "pack/gcmt/start/taboo"]
+	path = pack/gcmt/start/taboo
+	url = git@github.com:gcmt/taboo.vim.git
