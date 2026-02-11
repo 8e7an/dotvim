@@ -44,7 +44,7 @@ Vim.
 - [x] 33. Case Study: Grep Operator, Part Two
           Completed this unit but the resulting Vim script file grep-operator.vim is buggy despite
 		  replicating the code in the article (even copied and pasted to be sure). Possibly something
-		  to do with my configuation (even tried without my .vimrc `.vim -u NONE` but still no luck).
+		  to do with my configuration (even tried without my .vimrc `.vim -u NONE` but still no luck).
 		  Maybe look into this again when my Vim script knowledge is further along.
 - [x] 34. Case Study: Grep Operator, Part Three
 - [x] 35. Lists

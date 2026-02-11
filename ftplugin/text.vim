@@ -5,4 +5,5 @@
 
 " syntax on
 
-set spell
+" Spell check on
+setlocal spell

@@ -1,12 +1,12 @@
 "        ___     ___    ___    ___        ___    _________     _________
 "       /###|   /###|  /###|  /###\      /###|  /#########\   /#########\
 "      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
-"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### __ ###|
-"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###|  |___/
+"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _  ###|
+"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###| |___/
 "      | ###|  | ###| | ###| | ##############| | ###| | ###| | ###|
 "      | ###|  | ###| | ###| | ###  ####  ###| | #########/  | ###|
-"      | ###|  | ###| | ###| | ###|  ##/| ###| | #########\  | ###|   ___
-"   __ \ ###|__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|__|###\
+"      | ###|  | ###| | ###| | ###|  ##/| ###| | #########\  | ###|  ____
+"   __ \ ###|__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|_/ ###\
 "  /##| \ #########/  | ###| | ###|     | ###| | ###| | ###| | ##########|
 " | ##|  \ #######/   | ###| | ###|     | ###| | ###| | ###| \ ##########|
 " |__/    \______/    |___/  |___/      |___/  |___/  |___/   \_________/
@@ -44,11 +44,8 @@
 "filetype on
 
 " Enable plugins and load plugin for the detected file type and load indent
-" for the detected file type:
+" for the detected file type.
 filetype plugin indent on
-"filetype plugin on
-"
-"syntax enable
 
 " Uncomment on the following line to disable the installed plugin:
 "let g:loaded_surround = 1
@@ -77,6 +74,9 @@ set regexpengine=0
 " [acd] Automatically changes Vim's current directory to the active buffer's directory:
 " (This setting active may effect plugins).
 "set autochdir
+
+" Enable use of terminal gui colours:
+"set termguicolors
 
 " [fo] Prevent auto-commenting on new lines (r flag for <enter> when in insert mode
 " and o flag for o/O command in normal mode)
@@ -129,6 +129,9 @@ set cursorcolumn
 
 " [ts] Tabstop length (override default of 8).
 set tabstop=2
+
+" [sta] Tabbing but 'smarter'.
+set smarttab
 
 " [sts] Number of spaces that a <Tab> counts for while performing editing
 " operations, like inserting a <Tab> or using <BS>.
@@ -194,7 +197,7 @@ set autoread
 " [is] Incremental highlight search matches.
 set incsearch
 
-"  [hls] Highlight search matches
+"  [hls] Highlight search matches.
 set hlsearch
 
 " [sm] Show matching words during a search.
@@ -202,6 +205,9 @@ set showmatch
 
 " [hid] Don't need to write changed buffer before switching to another one.
 set hidden
+
+" [swb] Jumping to a buffer using a buffer split command.
+set switchbuf=useopen,usetab
 
 " Set the commands to save in history default number is 20.
 set history=50
@@ -242,6 +248,9 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 " to expand wildcards, which happens when there are special characters.
 "set wildignorecase
 
+" Include alphanumerics in the increment/decrement operation
+"set nrformats+=alpha
+
 " AUTO-COMPLETE WITH DICTIONARY ---------------------------------------------------- {{{
 
 "set dictionary?
@@ -275,11 +284,8 @@ set spelllang+=en_gb
 " Set wildcharm as the built-in color scheme:
 "colorscheme wildcharm
 
-" Set murphy as the built-in color scheme:
-"colorscheme industry
-"colorscheme murphy
-colorscheme slate
-
+" [cc] Set the color column to the number of columns. Eg. 80.
+"set colorcolumn=80
 "highlight ColorColumn ctermbg=darkred
 "call matchadd('ColorColumn','\%81v',100)
 
@@ -296,6 +302,8 @@ colorscheme slate
 " 231 is Grey100 (white)
 " 232 is Grey3 (very dark grey)
 " 236 is Grey19 (dark grey)
+
+" With autocmd it can also be written as au.
 
 augroup ColorScheming
 	"  Removes any existing autocommands in this group to avoid duplication:
@@ -323,6 +331,13 @@ augroup ColorScheming
 	" -- autocmd InsertEnter * highlight CursorLine cterm=none ctermfg=231 ctermbg=236
 	" -- autocmd InsertEnter * highlight CursorColumn cterm=none ctermbg=236
 
+	" Set murphy as the built-in color scheme (instead of colorscheme you can
+	" also use colo):
+	"colorscheme industry
+	"colorscheme slate
+	"colo PaperColor
+	colo murphy
+
 	" Other Vim autocmd events:
 	" BufRead
 	" BufNewFile
@@ -345,7 +360,9 @@ augroup ColorScheming
 	" TabLine - In-active tab
 	" TabLineSel - Active Tab
 
-	" Set the Cursor "cross-hair" colors:
+	highlight clear
+
+	" Set the Cursor "cross-hair" colours:
 	highlight CursorLine ctermbg=235
 	highlight CursorColumn ctermbg=236
 
@@ -382,7 +399,7 @@ augroup END
 
 " FILE-TYPE AUTO-COMMANDS ------------------------------------------------------------------
 
-" Vimscript file settings ---------------------- {{{
+" Vimscript file settings -------------------------------------------------- {{{
 augroup filetype_vim
 	autocmd!
 	" These settings in addition to ftplugin/vim.vim
@@ -390,7 +407,7 @@ augroup filetype_vim
 augroup END
 " }}}
 
-" Pico-8 file settings ---------------------- {{{
+" Pico-8 file settings ----------------------------------------------------- {{{
 augroup filetype_p8
 	autocmd!
 	" These settings in addition to ftplugin/lua.vim
@@ -399,7 +416,7 @@ augroup filetype_p8
 augroup END
 " }}}
 
-" CSS file settings ---------------------- {{{
+" CSS file settings -------------------------------------------------------- {{{
 augroup filetype_css
 	autocmd!
 	" These settings in addition to ftplugin/css.vim
@@ -421,6 +438,12 @@ augroup END
 "autocmd BufNewFile,BufRead *.html setlocal nowrap
 
 " CUSTOM ABBREVIATIONS FOR VARIOUS FILE TYPES ------------------------------
+
+augroup filetype_lisp
+	autocmd!
+	" These settings in addition to ftplugin/lisp.vim
+	"
+augroup END
 
 augroup filetype_python
 	autocmd!
@@ -463,7 +486,7 @@ augroup END
 
 " COMMANDS ---------------------------------------------------------------------------------
 
-" Clear the Registry ---------------------- {{{
+" Clear the Registry --------------------------------------------------------------- {{{
 augroup commands
 	command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 augroup END
@@ -600,6 +623,8 @@ noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
 noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
 
 " Jump to next `f` / `F` / `t` / `T` match on the line:
 	"nnoremap <leader>; ;
@@ -615,10 +640,8 @@ nnoremap <leader>B :buffers<cr>
 nnoremap <leader>J :jumps<cr>
 " View the marks:
 nnoremap <leader>M :marks<cr>
-" Close the buffer:
-nnoremap <leader>c :close<cr>
 " Unload buffer [N] (default: current buffer) and delete it from the buffer list:
-nnoremap <leader>C :bdelete<cr>
+"nnoremap <leader>C :bdelete<cr>
 " Set focus to left split:
 nnoremap <leader>h <c-w>h
 " Set focus to top split:
@@ -628,51 +651,53 @@ nnoremap <leader>j <c-w>j
 " Set focus to right split:
 nnoremap <leader>l <c-w>l
 
+" Go to the next buffer (split/window) and delete the current one:
+nnoremap <Leader>bd :bnext<bar>bdelete #<CR>
+
 " 'Special' leader commands. 's' is rather arbitrary for these leader
 " short-cuts commands but it's a handy pneumonic
 "
 " Available leader s commands:
-" nnoremap <leader>sa
 " nnoremap <leader>se
-" nnoremap <leader>se
-" nnoremap <leader>sf
 " nnoremap <leader>sg
 " nnoremap <leader>sj
 " nnoremap <leader>sk
 " nnoremap <leader>sm
 " nnoremap <leader>su
-" nnoremap <leader>sv
-" nnoremap <leader>sy
 " nnoremap <leader>sz
 
-" Create new tabset:
-nnoremap <leader>sa :tabe<cr>
-" Clear the current quickfix list (replace with an empty list).
-nnoremap <silent> <leader>sc :call setqflist([], 'r')<cr>:echo "Quicklist menu cleared"<cr>
-" With 4 vertical splits move the far-right one down below the others:
-nnoremap <leader>sq 4<c-w>l<c-w>J
 " Replace the current line with the date - day month year (note the escaping
 " of % with \ - otherwise it outputs the file path):
-nnoremap <silent> <leader>sd :.!date '+\%d \%B \%Y'<cr>
-"nnoremap <leader>sd :.!date<cr>4wD<esc>
+nnoremap <silent> <leader>sa :.!date '+\%d \%B \%Y'<cr>
+"nnoremap <leader>sa :.!date<cr>4wD<esc>
+" Toggle line breaking:
+nnoremap <silent> <leader>sb :set linebreak!<cr>
+" Close the buffer:
+nnoremap <silent> <leader>sc :close<cr>:echo "Closed the buffer"<cr>
 " View the full path of the file/buffer:
-nnoremap <leader>sf :echo expand('%:p')<cr>
+"nnoremap <leader>sf :echo expand('%:p')<cr>
+" Show current directory:
+nnoremap <leader>sd :pwd<cr>
+" Toggle fold column visibility
+nnoremap <leader>sf :call <SID>FoldColumnToggle()<cr>
 " Toggle hidden characters (i for invisible):
 nnoremap <silent> <leader>si :set list!<cr>
 " New horizontal split for the current buffer:
 nnoremap <silent> <leader>sh :sp<cr>
 " New vertical split for the current buffer:
-nnoremap <silent> <leader>sv :vs<cr>>
+nnoremap <silent> <leader>sv :vs<cr>
 " Save the session (to the default Session.vim file):
 nnoremap <leader>ss :mksession!<cr>:echo "Session saved to Session.vim"<cr>
 " Restore the session (from the default Session.vim file):
 nnoremap <leader>sr :source Session.vim<cr>:echo "Session restored from Session.vim"<cr>
-" Toggle text wrapping:
-nnoremap <silent> <leader>sw :set wrap!<cr>
-" Toggle line breaking:
-nnoremap <silent> <leader>sb :set linebreak!<cr>
 " Toggle spelling:
 nnoremap <silent> <leader>sp :set spell!<cr>
+" Yank the current line to the 'j' register and paste on the next line:
+nnoremap <leader>sj "jyyp
+" Yank the current line to the 'k' register and paste on the previous line:
+nnoremap <leader>sk "kyyP
+" Toggle visibility of color column (80)
+nnoremap <silent> <leader>sl :call <SID>ColorColumnToggle(80)<cr>
 " Open a tag definition for the term under the cusor in a new horizontal split:
 nnoremap <silent> <leader>st :stag<cr>
 " Tidy the indentation the whole document:
@@ -683,11 +708,36 @@ nnoremap <silent> <leader>sx :ContextToggle<cr>
 nnoremap <leader>sn :Ntree .<cr>
 " Call the custom BuffOnly command to clear all but the current buffer:
 nnoremap <leader>so :BuffOnly<cr>
+" Toggle text wrapping:
+nnoremap <silent> <leader>sw :set wrap!<cr>
+" With 4 vertical splits move the far-right one down below the others:
+"nnoremap <leader>sq 4<c-w>l<c-w>J
+" Yank in word to the clipboard
+nnoremap <silent> <leader>sy "*yiw
+
+" Quicklist leader commands
+
+" Clear the current quickfix list (replace with an empty list).
+"nnoremap <silent> <leader>sc :call setqflist([], 'r')<cr>:echo "Quicklist menu cleared"<cr>
+nnoremap <silent> <leader>cc :cexpr []<cr>:echo "Quicklist menu cleared"<cr>
+" Quicklist previous:
+nnoremap <silent> <leader>cp :cprevious<cr>:echo "Previous in the Quicklist"<cr>
+" Quicklist next:
+nnoremap <silent> <leader>cn :cnext<cr>:echo "Next in the Quicklist"<cr>
+" Quicklist open:
+"nnoremap <silent> <leader>co :copen<cr>
+" Quicklist close:
+"nnoremap <silent> <leader>cl :close<cr>
+" Quicklist toggle visibility 
+nnoremap <silent> <leader>ct :call <SID>QuickfixToggle()<cr>
+
+" Other leader commands
 
 " Reposition horizontal split to  vertical split:
 nnoremap <leader>tt <c-w>t<c-w>H
 " Reposition vertical split to horizontal split:
 nnoremap <leader>tk <c-w>t<c-w>K
+
 " Decrease split width by 15:
 nnoremap <leader>< 15<c-w><:echo "Decrease split width by 15"<cr>
 " Increase split width by 15:
@@ -704,17 +754,25 @@ nnoremap <leader>0 10<c-w>+:echo "Increase split height by 12"<cr>
 "nnoremap <leader>; <c-w>-
 " Increase split height by 1. {number}<leader>' to increase by {number}:
 "nnoremap <leader>' <c-w>+
+
 " Set focus to previous tab:
-nnoremap <leader>n :tabp<cr>:echo "Focus previous tab"<cr>
+"nnoremap <silent> <leader>n :tabp<cr>:echo "Focus previous tab"<cr>
+" Leader [ to change to previous buffer (last cycling around):
+nnoremap <silent> <leader>n :bp<cr>:echo "Previous buffer"<cr>
 " Set focus to next tab:
-nnoremap <leader>m :tabn<cr>:echo "Focus next tab"<cr>
-" Open a new tab set:
-nnoremap <leader>N :tabnew<cr>:echo "New tab"<cr>
+"nnoremap <silent> <leader>m :tabn<cr>:echo "Focus next tab"<cr>
+" Leader ] to change to next buffer (first cycling around):
+nnoremap <silent> <leader>m :bn<cr>:echo "Next buffer"<cr>
+
 " Inset blank line ({number}<leader>i for {number} of lines) - good for moving
 " text after the cursor down one line:
 nnoremap <silent> <leader>i i<cr><esc>
-" Add blank line ({number}<leader>o to add {number} of blank lines):
+" Add blank line after the cursor 
+"   ({number}<leader>o to add {number} of blank lines):
 nnoremap <silent> <leader>o o<esc>
+" Add blank line before the cursor 
+"   ({number}<leader>o to add {number} of blank lines):
+nnoremap <silent> <leader>O O<esc>
 " Write changes:
 nnoremap <leader>w :w<cr>:echo "Write changes to file."<cr>
 " Write changes to all:
@@ -729,22 +787,39 @@ nnoremap \ :.y+<cr>:echo "Line copied to clipboard"<cr>
 " Paste from the system clipboard with the pipe (shift+\) - needs to be escaped
 nnoremap \| "*p<cr>:echo "Line pasted from clipboard"<cr>
 " Copy all text to the clipboard:
-nnoremap <leader>e :%y+<cr>
+nnoremap <silent> <leader>e :%y+<cr>:echo "Whole file copied to the clipboard"<cr>
 " Toggle fold:
 nnoremap <leader>z za
 " Write and quite file:
 nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"<cr>
-" Replace text under cursor or visually selected text with yanked (register) text:
-nnoremap <silent> <leader>r diw"0P
+" Replace text under cursor or visually selected text with yanked (register) text
+" (deletes the old text to the "blackhole" register):
+nnoremap <silent> <leader>r "_diw"0P
+
 " Leader [ to change to previous buffer (last cycling around):
-nnoremap <leader>[ :bp<cr>
+"nnoremap <leader>[ :bp<cr>
+nnoremap <silent> <leader>[ :tabp<cr>:echo "Focus previous tab"<cr>
 " Map ending square bracket to semicolon (;to change to previous buffer (last cycling around)
 " Leader ] to change to next buffer (first cycling around):
-nnoremap <leader>] :bn<cr>
+"nnoremap <leader>] :bn<cr>
+nnoremap <silent> <leader>] :tabn<cr>:echo "Focus next tab"<cr>
 " Go to the first buffer:
-nnoremap <leader>{ :bfirst<cr>
+"nnoremap <leader>{ :bfirst<cr>
+" Go to the first tab:
+nnoremap <silent> <leader>{ :tabfirst<cr>:echo "Focus first tab"<cr>
 " Go to the last buffer:
-nnoremap <leader>} :blast<cr>
+"nnoremap <leader>} :blast<cr>
+" Go to the last tab:
+nnoremap <silent> <leader>} :tabfirst<cr>:echo "Focus last tab"<cr>
+" Close current tab:
+nnoremap <silent> <leader>tc :tabclose<cr>:echo "Closed tab"<cr>
+" Open a new tab:
+nnoremap <silent> <leader>tn :tabnew<cr>:echo "New tab"<cr>
+" Move the current tab to the first position:
+nnoremap <leader>th :tabm 0<cr>:echo "Moved tab to the first position"<cr>
+" Move the current tab to the last position:
+nnoremap <leader>tl :tabm $<cr>:echo "Moved tab to the last position"<cr>
+
 " Leader v to open the .vimrc file in a vertical split:
 nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc:
@@ -783,12 +858,6 @@ nnoremap <leader>D "_dd:echo "Delete into the 'black hole' and removed line"<cr>
 "Map the backspace/delete <bs> key to delete the current line to the 'black
 "hole' and leave the current line blank.
 nnoremap <bs> _"_D:echo "Also delete into the 'black hole' and leave line"<cr>
-
-" Uppercase full word in insert mode.
-"nnoremap <leader>su <esc>viWU<esc>Ei
-
-" Lowercase full word in insert mode.
-"nnoremap <leader>sl <esc>viWu<esc>Ei
 
 "nnoremap <leader>html :this is a test
 
@@ -919,22 +988,48 @@ iabbrev loremp Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
 
 " }}}
 
-" TOGGLING ------------------------------------------------------------------------- {{{
+" CUSTOM FUNCTIONS ----------------------------------------------------------------- {{{
+
 " https://learnvimscriptthehardway.stevelosh.com/chapters/38.html
 
+" The s: denotes variables and functions scoped to this script (.vimrc) file.
+" The a: denotes argument variables that are scoped in the function they are
+" passed to.
+" Key details about a: variables:
+" Scope: They are valid only within the scope of the function in which they are defined.
+" Read-Only: You cannot change the value of a function argument (e.g., let a:arg = 1 is invalid).
+" Usage: You must prefix the parameter name with a: whenever you use it within the function. 
+" s:FunctionName() is called with call: <SID>FunctionName() in the same script
+" file.
+" 
+" Variadic Functions (Variable Number of Arguments):
+" If a function is defined with ... to accept variable arguments, the a:
+" prefix is used to access them: 
+" a:0: The number of extra arguments.
+" a:1, a:2, etc.: The specific extra arguments.
+" a:000: A list containing all extra arguments. 
+" 
+" Other Related Scopes:
+" g: Global variable (accessible everywhere).
+" l: Local variable inside a function.
+" b: Buffer-local variable (specific to a file). 
+" If you do not use a prefix in a script, it is usually global; using s: is
+" considered best practice for internal script variables. 
+
+" s:FunctionName() is called with call <SID>FunctionName() in the same script
+" file.
+
 " Toggle fold column visibility
-nnoremap <leader>Sf :call <SID>FoldColumnToggle()<cr>
 function! s:FoldColumnToggle()
 	"echom &foldcolumn
 	if &foldcolumn
-		setlocal foldcolumn=0
+		setlocal foldcolumn = 0
 	else
-		setlocal foldcolumn=4
+		setlocal foldcolumn = 4
 	endif
 endfunction
 
 " Toggle quick fix window visibility 
-nnoremap <leader>Sq :call <SID>QuickfixToggle()<cr>
 let s:quickfix_is_open = 0
 function! s:QuickfixToggle()
 	if s:quickfix_is_open
@@ -947,6 +1042,91 @@ function! s:QuickfixToggle()
 		let s:quickfix_is_open = 1
 	endif
 endfunction
+
+" Toggle the color column's visibility
+" Notes: 
+"   To assign a variable value to a set property you need to call execute
+"     with a string.
+"   Cannot have a space around the = sign for assigning a value to a set
+"     property. I think setlocal = sign can have a space.
+"   A script variable of say let s:color_column = 0 doesn't work with multiple
+"	    windows/splits as toggling on the column in one view effects the other
+"	    window/splits. Better to check the colorcolumn value of the window/split
+"	    with &colorcolumn so the test and set is for each window/split.
+function! s:ColorColumnToggle(cols)
+	if &colorcolumn
+		set colorcolumn=0
+		echom a:cols . " columns visibility toggled off"
+	else
+		execute "set colorcolumn=" . a:cols 
+		echom a:cols . " columns visibility toggled on"
+	endif
+endfunction
+
+" Function to take starting and ending numbers and delete the buffers 
+" in that range (inclusive).
+function! DelBufsRange(start, end)
+	if exists('*getbufinfo')
+		echo "Removing buffers ranging from " . a:start . " to " . a:end
+		for buffer_info in getbufinfo()
+			let l:bufnr = buffer_info.bufnr
+			"let l:bufname = buffer_info.name
+			if buffer_info.listed
+				"echom 'Listed buffer: ' . l:bufnr . ' - ' . l:bufname
+				if l:mbufnr >= a:start && l:bufnr <= a:end
+					"echo 'Delete buffer: ' . l:bufnr . ' - ' . l:bufname
+					execute " bdelete " . l:bufnr
+				endif
+			endif
+		endfor
+	else
+		echo "The function 'getbufinfo' is not availble. No buffers removed"
+	endif
+endfunction
+
+" Call the DelBufsRange function as an EX command with:
+" :call DelBufsRange({startnumber}, {endumber})
+" Eg. :call DelBufsRange(4,10) to delete buffers from 4 (inclusive) to 10 (inclusive).
+command! DelBufsRange call DelBufsRange(<f-args>)
+
+" Function to take a variable number of integer arguments and delete 
+" buffers with any of the arguments.
+function! DelBufsInstances(...)
+	let l:bufnrlist = map(getbufinfo({'buflisted': 1}), 'v:val.bufnr')
+	for l:arg in a:000
+		if index(l:bufnrlist, l:arg) != -1
+			echom "Deleting buffer: " . l:arg
+			execute " bdelete " . l:arg
+		endif
+	endfor
+
+	" Following also works but two loops instead of using map() function
+	" to get the listed buffer numbers.
+
+	" echom "Removing buffers instances"
+	" echom "Number of args provded: " . a:0
+	" for l:arg in a:000
+	" 	" echom "Argument: " . l:arg
+	" 	for buffer_info in getbufinfo()
+	" 		let l:bufnr = buffer_info.bufnr
+	" 		"let l:bufname = buffer_info.name
+	" 		if buffer_info.listed
+	" 			if l:bufnr == l:arg
+	" 				echom "Deleting buffer: " . l:arg
+	" 				execute " bdelete " . l:bufnr
+	" 				break
+	" 			endif
+	" 		endif
+	" 	endfor
+	" endfor
+
+endfunction
+
+
+" Call the DelBufsInstances function as an EX command with:
+" :call DelBufsInstances({number}...)
+" Eg. :call DelBufsInstances(4,10,13) to delete buffer from 4, 10 and 13 (if there).
+command! DelBufsInstances call DelBufsInstances(<f-args>)
 
 " }}}
 
@@ -970,6 +1150,4 @@ endif
 " - :bd# (or :bdelete #): After the previous step, the new empty buffer becomes
 "   the alternate file. This command deletes that empty, unneeded buffer. 
 command! BuffOnly silent! execute "%bd|e#|bd#"
-
-
 

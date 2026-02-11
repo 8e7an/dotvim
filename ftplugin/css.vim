@@ -1,22 +1,25 @@
 "
 " css.vim
+" For scss (sass styling too) as set in the .vimrc
 "
 
 " Turn syntax highlighting on.
 syntax on
 
 " Tabstop length (override default of 2).
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
 
 " Expand tabstops to spaces.
-set expandtab
+setlocal expandtab
 
-" Code folding
-set foldmethod=syntax
+" Folding
+"setlocal foldmethod=syntax
+setlocal foldmethod=indent
+
 " Depth of default folding
-set foldlevel=4
+setlocal foldlevel=5
 
 "colorscheme zaibatsu
 
@@ -47,12 +50,17 @@ iabbrev fl1 flex: 1;
 iabbrev fla flex: auto;
 iabbrev fl01 flex: 0 1;
 iabbrev fl01a flex: 0 1 auto;
-iabbrev jcc justify-content: center;
-iabbrev jcfs align-items: flex-start;
-iabbrev jcfe align-items: flex-end;
+iabbrev fdr flex-directioon: row;
+iabbrev fdc flex-directioon: column;
+iabbrev fww flex-wrap: wrap;
+iabbrev aifs align-items: flex-start;
+iabbrev aife align-items: flex-end;
 iabbrev aic align-items: center;
 iabbrev aifs align-items: flex-start;
 iabbrev aife align-items: flex-end;
+iabbrev jcc justify-content: center;
+iabbrev jcfs justify-content: flex-start;
+iabbrev jcfe justify-content: flex-end;
 iabbrev gp gap:
 iabbrev gp12 gap: 12px;
 iabbrev gp24 gap: 24px;
@@ -72,4 +80,9 @@ iabbrev fw font-weight:
 iabbrev fwn font-weight: normal;
 iabbrev fwb font-weight: bold;
 iabbrev shd box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.35);
+iabbrev wsnw white-space: nowrap;
+iabbrev wsw white-space: wrap;
+iabbrev h100% height: 100%;
+iabbrev w100% width: 100%;
+
 

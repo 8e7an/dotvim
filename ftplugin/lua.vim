@@ -5,19 +5,19 @@
 " Turn syntax highlighting on.
 syntax on
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
 
 " Expand tabstops to spaces.
-set expandtab
+setlocal expandtab
 
 " Code folding
-set foldmethod=indent
+setlocal foldmethod=indent
 " Depth of default folding
-set foldlevel=4
+setlocal foldlevel=4
 
-"Set the (custom) leader commands.
+"setlocal the (custom) leader commands.
 " Insert comment (--) current line.
 nnoremap <leader>j I--<esc>
 " Remove comment (remove --) current line.

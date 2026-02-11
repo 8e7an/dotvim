@@ -5,14 +5,11 @@
 " Syntax highlighting on
 syntax on
 
-" Spellcheck enabled
-set spell
-
-" Use Vim's spell checker
+" Spellcheck enabled with Vim's spell checker
 setlocal spell
 
-" Fold method
-set foldmethod=syntax
+" Folding
+setlocal foldmethod=syntax
 
 "Operator-Pending mappings for Markdown files
 " 'in heading' of the previously found heading

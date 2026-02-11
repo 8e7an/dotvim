@@ -5,17 +5,17 @@
 " Turn syntax highlighting on.
 syntax on
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
 
 " Expand tabstops to spaces.
-set expandtab
+setlocal expandtab
 
 " Code folding
-set foldmethod=indent
+setlocal foldmethod=indent
 " Depth of default folding
-set foldlevel=8
+setlocal foldlevel=8
 "
 " Code (HTML etc.) add comment (starting <!-- and ending -->) to the current line
 nnoremap <buffer> <silent> <localleader>j I<!-- <esc>A --><esc>

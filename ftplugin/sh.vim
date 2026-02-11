@@ -8,7 +8,7 @@
 syntax on
 
 " Display with the phython syntax highlighting 
-set ft=python
+setlocal ft=python
 
 " Code (JavaScript etc.) add comment (starting #) to the current line
 nnoremap <buffer> <localleader>j I#<esc>

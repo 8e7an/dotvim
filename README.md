@@ -58,7 +58,8 @@ From .vim/ folder add a submodule from a GitHub account with the following forma
 
 `git submodule add --depth 1 {https_git[hub]_repository_url} ./pack/{repository_author}/start/{plugin_name_alias_name}`
 
-`{https_git[hub]_repository_url}` is the (SSH) url from the git remote (ie. GitHub) to clone down from.
+`{https_git[hub]_repository_url}` is the (SSH) url from the git remote (ie.
+GitHub) to clone down from.
 
 `{repository_author}` is the author's user name/handle from their GitHub profile.
 
