@@ -36,6 +36,12 @@ nnoremap <buffer> <localleader>while iwhile  do<cr><tab><cr>end<esc>2k_fdhi
 " Do while loop template
 nnoremap <buffer> <localleader>do irepeat<cr><tab><cr>until <esc>i
 
+nnoremap <buffer> <localleader>note i--[[<esc>o <esc>o--]]<esc>kA 
+
+nnoremap <buffer> <localleader>c ?\v--[[<cr>_dd<c-o>/\v--]]<cr>_dd<c-o>
+
+vnoremap <buffer> <localleader>c <esc>`<O--[[<esc>`>o--]]<esc>
+
 " set formatoptions in .vimrc is (seemingly) being overriden by a plugin
 " so the following autocmd takes out the (r and o flags) again for the Lua
 " file type:

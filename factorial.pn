@@ -1,0 +1,16 @@
+# experimental "potion" file from the chapter on Basic Folding at:
+# https://learnvimscriptthehardway.stevelosh.com/chapters/48.html
+
+factorial = (n):
+	total = 1
+	n to 1 (i):
+		# Multiply the running total.
+		total *= i.
+	total.
+
+10 times (i):
+	i string print
+	'! is: ' print
+	factorial (i) string print
+	"\n" print.
+		

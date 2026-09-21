@@ -1,15 +1,15 @@
-"        ___     ___    ___    ___        ___    _________     _________
-"       /###|   /###|  /###|  /###\      /###|  /#########\   /#########\
-"      | ###|  | ###| | ###| | ####\    /####| | ##########| | ##########|
-"      | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _  ###|
-"      | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###| |___/
-"      | ###|  | ###| | ###| | ##############| | ###| | ###| | ###|
-"      | ###|  | ###| | ###| | ###  ####  ###| | #########/  | ###|
-"      | ###|  | ###| | ###| | ###|  ##/| ###| | #########\  | ###|  ____
-"   __ \ ###|__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|_/ ###\
-"  /##| \ #########/  | ###| | ###|     | ###| | ###| | ###| | ##########|
-" | ##|  \ #######/   | ###| | ###|     | ###| | ###| | ###| \ ##########|
-" |__/    \______/    |___/  |___/      |___/  |___/  |___/   \_________/
+"         ___     ___    ___    ___        ___    _________      ________
+"        /###|   /###|  /###|  /###\      /###|  /#########\    /########\
+"       | ###|  | ###| | ###| | ####\    /####| | ##########|  /##########|
+"       | ###|  | ###| | ###| | #####\  /#####| | ### _  ###| | ### _  ###|
+"       | ###|  | ###| | ###| | ######\/######| | ###| | ###| | ###| |___/
+"       | ###|  | ###| | ###| | ##############| | ###|_| ###| | ###|
+"       | ###|  | ###| | ###| | ###  ####  ###| | #########/  | ###|
+"       | ###|  | ###| | ###| | ###|  ##/| ###| | #########\  | ###|   ___
+"   __  | ###|__/ ###/ | ###| | ###|\__/ | ###| | ### _  ###| | ###|__/###\
+"  /##| \  #########/  | ###| | ###|     | ###| | ###| | ###| | ##########|
+" | ##|  \  #######/   | ###| | ###|     | ###| | ###| | ###| |  ########/ 
+" |__/    \_______/    |___/  |___/      |___/  |___/  |___/   \________/ 
 "
 "
 "Notes about this file:
@@ -54,6 +54,7 @@ filetype plugin indent on
 "let g:loaded_Signature = 1
 "let g:context_enabled = 0
 "let g:loaded_traces_plugin = 1
+"let g:loaded_taboo = 1
 
 " Turn syntax highlighting on.
 syntax on
@@ -79,9 +80,11 @@ set regexpengine=0
 "set termguicolors
 
 " [fo] Prevent auto-commenting on new lines (r flag for <enter> when in insert mode
-" and o flag for o/O command in normal mode)
+" and o flag for o/O command in normal mode):
 set formatoptions-=r
 set formatoptions-=o
+" Automatically reflow paragraphs in insert mode:
+" set formatoptions+=a 
 
 " [is] Searching though a buffer incrementally highlight matching characters
 " as you type.
@@ -177,7 +180,7 @@ set number
 " [nuw] Set the width of the number column.
 "set numberwidth=6
 
-" [rno] Set relative line numbers to display by default.
+" [rnu] Set relative line numbers to display by default.
 set relativenumber
 
 " [ru] Set the cursor position (including % location in the file) in the
@@ -217,9 +220,17 @@ set history=50
 "let &history=&history + 10
 "set history?
 
-" New horizontal and vertical splits are to the bottom and right (not top and
-" left)
+" New horizontal and vertical splits are to the bottom and right (not top and left).
 set splitbelow splitright
+
+" Ensures active vertical split is at least 80 columns wide.
+"set winwidth=40
+
+" Ensures active horizontal split is at least 20 lines high.
+"set winheight=20
+
+" In your .vimrc
+"set equalalways
 
 " Set the character in the vertical split to \ (defaults to |)
 "set fillchars+=vert:\
@@ -463,11 +474,11 @@ augroup typescript_js
 	autocmd BufNewFile,BufRead *.ts set ft=javascript
 	" These settings in addition to ftplugin/typescript.vim
   "autocmd BufRead,BufNewFile *.ts setfiletype typescript
-	
+	"	
 	" This works but effect the whole of Vim, not just the file of type
 	" javascript:
 	"autocmd FileType javascript colorscheme torte
-
+	"
 augroup END
 
 augroup filetype_html
@@ -475,7 +486,7 @@ augroup filetype_html
 	" These settings in addition to ftplugin/html.vim
 	"
 	" Auto indent HTML files on read (into the buffer) and write (from the buffer).
-	autocmd BufWritePre,BufRead *.html :normal gg=G
+	autocmd BufWritePre,BufRead *.html :normal gg=Gg;
 augroup END
 
 augroup filetype_markdown
@@ -550,10 +561,11 @@ nnoremap <leader><space> :
 " Map semicolon (') to $ (cursor to end of line):
 "nnoremap ' $
 
-" Map <tab> key to % to swap between matching brackets - ({[j:
-" Remapping <tab> to % also causes the <c-i> to be remapped 
-" (c-i points to tab) which means the tab key calls the jump list newest
-" command. Instead leader-tab gets around this issue.
+" Map <leader><tab> key to % to swap between matching brackets - ({[ - ]}):
+" Remapping just <tab> to % also causes the <c-i> to be remapped 
+" (c-i points to tab) which we don't want as this means the tab 
+" key calls the jump list's newest " command. <leader><tab> gets 
+" around this issue (albeit with an extra key press).
 nnoremap <silent> <leader><tab> %
 
 " Map Y to yank to the end of the current line:
@@ -634,8 +646,9 @@ nnoremap <silent> <leader>, _
 nnoremap <silent> <leader>; $
 " View the registers:
 nnoremap <leader>R :reg<cr>
-" View the buffers:
-nnoremap <leader>B :buffers<cr>
+" View the buffers (:buffers / :buf / :ls):
+nnoremap <leader>B :ls<cr>
+nnoremap <leader>L :ls<cr>
 " View the jumps:
 nnoremap <leader>J :jumps<cr>
 " View the marks:
@@ -674,12 +687,19 @@ nnoremap <silent> <leader>sa :.!date '+\%d \%B \%Y'<cr>
 nnoremap <silent> <leader>sb :set linebreak!<cr>
 " Close the buffer:
 nnoremap <silent> <leader>sc :close<cr>:echo "Closed the buffer"<cr>
+
+
 " View the full path of the file/buffer:
 "nnoremap <leader>sf :echo expand('%:p')<cr>
 " Show current directory:
 nnoremap <leader>sd :pwd<cr>
+" Set the tab current working directory to that of the active file:
+" TODO find out how to have the echo[m] and the concatenated execute('pwd')
+" not show the ^@ characters.
+nnoremap <silent> <leader>sf :tcd %:p:h<cr>:echom "Set tab current working
+			\ directory to active file: " .. execute('pwd')<cr> 
 " Toggle fold column visibility
-nnoremap <leader>sf :call <SID>FoldColumnToggle()<cr>
+"nnoremap <leader>sf :call <SID>FoldColumnToggle()<cr>
 " Toggle hidden characters (i for invisible):
 nnoremap <silent> <leader>si :set list!<cr>
 " New horizontal split for the current buffer:
@@ -755,13 +775,9 @@ nnoremap <leader>0 10<c-w>+:echo "Increase split height by 12"<cr>
 " Increase split height by 1. {number}<leader>' to increase by {number}:
 "nnoremap <leader>' <c-w>+
 
-" Set focus to previous tab:
-"nnoremap <silent> <leader>n :tabp<cr>:echo "Focus previous tab"<cr>
-" Leader [ to change to previous buffer (last cycling around):
+" Set focus on the previous buffer:
 nnoremap <silent> <leader>n :bp<cr>:echo "Previous buffer"<cr>
-" Set focus to next tab:
-"nnoremap <silent> <leader>m :tabn<cr>:echo "Focus next tab"<cr>
-" Leader ] to change to next buffer (first cycling around):
+" Set focus on the next buffer:
 nnoremap <silent> <leader>m :bn<cr>:echo "Next buffer"<cr>
 
 " Inset blank line ({number}<leader>i for {number} of lines) - good for moving
@@ -778,9 +794,9 @@ nnoremap <leader>w :w<cr>:echo "Write changes to file."<cr>
 " Write changes to all:
 nnoremap <leader>W :wa<cr>:echo "Write changes to all files."<cr>
 " Quit (no save) - unsaved files warning issued on buffer closed:
-nnoremap <silent> <leader>q :q<cr>
+nnoremap <leader>q :q<cr>
 " Quit and discard any changes (for all files) - the nuclear option:
-nnoremap <silent> <leader>Q :qa!<cr>
+nnoremap <leader>Q :qa!<cr>
 " Copy line to the system clipboard:
 "nnoremap <silent> <leader>l :.y+<cr>
 nnoremap \ :.y+<cr>:echo "Line copied to clipboard"<cr>
@@ -792,7 +808,7 @@ nnoremap <silent> <leader>e :%y+<cr>:echo "Whole file copied to the clipboard"<c
 nnoremap <leader>z za
 " Write and quite file:
 nnoremap <leader>x :x<cr>:echo "Save (if there are changes) and quit"<cr>
-" Replace text under cursor or visually selected text with yanked (register) text
+" Replace text under cursor with yanked (register) text
 " (deletes the old text to the "blackhole" register):
 nnoremap <silent> <leader>r "_diw"0P
 
@@ -811,25 +827,31 @@ nnoremap <silent> <leader>{ :tabfirst<cr>:echo "Focus first tab"<cr>
 "nnoremap <leader>} :blast<cr>
 " Go to the last tab:
 nnoremap <silent> <leader>} :tabfirst<cr>:echo "Focus last tab"<cr>
+" Open buffers in seperate tabs
+nnoremap <silent> <leader>tb :tab ball<cr>:echo "Open buffers in seperate tabs"<cr>
 " Close current tab:
 nnoremap <silent> <leader>tc :tabclose<cr>:echo "Closed tab"<cr>
 " Open a new tab:
 nnoremap <silent> <leader>tn :tabnew<cr>:echo "New tab"<cr>
+" Close all other tabs:
+nnoremap <silent> <leader>to :tabonly<cr>:echo "Close other tabs"<cr>
 " Move the current tab to the first position:
 nnoremap <leader>th :tabm 0<cr>:echo "Moved tab to the first position"<cr>
 " Move the current tab to the last position:
 nnoremap <leader>tl :tabm $<cr>:echo "Moved tab to the last position"<cr>
+" Take the active split and open it in new tab:
+nnoremap <leader>ts :tab split<cr>
 
 " Leader v to open the .vimrc file in a vertical split:
-nnoremap <leader>v :vsp $MYVIMRC<cr>
+"nnoremap <leader>v :vsp $MYVIMRC<cr>
 " Reload/apply the .vimrc:
-nnoremap <leader>V :source $MYVIMRC<cr>
+nnoremap <leader>V :source $MYVIMRC<cr>:echo "Reloaded the .virmc source file."<cr>
 " Open NetRW in a left-sided split:
-nnoremap <leader>E :20Lex<cr>
+nnoremap <silent> <leader>E :16Lex<cr>
 " Take the URL under the cursor and convert it to a Markdown link with the:
 " name of the HTML page.
 " url -> [name of page](url)
-nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh <c-r>0<cr>kgJgJ
+nnoremap <silent> <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh <c-r>0<cr>kgJgJ
 " Works for simple URLs. It has issues with # and ? in URLs as the url is injected here and
 " can conflict with Vim.
 " Possible to use Visual select of the URL with something like (doesn't
@@ -840,6 +862,8 @@ nnoremap <leader>H yiWEa)<esc>Bi[](<esc>hi<cr><esc>k:r!~/.vim/getwebpagename.sh 
 " Highlight trailing white-space as an error.
 "nnoremap <leader>sm gg:match Error /\v\s+$/<cr> " <- this works as does the next line:
 "nnoremap <leader>se gg:execute "match Error " . '/\v\s+$/'<cr>
+" Toggle previous buffer.
+nnoremap <silent> <leader>se :b#<cr>
 " Clear highlight of white-space error.
 "nnoremap <leader>sW :match none<cr> " <- this works as does the next line:
 "nnoremap <leader>sW :execute "match none"<cr>
@@ -876,8 +900,6 @@ vnoremap <leader>{ <esc>`<i{<esc>`>a}<esc>
 vnoremap <leader>< <esc>`<i<<esc>`>a><esc>
 vnoremap <leader>** <esc>`<i**<esc>`>a**<esc>
 vnoremap <leader>* <esc>`<i*<esc>`>a*<esc>
-
-" }}}
 
 " TERMINAL MODE RE-MAPPINGS ---------------------------------------- {{{
 
@@ -950,6 +972,8 @@ set laststatus=2
 let g:netrw_preview = 1
 " NetRW opens previews to the right (not to the left) by default:
 let g:netrw_alto = 0
+" NetRW opens vertical on the left:
+let g:netrw_altv = 1
 " NetRW opens in tree view by default:
 " (apparently the Tree view is buggy in NetRW so maybe should be avoided)
 let g:netrw_liststyle = 3
@@ -960,10 +984,22 @@ let g:netrw_banner = 0
 " Automatically set Vim's working directory to be the same as netrw's current
 " directory:
 "let g:netrw_keepdir=0
-" Set the width of the NetRW window:
-let g:netrw_winsize = 16 
+" Set the width of the NetRW window (percentage value):
+"let g:netrw_winsize = 80
+"let g:netrw_winsize = 50
+" Set the width of the NetRW window (absolute value):
+let g:netrw_winsize = -30
 " Open files in previous window emulating the typical 'drawer' behavior:
 let g:netrw_browse_split = 4
+
+augroup FixNetRWRefresh
+  autocmd!
+	" For NetRW map the 'r' key to refresh the view/buffer:
+	" - The `<buffer>` flag ensures the shortcut only activates when the cursor is
+	"   actively inside a netrw screen.
+	" - `:ed .` provides the ex command to trigger a refresh in NetRW
+	autocmd FileType netrw nnoremap <buffer> r :ed .<cr>
+augroup END
 
 " }}}
 
@@ -1056,10 +1092,10 @@ endfunction
 function! s:ColorColumnToggle(cols)
 	if &colorcolumn
 		set colorcolumn=0
-		echom a:cols . " columns visibility toggled off"
+		echom a:cols .. " columns visibility toggled off"
 	else
 		execute "set colorcolumn=" . a:cols 
-		echom a:cols . " columns visibility toggled on"
+		echom a:cols .. " columns visibility toggled on"
 	endif
 endfunction
 
@@ -1067,14 +1103,14 @@ endfunction
 " in that range (inclusive).
 function! DelBufsRange(start, end)
 	if exists('*getbufinfo')
-		echo "Removing buffers ranging from " . a:start . " to " . a:end
+		echo "Removing buffers ranging from " .. a:start .. " to " .. a:end
 		for buffer_info in getbufinfo()
 			let l:bufnr = buffer_info.bufnr
 			"let l:bufname = buffer_info.name
 			if buffer_info.listed
-				"echom 'Listed buffer: ' . l:bufnr . ' - ' . l:bufname
-				if l:mbufnr >= a:start && l:bufnr <= a:end
-					"echo 'Delete buffer: ' . l:bufnr . ' - ' . l:bufname
+				"echom 'Listed buffer: ' .. l:bufnr .. ' - ' .. l:bufname
+				if l:bufnr >= a:start && l:bufnr <= a:end
+					"echo 'Delete buffer: ' .. l:bufnr .. ' - ' .. l:bufname
 					execute " bdelete " . l:bufnr
 				endif
 			endif
@@ -1095,8 +1131,8 @@ function! DelBufsInstances(...)
 	let l:bufnrlist = map(getbufinfo({'buflisted': 1}), 'v:val.bufnr')
 	for l:arg in a:000
 		if index(l:bufnrlist, l:arg) != -1
-			echom "Deleting buffer: " . l:arg
-			execute " bdelete " . l:arg
+			echom "Deleting buffer: " .. l:arg
+			execute " bdelete " .. l:arg
 		endif
 	endfor
 
@@ -1104,16 +1140,16 @@ function! DelBufsInstances(...)
 	" to get the listed buffer numbers.
 
 	" echom "Removing buffers instances"
-	" echom "Number of args provded: " . a:0
+	" echom "Number of args provded: " .. a:0
 	" for l:arg in a:000
-	" 	" echom "Argument: " . l:arg
+	" 	" echom "Argument: " .. l:arg
 	" 	for buffer_info in getbufinfo()
 	" 		let l:bufnr = buffer_info.bufnr
 	" 		"let l:bufname = buffer_info.name
 	" 		if buffer_info.listed
 	" 			if l:bufnr == l:arg
-	" 				echom "Deleting buffer: " . l:arg
-	" 				execute " bdelete " . l:bufnr
+	" 				echom "Deleting buffer: " .. l:arg
+	" 				execute " bdelete " .. l:bufnr
 	" 				break
 	" 			endif
 	" 		endif
@@ -1122,22 +1158,10 @@ function! DelBufsInstances(...)
 
 endfunction
 
-
 " Call the DelBufsInstances function as an EX command with:
 " :call DelBufsInstances({number}...)
 " Eg. :call DelBufsInstances(4,10,13) to delete buffer from 4, 10 and 13 (if there).
 command! DelBufsInstances call DelBufsInstances(<f-args>)
-
-" }}}
-
-" TODO: does this apply for calling the `git mergetool` (for vimdiff):
-if &diff
-	"nnoremap <leader>1 :diffget LOCAL<cr>"echo "Selected LOCAL"<cr>
-	nnoremap <leader>1 :diffget LOCAL<cr>
-  nnoremap <leader>2 :diffget BASE<cr>
-  nnoremap <leader>3 :diffget REMOTE<cr>
-	colorscheme zaibatsu
-endif
 
 " Clear all but the current buffer (sourced from Google AI):
 " This command is a sequence of three separate commands chained together using
@@ -1150,4 +1174,31 @@ endif
 " - :bd# (or :bdelete #): After the previous step, the new empty buffer becomes
 "   the alternate file. This command deletes that empty, unneeded buffer. 
 command! BuffOnly silent! execute "%bd|e#|bd#"
+
+" }}}
+
+" VIM DIFF ------------------------------------------------------------------------- {{{
+
+" Settings fo the vimdiff tool.
+"
+" vimdiff is called either with `vimdiff` or `vim -d` from the terminal. 
+"
+" With git configured to use vimdiff as its diff tool (in .gitconfig)
+" [diff]
+" 	tool = vimdiff
+" Or with:
+" git config --global diff.tool vimdiff
+" These settings apply to it too calling the `git mergetool` (for vimdiff):
+if &diff
+	"nnoremap <silent> <leader>1 :diffget LOCAL<cr>"echo "Selected LOCAL"<cr>
+	nnoremap <leader>1 :diffget LOCAL<cr>
+  nnoremap <leader>2 :diffget BASE<cr>
+  nnoremap <leader>3 :diffget REMOTE<cr>
+	" Set the context folding to a very high level so it effectively disables
+	" folding for vimdiff
+	set diffopt=filler,context:99999
+	colorscheme zaibatsu
+endif
+
+" }}}
 

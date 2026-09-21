@@ -29,7 +29,3 @@ function! MyFocusGainedFunction()
   echomsg "Focus gained by a split"
 endfunction
 
-Sharp present ipsum dolor sit amet, Sharp consectetuer adipiscing elit. Aenean commodo ligula
-eget dolor. Present present present Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-montes, Sharp Sharp nascetur ridiculus mus. Present present present Donec quam felis, ultricies nec, pellentesque
-eu, pretium quis, sem. Nulla consequat massa present.

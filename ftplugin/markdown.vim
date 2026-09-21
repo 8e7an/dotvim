@@ -11,6 +11,9 @@ setlocal spell
 " Folding
 setlocal foldmethod=syntax
 
+" Text Width
+set textwidth=80
+
 "Operator-Pending mappings for Markdown files
 " 'in heading' of the previously found heading
 "autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>

@@ -33,6 +33,12 @@ nnoremap <buffer> <silent> <localleader>k :.s/\v^(\s*)(\/\*\s*)/\1/<cr>:.s/\v\s*
 "  Third:  Add any spaces after the { that do not have a space before them
 "  Fourth: Add any missing trailing ; characters on lines that should have  them
 nnoremap <buffer> <silent> <localleader>= gg=G<esc>:g/\S[^:]:\S/s/:/: /<cr>:g/\S{/s/{/ {/<cr>:g/[^;,\/\{\}]$/norm A;<cr>:silent noh<cr>g;
+" Remove the comment block above (and then after) the cursor.
+nnoremap <buffer> <localleader>c ?\/\*<cr>_dd<c-o>/\*\/<cr>_dd<c-o>
+"nnoremap <buffer> <localleader>c ?^\s*\/\*\s*<cr>_dd<c-o>/^\s*\*\/\s*$<cr>_dd<c-o>
+
+" Add block comment around the visual selection (C/C++, JS etc) with /* ... */
+vnoremap <buffer> <localleader>c <esc>`<O/*<esc>`>o*/<esc>
 
 " Entity references shorthands
 iabbrev bb box-sizing: border-box; 
@@ -40,18 +46,23 @@ iabbrev db display: block;
 iabbrev dib display: inline-block;
 iabbrev df display: flex;
 iabbrev dif display: inline-flex;
+iabbrev dn display: none;
 iabbrev lst list-style-type:
 iabbrev abs position: absolute;
 iabbrev rel position: relative;
 iabbrev fxd position: fixed;
+iabbrev t0 top: 0;
+iabbrev b0 bottom: 0;
+iabbrev l0 left: 0;
+iabbrev r0 right: 0;
 iabbrev zi z-index:
 iabbrev zi1 z-index: 1;
 iabbrev fl1 flex: 1;
 iabbrev fla flex: auto;
 iabbrev fl01 flex: 0 1;
 iabbrev fl01a flex: 0 1 auto;
-iabbrev fdr flex-directioon: row;
-iabbrev fdc flex-directioon: column;
+iabbrev fdr flex-direction: row;
+iabbrev fdc flex-direction: column;
 iabbrev fww flex-wrap: wrap;
 iabbrev aifs align-items: flex-start;
 iabbrev aife align-items: flex-end;
@@ -68,8 +79,8 @@ iabbrev m0 margin: 0;
 iabbrev p0 padding: 0;
 iabbrev bg background:
 iabbrev bgc background-color:
-iabbrev bn border: none;
-iabbrev b1 border: 1px solid var(--black);
+iabbrev bon border: none;
+iabbrev bo1 border: 1px solid var(--black);
 iabbrev txd text-decoration:
 iabbrev txdn text-decoration: none;
 iabbrev txdu text-decoration: underline;
@@ -84,5 +95,4 @@ iabbrev wsnw white-space: nowrap;
 iabbrev wsw white-space: wrap;
 iabbrev h100% height: 100%;
 iabbrev w100% width: 100%;
-
 

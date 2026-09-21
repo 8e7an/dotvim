@@ -4,8 +4,6 @@ This document contains my notes and various bits-and-pieces about Vim.
 
 ![Vim icon](./vim-icon.png?raw=true "A Little Vim Icon")
 
-Das ist gut ya!
-
 Following commands for when in command **ex** mode:
 
 When in view **vi** mode the Escape key goes to **ex** mode. Various commands
@@ -81,8 +79,10 @@ Open all files in a directory of a file type in tabs:
 
 `vim -p *.{filetype}`
 
-Here colours can be set for modes. eg.:
- `:tabm +{number}` / `:tabm+{number}` Move the current tab {number} or places to the right.
+Here colours can be set for modes. Eg.:
+`:tabm +{number}` / `:tabm+{number}` Move the current tab {number} or places to
+ the right.
+
 `autocmd InsertEnter * highlight Normal ctermfg=lightblue`
 
 `autocmd InsertLeave * highlight Normal ctermfg=green`
@@ -105,7 +105,8 @@ Or:
 
 `:source ~/.vimrc`
 
-To source (apply) changes from a ftplugin *.vim file (provided the filetype setting is on):
+To source (apply) changes from a ftplugin *.vim file (provided the filetype
+setting is on):
 
 `:e`
 
@@ -115,6 +116,10 @@ cursor is at how far down the document as a %).
 Information about the vim setting for the file based on its type:
 
 `:filetype`
+
+Find the filetype of the active file/buffer:
+
+`:set filetype?`
 
 Get the filetype of the current file/buffer:
 
@@ -383,6 +388,10 @@ Enter normal commands like:
 `norm guu` then 'visual' (to exit) to make the text on the current line **ex
 mode** was called on from all lower-case.
 
+`:%norm ^gUlcsw"A: "",` Normal command to effect every line making the first
+character upper-case and formatting it with JSON syntax with the text as the name
+and the value empty.
+
 Can enter multiple normal commands like this and enter `visual` to apply those
 changes (to that same line).
 
@@ -429,86 +438,17 @@ Vim stores the last 100 changes in the change list.
 
 `:help quickref` Quick reference help.
 
-`:help user-manual` User-manual help.
+`:help user-manual` User-manual help. `:help usr_{number}` to go to a specific
+section of the user manual.
 
 When entering in : commands `<ctrl-d>` will give a list of matching options;
 `<tab>` to auto complete.
 
 `<ctrl-]>` To follow a link in help.
 
+`<ctrl-o>` To go back from a link in help.
+
 `:helpgrep {expression}` Grep search in help for {expression}.
-
-## File Browser - NetRW
-
-`:Explore` / `:Ex` / `:e .`
-
-`:Lex` NetRW explorer on the left (stays open on file open).
-
-`:Lex!` NetRW explorer on the right.
-
-`:Sex` NetRW explorer on top (stays open on file open).
-
-`:Sex!` NetRW explorer on the left (stays open on file open).
-
-`:Ntree {directory}` Set the current (tree-view) directory of NetRW to the
-{directory}. Can set the NetRW current directory to the active file with:
-`:Ntree .`
-
-`%` Create new file.
-
-`d` Create new directory.
-
-`D` Delete file or delete marked files (with confirmations).
-
-`s` Sort listing and toggle through different sorting options such as by name,
-time, or size.
-
-`r` Reverse sorting order.
-
-`x` Special - opens the file in the web browser.
-
-`R` Move - rename the file.
-
-`p` Preview file - open a new horizontal split but keep focus in NetRW.
-Settings in **.vimrc** to customise NetRW so `p` open previews in a vertical
-split to the right by default.
-
-`I` Toggle banner visibility.
-
-`i` Cycle view types, including tree view.
-
-`x` Open file in associated program (HTML in the web browser, images in Preview
-etc.).
-
-`v` Open file in a vertical split and move focus to the new split.
-
-`o` Open file in a horizontal split and move focus to the new split.
-
-`<enter>` Toggle tree directories open/close in tree view.
-
-`{number}o{enter text when put into insert mode}<esc>` The text 'enter text
-when put into insert mode' will be entered for {number} of lines.
-
-`mf` Mark/unmark file/directory (for moving/copying).
-
-`mF` Unmark marked files/directories.
-
-`mt` Mark target destination (folder). The destination will be listed in the
-NetRW banner.
-
-`mm` Move marked files to target destination (folder).
-
-`mc` Copy marked files to target destination (folder).
-
-Note that the current working directory (as indicated by `:pwd`) is reflected
-in NetRW. Use of `:cd` effects NetRW.
-
-`ctrl-l` Refresh NetRW.
-
-Moving files in NetRW is flaky. Before moving a file/files, try first
-refreshing the listing with `ctrl-l`, select the target destination with `mt`,
-select the file/files to move with `mf`, then move with `mm` or copy with `mc`.
-After `mm`/`mc` refresh again even if it appears the file didn't move.
 
 ### Commands to save
 
@@ -631,9 +571,9 @@ over.
 
 `)` Move cursor to the start of the next sentence.
 
-`f{character}` Move cursor to the next <character> on the current line.
+`f{character}` Move cursor to the next instance of `{character}` from cursor on the current line.
 
-`F{character}` Move cursor to the previous <character> on the current line.
+`F{character}` Move cursor to the previous instance of `{character}` from cursor on the current line.
 
 `<ctrl-f>` Forward one screen.
 
@@ -761,39 +701,43 @@ instead (which is not what I want.
 
 `g#` Move cursor to the previous partial occurrence of the word the cursor is over.
 
-`guu` Current line of text all lowercase.
+`gul` Make the letter under the cursor upper-case.
 
-`gUU` Current line of text all uppercase.
+`gUl` Make the letter under the cursor lower-case.
+
+`guu` Current line of text all lower-case.
+
+`gUU` Current line of text all upper-case.
 
 `g~~` Current line of text case-inverted.
 
-`guw` Make the word after the cursor all lowercase.
+`guw` Make the word after the cursor all lower-case.
 
-`gUw` Make the word AFTER the cursor all uppercase.
+`gUw` Make the word AFTER the cursor all upper-case.
 
-`{number}guw` Make {number} of words all uppercase.
+`{number}guw` Make {number} of words all upper-case.
 
-`{number}gUw` Make {number} of words all lowercase.
+`{number}gUw` Make {number} of words all lower-case.
 
-`guiw` Lowercase entire word.
+`guiw` lower-case entire word.
 
-`gUiw` Uppercase entire word.
+`gUiw` upper-case entire word.
 
-`guaw` Make the whole word under the cursor all lowercase.
+`guaw` Make the whole word under the cursor all lower-case.
 
-`gUaw` Make the whole word under the cursor all lowercase.
+`gUaw` Make the whole word under the cursor all lower-case.
 
 `g~iw` Toggle case entire word.
 
-`gu$` Lowercase until the end of the line.
+`gu$` lower-case until the end of the line.
 
-`gU$` Uppercase until the end of the line.
+`gU$` upper-case until the end of the line.
 
 `g~$` Toggle case until the end of the line.
 
-`gu0` Lowercase until the start of the line.
+`gu0` lower-case until the start of the line.
 
-`gU0` Uppercase until the start of the line.
+`gU0` upper-case until the start of the line.
 
 `g~0` Toggle case until the start of the line.
 
@@ -806,9 +750,32 @@ If trying to stay more in insert mode, there's a way to manually create and undo
 
 ## Global EX Commands
 
-`:global/{term}` / `:g/{term}` List the lines where the `{term}` is found. Can also use:
+Can use the `:global` or `:g` shorthand.
 
-`:global/{term}/p` / `:g/{term}/p` but the `p` for print is the default.
+`:global/{term}` / `:g/{term}` List the lines where the `{term}` is found.
+
+`:g/{term}/{cmd}` Execute the command on the lines that
+match the term.
+
+`:g/{term}/p` `p` for print. Print is also the default.
+
+`:global/{term}/nu` / `:global/{term}/#` `nu` / `#` for print with the current
+line with line numbers on the lines that match the `{term}`.
+
+`:g/{term}/m {destination}` Move the text to the `{destination}` for lines that
+match the `{term}`.
+
+`:g/{term}/t {destination}` / `:g/{term}/co {destination}` Copy the text to the
+`{destination}` for lines that match the `{term}`.
+
+`:global/{term}/A {suffix}` / `:global/{term}/I {suffix}` Append or Insert with
+the suffix}` on the lines that match the `{term}`.
+
+`:global/{term}/norm {normalexpression}` Run the normal `{normalexpression}` on
+the lines that match the `{term}`.
+
+`:global/{term}/norm @{buffer}` Run the normal command with the `@{buffer}` on
+the lines that match the `{term}`.
 
 Delete lines which include the {regexpattern}:
 
@@ -848,7 +815,7 @@ from line 7 to the end of the file delete all lines starting with //:
 
 `:g/{term}/norm {commands}` Run the normal {commands} on any the lines where `{term}` is found.
 
-Eg. `:g/SOMETHING/norm gu` Any line that has SOMETHING is made all lowercase.
+Eg. `:g/SOMETHING/norm gu` Any line that has SOMETHING is made all lower-case.
 
 `:v/{term}/norm {commands}` Run the normal {commands} on any the lines where `{term}` is not found.
 
@@ -857,6 +824,16 @@ Eg. `:g/SOMETHING/norm gu` Any line that has SOMETHING is made all lowercase.
 `:g/^/m0` Effectively reverse the line order of the document.
 
 `:g/^$/d` Delete all blank lines in the document.
+
+Can chain global commands to, for instance, narrow a search before enacting a
+replacement. Eg.:
+
+`:g/\{regexpattern}/g/{regexpattern}/g/\{regexpattern}/s/{regexpattern}/{replacement}/gc`
+
+The global command also lets you run operations across buffers with the `bufdo`
+or `windo` commands.
+
+## Movement
 
 `%` / `**<tab>**` Jump between matching brackets under cursor.
 
@@ -894,6 +871,14 @@ don't do anything. TODO: find out how?
 
 `dL` Delete from cursor to the bottom line of what is displayed visually.
 
+`:,$d` Delete from the current line to the end of the file.
+
+`:,$d _` Black hole delete from the current line to the end of the file.
+
+`:{linenumber},$d` Delete from the `{linenumber}` to the end of the file.
+
+`:{linenumber},$d _` Black hole delete from the `{linenumber}` to the end of the file.
+
 `S` Substitute - Cut the current line to register and go into insert mode on
 that line?
 
@@ -913,6 +898,9 @@ associated brackets - ( ), { }, [ ] - on the current line.
 > syntax, it only searches for a match with the keyword.  If included files
 > also need to be searched use the commands listed in |include-search|.  After
 > this command |n| searches forward for the next match (not backward).
+
+`:g/{expression}/normal "_dd` Normal command to black hold delete all lines that 
+contain `{expression}`.
 
 ## Command window
 
@@ -994,7 +982,7 @@ Nine                    9       Horn
 
 `u` Undo.
 
-`U` Undo/redo multiple changes to a line.
+`U` Return changes to the line to its original state.
 
 `<ctrl-r>` Redo.
 
@@ -1053,13 +1041,17 @@ subsequent numbered registers by 1).
 
 `**j**` Move the line down one.
 
-`c/{pattern}` From the cursor to the first matched pattern change (cut) the text and go into insert mode.
+`c/{pattern}` From the cursor to just before the first (right) matched pattern
+change (cut) the text and go into insert mode. Works over multiple lines.
 
-`d/{pattern}` From the cursor to the first matched pattern delete the text.
+`d/{pattern}` From the cursor to just before the first (right) matched pattern
+delete the text. Works over multiple lines.
 
-`c?{pattern}` From the cursor to the last matched pattern change (cut) the text and go into insert mode.
+`c?{pattern}` From the cursor to the last (left) matched pattern change (cut)
+the text and go into insert mode. Works over multiple lines.
 
-`d?{pattern}` From the cursor to the last matched pattern delete the text.
+`d?{pattern}` From the cursor to the last (left) matched pattern delete the
+text. Works over multiple lines.
 
 `dd` Delete line (stay in normal mode) (copies to the unnamed `""` register).
 Will also push a copy to the "0 numbered register (pushing subsequent numbered
@@ -1113,9 +1105,9 @@ registers by 1).
 
 `cat` Cut content around matching tags.
 
-`di"` Delete inside " marks.
+`di"` Delete inside " double-quotes.
 
-`da"` Delete around " marks.
+`da"` Delete around " double-quotes.
 
 `dit` Delete inside matching tags.
 
@@ -1195,15 +1187,19 @@ indentation of the current line.
 `"_dG` Delete from current line to the end of the document but NOT put into a
 register (not remembered but sent to the "Black hole").
 
-`r{character}` Replace {character}
+`r{character}` Replace the character under the cursor with `{character}`.
 
 `R{characters}` Replace the text where the cursor is at with {characters} -
 Each character you enter will replace the character the cursor is over moving
 onto the next one - Press `<esc>` to cancel out of this.
 
+`~` Change the case of the letter under the cursor (inclusive of the current line).
+
 `J` Join current and next line separated with a space.
 
-`~` Change the case of the letter under the cursor (inclusive of the current line).
+`{number}J` Join current and next `{number}` of lines separated with a space.
+The `{number}` preceeding the J includes the current line, but `1J` and `2J`
+appear to work the same as just `J` joining the current line with the next line.
 
 `>>` Indent current line by one increment.
 
@@ -1368,27 +1364,16 @@ V and select lines
 The '<,'> is entered in for you as representative of the visual line select, so
 y, + and enter will copy the selected range into the system clipboard.
 
-If you have a math equation on a line you can store that in the register with:
-
-`“{letter}yy`
-
-Then in insert mode:
-
-`<ctrl-r>=<ctrl-r>{letter}<enter>`
-
-Will give the result of that equation. You may have to edit the equation before
-hitting enter as unwanted character(s) may appear.
-
-With the equation in the resister in vim, go to insert mode and enter `<ctrl-r>=`
-then `<ctrl-r>"` to paste the yanked text and press `<enter>`
-
 `@:` Repeat the last Ex command (from the : register).
 
-`:{range}d {register}` Delete the [range into {register}. 
+`"{namedregister}yy` Store the line the cursor is on in the `{namedregister}`.
+
+`:{range}d {namedregister}` Delete the range into `{namedregister}`. 
 Eg. `:33,57d x` Will take lines 33 to 57 and delete them putting them into
 register **x**.
+
 Eg. `:,+5d y` Will take the line the cursor in currently on and next 5 lines
-and delete them putting them into register **y**.
+and delete them putting them into named register **y**.
 
 ### Paste from the register
 
@@ -1551,6 +1536,13 @@ next line? Not sure how this works exactly but noted here nonetheless.
 `<ctrl-x><...>` Complete the word before the cursor in various ways. 
 Eg. `<ctrl-x><ctrl-l>` to complete by matching line.
 Eg. `<ctrl-x><ctrl-p>` to complete by matching word-by-word.
+Eg. `<ctrl-x><ctrl-x>` to complete by matching spelling. Need spell checking
+enabled.
+Eg. `<ctrl-x><ctrl-f>` to complete by matching directory and file paths. Starts
+at current working directory.
+Eg. `<ctrl-x><ctrl-v>` to complete by matching Vim command-line / Vim-script syntax.
+
+More about insert mode completion: `:help ins-completion`.
 
 `<ctrl-h>` Delete character before the cursor.
 
@@ -1667,25 +1659,23 @@ Links about find + replace:
 
 * [Inspect Character Under Cursor in Vim - VimTricks](https://vimtricks.com/p/inspect-character-under-cursor-in-vim/) (replace unicode / special characters) 
 
-[Search and replace | Vim Tips Wiki | Fandom](https://vim.fandom.com/wiki/Search_and_replace#:~:text=The%20%3Asubstitute%20command%20searches%20for,replace%20it%20with%20'bar'.)
+* [Search and replace | Vim Tips Wiki | Fandom](https://vim.fandom.com/wiki/Search_and_replace#:~:text=The%20%3Asubstitute%20command%20searches%20for,replace%20it%20with%20'bar'.)
 
-`f{character}` - next instance of {character} from cursor?
-
-`F{character}` - previous instance of {character} from cursor?
-
-`r{character}` - Replace the character under the cursor with {character}.
-
-Find the next instance of the text (pattern) (cases sensitive unless configured otherwise):
+Search for the next instance of the text (pattern) (cases sensitive unless configured otherwise):
 
 `/{pattern}`
 
-Find the previous instance of the text (pattern) (cases sensitive unless configured otherwise):
+Search for the previous instance of the text (pattern) (cases sensitive unless configured otherwise):
 
 `?{pattern}`
 
-Find the next instance of the text (pattern) (cases sensitive unless configured otherwise):
+Search for the next instance of the text (pattern) (cases sensitive unless configured otherwise):
 
 `/\c{pattern}`
+
+Search for the {pattern}` in the last visual selection:
+
+`/\%V{pattern}`
 
 `n` Find the next instance of the searched pattern.
 
@@ -1824,6 +1814,19 @@ The choices:
 `^E` Scroll the screen up.
 
 `^Y` Scroll the screen down.
+
+Can use the previous search value (in the `/` search register) as the implicit
+`pattern` in the search pattern. Eg. every occurrence of the value in the search
+register will be replaced with 'replace':
+
+`:%s//replace/`
+
+Substitution across different ranges:
+
+`:for range in split('6,10 14,18')| exe range
+'s/<search_string>/<replace_string>/g' | endfor`
+
+Implicit search 
 
 Search examples
 
@@ -2015,9 +2018,11 @@ Command to go to a line number:
 
 `:scriptnames` Show a list of the script files loaded.
 
-`ctrl-g` (normal mode) Show current file name (with path) and cursor position.
+`ctrl-g` (normal mode) Show current file name (with path) and cursor position in
+the status bar.
 
-`g <ctrl-g>` (normal mode) Show cursor column, line, and character position.
+`g <ctrl-g>` (normal mode) Show cursor column, line, and character position in
+the status bar.
 
 `<ctrl-l>` (normal mode) Redraw the screen.
 
@@ -2058,15 +2063,22 @@ with the working directory of the buffer (file).
 
 `:pwd` Print the working directory.
 
-`:cd {pathname}` Change the working directory to the {pathname}.
+`:cd {pathname}` Change the working directory to the {pathname} for all tabs
+and windows. 
+
+`:tcd {pathname}` Changes the working directory for all windows only within the
+current tab page. 
+
+Eg. `:tcd %:p:h:` Changes the tab's working directory to the directory of the
+current file.
+
+`:lcd {path}:` Changes the directory only for the current window (window-local).
 
 Copy from one part of the document to where the cursor is:
 
 `:{relativelinenumberstart},{relativelinenumberend}co.`
 
-Eg.
-
-`:-16,-14co.`
+Eg. `:-16,-14co.`
 
 Move text at cursor and next line  to the end of the document (can omit the .;
 the 1 can also be omitted here):
@@ -2142,6 +2154,11 @@ From normal mode:
 
 `va`[ Select a [] block includes.
 
+With the `va` these can be combined with a number to select that many blocks of
+bracketed text around the cursor. For instance `v3a{` will visually select 3
+block levels of `{ ... }` around the cursor. If there aren't that many levels to
+visually select Vim just reverts into cursor visual select mode.
+
 `v{number}>` Indent line by {number}.
 
 `v{number}<` Decrement line by {number}.
@@ -2169,9 +2186,11 @@ In visual select mode:
 `%` Expand visual selection to the matching parentheses, bracket or brace,
 including text from the starting point. `%` again toggles the selection.
 
-`u` Change the selected text to lowercase.
+`v%` Visual selection from brace/bracket under cursor to matching cursor.
 
-`U` Change the selected text to uppercase.
+`u` Change the selected text to lower-case.
+
+`U` Change the selected text to upper-case.
 
 `aw` Advance visual selection a word depending on the location of the cursor
 (at the start `aw` advances back, at the end `aw` advances forward).
@@ -2182,11 +2201,22 @@ including text from the starting point. `%` again toggles the selection.
 
 `:w` {filename} Write the visually selected text to the filename TEST.
 
-Can sort multiple lines with the Terminal sort command; start selecting
-multiples lines with Visual mode then use the command (< and > added in
-with Visual select):
+Can sort multiple lines with the Vim sort command or the Terminal sort command
+(!).
 
-`'<,'>sort` Sort selected lines alphabetically. 
+`{linenumber},{linenumber}sort` Sort range lines in alphabetical order. 
+
+`{linenumber},{linenumber}sort!` Sort range lines in reverse-alphabetical order.  
+
+`%sort` Sort the whole file.
+
+`%sort!` Reverse sort the whole file.
+
+Can use Visual mode then use the command (< and > added in with Visual select):
+
+`'<,'>sort` Sort selected lines in alphabetical order. 
+
+`'<,'>sort!` Sort selected lines in reverse-alphabetical order. 
 
 `'<,'>sort` Sort selected lines alphabetically and remove duplicates. 
 
@@ -2194,17 +2224,19 @@ with Visual select):
 
 `'<,'>sort n u` Sort selected lines by number and remove duplicates.
 
-`'<,'>.!sort`
+`'<,'>.!sort` / `'<,'>!sort` Terminal command sort.
 
-`'<,'>!sort` This will also work here.
+`'<,'>.!sort -r` Sort in reverse order.
 
 `'<,'>.!sort -n` Use this for sorting lines starting with numbers.
 
 `'<,'>.!sort -nu` Sort selected lines by number and remove duplicates.
 
-`'<,'>.!sort -r` Use this for sorting lines at random.
+`'<,'>.!sort -R` Use this for sorting lines at random.
 
 `,+12!sort` Sort from the current line to 12 additional lines down.
+
+`,+12!sort -r` Reverse sort from the current line to 12 additional lines down.
 
 `<ctrl-v>` To enter visual select mode, move vertically to select multiple
 lines and enter either I or A to insert or append (respectively) entered
@@ -2218,7 +2250,8 @@ There doesn't appear to be a way (an equivalent built-in way) to Contract the
 visual selection of tags so as to shrink the selection to inside the selected
 tags.
 
-`a{` Expand / contract visual selection in **{** ... **}**.
+`a{` Expand / contract visual selection in **{** ... **}**. Use other brackets
+with `a` to expand to those bracket types.
 
 Edit multiple contiguous lines
 
@@ -2243,7 +2276,12 @@ With a visual selection `:` will open up an Ex command where certain commands
 apply only to that visual selection. For instance `:'<,'>s/{from}/{to}/g` will
 run a substitution on that visual selection only.
 
-## Folding
+With lines of a paragraph broken over multiple continuous lines use the
+following to visually select the paragraph and join all the lines.
+
+`vipJ` 
+
+## Folds / Folding
 
 [Vim Code Folding - VimTricks](https://vimtricks.com/p/vim-code-folding/)
 
@@ -2251,9 +2289,9 @@ There are six methods to select folds:
 
 manual		manually define folds
 indent		more indent means a higher fold level
-expr		specify an expression to define folds
+expr		  specify an expression to define folds
 syntax		folds defined by syntax highlighting
-diff		folds for unchanged text
+diff		  folds for unchanged text
 marker		folds defined by markers in the text
 
 ### Vim Folding Commands
@@ -2275,15 +2313,27 @@ folds underneath of it, not just the current fold.
 
 `zO` Same as above, but opens folds nested underneath as well.
 
+`zE` Eliminate all folds in the window.
+
 `zR` Open all folds.
 
 `zM` Close all folds.
 
 `zr` Reduce folding across all folds by one level.
 
-`zx` Update folds: Undo manually opened and closed folds: re-apply 'foldlevel', then do "zv": View cursor line.
+`zx` Update folds: Undo manually opened and closed folds: re-apply 'foldlevel',
+then do "zv": View cursor line.
 
-`zX` Undo manually opened and closed folds: re-apply 'foldlevel'.  Also forces recomputing folds, like `zx`.
+`zX` Undo manually opened and closed folds: re-apply 'foldlevel'.  Also forces
+recomputing folds, like `zx`.
+
+`zj` Go to the next fold.
+
+`zk` Go to the previous fold.
+
+`[z` Go to the start of the current open fold.
+
+`]z` Go to the end of the current open fold.
 
 ## Jump List
 
@@ -2375,11 +2425,16 @@ More on split windows in Vim:
 
 * [https://www.baeldung.com/linux/vim-windows#:~:text=The%20ctrl%2Bw%20%2Bs%20and,use%20ctrl%2Bw%20%2Bn]
 
-`:edit` / `:e` {filepath} Open a file (to the buffer) to edit. Do not include
-the {filepath} and this will give info about the file opened.
+`:edit {filepath}` / `:e {filepath}` Open a file (to the buffer) to edit. Do not include
+the `{filepath}` and this will give info about the file opened.
 
 `:edit!` / `:e!` Clear edits to the buffer - effectively revert the file back
 to its saved state.
+
+`:edit #` / `:e #` Edit the last viewed buffer.
+
+`:view {filepath}` / `:vie {filepath}` Open the file at `{filepath}` in
+read-only mode.
 
 `:read` / `:r` `{file path}` Read in a copy of the specified file `{file path}`
 into the buffer and past to the cursor location, effectively writing that
@@ -2407,27 +2462,25 @@ Following to clear the register a (I found the spaces around the = aren’t nece
 
 [Vim Calculator - VimTricks](https://vimtricks.com/p/vim-calculator/)
 
-Mathematical calculations can be done when in insert mode. 
+Mathematical calculations can be done in Vim. 
 
-Doesn't seem to provide decimal values on division.
+If whole interger values are used no decimal values are retured (integer math).
+Use a decimal floating value for division that returns a decimal floating point
+value.
 
-Doesn't do decimal / floating point values - only integer.
+For instance to get the result of a math equation:
 
-For instance to get the result of a math equation.
+`<ctrl-r>={equation}<enter>` In insert mode, to enter the equation manually.
 
-In insert mode use:
+`<ctrl-r>=<ctrl-r>"<enter>` In insert mode, this will give the result of the
+equation in the unnamed register. 
 
-`<ctrl-r>={expression}<enter>` (insert mode)
+`<ctrl-r>=<ctrl-r>{namedregister}<enter>` In insert mode, this will give the result of
+the equation in the `{namedregister}`. You may have to edit the equation before
+hitting enter as unwanted character(s) may appear.
 
-In normal mode use:
-
-`={expression}<enter><p>` (command mode)
-
-`:put={math equation}<enter>`
-
-An example of a math function here is:
-
-Enter mathematical result when in insert mode (using the "= expression register):
+`:put={equation}<enter>` In normal mode, this will return the result of the
+equation.
 
 #### Unnamed register
 
@@ -2474,6 +2527,10 @@ term used in the `"/` search register.
 buffer if no number}.
 
 `:e #` Toggle between the current and previous buffers.
+
+`:!rm #` Delete the file from the system under the previous buffer (`#`). 
+Could also use: `:call delete(expand('#'))`
+Warning: be careful with this command. Use `:ls / :buffers` to see what buffer is `#`.
 
 `:bufdo` Run an operation across all files open in the buffers.
 
@@ -2581,11 +2638,23 @@ UI elements).
 
 `:sp filename` Open a file in a new buffer and split window.
 
-`:{number}sp` Open a file in a new buffer and split window {number} characters wide (including UI elements).
+`:{number}sp` Open a file in a new buffer and split window {number} characters
+wide (including UI elements).
+
+`:vsplit #{number}` / `:vs #{number}`  Open the buffer with the {number} in a new vertical split.
+
+`:split #{number}` / `:sp #{number}` Open the buffer with the {number} in a new
+horizontal split.
 
 `:next` Navigate to next open file.
 
 `:previous` Navigate to previous open file.
+
+`:resize {number}` Set the horizontal split size to {number}.
+
+`:resize +{number}` Increase the horizontal split size by {number}.
+
+`:resize -{number}` Decrease the horizontal split size by {number}.
 
 `:vertical resize {number}` Set the vertical split size to {number}.
 
@@ -2595,7 +2664,11 @@ UI elements).
 
 Note that for the following the second key can have ctrl held down too:
 
+`<ctrl-w>b` Focus on the bottom split.
+
 `<ctrl-w>s` View buffer in a horizontal split
+
+`<ctrl-w>t` Focus on the top split.
 
 `<ctrl-w>v` View buffer in a vertical split.
 
@@ -2605,13 +2678,18 @@ Note that for the following the second key can have ctrl held down too:
 
 `<ctrl-w>w` Cycle split focus.
 
-`<ctrl-w>h` Focus buffer to the left.
+`<ctrl-w>h` Focus buffer left buffer.
 
-`<ctrl-w>j` Focus lower buffer.
+`<ctrl-w>j` Focus on the lower buffer.
 
-`<ctrl-w>k` Focus above buffer.
+`<ctrl-w>k` Focus on the higher buffer.
 
-`<ctrl-w>l` Focus buffer to the right.
+`<ctrl-w>l` Focus on the right buffer.
+
+`<ctrl-w>o` / `:only` / `:on` Close the other buffers/tabs leaving the current
+one only open.
+
+`<ctrl-w>x` Swap buffers in the splits.
 
 `<ctrl-w>H` Moves the active split to a full-height split across the left.
 
@@ -2621,7 +2699,13 @@ Note that for the following the second key can have ctrl held down too:
 
 `<ctrl-w>L` Moves the active split to a full-height split across the right.
 
-`<ctrl-w>R` Swap position of the splits.
+`<ctrl-w>r` Rotate the position of the active split in the group of vertical or
+horizontal splits.
+
+`<ctrl-w>R` Rotate the position of the active split in the group of vertical or
+horizontal splits reverse direction.
+
+`<ctrl-w>T` Open the active split in a new tab closing it in the current window.
 
 `<ctrl-w>=` Evenly size the splits.
 
@@ -2629,12 +2713,23 @@ Note that for the following the second key can have ctrl held down too:
 
 `<ctrl-w>_` Max hight of the current split.
 
-`{number}<ctrl-w><` Decrease width of split by {number}.
+`{number}<ctrl-w><` Decrease width of split by `{number}.`
 
-`{number}<ctrl-w>>` Increase width of split by {number}.
+`{number}<ctrl-w>>` Increase width of split by `{number}.`
 
-`<ctrl-w>o` / `:only` / `:on` Close the other buffers/tabs leaving the current
-one only open.
+`:{number}ba` Open the first `{number}` of buffers in horizontal splits.
+
+`:vert {number}ba` Open the first `{number}` of buffers in vertical splits.
+
+`vs | b{number}` Open the buffer `{number}` in a new vertical split.
+
+`sp | b{number}` Open the buffer `{number}` in a new horizontal split.
+
+`vs | b {buffername}` Open the buffer `{buffername}` in a new vertical split.
+Note that the `{buffername}` can be a partial match to the buffer's name. Can
+use tab to suggest matches too (with the right setting turned on).
+
+`sp | b {buffername}` Open the buffer `{buffername}` in a new horizontal split.
 
 `:<ctrl-f>` Open up, and edit, the : command history. Can use vim commands to
 navigate and edit here. Enter to fire the command the cursor is under. Enter on
@@ -2666,40 +2761,41 @@ describing a scoped variable.
 `:tabnew {buffer}` / `:tabedit {buffer}` / `:tabe {buffer}` Create a new tab set
 with the optional `{buffsr}` `{filename}`.
 
-`:tabclose` Close the tab set.
+`:tabclose` / `:tabc` Close the tab.
 
-`:tabnext`/ `:tabn` Go to the next tab.
+`:tabonly` / `:tabo` Close all other tabs.
 
-`:tabprevious` / `:tabp` Go to the previous tab.
+`:tabprevious` / `:tabp` / `gT` / `**<leader>[**` Go to the previous tab.
+
+`:tabnext`/ `:tabn` / `gt` / `**<leader>]**`  Go to the next tab.
 
 `:tabrewind` / `:tabr` / `:tabfirst` / `:tabfir` Go to the first tab.
 
 `:tablast` / `:tabl` Go to the last tab.
 
-`:tabc` Close the current tab.
+`:tabmove +{number}` / `:tabmove -{number}` / `:tabm +{number}` / `:tabm -{number}` 
+Move the current tab {number} or places to the left. 
 
-`:tabo` Close all other tabs.
+`:tabmove {place}` Move tab to {place}. {place} is 0-based.
 
-`:tabmove +{number}` / `:tabmove -{number}` / `:tabm +{number}` / `:tabm
--{number}` Move the current tab {number} or places to the left. 
+Eg. `:tabmove 0` Move tab to the start.
 
-`:tabmove 0` Move tab to the start.
+`:tabmove` / `:tabmove $` Move tab to the end.
 
 `{number}gt` Go to tab set of {number}.
-
-`gt` / `**<leader>n**` Switch to right tab sets.
-
-`gT` / `**<leader>m**` Switch to left tab sets.
-
-`nnoremap <c-left> :tabprevious<cr>`
-
-`nnoremap <c-right> :tabnext<cr>`
-
-Now you can use ctrl ← to go left and ctrl → to go right.
 
 `:tabdo {command}` Executes the {command} on all files open in different tabs.
 
 Note that tabs are also buffers in Vim so :buffers will list the tabs.
+
+`:tab ball` Open all the buffers in seperate tabs.
+
+`:tab split` Take the active split and open it in new tab.
+
+`:drop {filesname}` Replace in the window/tab the current file with {filename}.
+If the file is already open in another tab Vim will switch to that tab.
+
+`q` Will also close the active tab (if there are multiple tabs open).
 
 More info about tabs in Vim:
 
@@ -2726,14 +2822,27 @@ More info about tabs in Vim:
 
 `{bookmark letter}` Jump to the specific column on the specific line bookmarked
 
-`` `` `` Move the previous mark [jump back (to position in current buffer where jumped from)]
+`[`` Left bracket then backtick to go the previous mark.
 
-`d\`{bookmark letter}` - Delete (copy to the clipboard) everything from the
+`]`` Right bracket then backtick to go the next mark.
+
+`'.` Move the first line of the previous mark (to position in current buffer
+where jumped from)
+
+`` `` `` Move the previous mark (to position in current buffer where jumped from)
+
+`'.` Move to the first line of last edited location.
+
+`` `. `` Move to the last edited location.
+
+`d`{bookmark letter}` - Delete (copy to the clipboard) everything from the
 marked position {bookmark letter} to the cursor position
 
-Substitution across different ranges:
+`:delmarks a-z` Delete marks in the range from a-z.
 
-`:for range in split('6,10 14,18')| exe range 's/<search_string>/<replace_string>/g' | endfor`
+`:delmarks a,b,I,z` Delete marks a, b, I and z.
+
+`:delmarks!` Delete all marks.
 
 Substitution in marked ranges:
 
@@ -2743,11 +2852,13 @@ The above will search from marked range starting point a going to marked point
 b and confirm global replacement of ‘before’ with ‘after’.
 More on marks in Vim:
 
-[Bookmark frequent locations - VimTricks](https://vimtricks.com/p/bookmark-frequent-locations/)
+[Bookmark frequent locations -
+VimTricks](https://vimtricks.com/p/bookmark-frequent-locations/)
 
 ## Macros
 
-Macros let you record a series of ad-hoc commands that you can repeat to modify the file.
+Macros let you record a series of ad-hoc commands that you can repeat to modify
+the file.
 
 When starting to record a macro with q you will see the text 'recording' at the
 bottom of the window with any commands you enter assigned, in sequence, to the
@@ -2765,7 +2876,7 @@ Play](http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-recor
 `{number}@{number|lowercaseletter}` - Run the macro assigned to the
 {number|letter} {number of times}
 
-`q{uppercaseletter}` Append to the macro of the lowercase version of
+`q{uppercaseletter}` Append to the macro of the lower-case version of
 {uppercaseletter}.
 
 `@@` Repeat the last macro.
@@ -2856,6 +2967,12 @@ Eg.
 with all occurrences on a line (g) and confirm (c). Pipe to update command to same
 changes automatically.
 
+`:cfdo %s/old_text/new_text/gc | update` Also like `:cdo` to find & replace for
+*old_text* to *new_text* with all occurrences on a line (g) and confirm (c).
+Pipe to update command to same changes automatically. Like :cdo but starts at
+the first and move forward through each file with cnfile for the (find-and-replace) 
+command.
+
 ## Other
 
 Set background colour indicator to 80th column
@@ -2875,6 +2992,82 @@ event scripting. See more at:
 
 [Vim File Templates - VimTricks](https://vimtricks.com/p/vim-file-templates/)
 
+## File Browser - NetRW - a built-in plug-in that provides a file browser in Vim
+
+`:Explore` / `:Ex` / `:e .`
+
+`:Lex` NetRW explorer on the left (stays open on file open).
+
+`:Lex!` NetRW explorer on the right.
+
+`:Sex` NetRW explorer on top (stays open on file open).
+
+`:Sex!` NetRW explorer on the left (stays open on file open).
+
+`:Ntree {directory}` Set the current (tree-view) directory of NetRW to the
+{directory}. Can set the NetRW current directory to the active file with:
+`:Ntree .`
+
+`%` Create new file.
+
+`d` Create new directory.
+
+`D` Delete file or delete marked files (with confirmations).
+
+`s` Sort listing and toggle through different sorting options such as by name,
+time, or size.
+
+`r` Reverse sorting order.
+
+`x` Special - opens the file in the web browser.
+
+`R` Move - rename the file.
+
+`p` Preview file - open a new horizontal split but keep focus in NetRW.
+Settings in **.vimrc** to customise NetRW so `p` open previews in a vertical
+split to the right by default.
+
+`I` Toggle banner visibility.
+
+`i` Cycle view types, including tree view.
+
+`x` Open file in associated program (HTML in the web browser, images in Preview
+etc.).
+
+`v` Open file in a vertical split and move focus to the new split.
+
+`o` Open file in a horizontal split and move focus to the new split.
+
+`<enter>` Toggle tree directories open/close in tree view.
+
+`{number}o{enter text when put into insert mode}<esc>` The text 'enter text
+when put into insert mode' will be entered for {number} of lines.
+
+`mf` Mark/unmark file/directory (for moving/copying).
+
+`mF` Unmark marked files/directories.
+
+`mt` Mark target destination (folder). The destination will be listed in the
+NetRW banner.
+
+`mm` Move marked files to target destination (folder).
+
+`mc` Copy marked files to target destination (folder).
+
+Note that the current working directory (as indicated by `:pwd`) is reflected
+in NetRW. Use of `:cd` effects NetRW.
+
+`ctrl-l` / `:edit .` / `:e .` Refresh NetRW.
+
+`:edit .` / `:e .` Seem to work better for me than `ctrl-l`.
+
+I set the `r` key to refresh in netRW in the `.vimrc`.
+
+Moving files in NetRW is flaky. Before moving a file/files, try first
+refreshing the listing with `ctrl-l`, select the target destination with `mt`,
+select the file/files to move with `mf`, then move with `mm` or copy with `mc`.
+After `mm`/`mc` refresh again even if it appears the file didn't move.
+
 ## Plugins
 
 [Airline Vim Plugin](https://github.com/vim-airline/vim-airline?tab=readme-ov-file)
@@ -2893,7 +3086,7 @@ Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML
 tags, and more. The plugin provides mappings to easily delete, change and add
 such surroundings in pairs.
 
-Add double-quotes `"..."` tags around the text hello: `ysiw"`
+Add double-quotes `"..."` tags around the text hello: `ysiw"` or `csw"`
 
 **"Hello" world!**
 
@@ -2918,7 +3111,8 @@ To make a word surrounded with < and > you need to use `ysiw>` as
 
 **<em>Hello</em> world!**
 
-It's easiest to explain with examples. Press `cs"'` inside
+It's easiest to explain with examples. Press `cs"'` inside. `cs` can also be used
+like `ys` to, not just change, but to add surrounding characters.
 
 **"Hello world!"**
 
@@ -2955,7 +3149,7 @@ Revert to the original text: `ds{ds)` (delete the surrounding { } then delete th
 **Hello world!**
 
 Surround the whole line with visual mode; press a V (for line wise visual mode)
-followed by S`<p class="important">`:
+followed by `S<p class="important">` to yield the following:
 
 **
 ```
@@ -2964,6 +3158,8 @@ followed by S`<p class="important">`:
 </p>
 ```
 **
+
+`ds"` To delete surrounding `"` characters where the cursor is.
 
 * [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
 
@@ -3287,7 +3483,7 @@ the current line, append **;** to the end of the line then return the cursor
 back to where the mark was placed.
 
 ## Global
-hello this is <testing>
+
 `%s/\<\w/\u&/g` Make the first letter of each word (after bounding symbol <) in the document upper-case.
 
 `%s/\w\>/\u&/g` Make the last letter of each word (before bounding symbol >) in the document upper-case.
@@ -3306,16 +3502,45 @@ Use Vim - its **VimDiff** mode - to resolve git merge conflicts. More at:
 
 https://gist.github.com/karenyyng/f19ff75c60f18b4b8149#concepts-for-resolving-git-conflicts
 
-Tutorial video on **VimDiff**:
+Tutorial videos on **VimDiff**:
 
-https://m.youtube.com/watch?v=kFVjoIish0E
+https://www.youtube.com/watch?v=kFVjoIish0E
+https://www.youtube.com/watch?v=Eb8S_KkmLS8
+
+In the terminal:
+
+`vimdiff {filepath1} {filepath2}` / `vim -d {filepath1} {filepath2}` Open
+vimdiff with {filepath1} diffed against {filepath2}. 
+
+### Flags
+
+Opens in a vertical arrangement; use the `-o` flag to open the files in a
+horizontal arrangement.
+
+To skip confirmation in VimDiff (e.g., when quitting changed buffers), use the
+-c flag to execute a command on startup.
+
+Force read-only (-R): Open in read-only mode to avoid modification prompts
+altogether: vimdiff -R {filepath1} {filepath2}.
+
+Because VimDiff in an implementation of Vim the regular Vim commands work but
+has additional commands for working with diff'd files.
+
+### Commands
+
+`:diffget` / `do` Get change from the other file/window to the current
+file/window.
+
+`:diffput` / `dp` Push change from the current file window to the other
+file/window.
 
 `:diffo` Switch off diff mode for the current window. Resets related options
 also when 'diff' was not set.
 
 `:difft` Switch on diff mode for the current window.
 
-`:diffu` Update the diff view for all windows.
+`:diffupdate` / `:dif` Update the diff view for all windows. Rescane for
+changes after edits (including undo).
 
 `:diffg REMOTE` / `:diffg RE`  Get from REMOTE.
 
@@ -3326,6 +3551,12 @@ also when 'diff' was not set.
 `]c` Jump to the next change.
 
 `[c` Jump to the previous change.
+
+`za` Toggle the highlighted code fold.
+
+`set scrollbind` / `set scb` Make the two diff windows scroll together.
+
+`set noscrollbind` / `set noscb` Make the two diff windows scroll independently.
 
 `:cquit` Exit **vimdiff** properly and start the merge again in case of issues.
 

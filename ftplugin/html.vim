@@ -28,12 +28,19 @@ nnoremap <buffer> <silent> <localleader>3 i<h3></h3><esc>4hi
 nnoremap <buffer> <silent> <localleader>4 i<h4></h4><esc>4hi
 nnoremap <buffer> <silent> <localleader>5 i<h5></h5><esc>4hi
 nnoremap <buffer> <silent> <localleader>6 i<h6></h6><esc>4hi
+nnoremap <buffer> <silent> <localleader>b i<body></body><esc>7hi
 nnoremap <buffer> <silent> <localleader>d i<div><cr><cr></div><esc>ki
-nnoremap <buffer> <silent> <localleader>s i<section><cr><cr></section><esc>ki
 nnoremap <buffer> <silent> <localleader>h i<heading><cr><cr></heading><esc>ki
 nnoremap <buffer> <silent> <localleader>f i<footer><cr><cr></footer><esc>ki
 nnoremap <buffer> <silent> <localleader>p i<p></p><esc>3hi
 nnoremap <buffer> <silent> <localleader>e i<em></em><esc>4hi
+nnoremap <buffer> <silent> <localleader>se i<section><cr><cr></section><esc>ki
+nnoremap <buffer> <silent> <localleader>sp i<span></span><esc>6hi
+" Remove block comment around the visual selection <!--  -->
+nnoremap <buffer> <localleader>c ?<!--<cr>_dd<c-o>/--><cr>_dd<c-o>
+
+" Add block comment around the visual selection <!--  -->
+vnoremap <buffer> <localleader>c <esc>`<O<!--<esc>`>o--><esc>
 
 " Entity References Abbreviations
 "autocmd FileType html iabbrev <buffer> --- &ndash;

@@ -3,6 +3,10 @@
 "
 " For JavaScript and TypeScript files.
 "
+" TODO: 
+"  - a localleader visual command to remove { and } from if / else if / else selection
+"  - opposite of the above with { and } added to if / else if / else selection
+"
 
 " Turn syntax highlighting on.
 syntax on
@@ -15,8 +19,8 @@ setlocal shiftwidth=2
 setlocal expandtab
 
 " Folding
-setlocal foldmethod=syntax
-"setlocal foldmethod=indent
+"setlocal foldmethod=syntax
+setlocal foldmethod=indent
 
 " Depth of default folding
 setlocal foldlevel=5
@@ -40,7 +44,12 @@ nnoremap <buffer> <localleader>do ido {<cr><tab><cr>} while ()<esc>i
 " Console.log template
 nnoremap <buffer> <localleader>log iconsole.log()<esc>i
 " Comment block
-nnoremap <buffer> <localleader>comment i/**<esc>o *<esc>o*/<esc>kA 
+nnoremap <buffer> <localleader>note i/**<esc>o *<esc>o*/<esc>kA 
+" Remove the comment block above (and then after) the cursor.
+nnoremap <buffer> <localleader>c ?\/\*<cr>_dd<c-o>/\*\/<cr>_dd<c-o>
+
+" Add block comment around the visual selection (C/C++, JS etc) with /* ... */
+vnoremap <buffer> <localleader>c <esc>`<O/*<esc>`>o*/<esc>
 
 " set formatoptions in .vimrc is (seemingly) being overriden by a plugin
 " so the following autocmd takes out the (r and o flags) again for the
